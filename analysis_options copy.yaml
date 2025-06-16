@@ -1,0 +1,28 @@
+# Flutter Linting for Teams - Professional Setup
+
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true                       
+    always_use_package_imports: true        
+    prefer_single_quotes: true              
+    prefer_const_constructors: true         
+    prefer_final_locals: true                
+    unnecessary_this: true                    
+    sort_constructors_first: true             
+    avoid_unnecessary_containers: true        
+    sized_box_for_whitespace: true            
+    avoid_field_initializers_in_const_classes: true
+    use_key_in_widget_constructors: true     
+    always_declare_return_types: true         
+    annotate_overrides: true                 
+    constant_identifier_names: true          
+    file_names: true                          
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"         
+    - "**/*.freezed.dart"
+    - "**/*.gr.dart"
+    - "**/*.config.dart"

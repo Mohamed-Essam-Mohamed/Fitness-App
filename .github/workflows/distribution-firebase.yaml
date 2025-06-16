@@ -1,0 +1,37 @@
+# name: Flutter Test Action
+
+# on:
+#   push:
+#   pull_request:
+
+# jobs:
+#   flutter-test-action:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v4
+
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           channel: 'stable'
+#           flutter-version: 3.27.4
+
+
+#       - run: flutter --version
+#       - run: flutter pub get
+
+
+#       # Build APK
+#       - name: Build release APK
+#         run: flutter build apk --release
+
+#       # Upload to Firebase App Distribution
+#       - name: Upload to Firebase App Distribution
+#         uses: wzieba/Firebase-Distribution-Github-Action@v1
+#         with:
+#           appId: ${{ secrets.FIREBASE_APP_ID }}
+#           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+#           file: build/app/outputs/flutter-apk/app-release.apk
+#           groups: tester-github-action
+#           releaseNotes: "Auto-release from GitHub Actions"
