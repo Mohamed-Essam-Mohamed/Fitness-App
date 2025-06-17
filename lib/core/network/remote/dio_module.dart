@@ -36,7 +36,8 @@ abstract class DioModule {
 
 class AuthInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     print('this is token from dio_module : $token');

@@ -13,6 +13,8 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:fitness_app/core/logger/logger_module.dart' as _i637;
 import 'package:fitness_app/core/network/remote/api_manager.dart' as _i74;
 import 'package:fitness_app/core/network/remote/dio_module.dart' as _i674;
+import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart'
+    as _i395;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -42,6 +44,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
         ));
+    gh.lazySingleton<_i395.AuthRetrofitClient>(
+        () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     return this;
   }
 }

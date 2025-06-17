@@ -1,5 +1,5 @@
 name: fitness_app
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
@@ -9,69 +9,69 @@ dependencies:
   flutter:
     sdk: flutter
   #? UI-related packages: For building and styling the user interface
-  cupertino_icons: ^1.0.8    
-  flutter_svg: ^2.0.17         
-  cached_network_image:         
-  skeletonizer: ^1.4.3         
-  shimmer: ^3.0.0               
-  lottie: ^3.3.1               
-  toastification: ^3.0.2       
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.17
+  cached_network_image:
+  skeletonizer: ^1.4.3
+  shimmer: ^3.0.0
+  lottie: ^3.3.1
+  toastification: ^3.0.2
   webview_flutter: ^4.11.0
   #? Network-related packages: For handling API calls and network operations
-  dio: ^5.8.0+1                
-  retrofit: ^4.4.2              
-  pretty_dio_logger: ^1.4.0     
-  retrofit_generator: ^9.1.9 
+  dio: ^5.8.0+1
+  retrofit: ^4.4.2
+  pretty_dio_logger: ^1.4.0
+  retrofit_generator: ^9.1.9
   #? State Management packages
-  flutter_bloc: ^9.1.0          
-  equatable: ^2.0.7            
-  rxdart: ^0.28.0 
+  flutter_bloc: ^9.1.0
+  equatable: ^2.0.7
+  rxdart: ^0.28.0
 
   #? Storage-related packages: For persisting data locally
-  flutter_secure_storage: ^9.2.4 
-  shared_preferences: ^2.5.2   
+  flutter_secure_storage: ^9.2.4
+  shared_preferences: ^2.5.2
 
   #? Utilities: General-purpose utilities and dependency injection
-  easy_localization: ^3.0.7+1  
-  get_it: ^8.0.3               
-  injectable: ^2.5.0            
-  injectable_generator: ^2.7.0  
-  fluttertoast: ^8.2.12         
-  logger: ^2.5.0                
-  json_annotation: ^4.9.0       
-  url_launcher: ^6.3.1          
+  easy_localization: ^3.0.7+1
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  injectable_generator: ^2.7.0
+  fluttertoast: ^8.2.12
+  logger: ^2.5.0
+  json_annotation: ^4.9.0
+  url_launcher: ^6.3.1
   image_picker: ^1.1.2
   country_picker: ^2.0.27
   http_parser: ^4.0.2
 
   #? Permissions: For handling runtime permissions
-  permission_handler: ^12.0.0+1 
+  permission_handler: ^12.0.0+1
 
   #? Firebase: For Firebase services
-  firebase_core: ^3.13.0        
-  firebase_crashlytics: ^4.3.5  
-  firebase_messaging: ^15.2.5   
+  firebase_core: ^3.13.0
+  firebase_crashlytics: ^4.3.5
+  firebase_messaging: ^15.2.5
   retry: ^3.1.2
   timelines: ^0.1.0
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  
+
   #!flutter pub run easy_localization:generate --source-dir ./assets/translations -f keys -o locale_keys.g.dart
-  json_serializable: ^6.9.4      # Code generator for JSON serialization
-  
+  json_serializable: ^6.9.4 # Code generator for JSON serialization
+
   #? helpers
   #! flutter packages pub run build_runner build
   #! flutter pub run build_runner build --delete-conflicting-outputs
-  build_runner: ^2.4.15        
-  build: ^2.4.2                 
-  mockito: ^5.4.5            
-  mocktail: ^1.0.4             
-  bloc_test: ^10.0.0    
-  device_preview: ^1.2.0   
-  lint: ^2.7.0  
+  build_runner: ^2.4.15
+  build: ^2.4.2
+  mockito: ^5.4.5
+  mocktail: ^1.0.4
+  bloc_test: ^10.0.0
+  device_preview: ^1.2.0
+  lint: ^2.7.0
 
 flutter:
   uses-material-design: true
@@ -85,5 +85,3 @@ flutter:
     - family: Supermercado One
       fonts:
         - asset: assets/fonts/super/SupermercadoOne-Regular.ttf
-        
-
