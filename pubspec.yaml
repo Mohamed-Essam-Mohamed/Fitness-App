@@ -8,6 +8,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  #? splash-screen
+
+
+
+
   #? UI-related packages: For building and styling the user interface
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.17
@@ -53,6 +59,8 @@ dependencies:
   firebase_messaging: ^15.2.5
   retry: ^3.1.2
   timelines: ^0.1.0
+  flutter_native_splash: ^2.4.4
+
 
 dev_dependencies:
   flutter_test:

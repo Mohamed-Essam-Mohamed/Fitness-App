@@ -13,6 +13,7 @@ abstract class AppColors {
   static const int colorCode90 = 90;
   static const int colorCode100 = 100;
 
+  static const Color splashColor = Color(0x1A1A1A80);
   static const Color green = Color(0xFF00A550);
   static const Color red = Color(0xFFD50000);
   static const Color lightGray = Color(0xFFEAEAEA);
