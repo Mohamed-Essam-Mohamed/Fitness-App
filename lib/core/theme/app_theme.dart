@@ -35,6 +35,11 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         fontSize: 16,
       ),
+      displayLarge: TextStyle(
+        color: AppColors.white,
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      ),
       labelLarge: TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w800,
@@ -49,6 +54,21 @@ class AppTheme {
         color: AppColors.white,
         fontWeight: FontWeight.w400,
         fontSize: 14,
+      ),
+      displayMedium: TextStyle(
+        color: AppColors.white,
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      ),
+      headlineLarge: TextStyle(
+        color: AppColors.orange,
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: AppColors.white,
       ),
       bodyLarge: TextStyle(
         color: AppColors.white,
