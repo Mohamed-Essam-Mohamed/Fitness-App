@@ -103,6 +103,16 @@
   "Messages": {
     "OtpSentToYourEmail": "OTP sent to your email"
   },
+
+  "Onboarding": {
+    "onBoardingTitle1": "The Price Of Excellence\nIs Discipline",
+    "onBoardingTitle2": "Fitness Has Never Been\nSo Much Fun",
+    "onBoardingTitle3": "NO MORE EXCUSES\nDo It Now",
+    "onBoardingSubtitle": "Lorem ipsum dolor sit amet consectetur. Urna ut gravida...",
+    "skip": "Skip",
+    "next": "Next",
+    "done": "Do It"
+  },
   "Ok": "Ok",
   "Loading": "Loading...",
   "Retry": "Retry"

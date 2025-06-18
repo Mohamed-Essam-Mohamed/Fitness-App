@@ -12,7 +12,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: AppColors.orange,
     secondaryHeaderColor: AppColors.redOrange,
-    fontFamily: AppFontsFamily.supermercadoOne,
+    // fontFamily: AppFontsFamily.supermercadoOne,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),

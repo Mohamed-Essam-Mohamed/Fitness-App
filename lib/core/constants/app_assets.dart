@@ -51,6 +51,12 @@ class SvgAsset {
 class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
+  static const backgroundImage = 'assets/png/background_image.png';
+  static const onboarding1 = 'assets/png/O15_31.png';
+  static const onboarding2 = 'assets/png/O15_30.png';
+  static const onboarding3 = 'assets/png/O15_29.png';
+
+
 }
 
 class LottieAsset {}
