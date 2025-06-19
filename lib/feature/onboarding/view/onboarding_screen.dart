@@ -1,4 +1,4 @@
-import 'package:fitness_app/feature/onboarding/view/widgets/Onboarding_Body.dart';
+import 'package:fitness_app/feature/onboarding/view/widgets/onboarding_Body.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
