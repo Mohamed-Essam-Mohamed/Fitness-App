@@ -3,7 +3,6 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
-
 import '../../../../core/base_state/base_state.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/di/service_locator.dart';
