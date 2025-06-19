@@ -23,6 +23,18 @@ import 'package:fitness_app/feature/auth/data/repository_impl/auth_repository_im
     as _i969;
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
     as _i911;
+import 'package:fitness_app/feature/auth/domain/use_cases/register_use_case.dart'
+    as _i669;
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
+    as _i176;
+import 'package:fitness_app/feature/auth/data/data_source/auth_data_source.dart'
+    as _i65;
+import 'package:fitness_app/feature/auth/data/data_source/auth_data_source_impl.dart'
+    as _i361;
+import 'package:fitness_app/feature/auth/data/repository_impl/auth_repository_impl.dart'
+    as _i969;
+import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
+    as _i911;
 import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart'
     as _i757;
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cubit.dart'
@@ -68,6 +80,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i285.LoginCubit>(
         () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
+    gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
+          gh<_i74.ApiManager>(),
+          gh<_i395.AuthRetrofitClient>(),
+        ));
+    gh.factory<_i911.AuthRepository>(
+        () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
+    gh.factory<_i669.RegisterUseCase>(
+        () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i176.RegisterCubit>(
+        () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     return this;
   }
 }

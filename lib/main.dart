@@ -11,8 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'feature/auth/presentation/view_model/register/register_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -37,6 +41,22 @@ void main() async {
                   initialRoute: initialRoute,
                 ))),
   );
+  runApp(EasyLocalization(
+    supportedLocales: AppValues.supportedLocales,
+    fallbackLocale: AppValues.englishLocale,
+    path: AppValues.pathTranslation,
+    child:
+
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<RegisterCubit>(
+          create: (_) => serviceLocator.get<RegisterCubit>(),
+        ),
+        // other providers
+      ],
+      child:
+    MyApp(),)
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -60,6 +80,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
+            initialRoute: Routes.selectGender,
             initialRoute: initialRoute,
           ),
         );
