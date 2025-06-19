@@ -22,11 +22,18 @@ class LoginContentWidget extends StatefulWidget {
 
 class _LoginContentWidgetState extends State<LoginContentWidget> {
   late LoginCubit cubit;
+  bool _isPasswordVisible = false;
 
   @override
   void initState() {
     super.initState();
     cubit = serviceLocator<LoginCubit>();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
   }
 
   @override
@@ -85,14 +92,20 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                       const SizedBox(height: 16.0),
                       TextFormField(
                         controller: cubit.passwordController,
-                        obscureText: true,
+                        obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon:   Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                              color: AppColors.gray[AppColors.colorCode10],
+                            ),
+                            onPressed: _togglePasswordVisibility,
+                          )
+      ,
                           prefixIcon: Icon(
                             Icons.lock_outlined,
-                            color: AppColors.gray[AppColors.colorCode10],
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility_outlined,
                             color: AppColors.gray[AppColors.colorCode10],
                           ),
                           hintText:
@@ -133,26 +146,29 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Center(
-                          child: Text.rich(
-                            TextSpan(
-                              text: LocaleKeys.Authentication_DonotHaveAnAccount
-                                  .tr(),
-                              style: Theme.of(context).textTheme.labelSmall,
-                              children: [
-                                TextSpan(
-                                  text: LocaleKeys.Authentication_Register.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium!
-                                      .copyWith(
-                                        color: AppColors.lightOrange,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: AppColors.lightOrange,
-                                      ),
-                                  // recognizer: TapGestureRecognizer()..onTap = onRegisterTap,
-                                ),
-                              ],
+                        child: InkWell(
+                          onTap: (){},
+                          child: Center(
+                            child: Text.rich(
+                              TextSpan(
+                                text: LocaleKeys.Authentication_DonotHaveAnAccount
+                                    .tr(),
+                                style: Theme.of(context).textTheme.labelSmall,
+                                children: [
+                                  TextSpan(
+                                    text: LocaleKeys.Authentication_Register.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(
+                                          color: AppColors.lightOrange,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: AppColors.lightOrange,
+                                        ),
+                                    // recognizer: TapGestureRecognizer()..onTap = onRegisterTap,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
