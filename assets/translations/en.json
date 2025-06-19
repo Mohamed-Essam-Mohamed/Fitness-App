@@ -1,6 +1,7 @@
 {
   "Authentication": {
     "Login": "Login",
+    "Register": "Register",
     "SignUp": "Sign up",
     "Email": "Email",
     "SendOtp": "Send OTP",
@@ -16,7 +17,7 @@
     "RememberMe": "Remember me",
     "ContinueAsGuest": "Continue as guest",
     "ForgetPassword": "Forget password?",
-    "DonotHaveAnAccount": "Don't have an account?",
+    "DonotHaveAnAccount": "Don't have an account yet?",
     "AlreadyHaveAnAccount": "Already have an account?",
     "FirstName": "First name",
     "LastName": "Last name",
@@ -37,7 +38,10 @@
     "DidnotReceiveCode": "Didn't receive code?",
     "EmailVerification": "Email verification",
     "Continue": "Continue",
-    "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number"
+    "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number",
+    "heyThere" : "Hey There",
+    "welcomeBack" : "WELCOME BACK",
+    "or" : "Or"
   },
   "Profile": {
     "Profile": "Profile",
@@ -67,6 +71,7 @@
   },
 
   "Error": {
+    "LoginFailed": "Login failed",
     "CodeCannotBeEmpty": "Code cannot be empty",
     "CodeShouldBeAtLeast6Digits": "Code should be at least 6 digits",
     "EmailAlreadyExists": "This email already exists.",

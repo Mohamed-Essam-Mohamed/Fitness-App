@@ -1,6 +1,7 @@
 {
   "Authentication": {
     "Login": "تسجيل الدخول",
+    "Register": "إنشاء حساب",
     "SignUp": "إنشاء حساب",
     "SendOtp": "ارسل كود التحقق",
     "Email": "البريد الإلكتروني",
@@ -16,7 +17,7 @@
     "RememberMe": "تذكرني",
     "ContinueAsGuest": "اكمل كزائر",
     "ForgetPassword": "نسيت كلمة المرور",
-    "DonotHaveAnAccount": "ليس لديك حساب؟",
+    "DonotHaveAnAccount": "ليس لديك حساب بعد؟",
     "AlreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
     "FirstName": "الاسم الأول",
     "LastName": "اسم العائلة",
@@ -37,7 +38,12 @@
     "DidnotReceiveCode": "لم تتلقَ الرمز؟",
     "EmailVerification": "التحقق من البريد الإلكتروني",
     "Continue": "متابعة",
-    "PasswordRequirements": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، حرف كبير، ورقم"
+    "PasswordRequirements": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، حرف كبير، ورقم",
+    "heyThere": "مرحبًا بك",
+    "welcomeBack": "مرحبًا بعودتك",
+    "or" : "او"
+
+
   },
   "Profile": {
     "Profile": "الملف الشخصي",
@@ -65,6 +71,7 @@
     "SortBy": "فرز حسب"
   },
   "Error": {
+    "LoginFailed": "فشل تسجيل الدخول",
     "CodeCannotBeEmpty": "يجب إدخال الكود",
     "CodeShouldBeAtLeast6Digits": "يجب أن يكون الكود مكونًا من 6 أرقام على الأقل",
     "EmailAlreadyExists": "هذا البريد الإلكتروني موجود بالفعل.",

@@ -4,6 +4,7 @@
 
 abstract class  LocaleKeys {
   static const Authentication_Login = 'Authentication.Login';
+  static const Authentication_Register = 'Authentication.Register';
   static const Authentication_SignUp = 'Authentication.SignUp';
   static const Authentication_SendOtp = 'Authentication.SendOtp';
   static const Authentication_Email = 'Authentication.Email';
@@ -41,6 +42,9 @@ abstract class  LocaleKeys {
   static const Authentication_EmailVerification = 'Authentication.EmailVerification';
   static const Authentication_Continue = 'Authentication.Continue';
   static const Authentication_PasswordRequirements = 'Authentication.PasswordRequirements';
+  static const Authentication_heyThere = 'Authentication.heyThere';
+  static const Authentication_welcomeBack = 'Authentication.welcomeBack';
+  static const Authentication_or = 'Authentication.or';
   static const Authentication = 'Authentication';
   static const Profile_Profile = 'Profile.Profile';
   static const Profile_EditProfile = 'Profile.EditProfile';
@@ -65,6 +69,7 @@ abstract class  LocaleKeys {
   static const Home_Next = 'Home.Next';
   static const Home_SortBy = 'Home.SortBy';
   static const Home = 'Home';
+  static const Error_LoginFailed = 'Error.LoginFailed';
   static const Error_CodeCannotBeEmpty = 'Error.CodeCannotBeEmpty';
   static const Error_CodeShouldBeAtLeast6Digits = 'Error.CodeShouldBeAtLeast6Digits';
   static const Error_EmailAlreadyExists = 'Error.EmailAlreadyExists';

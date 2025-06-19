@@ -9,6 +9,7 @@ import 'package:fitness_app/core/utils/bloc_observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,18 +18,31 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
 
-  runApp(EasyLocalization(
-    supportedLocales: AppValues.supportedLocales,
-    fallbackLocale: AppValues.englishLocale,
-    path: AppValues.pathTranslation,
-    child:   DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp())),
+  final pref = await SharedPreferences.getInstance();
+  final isLoggedIn = pref.getBool(AppValues.isLoggedIn) ?? false;
+  final isOnboardingCompleted =
+      pref.getBool(AppValues.isOnboardingCompleted) ?? false;
+
+  final initialRoute = isOnboardingCompleted
+      ? (isLoggedIn ? Routes.appSection : Routes.login)
+      : Routes.onboarding;
+  runApp(
+    EasyLocalization(
+        supportedLocales: AppValues.supportedLocales,
+        fallbackLocale: AppValues.englishLocale,
+        path: AppValues.pathTranslation,
+        child: DevicePreview(
+            enabled: !kReleaseMode,
+            builder: (context) => MyApp(
+                  initialRoute: initialRoute,
+                ))),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
+
+  const MyApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +60,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.onboarding,
+            initialRoute: initialRoute,
           ),
         );
       },
