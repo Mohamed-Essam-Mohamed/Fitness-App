@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -20,8 +21,7 @@ void main() async {
 
   final pref = await SharedPreferences.getInstance();
   final isLoggedIn = pref.getBool(AppValues.isLoggedIn) ?? false;
-  final isOnboardingCompleted =
-      pref.getBool(AppValues.isOnboardingCompleted) ?? false;
+  final isOnboardingCompleted = pref.getBool(AppValues.isOnboardingCompleted) ?? false;
 
   final initialRoute = isOnboardingCompleted
       ? (isLoggedIn ? Routes.appSection : Routes.login)
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       builder: (context, constraints) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(1.0),
+            textScaler: const TextScaler.linear(1.0),
           ),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const Authentication_Login = 'Authentication.Login';
   static const Authentication_Register = 'Authentication.Register';
   static const Authentication_SignUp = 'Authentication.SignUp';
@@ -21,7 +21,8 @@ abstract class  LocaleKeys {
   static const Authentication_ContinueAsGuest = 'Authentication.ContinueAsGuest';
   static const Authentication_ForgetPassword = 'Authentication.ForgetPassword';
   static const Authentication_DonotHaveAnAccount = 'Authentication.DonotHaveAnAccount';
-  static const Authentication_AlreadyHaveAnAccount = 'Authentication.AlreadyHaveAnAccount';
+  static const Authentication_AlreadyHaveAnAccount =
+      'Authentication.AlreadyHaveAnAccount';
   static const Authentication_FirstName = 'Authentication.FirstName';
   static const Authentication_LastName = 'Authentication.LastName';
   static const Authentication_EnterFirstName = 'Authentication.EnterFirstName';
@@ -31,9 +32,11 @@ abstract class  LocaleKeys {
   static const Authentication_Gender = 'Authentication.Gender';
   static const Authentication_Female = 'Authentication.Female';
   static const Authentication_Male = 'Authentication.Male';
-  static const Authentication_CreatingAnAccountYouAgreeToOur = 'Authentication.CreatingAnAccountYouAgreeToOur';
+  static const Authentication_CreatingAnAccountYouAgreeToOur =
+      'Authentication.CreatingAnAccountYouAgreeToOur';
   static const Authentication_TermsConditions = 'Authentication.TermsConditions';
-  static const Authentication_PleaseEnterYourEmail = 'Authentication.PleaseEnterYourEmail';
+  static const Authentication_PleaseEnterYourEmail =
+      'Authentication.PleaseEnterYourEmail';
   static const Authentication_InvalidCode = 'Authentication.InvalidCode';
   static const Authentication_PleaseEnterYourCode = 'Authentication.PleaseEnterYourCode';
   static const Authentication_Confirm = 'Authentication.Confirm';
@@ -41,7 +44,16 @@ abstract class  LocaleKeys {
   static const Authentication_DidnotReceiveCode = 'Authentication.DidnotReceiveCode';
   static const Authentication_EmailVerification = 'Authentication.EmailVerification';
   static const Authentication_Continue = 'Authentication.Continue';
-  static const Authentication_PasswordRequirements = 'Authentication.PasswordRequirements';
+  static const Authentication_PasswordRequirements =
+      'Authentication.PasswordRequirements';
+  static const Authentication_MakeSureIts8CharactersOrMore =
+      'Authentication.MakeSureIts8CharactersOrMore';
+  static const Authentication_CreateNewPassword = 'Authentication.CreateNewPassword';
+  static const Authentication_OtpCode = 'Authentication.OtpCode';
+  static const Authentication_EnterYourOtpCheckYourEmail =
+      'Authentication.EnterYourOtpCheckYourEmail';
+  static const Authentication_ResendCode = 'Authentication.ResendCode';
+  static const Authentication_Done = 'Authentication.Done';
   static const Authentication_heyThere = 'Authentication.heyThere';
   static const Authentication_welcomeBack = 'Authentication.welcomeBack';
   static const Authentication_or = 'Authentication.or';
@@ -117,5 +129,4 @@ abstract class  LocaleKeys {
   static const Ok = 'Ok';
   static const Loading = 'Loading';
   static const Retry = 'Retry';
-
 }

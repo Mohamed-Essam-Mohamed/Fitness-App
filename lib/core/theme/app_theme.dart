@@ -12,6 +12,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: AppColors.orange,
     secondaryHeaderColor: AppColors.redOrange,
+    fontFamily: AppFontsFamily.Baloo,
     // fontFamily: AppFontsFamily.supermercadoOne,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
@@ -20,12 +21,12 @@ class AppTheme {
       backgroundColor: AppColors.white,
     ),
     textTheme: TextTheme(
-      titleLarge: TextStyle(
+      titleLarge: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w800,
         fontSize: 24,
       ),
-      titleMedium: TextStyle(
+      titleMedium: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w400,
         fontSize: 18,
@@ -35,42 +36,42 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         fontSize: 16,
       ),
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         color: AppColors.white,
         fontSize: 16,
         fontWeight: FontWeight.w700,
       ),
-      labelLarge: TextStyle(
+      labelLarge: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w800,
         fontSize: 20,
       ),
-      labelMedium: TextStyle(
+      labelMedium: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w800,
         fontSize: 14,
       ),
-      labelSmall: TextStyle(
+      labelSmall: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w400,
         fontSize: 14,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         color: AppColors.white,
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
-      headlineLarge: TextStyle(
+      headlineLarge: const TextStyle(
         color: AppColors.orange,
         fontWeight: FontWeight.w600,
         fontSize: 14,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: AppColors.white,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w600,
         fontSize: 12,
@@ -109,7 +110,6 @@ class AppTheme {
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(Colors.transparent),
         foregroundColor: WidgetStateProperty.all(AppColors.white),
@@ -120,10 +120,8 @@ class AppTheme {
           ),
         ),
         shape: WidgetStateProperty.all(
-
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-
           ),
         ),
         elevation: WidgetStateProperty.all(0),
@@ -138,15 +136,14 @@ class AppTheme {
           const EdgeInsets.all(14),
         ),
       ),
-
     ),
     inputDecorationTheme: InputDecorationTheme(
       errorStyle: const TextStyle(color: AppColors.red, fontSize: 12),
-      contentPadding: const EdgeInsets.symmetric(vertical: 9.5, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       iconColor: AppColors.lightPink,
       hintStyle: TextStyle(
         color: AppColors.gray[AppColors.colorCode10],
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
       prefixIconColor: AppColors.white,
@@ -214,9 +211,9 @@ class AppTheme {
         ),
       ),
     ),
-    radioTheme: RadioThemeData(
-      fillColor: WidgetStatePropertyAll((AppColors.orange)),
-      overlayColor: WidgetStatePropertyAll(AppColors.orange),
+    radioTheme: const RadioThemeData(
+      fillColor: const WidgetStatePropertyAll((AppColors.orange)),
+      overlayColor: const WidgetStatePropertyAll(AppColors.orange),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       shape: RoundedRectangleBorder(
