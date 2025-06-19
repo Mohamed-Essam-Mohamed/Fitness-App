@@ -12,7 +12,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: AppColors.orange,
     secondaryHeaderColor: AppColors.redOrange,
-    fontFamily: AppFontsFamily.supermercadoOne,
+    fontFamily: AppFontsFamily.Baloo,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -110,11 +110,11 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       errorStyle: const TextStyle(color: AppColors.red, fontSize: 12),
-      contentPadding: const EdgeInsets.symmetric(vertical: 9.5, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       iconColor: AppColors.lightPink,
       hintStyle: TextStyle(
         color: AppColors.gray[AppColors.colorCode10],
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
       prefixIconColor: AppColors.white,

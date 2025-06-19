@@ -1,3 +1,3 @@
 abstract class AppFontsFamily {
-  static const supermercadoOne = "Supermercado One";
+  static const Baloo = "Baloo";
 }

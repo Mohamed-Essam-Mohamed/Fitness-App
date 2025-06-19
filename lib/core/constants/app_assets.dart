@@ -10,6 +10,8 @@ class SvgAsset {
   static const lockSetting = 'assets/svg/lock_setting.svg';
   static const profile = 'assets/svg/profile.svg';
   static const securityWarning = 'assets/svg/security_warning.svg';
+  static const lock = 'assets/svg/lock.svg';
+  static const eye = 'assets/svg/eye.svg';
   static const ex1 = 'assets/svg/O15_1.svg';
   static const ex2 = 'assets/svg/O15_2.svg';
   static const ex3 = 'assets/svg/O15_3.svg';
@@ -46,11 +48,18 @@ class SvgAsset {
   static const ex34 = 'assets/svg/O15_34.svg';
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
+  static const mail = 'assets/svg/mail.svg';
 }
 
 class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
+  static const firstBg = 'assets/png/first_bg.png';
+
+  static const secondBg = 'assets/png/second_bg.png';
+  static const thirdBg = 'assets/png/third_bg.png';
+  static const fourthBg = 'assets/png/fourth_bg.png';
+  static const logo = 'assets/png/logo.png';
 }
 
 class LottieAsset {}

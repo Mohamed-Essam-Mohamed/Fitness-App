@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.onboarding,
+            initialRoute: Routes.forgotPassword,
           ),
         );
       },
