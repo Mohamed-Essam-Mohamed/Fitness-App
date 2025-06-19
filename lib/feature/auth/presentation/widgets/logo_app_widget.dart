@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/constants/app_assets.dart';
 
 class LogoAppWidget extends StatelessWidget {
   const LogoAppWidget({super.key});
