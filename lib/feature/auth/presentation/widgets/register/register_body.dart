@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
+import 'package:fitness_app/core/utils/validator.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/register/bottom_section.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/gestures.dart';
@@ -15,6 +16,16 @@ class RegisterBody extends StatefulWidget {
 }
 
 class _RegisterBodyState extends State<RegisterBody> {
+  final TextEditingController _firstNmaeController = TextEditingController();
+  final TextEditingController _lastNmaeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,6 +45,7 @@ class _RegisterBodyState extends State<RegisterBody> {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: SingleChildScrollView(
               child: Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     Text(
@@ -44,6 +56,11 @@ class _RegisterBodyState extends State<RegisterBody> {
                       height: 16,
                     ),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _firstNmaeController,
+                      validator: (value) {
+                        return Validator.validateName(value);
+                      },
                       decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -56,6 +73,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                     ),
                     SizedBox(height: 16),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _lastNmaeController,
+                      validator: (value) => Validator.validateName(value),
                       decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(12.0),
@@ -65,6 +85,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                     ),
                     SizedBox(height: 16),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _emailController,
+                      validator: (value) => Validator.validateEmail(value),
                       decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(12.0),
@@ -74,6 +97,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                     ),
                     SizedBox(height: 16),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordController,
+                      validator: (value) => Validator.validatePassword(value),
                       decoration: InputDecoration(
                           suffixIcon: Icon(Icons.visibility_outlined),
                           prefixIcon: Padding(
@@ -86,16 +112,19 @@ class _RegisterBodyState extends State<RegisterBody> {
                     BottomSection(),
                     SizedBox(height: 24),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          return null;
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(LocaleKeys.Authentication_register.tr())
-                          ], 
+                          ],
                         )),
-                    SizedBox(
-                      height: 8,
-                    ),
+                    SizedBox(height: 8),
                     RichText(
                       text: TextSpan(
                           children: [
