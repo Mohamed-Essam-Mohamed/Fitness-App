@@ -12,7 +12,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: AppColors.orange,
     secondaryHeaderColor: AppColors.redOrange,
-    fontFamily: AppFontsFamily.supermercadoOne,
+    // fontFamily: AppFontsFamily.supermercadoOne,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -92,7 +92,7 @@ class AppTheme {
         foregroundColor: WidgetStateProperty.all(AppColors.white),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10000),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
         elevation: WidgetStateProperty.all(0),
@@ -107,6 +107,38 @@ class AppTheme {
           const EdgeInsets.all(14),
         ),
       ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(Colors.transparent),
+        foregroundColor: WidgetStateProperty.all(AppColors.white),
+        side: WidgetStateProperty.all(
+          const BorderSide(
+            color: AppColors.orange,
+            width: 1,
+          ),
+        ),
+        shape: WidgetStateProperty.all(
+
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+
+          ),
+        ),
+        elevation: WidgetStateProperty.all(0),
+        textStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontWeight: FontWeight.w800,
+            fontSize: 15,
+            color: AppColors.white,
+          ),
+        ),
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.all(14),
+        ),
+      ),
+
     ),
     inputDecorationTheme: InputDecorationTheme(
       errorStyle: const TextStyle(color: AppColors.red, fontSize: 12),

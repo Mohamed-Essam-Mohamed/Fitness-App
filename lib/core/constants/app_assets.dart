@@ -60,6 +60,18 @@ class ImageAsset {
   static const backGroundImage = 'assets/png/background.png';
   static const fitLogo='assets/png/fit.png';
 
+  static const onboardingBackgroundImage = 'assets/png/onboarding_background_image.png';
+  static const screenFitLogo = 'assets/png/fit_1.png';
+  static const backgroundImage = 'assets/png/background_image.png';
+  static const onboarding1 = 'assets/png/O15_31.png';
+  static const onboarding2 = 'assets/png/O15_30.png';
+  static const onboarding3 = 'assets/png/O15_29.png';
+  static const facebook = 'assets/png/facebook circle.png';
+  static const google = 'assets/png/Google.png';
+  static const apple = 'assets/png/Apple.png';
+
+
+
 }
 
 class LottieAsset {}

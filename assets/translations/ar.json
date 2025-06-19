@@ -1,6 +1,7 @@
 {
   "Authentication": {
     "Login": "تسجيل الدخول",
+    "Register": "إنشاء حساب",
     "SignUp": "إنشاء حساب",
     "SendOtp": "ارسل كود التحقق",
     "Email": "البريد الإلكتروني",
@@ -16,7 +17,7 @@
     "RememberMe": "تذكرني",
     "ContinueAsGuest": "اكمل كزائر",
     "ForgetPassword": "نسيت كلمة المرور",
-    "DonotHaveAnAccount": "ليس لديك حساب؟",
+    "DonotHaveAnAccount": "ليس لديك حساب بعد؟",
     "AlreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
     "FirstName": "الاسم الأول",
     "LastName": "اسم العائلة",
@@ -38,8 +39,12 @@
     "EmailVerification": "التحقق من البريد الإلكتروني",
     "Continue": "متابعة",
     "PasswordRequirements": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، حرف كبير، ورقم",
-    "heyThere":"مرحبا",
-    "createAnAccount":"انشاء حساب",
+
+    "welcomeBack": "مرحبًا بعودتك",
+    "or": "او",
+
+    "heyThere": "مرحبا",
+    "createAnAccount": "انشاء حساب",
     "register": "تسجيل"
   },
   "Profile": {
@@ -47,8 +52,8 @@
     "EditProfile": "تعديل الملف الشخصي",
     "Change": "تغيير",
     "ChangePassword": "تغيير كلمة المرور",
-    "ResetPassword": "تعديل كلمة المرور"
-   , "Update" : "تحديث"
+    "ResetPassword": "تعديل كلمة المرور",
+    "Update": "تحديث"
   },
   "Home": {
     "Home": "الرئيسية",
@@ -68,6 +73,7 @@
     "SortBy": "فرز حسب"
   },
   "Error": {
+    "LoginFailed": "فشل تسجيل الدخول",
     "CodeCannotBeEmpty": "يجب إدخال الكود",
     "CodeShouldBeAtLeast6Digits": "يجب أن يكون الكود مكونًا من 6 أرقام على الأقل",
     "EmailAlreadyExists": "هذا البريد الإلكتروني موجود بالفعل.",
@@ -104,6 +110,18 @@
   "Messages": {
     "OtpSentToYourEmail": "تم إرسال رمز OTP إلى بريدك الإلكتروني"
   },
+
+  "Onboarding": {
+    "onBoardingTitle1": "ثمن التميز هو الانضباط",
+    "onBoardingTitle2": "لم تكن اللياقة ممتعة بهذا الشكل من قبل",
+    "onBoardingTitle3": "لا أعذار بعد الآن، افعلها الآن",
+    "onBoardingSubtitle": "لوريم إيبسوم دولور سيت أميت. يورنا أوت غرافيدا كويز إد بريتيوم بوروس. موريس ماسا",
+    "skip": "تخطي",
+    "next": "التالي",
+    "done": "نفّذ",
+    "back": "عودة"
+  },
+
   "Ok": "موافق",
   "Loading": "جارٍ التحميل...",
   "Retry": "إعادة المحاولة"

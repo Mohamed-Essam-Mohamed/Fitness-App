@@ -1,6 +1,7 @@
 {
   "Authentication": {
     "Login": "Login",
+    "Register": "Register",
     "SignUp": "Sign up",
     "Email": "Email",
     "SendOtp": "Send OTP",
@@ -16,7 +17,7 @@
     "RememberMe": "Remember me",
     "ContinueAsGuest": "Continue as guest",
     "ForgetPassword": "Forget password?",
-    "DonotHaveAnAccount": "Don't have an account?",
+    "DonotHaveAnAccount": "Don't have an account yet?",
     "AlreadyHaveAnAccount": "Already have an account?",
     "FirstName": "First name",
     "LastName": "Last name",
@@ -38,9 +39,13 @@
     "EmailVerification": "Email verification",
     "Continue": "Continue",
     "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number",
-    "heyThere":"Hey There",
-    "createAnAccount":"Create an account",
-    "register": "Register"
+
+    "createAnAccount": "Create an account",
+    "register": "Register",
+
+    "heyThere": "Hey There",
+    "welcomeBack": "WELCOME BACK",
+    "or": "Or"
   },
   "Profile": {
     "Profile": "Profile",
@@ -59,17 +64,18 @@
     "BestSeller": "Best seller",
     "ViewAll": "View All",
     "DiscoverSomethingNow": "Discover something now",
-    
+
     "AddToCart": "Add to cart",
     "BestSellerSubTitle": "Bloom with our exquisite best sellers",
-    "Filter" : "Filter",
-    "CheckOut" : "Checkout",
-    "PlaceOrder" : "Place Order",
-    "Next" : "Next",
-    "SortBy" : "Sort By"
+    "Filter": "Filter",
+    "CheckOut": "Checkout",
+    "PlaceOrder": "Place Order",
+    "Next": "Next",
+    "SortBy": "Sort By"
   },
 
   "Error": {
+    "LoginFailed": "Login failed",
     "CodeCannotBeEmpty": "Code cannot be empty",
     "CodeShouldBeAtLeast6Digits": "Code should be at least 6 digits",
     "EmailAlreadyExists": "This email already exists.",
@@ -105,6 +111,17 @@
   },
   "Messages": {
     "OtpSentToYourEmail": "OTP sent to your email"
+  },
+
+  "Onboarding": {
+    "onBoardingTitle1": "The Price Of Excellence\nIs Discipline",
+    "onBoardingTitle2": "Fitness Has Never Been\nSo Much Fun",
+    "onBoardingTitle3": "NO MORE EXCUSES\nDo It Now",
+    "onBoardingSubtitle": "Lorem ipsum dolor sit amet consectetur. Eu urna ut gravida quis id pretium purus. Mauris massa ",
+    "skip": "Skip",
+    "next": "Next",
+    "done": "Do It",
+    "back": "Back"
   },
   "Ok": "Ok",
   "Loading": "Loading...",

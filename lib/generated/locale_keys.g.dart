@@ -4,6 +4,7 @@
 
 abstract class  LocaleKeys {
   static const Authentication_Login = 'Authentication.Login';
+  static const Authentication_Register = 'Authentication.Register';
   static const Authentication_SignUp = 'Authentication.SignUp';
   static const Authentication_SendOtp = 'Authentication.SendOtp';
   static const Authentication_Email = 'Authentication.Email';
@@ -44,6 +45,8 @@ abstract class  LocaleKeys {
   static const Authentication_heyThere = 'Authentication.heyThere';
   static const Authentication_createAnAccount = 'Authentication.createAnAccount';
   static const Authentication_register = 'Authentication.register';
+  static const Authentication_welcomeBack = 'Authentication.welcomeBack';
+  static const Authentication_or = 'Authentication.or';
   static const Authentication = 'Authentication';
   static const Profile_Profile = 'Profile.Profile';
   static const Profile_EditProfile = 'Profile.EditProfile';
@@ -68,6 +71,7 @@ abstract class  LocaleKeys {
   static const Home_Next = 'Home.Next';
   static const Home_SortBy = 'Home.SortBy';
   static const Home = 'Home';
+  static const Error_LoginFailed = 'Error.LoginFailed';
   static const Error_CodeCannotBeEmpty = 'Error.CodeCannotBeEmpty';
   static const Error_CodeShouldBeAtLeast6Digits = 'Error.CodeShouldBeAtLeast6Digits';
   static const Error_EmailAlreadyExists = 'Error.EmailAlreadyExists';
@@ -103,6 +107,15 @@ abstract class  LocaleKeys {
   static const Error = 'Error';
   static const Messages_OtpSentToYourEmail = 'Messages.OtpSentToYourEmail';
   static const Messages = 'Messages';
+  static const Onboarding_onBoardingTitle1 = 'Onboarding.onBoardingTitle1';
+  static const Onboarding_onBoardingTitle2 = 'Onboarding.onBoardingTitle2';
+  static const Onboarding_onBoardingTitle3 = 'Onboarding.onBoardingTitle3';
+  static const Onboarding_onBoardingSubtitle = 'Onboarding.onBoardingSubtitle';
+  static const Onboarding_skip = 'Onboarding.skip';
+  static const Onboarding_next = 'Onboarding.next';
+  static const Onboarding_done = 'Onboarding.done';
+  static const Onboarding_back = 'Onboarding.back';
+  static const Onboarding = 'Onboarding';
   static const Ok = 'Ok';
   static const Loading = 'Loading';
   static const Retry = 'Retry';
