@@ -78,6 +78,12 @@ abstract class  LocaleKeys {
   static const Authentication_register = 'Authentication.register';
   static const Authentication_welcomeBack = 'Authentication.welcomeBack';
   static const Authentication_or = 'Authentication.or';
+  static const Authentication_MakeSureIts8CharactersOrMore = 'Authentication.MakeSureIts8CharactersOrMore';
+  static const Authentication_CreateNewPassword = 'Authentication.CreateNewPassword';
+  static const Authentication_OtpCode = 'Authentication.OtpCode';
+  static const Authentication_EnterYourOtpCheckYourEmail = 'Authentication.EnterYourOtpCheckYourEmail';
+  static const Authentication_ResendCode = 'Authentication.ResendCode';
+  static const Authentication_Done = 'Authentication.Done';
   static const Authentication = 'Authentication';
   static const Profile_Profile = 'Profile.Profile';
   static const Profile_EditProfile = 'Profile.EditProfile';

@@ -1,17 +1,16 @@
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/feature/onboarding/domain/model/onboarding_entity.dart';
 import 'package:fitness_app/feature/onboarding/view/widgets/onboardingHelper.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../../generated/locale_keys.g.dart';
-import '../../domain/model/onboarding_entity.dart';
 
 class OnboardingContainerWidget extends StatefulWidget {
   const OnboardingContainerWidget({super.key});
 
   @override
-  State<OnboardingContainerWidget> createState() =>
-      _OnboardingContainerWidgetState();
+  State<OnboardingContainerWidget> createState() => _OnboardingContainerWidgetState();
 }
 
 class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
@@ -54,8 +53,7 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
                     // Foreground content
                     Container(
                       height: 375,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         color: Colors.black.withAlpha(20),
@@ -76,8 +74,7 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
                               onBoardingItems.length,
                               (dotIndex) => AnimatedContainer(
                                 duration: const Duration(milliseconds: 300),
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 4),
+                                margin: const EdgeInsets.symmetric(horizontal: 4),
                                 height: 8,
                                 width: currIndex == dotIndex ? 24 : 8,
                                 decoration: BoxDecoration(
@@ -97,30 +94,25 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       onPressed: navigateToNextPage,
-                                      child:
-                                          Text(LocaleKeys.Onboarding_next.tr()),
+                                      child: Text(LocaleKeys.Onboarding_next.tr()),
                                     ),
                                   )
                                 : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       OutlinedButton(
                                         onPressed: () {
                                           _pageController.previousPage(
-                                            duration: const Duration(
-                                                milliseconds: 400),
+                                            duration: const Duration(milliseconds: 400),
                                             curve: Curves.easeInOut,
                                           );
                                         },
-                                        child: Text(
-                                            LocaleKeys.Onboarding_back.tr()),
+                                        child: Text(LocaleKeys.Onboarding_back.tr()),
                                       ),
                                       ElevatedButton(
                                         onPressed: navigateToNextPage,
                                         child: Text(
-                                          currIndex ==
-                                                  onBoardingItems.length - 1
+                                          currIndex == onBoardingItems.length - 1
                                               ? LocaleKeys.Onboarding_done.tr()
                                               : LocaleKeys.Onboarding_next.tr(),
                                         ),
@@ -148,7 +140,7 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
         curve: Curves.easeInOut,
       );
     } else {
-       await OnboardingHelper.checkLoginStatus(context);
+      await OnboardingHelper.checkLoginStatus(context);
     }
   }
 

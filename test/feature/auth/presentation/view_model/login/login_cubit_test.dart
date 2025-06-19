@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:fitness_app/core/base_state/base_state.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/request/login_request_entity.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/response/user_data_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/user_data_entity.dart';
 import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_state.dart';
@@ -34,7 +34,7 @@ void main() {
   });
 
   group('LoginCubit', () {
-    final loginRequest = LoginRequestEntity(
+    final loginRequest = const LoginRequestEntity(
       email: 'test@example.com',
       password: 'password123',
     );
@@ -99,7 +99,7 @@ void main() {
       expect: () => [
         loginCubit.state.copyWith(baseState: BaseLoadingState()),
         isA<LoginState>().having(
-              (s) => s.baseState,
+          (s) => s.baseState,
           'baseState',
           isA<BaseErrorState>(),
         ),

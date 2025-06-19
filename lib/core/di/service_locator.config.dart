@@ -23,14 +23,18 @@ import 'package:fitness_app/feature/auth/data/repository_impl/auth_repository_im
     as _i969;
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
     as _i911;
+import 'package:fitness_app/feature/auth/domain/use_cases/change_password_use_case.dart'
+    as _i1031;
+import 'package:fitness_app/feature/auth/domain/use_cases/forget_password_use_case.dart'
+    as _i498;
 import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart'
     as _i757;
-import 'package:fitness_app/feature/auth/domain/use_cases/register_use_case.dart'
-    as _i669;
+import 'package:fitness_app/feature/auth/domain/use_cases/verify_code_use_case.dart'
+    as _i394;
+import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart'
+    as _i369;
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cubit.dart'
     as _i285;
-import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
-    as _i176;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -70,12 +74,19 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
     gh.factory<_i757.LoginUseCase>(
         () => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i1031.ChangePasswordUseCase>(
+        () => _i1031.ChangePasswordUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i498.ForgetPasswordUseCase>(
+        () => _i498.ForgetPasswordUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i394.VerifyCodeUseCase>(
+        () => _i394.VerifyCodeUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i369.ForgetPasswordCubit>(() => _i369.ForgetPasswordCubit(
+          gh<_i498.ForgetPasswordUseCase>(),
+          gh<_i394.VerifyCodeUseCase>(),
+          gh<_i1031.ChangePasswordUseCase>(),
+        ));
     gh.factory<_i285.LoginCubit>(
         () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
-    gh.factory<_i669.RegisterUseCase>(
-        () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
-    gh.factory<_i176.RegisterCubit>(
-        () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     return this;
   }
 }

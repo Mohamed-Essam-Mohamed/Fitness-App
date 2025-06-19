@@ -6,9 +6,9 @@
 import 'dart:async' as _i3;
 
 import 'package:fitness_app/core/network/common/api_result.dart' as _i4;
-import 'package:fitness_app/feature/auth/domain/entity/login/request/login_request_entity.dart'
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart'
     as _i6;
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart'
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart'
     as _i5;
 import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart'
     as _i2;

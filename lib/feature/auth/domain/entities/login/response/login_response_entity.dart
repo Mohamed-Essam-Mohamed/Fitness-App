@@ -1,5 +1,4 @@
-import 'package:fitness_app/feature/auth/domain/entity/login/response/user_data_entity.dart';
-
+import 'package:fitness_app/feature/auth/domain/entities/login/response/user_data_entity.dart';
 
 class LoginResponseEntity {
   final String? message;
@@ -7,7 +6,4 @@ class LoginResponseEntity {
   final String? token;
 
   LoginResponseEntity({this.message, this.user, this.token});
-
 }
-
-

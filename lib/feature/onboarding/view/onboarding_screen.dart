@@ -9,17 +9,19 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Image.asset(
-            ImageAsset.onboardingBackgroundImage,
-            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset(
+              ImageAsset.onboardingBackgroundImage,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-      OnBoardingBody()
-      ]),
+          OnBoardingBody()
+        ],
+      ),
     );
   }
 }

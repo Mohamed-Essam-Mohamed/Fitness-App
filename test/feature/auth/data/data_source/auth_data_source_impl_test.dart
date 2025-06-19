@@ -1,5 +1,5 @@
 import 'package:fitness_app/feature/auth/data/data_source/auth_data_source_impl.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -36,7 +36,7 @@ void main() {
       final loginResponse = LoginResponseDto(message: "Login success", token: "token");
 
       when(mockApiManager.execute<LoginResponseDto?>(any)).thenAnswer(
-            (_) async => SuccessResult<LoginResponseDto?>(loginResponse),
+        (_) async => SuccessResult<LoginResponseDto?>(loginResponse),
       );
 
       final result = await dataSource.login(loginRequest);
@@ -51,7 +51,7 @@ void main() {
       final exception = Exception("Invalid email or password");
 
       when(mockApiManager.execute<LoginResponseDto?>(any)).thenAnswer(
-            (_) async => FailureResult<LoginResponseDto?>(exception),
+        (_) async => FailureResult<LoginResponseDto?>(exception),
       );
 
       final result = await dataSource.login(loginRequest);

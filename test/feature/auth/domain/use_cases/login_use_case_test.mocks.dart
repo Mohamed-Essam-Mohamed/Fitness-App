@@ -6,12 +6,16 @@
 import 'dart:async' as _i3;
 
 import 'package:fitness_app/core/network/common/api_result.dart' as _i4;
-import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart'
-    as _i5;
-import 'package:fitness_app/feature/auth/domain/entity/login/request/login_request_entity.dart'
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/change_password_entity.dart'
     as _i8;
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart'
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/forgot_password_entity.dart'
+    as _i5;
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/verify_code_entity.dart'
     as _i7;
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart'
+    as _i10;
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart'
+    as _i9;
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -40,30 +44,69 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
   }
 
   @override
-  _i3.Future<_i4.Result<String>> registerUser(_i5.RegisterRequestModel? body) =>
+  _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>> forgotPassword({
+    required String? email,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#registerUser, [body]),
-            returnValue: _i3.Future<_i4.Result<String>>.value(
-              _i6.dummyValue<_i4.Result<String>>(
+            Invocation.method(#forgotPassword, [], {#email: email}),
+            returnValue: _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i5.ForgotPasswordEntity>>(
                 this,
-                Invocation.method(#registerUser, [body]),
+                Invocation.method(#forgotPassword, [], {#email: email}),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<String>>);
+          as _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>>);
 
   @override
-  _i3.Future<_i4.Result<_i7.LoginResponseEntity?>> login(
-    _i8.LoginRequestEntity? loginRequest,
+  _i3.Future<_i4.Result<_i7.VerifyCodeEntity>> verifyCode({
+    required String? code,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#verifyCode, [], {#code: code}),
+            returnValue: _i3.Future<_i4.Result<_i7.VerifyCodeEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i7.VerifyCodeEntity>>(
+                this,
+                Invocation.method(#verifyCode, [], {#code: code}),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i7.VerifyCodeEntity>>);
+
+  @override
+  _i3.Future<_i4.Result<_i8.ChangePasswordEntity>> changePassword({
+    required String? password,
+    required String? email,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#changePassword, [], {
+              #password: password,
+              #email: email,
+            }),
+            returnValue: _i3.Future<_i4.Result<_i8.ChangePasswordEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i8.ChangePasswordEntity>>(
+                this,
+                Invocation.method(#changePassword, [], {
+                  #password: password,
+                  #email: email,
+                }),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i8.ChangePasswordEntity>>);
+
+  @override
+  _i3.Future<_i4.Result<_i9.LoginResponseEntity?>> login(
+    _i10.LoginRequestEntity? loginRequest,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#login, [loginRequest]),
-            returnValue: _i3.Future<_i4.Result<_i7.LoginResponseEntity?>>.value(
-              _i6.dummyValue<_i4.Result<_i7.LoginResponseEntity?>>(
+            returnValue: _i3.Future<_i4.Result<_i9.LoginResponseEntity?>>.value(
+              _i6.dummyValue<_i4.Result<_i9.LoginResponseEntity?>>(
                 this,
                 Invocation.method(#login, [loginRequest]),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i7.LoginResponseEntity?>>);
+          as _i3.Future<_i4.Result<_i9.LoginResponseEntity?>>);
 }

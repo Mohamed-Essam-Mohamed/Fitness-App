@@ -1,8 +1,8 @@
 import 'package:fitness_app/core/network/common/api_result.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart';
+import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
-import '../entity/login/request/login_request_entity.dart';
-import '../entity/login/response/login_response_entity.dart';
-import '../repository/auth_repository.dart';
 
 @injectable
 class LoginUseCase {
