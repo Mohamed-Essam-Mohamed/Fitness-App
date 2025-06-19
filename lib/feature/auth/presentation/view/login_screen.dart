@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget{
             fit: BoxFit.cover,
           ),
         ),
-        LoginBody()
+        SingleChildScrollView(child: LoginBody())
       ]),
     );
 

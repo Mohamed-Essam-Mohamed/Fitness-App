@@ -1,4 +1,6 @@
 import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/feature/auth/presentation/view/register_first_part_screen.dart';
+import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +12,6 @@ import '../../feature/auth/presentation/view/complete_register/select_gender.dar
 import '../../feature/auth/presentation/view/complete_register/weight_screen.dart';
 import '../../feature/auth/presentation/view_model/models/collecting_data_model.dart';
 import '../../feature/auth/presentation/view_model/register/register_cubit.dart';
-import '../../feature/onboarding/onboarding_screen.dart';
 import '../di/service_locator.dart';
 import 'animation_routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view/login_screen.dart';
@@ -31,13 +32,12 @@ class RouteGenerator {
         return AnimationRoute(page: LoginScreen());
       case Routes.appSection:
         return AnimationRoute(page: AppSection());
-        return AnimationRoute(page: const OnboardingScreen());
 
       case Routes.selectGender:
         return AnimationRoute(
           page: BlocProvider.value(
             value: registerCubit,
-            child: SelectGender(),
+            child: SelectGender(data: arg as DataModel),
           ),
         );
 
@@ -80,6 +80,12 @@ class RouteGenerator {
             child: WeightScreen(data: arg as CollectingDataModel),
           ),
         );
+      case Routes.RgisterFirsPart:
+        return AnimationRoute(
+          page:RegisterFirstPartScreen(),
+
+        );
+
 
       default:
         return null;

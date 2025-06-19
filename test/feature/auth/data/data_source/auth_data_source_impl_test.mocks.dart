@@ -3,18 +3,22 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:fitness_app/core/network/common/api_result.dart' as _i5;
-import 'package:fitness_app/core/network/remote/api_manager.dart' as _i3;
+import 'package:fitness_app/core/network/common/api_result.dart' as _i6;
+import 'package:fitness_app/core/network/remote/api_manager.dart' as _i4;
 import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart'
-    as _i7;
-import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart'
     as _i8;
+import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart'
+    as _i10;
 import 'package:fitness_app/feature/auth/data/model/login/response/login_response_dto.dart'
+    as _i3;
+import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart'
+    as _i9;
+import 'package:fitness_app/feature/auth/data/model/respones/register_response.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,53 +34,72 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeLoginResponseDto_0 extends _i1.SmartFake
-    implements _i2.LoginResponseDto {
-  _FakeLoginResponseDto_0(Object parent, Invocation parentInvocation)
+class _FakeRegisterResponse_0 extends _i1.SmartFake
+    implements _i2.RegisterResponse {
+  _FakeRegisterResponse_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeLoginResponseDto_1 extends _i1.SmartFake
+    implements _i3.LoginResponseDto {
+  _FakeLoginResponseDto_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i3.ApiManager {
+class MockApiManager extends _i1.Mock implements _i4.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i5.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
+  _i5.Future<_i6.Result<T>> execute<T>(_i5.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [apiCall]),
-            returnValue: _i4.Future<_i5.Result<T>>.value(
-              _i6.dummyValue<_i5.Result<T>>(
+            returnValue: _i5.Future<_i6.Result<T>>.value(
+              _i7.dummyValue<_i6.Result<T>>(
                 this,
                 Invocation.method(#execute, [apiCall]),
               ),
             ),
           )
-          as _i4.Future<_i5.Result<T>>);
+          as _i5.Future<_i6.Result<T>>);
 }
 
 /// A class which mocks [AuthRetrofitClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRetrofitClient extends _i1.Mock
-    implements _i7.AuthRetrofitClient {
+    implements _i8.AuthRetrofitClient {
   MockAuthRetrofitClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.LoginResponseDto> login(_i8.LoginRequestDto? loginRequest) =>
+  _i5.Future<_i2.RegisterResponse> register(_i9.RegisterRequestModel? body) =>
+      (super.noSuchMethod(
+            Invocation.method(#register, [body]),
+            returnValue: _i5.Future<_i2.RegisterResponse>.value(
+              _FakeRegisterResponse_0(
+                this,
+                Invocation.method(#register, [body]),
+              ),
+            ),
+          )
+          as _i5.Future<_i2.RegisterResponse>);
+
+  @override
+  _i5.Future<_i3.LoginResponseDto> login(_i10.LoginRequestDto? loginRequest) =>
       (super.noSuchMethod(
             Invocation.method(#login, [loginRequest]),
-            returnValue: _i4.Future<_i2.LoginResponseDto>.value(
-              _FakeLoginResponseDto_0(
+            returnValue: _i5.Future<_i3.LoginResponseDto>.value(
+              _FakeLoginResponseDto_1(
                 this,
                 Invocation.method(#login, [loginRequest]),
               ),
             ),
           )
-          as _i4.Future<_i2.LoginResponseDto>);
+          as _i5.Future<_i3.LoginResponseDto>);
 }

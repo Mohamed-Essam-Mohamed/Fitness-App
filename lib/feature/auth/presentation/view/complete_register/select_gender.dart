@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +15,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../widgets/pop_widget.dart';
 
 class SelectGender extends StatefulWidget {
-  const SelectGender({super.key});
+  const SelectGender({super.key, required this.data});
+  final DataModel data;
 
   @override
   State<SelectGender> createState() => _SelectGenderState();
@@ -211,9 +213,11 @@ class _SelectGenderState extends State<SelectGender> {
                               onTap: selectedGender == null
                                   ? null
                                   : () {
-                                final data = CollectingDataModel();
+                                final data1 = CollectingDataModel();
                                 final userData =
-                                data.copyWith(gender: selectedGender);
+                                data1.copyWith(gender: selectedGender,firstName: widget.data.firstname,lastName: widget.data.LastName,email: widget.data.email,password: widget.data.password);
+                                print(userData.firstName);
+                                print("ooooooooooooooooooooooooooooooo");
                                 Navigator.of(context).pushNamed(
                                   Routes.old,
                                   arguments: userData,

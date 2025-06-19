@@ -15,8 +15,6 @@ import 'feature/auth/presentation/view_model/register/register_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
-
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -30,17 +28,6 @@ void main() async {
   final initialRoute = isOnboardingCompleted
       ? (isLoggedIn ? Routes.appSection : Routes.login)
       : Routes.onboarding;
-  runApp(
-    EasyLocalization(
-        supportedLocales: AppValues.supportedLocales,
-        fallbackLocale: AppValues.englishLocale,
-        path: AppValues.pathTranslation,
-        child: DevicePreview(
-            enabled: !kReleaseMode,
-            builder: (context) => MyApp(
-                  initialRoute: initialRoute,
-                ))),
-  );
   runApp(EasyLocalization(
     supportedLocales: AppValues.supportedLocales,
     fallbackLocale: AppValues.englishLocale,
@@ -55,7 +42,7 @@ void main() async {
         // other providers
       ],
       child:
-    MyApp(),)
+    MyApp(initialRoute: initialRoute,),)
   ));
 }
 
@@ -80,7 +67,6 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.selectGender,
             initialRoute: initialRoute,
           ),
         );

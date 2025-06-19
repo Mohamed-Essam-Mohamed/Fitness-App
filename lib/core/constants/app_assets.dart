@@ -56,7 +56,6 @@ class SvgAsset {
 }
 
 class ImageAsset {
-  static const backGroundImage = 'assets/png/BackGround.png';
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
   static const fit1 = 'assets/png/fit1.png';

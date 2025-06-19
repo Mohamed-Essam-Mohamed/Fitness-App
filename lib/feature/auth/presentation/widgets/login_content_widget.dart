@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
@@ -165,7 +166,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                                           decoration: TextDecoration.underline,
                                           decorationColor: AppColors.lightOrange,
                                         ),
-                                    // recognizer: TapGestureRecognizer()..onTap = onRegisterTap,
+                                     recognizer: TapGestureRecognizer()..onTap = () => Navigator.of(context).pushNamed(Routes.RgisterFirsPart),
                                   ),
                                 ],
                               ),

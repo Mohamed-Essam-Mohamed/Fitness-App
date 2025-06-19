@@ -6,14 +6,16 @@
 import 'dart:async' as _i3;
 
 import 'package:fitness_app/core/network/common/api_result.dart' as _i4;
-import 'package:fitness_app/feature/auth/domain/entity/login/request/login_request_entity.dart'
-    as _i6;
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart'
+import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart'
     as _i5;
+import 'package:fitness_app/feature/auth/domain/entity/login/request/login_request_entity.dart'
+    as _i8;
+import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart'
+    as _i7;
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -38,17 +40,30 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
   }
 
   @override
-  _i3.Future<_i4.Result<_i5.LoginResponseEntity?>> login(
-    _i6.LoginRequestEntity? loginRequest,
+  _i3.Future<_i4.Result<String>> registerUser(_i5.RegisterRequestModel? body) =>
+      (super.noSuchMethod(
+            Invocation.method(#registerUser, [body]),
+            returnValue: _i3.Future<_i4.Result<String>>.value(
+              _i6.dummyValue<_i4.Result<String>>(
+                this,
+                Invocation.method(#registerUser, [body]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<String>>);
+
+  @override
+  _i3.Future<_i4.Result<_i7.LoginResponseEntity?>> login(
+    _i8.LoginRequestEntity? loginRequest,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#login, [loginRequest]),
-            returnValue: _i3.Future<_i4.Result<_i5.LoginResponseEntity?>>.value(
-              _i7.dummyValue<_i4.Result<_i5.LoginResponseEntity?>>(
+            returnValue: _i3.Future<_i4.Result<_i7.LoginResponseEntity?>>.value(
+              _i6.dummyValue<_i4.Result<_i7.LoginResponseEntity?>>(
                 this,
                 Invocation.method(#login, [loginRequest]),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i5.LoginResponseEntity?>>);
+          as _i3.Future<_i4.Result<_i7.LoginResponseEntity?>>);
 }
