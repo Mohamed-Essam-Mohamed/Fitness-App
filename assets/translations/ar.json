@@ -37,7 +37,10 @@
     "DidnotReceiveCode": "لم تتلقَ الرمز؟",
     "EmailVerification": "التحقق من البريد الإلكتروني",
     "Continue": "متابعة",
-    "PasswordRequirements": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، حرف كبير، ورقم"
+    "PasswordRequirements": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، حرف كبير، ورقم",
+    "heyThere":"مرحبا",
+    "createAnAccount":"انشاء حساب",
+    "register": "تسجيل"
   },
   "Profile": {
     "Profile": "الملف الشخصي",

@@ -82,6 +82,6 @@ flutter:
     - assets/translations/
 
   fonts:
-    - family: Supermercado One
+    - family: Baloo Thambi 2
       fonts:
-        - asset: assets/fonts/super/SupermercadoOne-Regular.ttf
+        - asset: assets/fonts/baloo/BalooThambi2-Regular.ttf

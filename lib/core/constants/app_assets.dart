@@ -46,11 +46,20 @@ class SvgAsset {
   static const ex34 = 'assets/svg/O15_34.svg';
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
+  static const user='assets/svg/user.svg';
+  static const mail='assets/svg/mail.svg';
+  static const lock='assets/svg/lock.svg';
+  static const google='assets/svg/Google.svg';
+  static const facebook='assets/svg/facebook.svg';
+  static const apple='assets/svg/apple.svg';
 }
 
 class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
+  static const backGroundImage = 'assets/png/background.png';
+  static const fitLogo='assets/png/fit.png';
+
 }
 
 class LottieAsset {}

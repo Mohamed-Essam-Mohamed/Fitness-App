@@ -5,10 +5,12 @@ import 'package:fitness_app/core/routes/route_generator.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/core/utils/bloc_observer.dart';
+import 'package:fitness_app/feature/auth/presentation/view/register_first_part_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -40,8 +42,9 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
-            onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.onboarding,
+            // onGenerateRoute: RouteGenerator.getRoute,
+            // initialRoute: Routes.onboarding,
+            home: RegisterFirstPartScreen(),
           ),
         );
       },

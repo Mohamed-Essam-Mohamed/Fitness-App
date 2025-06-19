@@ -37,7 +37,10 @@
     "DidnotReceiveCode": "Didn't receive code?",
     "EmailVerification": "Email verification",
     "Continue": "Continue",
-    "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number"
+    "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number",
+    "heyThere":"Hey There",
+    "createAnAccount":"Create an account",
+    "register": "Register"
   },
   "Profile": {
     "Profile": "Profile",
