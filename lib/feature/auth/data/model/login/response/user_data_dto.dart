@@ -1,23 +1,9 @@
-import 'package:fitness_app/feature/auth/domain/entity/login/response/user_data_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/user_data_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user_data_dto.g.dart';
 
 @JsonSerializable()
 class UserDataDto {
-  @JsonKey(name: '_id')
-  final String? id;
-  final String? firstName;
-  final String? lastName;
-  final String? email;
-  final String? gender;
-  final int? age;
-  final int? weight;
-  final int? height;
-  final String? activityLevel;
-  final String? goal;
-  final String? photo;
-  final String? createdAt;
-
   UserDataDto({
     this.id,
     this.firstName,
@@ -32,14 +18,27 @@ class UserDataDto {
     this.photo,
     this.createdAt,
   });
-
   factory UserDataDto.fromJson(Map<String, dynamic> json) => _$UserDataDtoFromJson(json);
+
+  @JsonKey(name: '_id')
+  final String? id;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? gender;
+  final int? age;
+  final int? weight;
+  final int? height;
+  final String? activityLevel;
+  final String? goal;
+  final String? photo;
+  final String? createdAt;
 
   Map<String, dynamic> toJson() => _$UserDataDtoToJson(this);
 
   UserDataEntity toDomain() {
     return UserDataEntity(
-       id: id,
+      id: id,
       email: email,
       createdAt: createdAt,
       photo: photo,
@@ -50,9 +49,7 @@ class UserDataDto {
       activityLevel: activityLevel,
       goal: goal,
       height: height,
-      weight: weight
-
+      weight: weight,
     );
   }
-
 }

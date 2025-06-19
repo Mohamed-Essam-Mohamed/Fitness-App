@@ -1,35 +1,35 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/constants/app_assets.dart';
+import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_assets.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../../generated/locale_keys.g.dart';
-
-class BottomSection extends StatelessWidget{
+class BottomSection extends StatelessWidget {
   const BottomSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Column(
-      children: [          Align(
-        alignment: Alignment.centerRight,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TextButton(
-              onPressed: () {
-                // Navigator.of(context).pushNamed(Routes.forgetPassword);
-              },
-              child: Text(
-                LocaleKeys.Authentication_ForgetPassword.tr(),
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: AppColors.orange,
-                  decoration: TextDecoration.underline,
-                  decorationColor: AppColors.orange,
-                ),
-              )),
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextButton(
+                onPressed: () {
+                  // Navigator.of(context).pushNamed(Routes.forgetPassword);
+                },
+                child: Text(
+                  LocaleKeys.Authentication_ForgetPassword.tr(),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: AppColors.orange,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.orange,
+                      ),
+                )),
+          ),
         ),
-      ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -63,8 +63,8 @@ class BottomSection extends StatelessWidget{
             Image.asset(ImageAsset.apple),
           ],
         ),
-        const SizedBox(height: 20),],
-
+        const SizedBox(height: 20),
+      ],
     );
   }
 }

@@ -1,21 +1,19 @@
 import 'package:fitness_app/core/network/common/api_result.dart';
-import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/remote/api_manager.dart';
 import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart';
 import 'package:fitness_app/feature/auth/data/data_source/auth_data_source.dart';
-import 'package:fitness_app/feature/auth/data/model/request/change_password_request_dto.dart';
-import 'package:fitness_app/feature/auth/data/model/request/forgot_password_request_dto.dart';
-import 'package:fitness_app/feature/auth/data/model/request/verify_code_request_dto.dart';
-import 'package:fitness_app/feature/auth/data/model/response/change_password_response_dto.dart';
-import 'package:fitness_app/feature/auth/data/model/response/forgot_password_response_dto.dart';
-import 'package:fitness_app/feature/auth/data/model/response/verify_code_response_dto.dart';
-import 'package:fitness_app/feature/auth/domain/entities/change_password_entity.dart';
-import 'package:fitness_app/feature/auth/domain/entities/forgot_password_entity.dart';
-import 'package:fitness_app/feature/auth/domain/entities/verify_code_entity.dart';
+import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/login/response/login_response_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/change_password_request_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/forgot_password_request_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/verify_code_request_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/change_password_response_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/forgot_password_response_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/verify_code_response_dto.dart';
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/change_password_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/forgot_password_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/verify_code_entity.dart';
 import 'package:injectable/injectable.dart';
-
-import '../model/login/request/login_request_dto.dart';
-import '../model/login/response/login_response_dto.dart';
 
 @Injectable(as: RemoteAuthDataSource)
 class RemoteAuthDataSourceImp extends RemoteAuthDataSource {
@@ -64,8 +62,6 @@ class RemoteAuthDataSourceImp extends RemoteAuthDataSource {
     }
   }
 
-  RemoteAuthDataSourceImp(this._apiManager, this._apiService);
-
   @override
   Future<Result<LoginResponseDto?>> login(LoginRequestDto loginRequest) async {
     final response = await _apiManager.execute<LoginResponseDto?>(
@@ -76,20 +72,4 @@ class RemoteAuthDataSourceImp extends RemoteAuthDataSource {
 
     return response;
   }
-
-  // ex
-  // @override
-  // Future<Result<ModelResponseEntity>> function() async {
-  //   final result = await _apiManager.execute<ModelResponseDto>(() async {
-  //     final response =
-  //         await _apiService.function(ModelRequestDto());
-  //     return response;
-  //   });
-  //   switch (result) {
-  //     case SuccessResult<ModelResponseDto>():
-  //       return SuccessResult<ModelResponseEntity>(result.data.toEntity());
-  //     case FailureResult<ModelResponseDto>():
-  //       return FailureResult<ModelResponseEntity>(result.exception);
-  //   }
-  // }
 }

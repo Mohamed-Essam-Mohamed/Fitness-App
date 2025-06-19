@@ -13,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await EasyLocalization.ensureInitialized();
 
@@ -28,14 +27,16 @@ void main() async {
       : Routes.onboarding;
   runApp(
     EasyLocalization(
-        supportedLocales: AppValues.supportedLocales,
-        fallbackLocale: AppValues.englishLocale,
-        path: AppValues.pathTranslation,
-        child: DevicePreview(
-            enabled: !kReleaseMode,
-            builder: (context) => MyApp(
-                  initialRoute: initialRoute,
-                ))),
+      supportedLocales: AppValues.supportedLocales,
+      fallbackLocale: AppValues.englishLocale,
+      path: AppValues.pathTranslation,
+      child: DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => MyApp(
+          initialRoute: initialRoute,
+        ),
+      ),
+    ),
   );
 }
 

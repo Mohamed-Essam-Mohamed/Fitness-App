@@ -1,17 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/base_state/base_state.dart';
+import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/di/service_locator.dart';
+import 'package:fitness_app/core/dialogs/app_toasts.dart';
+import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/core/utils/validator.dart';
+import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cubit.dart';
+import 'package:fitness_app/feature/auth/presentation/view_model/login/login_state.dart';
+import 'package:fitness_app/feature/auth/presentation/widgets/bottom_section.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
-import '../../../../core/base_state/base_state.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../../core/di/service_locator.dart';
-import '../../../../core/dialogs/app_toasts.dart';
-import '../../../../core/routes/routes.dart';
-import '../../../../core/utils/validator.dart';
-import '../view_model/login/login_cubit.dart';
-import '../view_model/login/login_state.dart';
-import 'bottom_section.dart';
 
 class LoginContentWidget extends StatefulWidget {
   const LoginContentWidget({super.key});
@@ -47,11 +47,11 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
         } else if (state.baseState is BaseErrorState) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             AppToast.showToast(
-                context: context,
-                description:
-                    (state.baseState as BaseErrorState).exception.toString(),
-                type: ToastificationType.error,
-                title: LocaleKeys.Error_LoginFailed.tr());
+              context: context,
+              description: (state.baseState as BaseErrorState).exception.toString(),
+              type: ToastificationType.error,
+              title: LocaleKeys.Error_LoginFailed.tr(),
+            );
           });
         }
       }, builder: (context, state) {
@@ -63,7 +63,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 24),
+                padding: const EdgeInsets.only(top: 24),
                 child: Text(
                   LocaleKeys.Authentication_Login.tr(),
                   style: Theme.of(context).textTheme.titleLarge,
@@ -81,8 +81,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined,
                               color: AppColors.gray[AppColors.colorCode10]),
-                          hintText:
-                              LocaleKeys.Authentication_EnterYourEmail.tr(),
+                          hintText: LocaleKeys.Authentication_EnterYourEmail.tr(),
                           labelText: LocaleKeys.Authentication_Email.tr(),
                         ),
                         validator: (value) => Validator.validateEmail(value),
@@ -95,28 +94,26 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                         obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            icon:   Icon(
+                            icon: Icon(
                               _isPasswordVisible
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility_outlined,
                               color: AppColors.gray[AppColors.colorCode10],
                             ),
                             onPressed: _togglePasswordVisibility,
-                          )
-      ,
+                          ),
                           prefixIcon: Icon(
                             Icons.lock_outlined,
                             color: AppColors.gray[AppColors.colorCode10],
                           ),
-                          hintText:
-                              LocaleKeys.Authentication_EnterYourPassword.tr(),
+                          hintText: LocaleKeys.Authentication_EnterYourPassword.tr(),
                           labelText: LocaleKeys.Authentication_Password.tr(),
                         ),
                         validator: (value) => Validator.validatePassword(value),
                         onTapOutside: (_) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                       ),
-                      BottomSection(),
+                      const BottomSection(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: SizedBox(
@@ -135,8 +132,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                                     height: 20,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      valueColor:
-                                          AlwaysStoppedAnimation(Colors.white),
+                                      valueColor: AlwaysStoppedAnimation(Colors.white),
                                     ),
                                   )
                                 : Text(LocaleKeys.Authentication_Login.tr()),
@@ -147,24 +143,21 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: InkWell(
-                          onTap: (){},
+                          onTap: () {},
                           child: Center(
                             child: Text.rich(
                               TextSpan(
-                                text: LocaleKeys.Authentication_DonotHaveAnAccount
-                                    .tr(),
+                                text: LocaleKeys.Authentication_DonotHaveAnAccount.tr(),
                                 style: Theme.of(context).textTheme.labelSmall,
                                 children: [
                                   TextSpan(
                                     text: LocaleKeys.Authentication_Register.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium!
-                                        .copyWith(
-                                          color: AppColors.lightOrange,
-                                          decoration: TextDecoration.underline,
-                                          decorationColor: AppColors.lightOrange,
-                                        ),
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium!.copyWith(
+                                              color: AppColors.lightOrange,
+                                              decoration: TextDecoration.underline,
+                                              decorationColor: AppColors.lightOrange,
+                                            ),
                                     // recognizer: TapGestureRecognizer()..onTap = onRegisterTap,
                                   ),
                                 ],

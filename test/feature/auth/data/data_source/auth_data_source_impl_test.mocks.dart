@@ -3,18 +3,30 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i7;
 
-import 'package:fitness_app/core/network/common/api_result.dart' as _i5;
-import 'package:fitness_app/core/network/remote/api_manager.dart' as _i3;
+import 'package:fitness_app/core/network/common/api_result.dart' as _i8;
+import 'package:fitness_app/core/network/remote/api_manager.dart' as _i6;
 import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart'
-    as _i7;
-import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart'
-    as _i8;
-import 'package:fitness_app/feature/auth/data/model/login/response/login_response_dto.dart'
+    as _i10;
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/change_password_request_dto.dart'
+    as _i13;
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/forgot_password_request_dto.dart'
+    as _i11;
+import 'package:fitness_app/feature/auth/data/model/forget_password/request/verify_code_request_dto.dart'
+    as _i12;
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/change_password_response_dto.dart'
+    as _i4;
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/forgot_password_response_dto.dart'
     as _i2;
+import 'package:fitness_app/feature/auth/data/model/forget_password/response/verify_code_response_dto.dart'
+    as _i3;
+import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart'
+    as _i14;
+import 'package:fitness_app/feature/auth/data/model/login/response/login_response_dto.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,53 +42,116 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeLoginResponseDto_0 extends _i1.SmartFake
-    implements _i2.LoginResponseDto {
-  _FakeLoginResponseDto_0(Object parent, Invocation parentInvocation)
+class _FakeForgotPasswordResponseDto_0 extends _i1.SmartFake
+    implements _i2.ForgotPasswordResponseDto {
+  _FakeForgotPasswordResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeVerifyCodeResponseDto_1 extends _i1.SmartFake
+    implements _i3.VerifyCodeResponseDto {
+  _FakeVerifyCodeResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeChangePasswordResponseDto_2 extends _i1.SmartFake
+    implements _i4.ChangePasswordResponseDto {
+  _FakeChangePasswordResponseDto_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeLoginResponseDto_3 extends _i1.SmartFake
+    implements _i5.LoginResponseDto {
+  _FakeLoginResponseDto_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i3.ApiManager {
+class MockApiManager extends _i1.Mock implements _i6.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i5.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
+  _i7.Future<_i8.Result<T>> execute<T>(_i7.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [apiCall]),
-            returnValue: _i4.Future<_i5.Result<T>>.value(
-              _i6.dummyValue<_i5.Result<T>>(
+            returnValue: _i7.Future<_i8.Result<T>>.value(
+              _i9.dummyValue<_i8.Result<T>>(
                 this,
                 Invocation.method(#execute, [apiCall]),
               ),
             ),
           )
-          as _i4.Future<_i5.Result<T>>);
+          as _i7.Future<_i8.Result<T>>);
 }
 
 /// A class which mocks [AuthRetrofitClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRetrofitClient extends _i1.Mock
-    implements _i7.AuthRetrofitClient {
+    implements _i10.AuthRetrofitClient {
   MockAuthRetrofitClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.LoginResponseDto> login(_i8.LoginRequestDto? loginRequest) =>
+  _i7.Future<_i2.ForgotPasswordResponseDto> forgotPassword(
+    _i11.ForgotPasswordRequestDto? forgetRequest,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#forgotPassword, [forgetRequest]),
+            returnValue: _i7.Future<_i2.ForgotPasswordResponseDto>.value(
+              _FakeForgotPasswordResponseDto_0(
+                this,
+                Invocation.method(#forgotPassword, [forgetRequest]),
+              ),
+            ),
+          )
+          as _i7.Future<_i2.ForgotPasswordResponseDto>);
+
+  @override
+  _i7.Future<_i3.VerifyCodeResponseDto> verifyCode(
+    _i12.VerifyCodeRequestDto? code,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#verifyCode, [code]),
+            returnValue: _i7.Future<_i3.VerifyCodeResponseDto>.value(
+              _FakeVerifyCodeResponseDto_1(
+                this,
+                Invocation.method(#verifyCode, [code]),
+              ),
+            ),
+          )
+          as _i7.Future<_i3.VerifyCodeResponseDto>);
+
+  @override
+  _i7.Future<_i4.ChangePasswordResponseDto> changePassword(
+    _i13.ChangePasswordRequestDto? resetPasswordRequest,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#changePassword, [resetPasswordRequest]),
+            returnValue: _i7.Future<_i4.ChangePasswordResponseDto>.value(
+              _FakeChangePasswordResponseDto_2(
+                this,
+                Invocation.method(#changePassword, [resetPasswordRequest]),
+              ),
+            ),
+          )
+          as _i7.Future<_i4.ChangePasswordResponseDto>);
+
+  @override
+  _i7.Future<_i5.LoginResponseDto> login(_i14.LoginRequestDto? loginRequest) =>
       (super.noSuchMethod(
             Invocation.method(#login, [loginRequest]),
-            returnValue: _i4.Future<_i2.LoginResponseDto>.value(
-              _FakeLoginResponseDto_0(
+            returnValue: _i7.Future<_i5.LoginResponseDto>.value(
+              _FakeLoginResponseDto_3(
                 this,
                 Invocation.method(#login, [loginRequest]),
               ),
             ),
           )
-          as _i4.Future<_i2.LoginResponseDto>);
+          as _i7.Future<_i5.LoginResponseDto>);
 }

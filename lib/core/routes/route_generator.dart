@@ -2,24 +2,20 @@ import 'package:fitness_app/core/common/widget/undefined_route.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/animation_routes.dart';
 import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/feature/app_section/app_section.dart';
 import 'package:fitness_app/feature/auth/presentation/view/change_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/forget_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/verify_code_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
-import 'package:fitness_app/feature/onboarding/onboarding_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/login_screen.dart';
 import 'package:fitness_app/feature/onboarding/view/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../feature/app_section/app_section.dart';
-
 class RouteGenerator {
   static Route<dynamic>? getRoute(RouteSettings settings) {
     final arg = settings.arguments;
     switch (settings.name) {
-      case Routes.onboarding:
-        return AnimationRoute(page: const OnboardingScreen());
       case Routes.forgotPassword:
         return AnimationRoute(
           page: BlocProvider<ForgetPasswordCubit>(
@@ -41,7 +37,7 @@ class RouteGenerator {
             child: const ChangePasswordScreen(),
           ),
         );
-
+      case Routes.onboarding:
         return AnimationRoute(page: const OnBoardingScreen());
       case Routes.login:
         return AnimationRoute(page: const LoginScreen());

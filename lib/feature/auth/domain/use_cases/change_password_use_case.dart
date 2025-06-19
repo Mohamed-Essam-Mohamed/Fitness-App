@@ -1,5 +1,5 @@
 import 'package:fitness_app/core/network/common/api_result.dart';
-import 'package:fitness_app/feature/auth/domain/entities/change_password_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/change_password_entity.dart';
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 

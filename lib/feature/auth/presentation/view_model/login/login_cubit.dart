@@ -1,6 +1,6 @@
 import 'package:fitness_app/core/constants/app_values.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/response/login_response_entity.dart';
-import 'package:fitness_app/feature/auth/domain/entity/login/response/user_data_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/user_data_entity.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,14 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/base_state/base_state.dart';
 import '../../../../../core/network/common/api_result.dart';
-import '../../../domain/entity/login/request/login_request_entity.dart';
+import '../../../domain/entities/login/request/login_request_entity.dart';
 import '../../../domain/use_cases/login_use_case.dart';
-
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginUseCase)
-      : super(LoginState(baseState: BaseInitialState())) {
+  LoginCubit(this._loginUseCase) : super(LoginState(baseState: BaseInitialState())) {
     emailController.addListener(_validateForm);
     passwordController.addListener(_validateForm);
   }
@@ -25,8 +23,6 @@ class LoginCubit extends Cubit<LoginState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-
 
   void doIntent(LoginAction action) {
     switch (action) {
@@ -71,13 +67,6 @@ class LoginCubit extends Cubit<LoginState> {
     return null;
   }
 
-
-
-
-
-
-
-
   Future<void> _saveUserData(LoginResponseEntity loginResponse) async {
     final UserDataEntity? userData = loginResponse.user;
     print('user first name ${userData?.firstName}');
@@ -96,14 +85,11 @@ class LoginCubit extends Cubit<LoginState> {
     pref.setString(AppValues.photo, userData?.photo ?? 'not found');
   }
 
-
-
   Future<void> _setLoggedInState(bool isLoggedIn, String? userToken) async {
     final pref = await SharedPreferences.getInstance();
     pref.setBool(AppValues.isLoggedIn, isLoggedIn);
     pref.setString(AppValues.token, userToken ?? '');
   }
-
 
   @override
   Future<void> close() {
