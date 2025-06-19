@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
@@ -8,6 +11,7 @@ import 'package:fitness_app/feature/auth/presentation/view_model/forget_password
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/logo_app_widget.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
@@ -17,6 +21,8 @@ class VerifyCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<ForgetPasswordCubit>(context);
+
     return BackgroundApp(
       child: Scaffold(
         body: SafeArea(
@@ -29,14 +35,10 @@ class VerifyCodeScreen extends StatelessWidget {
                 }
                 if (state.isSuccess) {
                   context.pop();
-                  context.pushNamed(
-                    Routes.changePassword,
-                    arguments: context.read()<ForgetPasswordCubit>(),
-                  );
+                  context.pushNamed(Routes.changePassword, arguments: cubit);
                 }
                 if (state.isFailure) {
                   context.pop();
-                  // AppToast.showToast(context: context, title: 'Error', description: '', type: type)
                 }
               },
               child: Column(
@@ -50,7 +52,7 @@ class VerifyCodeScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        "OTP CODE",
+                        LocaleKeys.Authentication_OtpCode.tr(),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -62,7 +64,7 @@ class VerifyCodeScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        "Enter Your OTP Check Your Email",
+                        LocaleKeys.Authentication_EnterYourOtpCheckYourEmail.tr(),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -83,12 +85,12 @@ class VerifyCodeScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           cursorColor: AppColors.orange,
                           onCompleted: (String value) async {
-                            context.read<ForgetPasswordCubit>().doIntend(
-                                  ForgetPasswordIntent(
-                                    status: ForgetPasswordStatus.verifyCode,
-                                    code: value,
-                                  ),
-                                );
+                            cubit.doIntend(
+                              ForgetPasswordIntent(
+                                status: ForgetPasswordStatus.verifyCode,
+                                code: value,
+                              ),
+                            );
                           },
                           onEditing: (bool value) {},
                         ),
@@ -103,18 +105,18 @@ class VerifyCodeScreen extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {},
-                            child: const Text('Sent OTP'),
+                            child: Text(LocaleKeys.Authentication_Confirm.tr()),
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "don't receive code?",
+                          LocaleKeys.Authentication_DidnotReceiveCode.tr(),
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'Resend Code?',
+                            LocaleKeys.Authentication_ResendCode.tr(),
                             style: Theme.of(context).textTheme.displayLarge!.copyWith(
                                   color: AppColors.orange,
                                 ),

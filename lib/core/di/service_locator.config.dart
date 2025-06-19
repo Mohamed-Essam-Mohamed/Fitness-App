@@ -68,10 +68,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i911.AuthRepository>(
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
-    gh.factory<_i498.ForgetPasswordUseCase>(
-        () => _i498.ForgetPasswordUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i1031.ChangePasswordUseCase>(
         () => _i1031.ChangePasswordUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i498.ForgetPasswordUseCase>(
+        () => _i498.ForgetPasswordUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i394.VerifyCodeUseCase>(
         () => _i394.VerifyCodeUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i369.ForgetPasswordCubit>(() => _i369.ForgetPasswordCubit(

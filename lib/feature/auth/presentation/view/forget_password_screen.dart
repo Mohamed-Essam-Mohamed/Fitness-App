@@ -1,18 +1,15 @@
-import 'dart:ui';
-
 import 'package:animate_do/animate_do.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
-import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
-import 'package:fitness_app/core/routes/animation_routes.dart';
 import 'package:fitness_app/core/routes/routes.dart';
-import 'package:fitness_app/feature/auth/presentation/view/verify_code_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/logo_app_widget.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,6 +24,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<ForgetPasswordCubit>(context);
     return BackgroundApp(
       child: Scaffold(
         body: SafeArea(
@@ -39,10 +37,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 }
                 if (state.isSuccess) {
                   context.pop();
-                  context.pushNamed(
-                    Routes.verifyCode,
-                    arguments: context.read<ForgetPasswordCubit>(),
-                  );
+                  context.pushNamed(Routes.verifyCode, arguments: cubit);
                 }
                 if (state.isFailure) {
                   context.pop();
@@ -60,7 +55,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        "Enter Your Email",
+                        LocaleKeys.Authentication_EnterYourEmail.tr(),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -70,7 +65,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        "  Forget password",
+                        LocaleKeys.Authentication_ForgetPassword.tr(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
@@ -94,7 +89,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 ),
                               ),
                             ),
-                            hintText: 'Email',
+                            hintText: LocaleKeys.Authentication_Email.tr(),
                           ),
                         ),
                         BounceInDown(
@@ -114,7 +109,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                     ),
                                   );
                             },
-                            child: const Text('Sent OTP'),
+                            child: Text(LocaleKeys.Authentication_SendOtp.tr()),
                           ),
                         )
                       ],
