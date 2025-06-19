@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
+import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:toastification/toastification.dart';
 
 class VerifyCodeScreen extends StatelessWidget {
   const VerifyCodeScreen({super.key});
@@ -28,15 +30,21 @@ class VerifyCodeScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
-                if (state.isLoading) {
+                if (state.isVerifyLoading) {
                   AppDialogs.showLoadingDialog(context);
                 }
-                if (state.isSuccess) {
+                if (state.isVerifySuccess) {
                   context.pop();
                   context.pushNamed(Routes.changePassword, arguments: cubit);
                 }
-                if (state.isFailure) {
+                if (state.isVerifyFailure) {
                   context.pop();
+                  AppToast.showToast(
+                    context: context,
+                    title: '',
+                    description: state.errorFromVerifyCode,
+                    type: ToastificationType.error,
+                  );
                 }
               },
               child: Column(
@@ -51,9 +59,10 @@ class VerifyCodeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         LocaleKeys.Authentication_OtpCode.tr(),
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -112,7 +121,13 @@ class VerifyCodeScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            cubit.doIntend(
+                              ForgetPasswordIntent(
+                                status: ForgetPasswordStatus.forgotPassword,
+                              ),
+                            );
+                          },
                           child: Text(
                             LocaleKeys.Authentication_ResendCode.tr(),
                             style: Theme.of(context).textTheme.displayLarge!.copyWith(

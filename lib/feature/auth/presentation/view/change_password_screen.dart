@@ -4,6 +4,7 @@ import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
+import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/utils/validator.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
@@ -14,6 +15,7 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:toastification/toastification.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -34,14 +36,21 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             physics: const BouncingScrollPhysics(),
             child: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
-                if (state.isLoading) {
+                if (state.isChangeLoading) {
                   AppDialogs.showLoadingDialog(context);
                 }
-                if (state.isSuccess) {
+                if (state.isChangeSuccess) {
                   context.pop();
+                  //!  navigate to home
                 }
-                if (state.isFailure) {
+                if (state.isChangeFailure) {
                   context.pop();
+                  AppToast.showToast(
+                    context: context,
+                    title: '',
+                    description: state.errorFromChangePassword,
+                    type: ToastificationType.error,
+                  );
                 }
               },
               child: Form(

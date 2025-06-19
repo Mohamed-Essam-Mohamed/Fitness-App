@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
+import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:toastification/toastification.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -32,90 +34,100 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             physics: const BouncingScrollPhysics(),
             child: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
-                if (state.isLoading) {
+                if (state.isForgetLoading) {
                   AppDialogs.showLoadingDialog(context);
                 }
-                if (state.isSuccess) {
+                if (state.isForgetSuccess) {
                   context.pop();
                   context.pushNamed(Routes.verifyCode, arguments: cubit);
                 }
-                if (state.isFailure) {
+                if (state.isForgetFailure) {
                   context.pop();
-                  // AppToast.showToast(context: context, title: 'Error', description: '', type: type)
+                  AppToast.showToast(
+                    context: context,
+                    title: '',
+                    description: state.errorFromForgetPassword,
+                    type: ToastificationType.error,
+                  );
                 }
               },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 50),
-                  const LogoAppWidget(),
-                  const SizedBox(height: 88),
-                  AnimationText(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        LocaleKeys.Authentication_EnterYourEmail.tr(),
-                        style: Theme.of(context).textTheme.titleMedium,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 50),
+                    const LogoAppWidget(),
+                    const SizedBox(height: 88),
+                    AnimationText(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          LocaleKeys.Authentication_EnterYourEmail.tr(),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
                       ),
                     ),
-                  ),
-                  AnimationText(
-                    millDelay: 1200,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        LocaleKeys.Authentication_ForgetPassword.tr(),
-                        style: Theme.of(context).textTheme.labelLarge,
+                    AnimationText(
+                      millDelay: 1200,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          LocaleKeys.Authentication_ForgetPassword.tr(),
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  CustomAuthContainer(
-                    child: Column(
-                      spacing: 24,
-                      children: [
-                        TextFormField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 8),
-                              child: SizedBox(
-                                width: 25,
-                                height: 25,
-                                child: SvgPicture.asset(
-                                  SvgAsset.mail,
-                                  fit: BoxFit.contain, // مهم جدًا
+                    const SizedBox(height: 16),
+                    CustomAuthContainer(
+                      child: Column(
+                        spacing: 24,
+                        children: [
+                          TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.only(left: 16, right: 8),
+                                child: SizedBox(
+                                  width: 25,
+                                  height: 25,
+                                  child: SvgPicture.asset(
+                                    SvgAsset.mail,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
+                              hintText: LocaleKeys.Authentication_Email.tr(),
                             ),
-                            hintText: LocaleKeys.Authentication_Email.tr(),
                           ),
-                        ),
-                        BounceInDown(
-                          delay: const Duration(milliseconds: 1800),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(38),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
+                          BounceInDown(
+                            delay: const Duration(milliseconds: 1800),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(38),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
                               ),
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  context.read<ForgetPasswordCubit>().doIntend(
+                                        ForgetPasswordIntent(
+                                          status: ForgetPasswordStatus.forgotPassword,
+                                          email: _emailController.text,
+                                        ),
+                                      );
+                                }
+                              },
+                              child: Text(LocaleKeys.Authentication_SendOtp.tr()),
                             ),
-                            onPressed: () async {
-                              context.read<ForgetPasswordCubit>().doIntend(
-                                    ForgetPasswordIntent(
-                                      status: ForgetPasswordStatus.forgotPassword,
-                                      email: _emailController.text,
-                                    ),
-                                  );
-                            },
-                            child: Text(LocaleKeys.Authentication_SendOtp.tr()),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -125,6 +137,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   }
 
   late TextEditingController _emailController;
+  var formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _emailController = TextEditingController();
