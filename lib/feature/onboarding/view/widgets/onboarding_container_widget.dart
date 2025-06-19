@@ -1,15 +1,17 @@
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/feature/onboarding/view/widgets/onboardingHelper.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../domain/model/Onboarding_entity.dart';
+import '../../domain/model/onboarding_entity.dart';
 
-class OnboardingContainerWidget extends StatefulWidget{
+class OnboardingContainerWidget extends StatefulWidget {
   const OnboardingContainerWidget({super.key});
 
   @override
-  State<OnboardingContainerWidget> createState() => _OnboardingContainerWidgetState();
+  State<OnboardingContainerWidget> createState() =>
+      _OnboardingContainerWidgetState();
 }
 
 class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
@@ -18,7 +20,7 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return      Expanded(
+    return Expanded(
       child: PageView.builder(
         controller: _pageController,
         itemCount: onBoardingItems.length,
@@ -72,10 +74,10 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
                               onBoardingItems.length,
-                                  (dotIndex) => AnimatedContainer(
+                              (dotIndex) => AnimatedContainer(
                                 duration: const Duration(milliseconds: 300),
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 4),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 4),
                                 height: 8,
                                 width: currIndex == dotIndex ? 24 : 8,
                                 decoration: BoxDecoration(
@@ -92,41 +94,39 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
                             padding: const EdgeInsets.all(8.0),
                             child: (currIndex == 0)
                                 ? SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: navigateToNextPage,
-                                child: Text(
-                                    LocaleKeys.Onboarding_next.tr()),
-                              ),
-                            )
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed: navigateToNextPage,
+                                      child:
+                                          Text(LocaleKeys.Onboarding_next.tr()),
+                                    ),
+                                  )
                                 : Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                OutlinedButton(
-                                  onPressed: () {
-                                    _pageController.previousPage(
-                                      duration: const Duration(
-                                          milliseconds: 400),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  },
-                                  child: Text(LocaleKeys
-                                      .Onboarding_back.tr()),
-                                ),
-                                ElevatedButton(
-                                  onPressed: navigateToNextPage,
-                                  child: Text(
-                                    currIndex ==
-                                        onBoardingItems.length - 1
-                                        ? LocaleKeys.Onboarding_done
-                                        .tr()
-                                        : LocaleKeys.Onboarding_next
-                                        .tr(),
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      OutlinedButton(
+                                        onPressed: () {
+                                          _pageController.previousPage(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve: Curves.easeInOut,
+                                          );
+                                        },
+                                        child: Text(
+                                            LocaleKeys.Onboarding_back.tr()),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: navigateToNextPage,
+                                        child: Text(
+                                          currIndex ==
+                                                  onBoardingItems.length - 1
+                                              ? LocaleKeys.Onboarding_done.tr()
+                                              : LocaleKeys.Onboarding_next.tr(),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
                           ),
                         ],
                       ),
@@ -148,19 +148,10 @@ class _OnboardingContainerWidgetState extends State<OnboardingContainerWidget> {
         curve: Curves.easeInOut,
       );
     } else {
-      // await checkLoginStatus();
+       await OnboardingHelper.checkLoginStatus(context);
     }
   }
 
-  // Future<void> checkLoginStatus() async {
-  //   var loginStatus =
-  //   await SharedPreferencesHelper.getBool(AppStrings.userLoggedInKey);
-  //   if (loginStatus != null && loginStatus) {
-  //     navigateToScreen(path: AppRoutes.kHomePage);
-  //   } else {
-  //     navigateToScreen(path: AppRoutes.kLoginView);
-  //   }
-  // }
   @override
   void dispose() {
     _pageController.dispose();

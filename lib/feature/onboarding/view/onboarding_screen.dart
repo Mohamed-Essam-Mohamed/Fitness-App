@@ -14,7 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Image.asset(
-            ImageAsset.backgroundImage,
+            ImageAsset.onboardingBackgroundImage,
             fit: BoxFit.cover,
           ),
         ),

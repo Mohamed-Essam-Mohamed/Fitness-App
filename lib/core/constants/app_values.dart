@@ -20,4 +20,21 @@ abstract class AppValues {
   // shared preferences keys
   static const String stateUser = "StateUser";
   static const String token = "token";
+  static const String isOnboardingCompleted = 'isOnboardingCompleted';
+  static const String isLoggedIn = "isLoggedIn";
+  static const String id = "id";
+  static const String firstName = "firstName";
+  static const String lastName = "lastName";
+  static const String email = "email";
+  static const String gender = "gender";
+  static const String age = "age";
+  static const String weight = "weight";
+  static const String height = "height";
+  static const String activityLevel = "activityLevel";
+  static const String goal = "goal";
+  static const String photo = "photo";
+  static const String createdAt = "createdAt";
+
+
+
 }
