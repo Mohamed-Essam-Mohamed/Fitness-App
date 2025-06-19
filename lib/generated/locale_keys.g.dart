@@ -3,6 +3,37 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class  LocaleKeys {
+  static const Authentication_Rookie = 'Authentication.Rookie';
+  static const Authentication_Beginner = 'Authentication.Beginner';
+  static const Authentication_Intermediate = 'Authentication.Intermediate';
+  static const Authentication_Advance = 'Authentication.Advance';
+  static const Authentication_TrueBeast = 'Authentication.TrueBeast';
+  static const Authentication_stepProgressSix = 'Authentication.stepProgressSix';
+  static const Authentication_yourRegularPhysical = 'Authentication.yourRegularPhysical';
+  static const Authentication_activityLevel = 'Authentication.activityLevel';
+  static const Authentication_next = 'Authentication.next';
+  static const Authentication_gainWeight = 'Authentication.gainWeight';
+  static const Authentication_loseWeight = 'Authentication.loseWeight';
+  static const Authentication_getFitter = 'Authentication.getFitter';
+  static const Authentication_gainMoreFlexible = 'Authentication.gainMoreFlexible';
+  static const Authentication_learnTheBasic = 'Authentication.learnTheBasic';
+  static const Authentication_stepProgressFive = 'Authentication.stepProgressFive';
+  static const Authentication_whatIsYourGoal = 'Authentication.whatIsYourGoal';
+  static const Authentication_goalDescription = 'Authentication.goalDescription';
+  static const Authentication_stepProgressFour = 'Authentication.stepProgressFour';
+  static const Authentication_whatIsYourHeight = 'Authentication.whatIsYourHeight';
+  static const Authentication_unitCm = 'Authentication.unitCm';
+  static const Authentication_stepProgressTwo = 'Authentication.stepProgressTwo';
+  static const Authentication_howOldAreYou = 'Authentication.howOldAreYou';
+  static const Authentication_unitYear = 'Authentication.unitYear';
+  static const Authentication_stepProgressOne = 'Authentication.stepProgressOne';
+  static const Authentication_tellUsAboutYourself = 'Authentication.tellUsAboutYourself';
+  static const Authentication_tellUsDescription = 'Authentication.tellUsDescription';
+  static const Authentication_genderMale = 'Authentication.genderMale';
+  static const Authentication_genderFemale = 'Authentication.genderFemale';
+  static const Authentication_stepProgressThree = 'Authentication.stepProgressThree';
+  static const Authentication_whatIsYourWeight = 'Authentication.whatIsYourWeight';
+  static const Authentication_unitKg = 'Authentication.unitKg';
   static const Authentication_Login = 'Authentication.Login';
   static const Authentication_SignUp = 'Authentication.SignUp';
   static const Authentication_SendOtp = 'Authentication.SendOtp';

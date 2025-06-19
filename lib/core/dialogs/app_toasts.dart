@@ -1,3 +1,4 @@
+import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
@@ -17,7 +18,7 @@ abstract class AppToast {
       autoCloseDuration: const Duration(seconds: 3),
       progressBarTheme: ProgressIndicatorThemeData(
         color: type == ToastificationType.success
-            ? Colors.green
+            ? AppColors.darkBackground
             : type == ToastificationType.info
                 ? Colors.blue
                 : type == ToastificationType.warning
@@ -26,7 +27,7 @@ abstract class AppToast {
       ),
       showProgressBar: true,
       backgroundColor: type == ToastificationType.success
-          ? Colors.green
+          ? AppColors.gray.withOpacity(0.1)
           : type == ToastificationType.info
               ? Colors.blue
               : type == ToastificationType.warning

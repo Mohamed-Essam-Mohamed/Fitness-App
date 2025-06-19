@@ -53,6 +53,9 @@ dependencies:
   firebase_messaging: ^15.2.5
   retry: ^3.1.2
   timelines: ^0.1.0
+  numberpicker: ^2.1.1
+  scrollable_positioned_list: ^0.3.8
+
 
 dev_dependencies:
   flutter_test:
@@ -85,3 +88,10 @@ flutter:
     - family: Supermercado One
       fonts:
         - asset: assets/fonts/super/SupermercadoOne-Regular.ttf
+
+
+    - family: BalooThambi2
+      fonts:
+        - asset: assets/fonts/super/BalooThambi2-Regular.ttf
+
+

@@ -46,11 +46,15 @@ class SvgAsset {
   static const ex34 = 'assets/svg/O15_34.svg';
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
+
 }
 
 class ImageAsset {
+  static const backGroundImage = 'assets/png/BackGround.png';
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
+  static const fit1 = 'assets/png/fit1.png';
+
 }
 
 class LottieAsset {}
