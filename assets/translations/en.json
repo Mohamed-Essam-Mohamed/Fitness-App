@@ -67,13 +67,19 @@
     "PleaseEnterYourCode": "Please enter the code sent to your email address",
     "Confirm": "Confirm",
     "Resend": "Resend",
+    "ResendCode":"Resend Code",
     "DidnotReceiveCode": "Didn't receive code?",
     "EmailVerification": "Email verification",
     "Continue": "Continue",
     "PasswordRequirements": "Password must not be empty and must contain at least 6 characters, an uppercase letter, and a number",
     "heyThere" : "Hey There",
     "welcomeBack" : "WELCOME BACK",
-    "or" : "Or"
+    "or" : "Or",
+    "MakeSureIts8CharactersOrMore": "Make Sure Its 8 Characters Or More",
+    "CreateNewPassword": "Create New Password",
+    "OtpCode": "Otp Code",
+    "EnterYourOtpCheckYourEmail": "Enter Your Otp Check Your Email",
+    "Done": "Done"
   },
   "Profile": {
     "Profile": "Profile",

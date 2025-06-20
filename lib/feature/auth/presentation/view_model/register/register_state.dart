@@ -21,7 +21,7 @@ class RegisterState extends Equatable {
   }) {
     return RegisterState(
       status: status ?? this.status,
-      errorMessage: errorMessage,
+      errorMessage:  errorMessage ??this.errorMessage,
       data: data ?? this.data,
     );
   }

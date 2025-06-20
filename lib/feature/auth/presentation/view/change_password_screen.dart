@@ -6,6 +6,7 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/utils/validator.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
@@ -40,7 +41,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   AppDialogs.showLoadingDialog(context);
                 }
                 if (state.isChangeSuccess) {
-                  context.pop();
+                  Navigator.of(context).pushNamed(Routes.login);
+                  Future.delayed(const Duration(milliseconds: 500), () {  AppToast.showToast(
+                    context: context,
+                    title: '',
+                    description: "password changed Successfuly",
+                    type: ToastificationType.success,
+                  );});
+       //           context.pop();
                   //!  navigate to home
                 }
                 if (state.isChangeFailure) {
@@ -104,7 +112,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             hintText: LocaleKeys.Authentication_ConfirmPassword.tr(),
                           ),
                           BounceInDown(
-                            delay: const Duration(milliseconds: 1800),
+                            delay: const Duration(milliseconds: 700),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size.fromHeight(38),

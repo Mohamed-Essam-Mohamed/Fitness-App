@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,7 +35,10 @@ void main() async {
         supportedLocales: AppValues.supportedLocales,
         fallbackLocale: AppValues.englishLocale,
         path: AppValues.pathTranslation,
-        child: MyApp(initialRoute: initialRoute),
+        child:
+
+        DevicePreview(enabled: !kReleaseMode,
+            builder: (context) =>MyApp(initialRoute: initialRoute)),
       ),
     ),
   );
@@ -71,7 +76,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.RgisterFirsPart,
+            initialRoute: initialRoute,
           ),
         );
       },

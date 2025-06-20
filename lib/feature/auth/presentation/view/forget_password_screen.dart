@@ -102,7 +102,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             ),
                           ),
                           BounceInDown(
-                            delay: const Duration(milliseconds: 1800),
+                            delay: const Duration(milliseconds: 700),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size.fromHeight(38),

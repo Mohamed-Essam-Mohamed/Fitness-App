@@ -2,6 +2,7 @@ import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/common/widget/undefined_route.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/animation_routes.dart';
+import 'package:fitness_app/feature/app_section/view/app_sections.dart';
 import 'package:fitness_app/feature/auth/presentation/view/register_first_part_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +18,6 @@ import '../../feature/auth/presentation/view_model/models/collecting_data_model.
 import '../../feature/auth/presentation/view_model/register/register_cubit.dart';
 import '../di/service_locator.dart';
 import 'animation_routes.dart';
-import 'package:fitness_app/feature/app_section/app_section.dart';
 import 'package:fitness_app/feature/auth/presentation/view/change_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/forget_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/verify_code_screen.dart';
@@ -59,7 +59,8 @@ class RouteGenerator {
       case Routes.login:
         return AnimationRoute(page: const LoginScreen());
       case Routes.appSection:
-        return AnimationRoute(page: AppSection());
+        return AnimationRoute(page: const AppSection());
+
 
       case Routes.selectGender:
         return AnimationRoute(
@@ -114,9 +115,7 @@ class RouteGenerator {
 
         );
 
-
-        return AnimationRoute(page: const AppSection());
-      default:
+        default:
         return AnimationRoute(page: const UndefinedRoute());
         return null;
     }

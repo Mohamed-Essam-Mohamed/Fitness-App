@@ -183,7 +183,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                   setState(() {
                                     selectedIndex = index;
                                   });
-                                  final level = "level${index + 1}";
                                 },
                               );
                             }),
