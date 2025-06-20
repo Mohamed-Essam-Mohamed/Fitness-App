@@ -66,6 +66,7 @@ dependencies:
   device_preview: ^1.2.0
   crystal_navigation_bar: ^1.0.4
   dot_navigation_bar: ^1.0.2
+  flutter_launcher_icons: ^0.14.4
 
 
 dev_dependencies:
@@ -85,6 +86,12 @@ dev_dependencies:
   mocktail: ^1.0.4
   bloc_test: ^10.0.0
   lint: ^2.7.0
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/png/icon-launcher.png"
+  adaptive_icon_background: "#242424"
+  adaptive_icon_foreground: "assets/png/play-store-icon-launcher.png" 
 
 flutter:
   uses-material-design: true
