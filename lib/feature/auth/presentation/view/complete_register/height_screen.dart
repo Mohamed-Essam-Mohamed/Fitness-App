@@ -1,6 +1,9 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/view/complete_register/goal_screen.dart';
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fitness_app/core/constants/app_assets.dart';
@@ -19,9 +22,9 @@ class HeightScreen extends StatefulWidget {
   @override
   State<HeightScreen> createState() => _HeightScreenState();
 }
-
+late RegisterCubit cubit;
 class _HeightScreenState extends State<HeightScreen> {
-  int height = 80;
+  late int height;
   late ScrollController _scrollController;
   late double itemWidth;
 
@@ -32,29 +35,14 @@ class _HeightScreenState extends State<HeightScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _loadHeightFromPrefs();
-
+    cubit = context.read<RegisterCubit>();
+    height = cubit.height;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToHeight(height);
       _scrollController.addListener(_onScroll);
     });
   }
 
-  Future<void> _loadHeightFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedHeight = prefs.getInt('height');
-    if (savedHeight != null) {
-      setState(() {
-        height = savedHeight;
-        _scrollToHeight(height);
-      });
-    }
-  }
-
-  Future<void> _saveHeightToPrefs(int value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('height', value);
-  }
 
   void _onScroll() {
     final offset = _scrollController.offset +
@@ -65,7 +53,6 @@ class _HeightScreenState extends State<HeightScreen> {
     final newHeight = (index - paddingItems + 1).clamp(1, numbersCount);
     if (newHeight != height) {
       setState(() => height = newHeight);
-      _saveHeightToPrefs(newHeight);
     }
   }
 
@@ -93,7 +80,7 @@ class _HeightScreenState extends State<HeightScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              ImageAsset.backGroundImage,
+              ImageAsset.backgroundImage,
               fit: BoxFit.fill,
             ),
           ),
@@ -111,7 +98,7 @@ class _HeightScreenState extends State<HeightScreen> {
                     SizedBox(
                       width: context.wp(17),
                       height: context.hp(8),
-                      child: Image.asset(ImageAsset.fit1, fit: BoxFit.contain),
+                      child: Image.asset(ImageAsset.logo, fit: BoxFit.contain),
                     ),
                     SizedBox(width: context.wp(12)),
                   ],
@@ -240,6 +227,7 @@ class _HeightScreenState extends State<HeightScreen> {
                             child: GestureDetector(
                               onTap: () {
                                 final userData = widget.data.copyWith(height: height);
+                                cubit.height=height;
                                 Navigator.of(context).pushNamed(Routes.goal, arguments: userData);
                               },
                               child: Container(

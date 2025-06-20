@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
+import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
@@ -19,18 +20,21 @@ class _RegisterFirstPartScreenState extends State<RegisterFirstPartScreen> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(ImageAsset.backGroundImage),
+              image: AssetImage(ImageAsset.backgroundImage),
               fit: BoxFit.cover)),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 46),
-              Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  child: Image.asset(ImageAsset.fitLogo),
+            //  SizedBox(height: 22),
+              SizedBox(
+                height: context.hp(15),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    child: Image.asset(ImageAsset.logo),
+                  ),
                 ),
               ),
               SizedBox(height: 36),

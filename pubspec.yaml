@@ -96,15 +96,7 @@ flutter:
     - assets/translations/
 
   fonts:
-    - family: Baloo
     - family: Baloo Thambi 2
       fonts:
-        - asset: assets/fonts/baloo/BalooThambi2-VariableFont_wght.ttf
         - asset: assets/fonts/baloo/BalooThambi2-Regular.ttf
-
-
-    - family: BalooThambi2
-      fonts:
-        - asset: assets/fonts/super/BalooThambi2-Regular.ttf
-
 

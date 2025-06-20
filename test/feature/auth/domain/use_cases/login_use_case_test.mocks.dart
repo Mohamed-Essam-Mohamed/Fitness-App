@@ -6,16 +6,18 @@
 import 'dart:async' as _i3;
 
 import 'package:fitness_app/core/network/common/api_result.dart' as _i4;
-import 'package:fitness_app/feature/auth/domain/entities/forgot_password/change_password_entity.dart'
-    as _i8;
-import 'package:fitness_app/feature/auth/domain/entities/forgot_password/forgot_password_entity.dart'
+import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart'
     as _i5;
-import 'package:fitness_app/feature/auth/domain/entities/forgot_password/verify_code_entity.dart'
-    as _i7;
-import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart'
-    as _i10;
-import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart'
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/change_password_entity.dart'
     as _i9;
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/forgot_password_entity.dart'
+    as _i7;
+import 'package:fitness_app/feature/auth/domain/entities/forgot_password/verify_code_entity.dart'
+    as _i8;
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart'
+    as _i11;
+import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart'
+    as _i10;
 import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -44,37 +46,50 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
   }
 
   @override
-  _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>> forgotPassword({
+  _i3.Future<_i4.Result<String>> registerUser(_i5.RegisterRequestModel? body) =>
+      (super.noSuchMethod(
+            Invocation.method(#registerUser, [body]),
+            returnValue: _i3.Future<_i4.Result<String>>.value(
+              _i6.dummyValue<_i4.Result<String>>(
+                this,
+                Invocation.method(#registerUser, [body]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<String>>);
+
+  @override
+  _i3.Future<_i4.Result<_i7.ForgotPasswordEntity>> forgotPassword({
     required String? email,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#forgotPassword, [], {#email: email}),
-            returnValue: _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>>.value(
-              _i6.dummyValue<_i4.Result<_i5.ForgotPasswordEntity>>(
+            returnValue: _i3.Future<_i4.Result<_i7.ForgotPasswordEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i7.ForgotPasswordEntity>>(
                 this,
                 Invocation.method(#forgotPassword, [], {#email: email}),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i5.ForgotPasswordEntity>>);
+          as _i3.Future<_i4.Result<_i7.ForgotPasswordEntity>>);
 
   @override
-  _i3.Future<_i4.Result<_i7.VerifyCodeEntity>> verifyCode({
+  _i3.Future<_i4.Result<_i8.VerifyCodeEntity>> verifyCode({
     required String? code,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#verifyCode, [], {#code: code}),
-            returnValue: _i3.Future<_i4.Result<_i7.VerifyCodeEntity>>.value(
-              _i6.dummyValue<_i4.Result<_i7.VerifyCodeEntity>>(
+            returnValue: _i3.Future<_i4.Result<_i8.VerifyCodeEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i8.VerifyCodeEntity>>(
                 this,
                 Invocation.method(#verifyCode, [], {#code: code}),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i7.VerifyCodeEntity>>);
+          as _i3.Future<_i4.Result<_i8.VerifyCodeEntity>>);
 
   @override
-  _i3.Future<_i4.Result<_i8.ChangePasswordEntity>> changePassword({
+  _i3.Future<_i4.Result<_i9.ChangePasswordEntity>> changePassword({
     required String? password,
     required String? email,
   }) =>
@@ -83,8 +98,8 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
               #password: password,
               #email: email,
             }),
-            returnValue: _i3.Future<_i4.Result<_i8.ChangePasswordEntity>>.value(
-              _i6.dummyValue<_i4.Result<_i8.ChangePasswordEntity>>(
+            returnValue: _i3.Future<_i4.Result<_i9.ChangePasswordEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i9.ChangePasswordEntity>>(
                 this,
                 Invocation.method(#changePassword, [], {
                   #password: password,
@@ -93,20 +108,21 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i8.ChangePasswordEntity>>);
+          as _i3.Future<_i4.Result<_i9.ChangePasswordEntity>>);
 
   @override
-  _i3.Future<_i4.Result<_i9.LoginResponseEntity?>> login(
-    _i10.LoginRequestEntity? loginRequest,
+  _i3.Future<_i4.Result<_i10.LoginResponseEntity?>> login(
+    _i11.LoginRequestEntity? loginRequest,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#login, [loginRequest]),
-            returnValue: _i3.Future<_i4.Result<_i9.LoginResponseEntity?>>.value(
-              _i6.dummyValue<_i4.Result<_i9.LoginResponseEntity?>>(
-                this,
-                Invocation.method(#login, [loginRequest]),
-              ),
-            ),
+            returnValue:
+                _i3.Future<_i4.Result<_i10.LoginResponseEntity?>>.value(
+                  _i6.dummyValue<_i4.Result<_i10.LoginResponseEntity?>>(
+                    this,
+                    Invocation.method(#login, [loginRequest]),
+                  ),
+                ),
           )
-          as _i3.Future<_i4.Result<_i9.LoginResponseEntity?>>);
+          as _i3.Future<_i4.Result<_i10.LoginResponseEntity?>>);
 }

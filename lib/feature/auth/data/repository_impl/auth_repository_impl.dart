@@ -22,7 +22,7 @@ class AuthRepositoryImp extends AuthRepository {
 
   @override
   Future<Result<String>> registerUser(RegisterRequestModel body) async {
-    final ans = await _dataSource.register(body);
+    final ans = await _dataSource.register (body);
     return ans;
   }
   // ex

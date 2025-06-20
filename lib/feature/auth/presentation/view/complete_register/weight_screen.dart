@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
@@ -6,6 +7,7 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/models/collecting_data_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/theme/app_theme.dart';
@@ -19,9 +21,9 @@ class WeightScreen extends StatefulWidget {
   @override
   State<WeightScreen> createState() => _WeightScreenState();
 }
-
+late RegisterCubit cubit;
 class _WeightScreenState extends State<WeightScreen> {
-  int weight = 85;
+  late int weight;
   late ScrollController _scrollController;
   late double itemWidth;
 
@@ -32,28 +34,14 @@ class _WeightScreenState extends State<WeightScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    cubit = context.read<RegisterCubit>();
+    weight = cubit.weight;
 
-    _loadWeightFromPrefs().then((_) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToWeight(weight);
         _scrollController.addListener(_onScroll);
       });
-    });
-  }
 
-  Future<void> _loadWeightFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('weight')) {
-      final savedWeight = prefs.getInt('weight');
-      if (savedWeight != null) {
-        weight = savedWeight;
-      }
-    }
-  }
-
-  Future<void> _saveWeightToPrefs(int value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('weight', value);
   }
 
   void _onScroll() {
@@ -64,7 +52,6 @@ class _WeightScreenState extends State<WeightScreen> {
     final newWeight = (index - paddingItems + 1).clamp(1, numbersCount);
     if (newWeight != weight) {
       setState(() => weight = newWeight);
-      _saveWeightToPrefs(newWeight);
     }
   }
 
@@ -91,7 +78,7 @@ class _WeightScreenState extends State<WeightScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(ImageAsset.backGroundImage, fit: BoxFit.fill),
+            child: Image.asset(ImageAsset.backgroundImage, fit: BoxFit.fill),
           ),
           SafeArea(
             child: Column(
@@ -107,7 +94,7 @@ class _WeightScreenState extends State<WeightScreen> {
                     SizedBox(
                       width: context.wp(17),
                       height: context.hp(8),
-                      child: Image.asset(ImageAsset.fit1, fit: BoxFit.contain),
+                      child: Image.asset(ImageAsset.logo, fit: BoxFit.contain),
                     ),
                     SizedBox(width: context.wp(12)),
                   ],
@@ -251,7 +238,7 @@ class _WeightScreenState extends State<WeightScreen> {
                               onTap: () {
                                 final userData =
                                 widget.data.copyWith(weight: weight);
-
+                              cubit.weight=weight;
                                 Navigator.of(context).pushNamed(
                                   Routes.height,
                                   arguments: userData,

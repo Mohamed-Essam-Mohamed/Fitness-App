@@ -9,6 +9,7 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_state.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/bottom_section.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
@@ -101,19 +102,21 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                               color: AppColors.gray[AppColors.colorCode10],
                             ),
                             onPressed: _togglePasswordVisibility,
-                          ),
+                          )
+      ,
                           prefixIcon: Icon(
                             Icons.lock_outlined,
                             color: AppColors.gray[AppColors.colorCode10],
                           ),
-                          hintText: LocaleKeys.Authentication_EnterYourPassword.tr(),
+                          hintText:
+                              LocaleKeys.Authentication_EnterYourPassword.tr(),
                           labelText: LocaleKeys.Authentication_Password.tr(),
                         ),
                         validator: (value) => Validator.validatePassword(value),
                         onTapOutside: (_) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                       ),
-                      const BottomSection(),
+                      BottomSection(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: SizedBox(
@@ -132,7 +135,8 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                                     height: 20,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                                      valueColor:
+                                          AlwaysStoppedAnimation(Colors.white),
                                     ),
                                   )
                                 : Text(LocaleKeys.Authentication_Login.tr()),
@@ -143,22 +147,25 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: (){},
                           child: Center(
                             child: Text.rich(
                               TextSpan(
-                                text: LocaleKeys.Authentication_DonotHaveAnAccount.tr(),
+                                text: LocaleKeys.Authentication_DonotHaveAnAccount
+                                    .tr(),
                                 style: Theme.of(context).textTheme.labelSmall,
                                 children: [
                                   TextSpan(
                                     text: LocaleKeys.Authentication_Register.tr(),
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium!.copyWith(
-                                              color: AppColors.lightOrange,
-                                              decoration: TextDecoration.underline,
-                                              decorationColor: AppColors.lightOrange,
-                                            ),
-                                    // recognizer: TapGestureRecognizer()..onTap = onRegisterTap,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(
+                                          color: AppColors.lightOrange,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: AppColors.lightOrange,
+                                        ),
+                                     recognizer: TapGestureRecognizer()..onTap = () => Navigator.of(context).pushNamed(Routes.RgisterFirsPart),
                                   ),
                                 ],
                               ),

@@ -22,6 +22,7 @@ class RegisterBody extends StatefulWidget {
 late RegisterCubit cubit;
 
 class _RegisterBodyState extends State<RegisterBody> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -51,15 +52,15 @@ class _RegisterBodyState extends State<RegisterBody> {
           // form section
           Padding(
             padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: SingleChildScrollView(
-              child: Form(
-                key:cubit.formKey  ,
+            child: Form(
+              key:formKey  ,
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Text(LocaleKeys.Authentication_register.tr(),
+                    Text(LocaleKeys.Authentication_Register.tr(),
                         style: theme.textTheme.titleLarge),
                     const SizedBox(height: 16),
-
+                            
                     // First Name
                     TextFormField(
                       controller: cubit.firstNameController,
@@ -68,15 +69,15 @@ class _RegisterBodyState extends State<RegisterBody> {
                       decoration: InputDecoration(
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: SvgPicture.asset(SvgAsset.user),
+                          child: SvgPicture.asset(SvgAsset.profile),
                         ),
                         label:
                         Text(LocaleKeys.Authentication_FirstName.tr()),
                       ),
                     ),
-
+                            
                     const SizedBox(height: 16),
-
+                            
                     // Last Name
                     TextFormField(
                       controller: cubit.lastNameController,
@@ -85,14 +86,14 @@ class _RegisterBodyState extends State<RegisterBody> {
                       decoration: InputDecoration(
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: SvgPicture.asset(SvgAsset.user),
+                          child: SvgPicture.asset(SvgAsset.profile),
                         ),
                         label: Text(LocaleKeys.Authentication_LastName.tr()),
                       ),
                     ),
-
+                            
                     const SizedBox(height: 16),
-
+                            
                     // Email
                     TextFormField(
                       controller: cubit.emailController,
@@ -106,9 +107,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                         labelText: LocaleKeys.Authentication_Email.tr(),
                       ),
                     ),
-
+                            
                     const SizedBox(height: 16),
-
+                            
                     // Password
                     TextFormField(
                       controller: cubit.passwordController,
@@ -123,21 +124,21 @@ class _RegisterBodyState extends State<RegisterBody> {
                         labelText: LocaleKeys.Authentication_Password.tr(),
                       ),
                     ),
-
+                            
                     const SizedBox(height: 24),
                     const BottomSection(),
                     const SizedBox(height: 24),
-
+                            
                     // Register Button
                     ElevatedButton(
                       onPressed: () {
-                        if (cubit.formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate()) {
                           cubit.updateUserData();
                           Navigator.of(context).pushNamed(
                             Routes.selectGender,
                             arguments:DataModel(cubit.passwordController.text, cubit.emailController.text, cubit.firstNameController.text, cubit.lastNameController.text) ,
                           );
-
+                            
                           print(cubit.emailController.text);
                           print("fffffffffffffffffffffffffff");
                         }
@@ -145,31 +146,33 @@ class _RegisterBodyState extends State<RegisterBody> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(LocaleKeys.Authentication_register.tr()),
+                          Text(LocaleKeys.Authentication_Register.tr()),
                         ],
                       ),
                     ),
-
+                            
                     const SizedBox(height: 8),
-
+                            
                     // Already have account
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: LocaleKeys
-                                .Authentication_AlreadyHaveAnAccount
-                                .tr(),
-                          ),
-                          TextSpan(
-                            text: LocaleKeys.Authentication_Login.tr(),
-                            style: theme.textTheme.labelMedium,
-                          ),
-                        ],
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            print('Go to login');
-                          },
+                    InkWell(
+                      onTap: ()=> Navigator.of(context).pushNamed(Routes.login) ,
+                      
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: LocaleKeys
+                                  .Authentication_AlreadyHaveAnAccount
+                                  .tr(),
+                            ),
+                            TextSpan(
+                              text: LocaleKeys.Authentication_Login.tr(),
+                              style: theme.textTheme.labelMedium,
+                            ),
+                          ],
+                      
+                            
+                        ),
                       ),
                     ),
                   ],

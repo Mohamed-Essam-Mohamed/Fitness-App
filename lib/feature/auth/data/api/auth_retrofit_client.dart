@@ -23,13 +23,13 @@ abstract class AuthRetrofitClient {
   @factoryMethod
   factory AuthRetrofitClient(Dio dio) = _AuthRetrofitClient;
 
-  @POST(AppKeyPref.registerApiKey)
-  Future<RegisterResponse> register(@Body() RegisterRequestModel body);
-  // ex :
   //  @POST(ApiConstants.nameEndpoint)
   // Future<ModelResponseDto> function(
   //     @Body() ModelRequestDto modelRequestDto);
 
+  @POST(AppKeyPref.registerApiKey)
+  Future<RegisterResponse> register(@Body() RegisterRequestModel body);
+  // ex :
   @POST(ApiConstants.forgotPassword)
   Future<ForgotPasswordResponseDto> forgotPassword(
       @Body() ForgotPasswordRequestDto forgetRequest);

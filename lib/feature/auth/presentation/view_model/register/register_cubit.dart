@@ -11,14 +11,19 @@ import '../models/collecting_data_model.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase registerUseCase;
 
-  RegisterCubit(this.registerUseCase) : super(RegisterInitial());
+  RegisterCubit(this.registerUseCase) : super(RegisterState());
 
   late CollectingDataModel _data;
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+   String gender="male";
+   int age=25;
+   int weight=80;
+   int height=85;
+   int goal=2;
+   int activityLevel=1;
   CollectingDataModel data = CollectingDataModel();
 
   void collectUserData(CollectingDataModel data) {
@@ -34,9 +39,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       password: passwordController.text,
     );
   }
-  void register() async {
-    print(firstNameController.text);
-   print(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+  Future<void> register() async {
+    emit(state.copyWith(status: RegisterStatus.loading));
+
     final model = RegisterRequestModel(
       firstName: _data.firstName!,
       lastName: _data.lastName!,
@@ -51,19 +56,25 @@ class RegisterCubit extends Cubit<RegisterState> {
       activityLevel: _data.activityLevel!,
     );
 
-    emit(RegisterLoading());
-
     final result = await registerUseCase(model);
 
-    switch (result) {
-      case SuccessResult<String>():
-        emit(RegisterSuccess(result.data));
-      case FailureResult<String>():
-        final error = result.exception.toString(); // example: "Exception: Some error occurred"
-        final extracted = error.contains("-")
-            ? error.split("-").sublist(1).join("-").trim()
-            : error;
-        emit(RegisterFailure(extracted));
+    if (result is SuccessResult<String>) {
+      emit(state.copyWith(
+        status: RegisterStatus.success,
+        errorMessage: null,
+        data: _data,
+      ));
+    } else if (result is FailureResult<String>) {
+      final error = result.exception.toString();
+      final cleanMessage = error.contains('-')
+          ? error.split('-').sublist(1).join('-').trim()
+          : error;
+
+      emit(state.copyWith(
+        status: RegisterStatus.failure,
+        errorMessage: cleanMessage,
+      ));
     }
   }
+
 }

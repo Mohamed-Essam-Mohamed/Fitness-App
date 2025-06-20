@@ -16,4 +16,5 @@ abstract class RemoteAuthDataSource {
   Future<Result<ChangePasswordEntity>> changePassword(
       {required String password, required String email});
   Future<Result<LoginResponseDto?>> login(LoginRequestDto loginRequest);
+  Future<Result<String>> register(RegisterRequestModel body);
 }

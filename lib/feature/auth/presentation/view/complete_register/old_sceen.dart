@@ -1,6 +1,9 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/view/complete_register/goal_screen.dart';
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fitness_app/core/constants/app_assets.dart';
@@ -19,12 +22,14 @@ class OldScreen extends StatefulWidget {
   @override
   State<OldScreen> createState() => _OldScreenState();
 }
+late RegisterCubit cubit;
 
 class _OldScreenState extends State<OldScreen> {
-  int age = 25;  // default age
+
+ // default age
   late ScrollController _scrollController;
   late double itemWidth;
-
+    late int age;
   final int paddingItems = 3;
   final int numbersCount = 100;  // age from 1 to 100
 
@@ -32,29 +37,12 @@ class _OldScreenState extends State<OldScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-
-    _loadAgeFromPrefs();
-
+    cubit = context.read<RegisterCubit>();
+     age = cubit.age;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToAge(age);
       _scrollController.addListener(_onScroll);
     });
-  }
-
-  Future<void> _loadAgeFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedAge = prefs.getInt('userAge');
-    if (savedAge != null && savedAge >= 1 && savedAge <= numbersCount) {
-      setState(() {
-        age = savedAge;
-      });
-      _scrollToAge(age);
-    }
-  }
-
-  Future<void> _saveAgeToPrefs(int value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('userAge', value);
   }
 
   void _onScroll() {
@@ -67,7 +55,6 @@ class _OldScreenState extends State<OldScreen> {
 
     if (newAge != age) {
       setState(() => age = newAge);
-      _saveAgeToPrefs(newAge);
     }
   }
 
@@ -96,7 +83,7 @@ class _OldScreenState extends State<OldScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              ImageAsset.backGroundImage,
+              ImageAsset.backgroundImage,
               fit: BoxFit.fill,
             ),
           ),
@@ -250,8 +237,8 @@ class _OldScreenState extends State<OldScreen> {
                             padding: const EdgeInsets.all(15),
                             child: GestureDetector(
                               onTap: () {
-                                _saveAgeToPrefs(age); // Save before navigating
                                 final userData = widget.data.copyWith(age: age);
+                                cubit.age=age;
                                 Navigator.of(context).pushNamed(
                                   Routes.weight, // or your next screen
                                   arguments: userData,

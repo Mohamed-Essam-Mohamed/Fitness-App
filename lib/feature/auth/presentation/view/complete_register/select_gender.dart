@@ -1,7 +1,9 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fitness_app/core/constants/app_assets.dart';
@@ -21,32 +23,19 @@ class SelectGender extends StatefulWidget {
   @override
   State<SelectGender> createState() => _SelectGenderState();
 }
-
+late RegisterCubit cubit;
 class _SelectGenderState extends State<SelectGender> {
   String? selectedGender;
 
   @override
   void initState() {
     super.initState();
-    _loadGenderFromPrefs();
-  }
+    cubit = context.read<RegisterCubit>();
 
-  Future<void> _loadGenderFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    final gender = prefs.getString('gender');
-    if (gender != null) {
-      setState(() => selectedGender = gender);
-    }
-  }
-
-  Future<void> _saveGenderToPrefs(String gender) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('gender', gender);
   }
 
   void _onGenderSelected(String gender) {
-    setState(() => selectedGender = gender);
-    _saveGenderToPrefs(gender);
+    setState(() => selectedGender = cubit.gender);
   }
 
   @override
@@ -56,7 +45,7 @@ class _SelectGenderState extends State<SelectGender> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              ImageAsset.backGroundImage,
+              ImageAsset.backgroundImage,
               fit: BoxFit.fill,
             ),
           ),
@@ -74,7 +63,7 @@ class _SelectGenderState extends State<SelectGender> {
                     SizedBox(
                       width: context.wp(17),
                       height: context.hp(8),
-                      child: Image.asset(ImageAsset.fit1, fit: BoxFit.contain),
+                      child: Image.asset(ImageAsset.logo, fit: BoxFit.contain),
                     ),
                     SizedBox(width: context.wp(12)),
                   ],
@@ -216,8 +205,7 @@ class _SelectGenderState extends State<SelectGender> {
                                 final data1 = CollectingDataModel();
                                 final userData =
                                 data1.copyWith(gender: selectedGender,firstName: widget.data.firstname,lastName: widget.data.LastName,email: widget.data.email,password: widget.data.password);
-                                print(userData.firstName);
-                                print("ooooooooooooooooooooooooooooooo");
+cubit.gender=selectedGender!;
                                 Navigator.of(context).pushNamed(
                                   Routes.old,
                                   arguments: userData,

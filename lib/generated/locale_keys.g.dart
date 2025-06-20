@@ -3,6 +3,7 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class  LocaleKeys {
+  static const Authentication_createAnAccount = 'Authentication.createAnAccount';
   static const Authentication_Rookie = 'Authentication.Rookie';
   static const Authentication_Beginner = 'Authentication.Beginner';
   static const Authentication_Intermediate = 'Authentication.Intermediate';
@@ -74,8 +75,6 @@ abstract class  LocaleKeys {
   static const Authentication_Continue = 'Authentication.Continue';
   static const Authentication_PasswordRequirements = 'Authentication.PasswordRequirements';
   static const Authentication_heyThere = 'Authentication.heyThere';
-  static const Authentication_createAnAccount = 'Authentication.createAnAccount';
-  static const Authentication_register = 'Authentication.register';
   static const Authentication_welcomeBack = 'Authentication.welcomeBack';
   static const Authentication_or = 'Authentication.or';
   static const Authentication_MakeSureIts8CharactersOrMore = 'Authentication.MakeSureIts8CharactersOrMore';

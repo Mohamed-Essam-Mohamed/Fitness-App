@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/models/collecting_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
@@ -35,64 +36,53 @@ class _ActivityScreenState extends State<ActivityScreen> {
     LocaleKeys.Authentication_Advance.tr(),
     LocaleKeys.Authentication_TrueBeast.tr(),
   ];
-
+ late int count ;
   @override
   void initState() {
     super.initState();
     data = widget.data;
     cubit = context.read<RegisterCubit>();
-    _loadActivityLevel();
-  }
-
-  Future<void> _loadActivityLevel() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedLevel = prefs.getString('activityLevel');
-    if (savedLevel != null) {
-      final levelMap = {
-        "level1": 0,
-        "level2": 1,
-        "level3": 2,
-        "level4": 3,
-        "level5": 4,
-      };
-      setState(() {
-        selectedIndex = levelMap[savedLevel] ?? 0;
-      });
-    }
-  }
-
-  Future<void> _saveActivityLevel(String level) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('activityLevel', level);
+    selectedIndex = cubit.activityLevel;
+    count=1;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocListener<RegisterCubit, RegisterState>(
       bloc: cubit,
       listener: (context, state) {
-        if (state is RegisterFailure) {
-          AppToast.showToast(
-            context: context,
-            title: 'Error',
-            description: state.error,
-            type: ToastificationType.error,
-          );
-        } else if (state is RegisterSuccess) {
-          AppToast.showToast(
+        if (state.status == RegisterStatus.failure) {
+          Navigator.of(context).pushNamed(Routes.RgisterFirsPart);
+
+          Future.delayed(const Duration(milliseconds: 500), () {
+            AppToast.showToast(
+              context: context,
+              title: 'Error',
+              description: state.errorMessage.toString(),
+              type: ToastificationType.error,
+            );
+          });
+
+        } else if (state.status == RegisterStatus.success) {
+
+            Navigator.of(context).pushNamed(Routes.login);
+
+            Future.delayed(const Duration(milliseconds: 500), () {  AppToast.showToast(
             context: context,
             title: '',
-            description: state.message,
+            description: "user created successfully",
             type: ToastificationType.success,
-          );
+          );});
         }
+
       },
       child: Scaffold(
         body: Stack(
           children: [
             Positioned.fill(
               child: Image.asset(
-                ImageAsset.backGroundImage,
+                ImageAsset.backgroundImage,
                 fit: BoxFit.fill,
               ),
             ),
@@ -110,7 +100,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       SizedBox(
                         width: context.wp(17),
                         height: context.hp(8),
-                        child: Image.asset(ImageAsset.fit1, fit: BoxFit.contain),
+                        child: Image.asset(ImageAsset.logo, fit: BoxFit.contain),
                       ),
                       SizedBox(width: context.wp(12)),
                     ],
@@ -194,7 +184,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                     selectedIndex = index;
                                   });
                                   final level = "level${index + 1}";
-                                  _saveActivityLevel(level);
                                 },
                               );
                             }),
@@ -202,11 +191,14 @@ class _ActivityScreenState extends State<ActivityScreen> {
                               padding: const EdgeInsets.all(15),
                               child: GestureDetector(
                                 onTap: () {
+
                                   final level = "level${selectedIndex + 1}";
-                                  _saveActivityLevel(level);
+                                  cubit.activityLevel=selectedIndex;
                                   data = data.copyWith(activityLevel: level);
                                   cubit.collectUserData(data);
-                                  cubit.register();
+                                    cubit.register();
+
+
                                 },
                                 child: Container(
                                   height: context.hp(6),

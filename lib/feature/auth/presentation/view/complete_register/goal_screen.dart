@@ -1,5 +1,7 @@
 import 'dart:ui';
+import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,7 +21,7 @@ class GoalScreen extends StatefulWidget {
   @override
   State<GoalScreen> createState() => _GoalScreenState();
 }
-
+late RegisterCubit cubit;
 class _GoalScreenState extends State<GoalScreen> {
   int selectedIndex = 0;
 
@@ -34,24 +36,14 @@ class _GoalScreenState extends State<GoalScreen> {
   @override
   void initState() {
     super.initState();
-    _loadGoalFromPrefs();
+    cubit = context.read<RegisterCubit>();
+
+    selectedIndex = cubit.goal;
   }
 
-  Future<void> _loadGoalFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedGoal = prefs.getString('goal');
-    if (savedGoal != null) {
-      final index = goals.indexOf(savedGoal);
-      if (index != -1) {
-        setState(() => selectedIndex = index);
-      }
-    }
-  }
 
-  Future<void> _saveGoalToPrefs(String goal) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('goal', goal);
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +52,7 @@ class _GoalScreenState extends State<GoalScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              ImageAsset.backGroundImage,
+              ImageAsset.backgroundImage,
               fit: BoxFit.fill,
             ),
           ),
@@ -78,7 +70,7 @@ class _GoalScreenState extends State<GoalScreen> {
                     SizedBox(
                       width: context.wp(17),
                       height: context.hp(8),
-                      child: Image.asset(ImageAsset.fit1, fit: BoxFit.contain),
+                      child: Image.asset(ImageAsset.logo, fit: BoxFit.contain),
                     ),
                     SizedBox(width: context.wp(12)),
                   ],
@@ -160,7 +152,6 @@ class _GoalScreenState extends State<GoalScreen> {
                               onTap: () {
                                 setState(() {
                                   selectedIndex = index;
-                                  _saveGoalToPrefs(goals[index]); // حفظ الهدف عند التغيير
                                 });
                               },
                             );
@@ -170,7 +161,7 @@ class _GoalScreenState extends State<GoalScreen> {
                             child: GestureDetector(
                               onTap: () {
                                 final selectedGoal = goals[selectedIndex];
-                                _saveGoalToPrefs(selectedGoal); // حفظ الهدف قبل التنقل
+                                cubit.goal=selectedIndex;
                                 final userData = widget.data.copyWith(goal: selectedGoal);
                                 Navigator.of(context).pushNamed(Routes.activity, arguments: userData);
                               },
