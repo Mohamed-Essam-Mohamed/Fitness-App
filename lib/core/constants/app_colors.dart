@@ -28,6 +28,7 @@ abstract class AppColors {
   static const Color white = Color(0xFFFFFFFF);
 
   static const Color black = Color(0xFF000000);
+  static const Color bgBottomNav = Color(0xFF2E2B2B);
 
   static const MaterialColor orange = MaterialColor(0xFFFF4100, <int, Color>{
     baseColor: Color(0xFFFF4100),

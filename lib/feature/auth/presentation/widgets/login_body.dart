@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_assets.dart';
 
-class LoginBody extends StatelessWidget{
+class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
 
   @override
@@ -16,20 +16,24 @@ class LoginBody extends StatelessWidget{
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(
-          height: (context).hp(20),
-            child: Image.asset(ImageAsset.screenFitLogo)),
+        SizedBox(height: (context).hp(20), child: Image.asset(ImageAsset.screenFitLogo)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(LocaleKeys.Authentication_heyThere.tr(), style: Theme.of(context).textTheme.titleMedium,),
+          child: Text(
+            LocaleKeys.Authentication_heyThere.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(LocaleKeys.Authentication_welcomeBack.tr(), style: Theme.of(context).textTheme.labelLarge),
+          child: Text(LocaleKeys.Authentication_welcomeBack.tr(),
+              style: Theme.of(context).textTheme.labelLarge),
         ),
         BlurredContainerWidget(
-          child: LoginContentWidget() ,
+          child: LoginContentWidget(),
         )
       ],
     );

@@ -1,14 +1,10 @@
 class SvgAsset {
   static const change = 'assets/svg/Change.svg';
-  static const chatAi = 'assets/svg/chat_ai.svg';
   static const fit = 'assets/svg/fit.svg';
-  static const chatBot = 'assets/svg/chat_bot.svg';
-  static const gym = 'assets/svg/gym.svg';
   static const help = 'assets/svg/help.svg';
   static const language = 'assets/svg/language.svg';
   static const logout = 'assets/svg/logout.svg';
   static const lockSetting = 'assets/svg/lock_setting.svg';
-  static const profile = 'assets/svg/profile.svg';
   static const securityWarning = 'assets/svg/security_warning.svg';
   static const lock = 'assets/svg/lock.svg';
   static const eye = 'assets/svg/eye.svg';
@@ -49,6 +45,10 @@ class SvgAsset {
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
   static const mail = 'assets/svg/mail.svg';
+  static const profile = 'assets/svg/profile.svg';
+  static const home = 'assets/svg/home.svg';
+  static const gym = 'assets/svg/gym.svg';
+  static const chatAi = 'assets/svg/chat_ai.svg';
 }
 
 class ImageAsset {
