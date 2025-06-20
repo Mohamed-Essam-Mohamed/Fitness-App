@@ -2,7 +2,7 @@ import 'package:fitness_app/core/common/widget/undefined_route.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/animation_routes.dart';
 import 'package:fitness_app/core/routes/routes.dart';
-import 'package:fitness_app/feature/app_section/app_section.dart';
+// import 'package:fitness_app/feature/app_section/app_section.dart';
 import 'package:fitness_app/feature/auth/presentation/view/change_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/forget_password_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/verify_code_screen.dart';
@@ -41,8 +41,8 @@ class RouteGenerator {
         return AnimationRoute(page: const OnBoardingScreen());
       case Routes.login:
         return AnimationRoute(page: const LoginScreen());
-      case Routes.appSection:
-        return AnimationRoute(page: const AppSection());
+      // case Routes.appSection:
+      //   return AnimationRoute(page: const AppSection());
       default:
         return AnimationRoute(page: const UndefinedRoute());
     }
