@@ -16,9 +16,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../widgets/pop_widget.dart';
 
 class OldScreen extends StatefulWidget {
-  const OldScreen({super.key, required this.data});
-  final CollectingDataModel data;
-
+  const OldScreen({super.key, required this.pageController});
+final PageController pageController;
   @override
   State<OldScreen> createState() => _OldScreenState();
 }
@@ -96,7 +95,13 @@ class _OldScreenState extends State<OldScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
-                      child: pop_widget(context),
+                      child:pop_widget(context,(){
+                        widget.pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+
+                      }),
                     ),
                     // You can add logo or something here if needed
                     SizedBox(width: context.wp(12)),
@@ -237,11 +242,10 @@ class _OldScreenState extends State<OldScreen> {
                             padding: const EdgeInsets.all(15),
                             child: GestureDetector(
                               onTap: () {
-                                final userData = widget.data.copyWith(age: age);
                                 cubit.age=age;
-                                Navigator.of(context).pushNamed(
-                                  Routes.weight, // or your next screen
-                                  arguments: userData,
+                                widget.pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
                                 );
                               },
                               child: Container(

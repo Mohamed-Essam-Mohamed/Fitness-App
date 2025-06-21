@@ -1,29 +1,25 @@
 import 'dart:ui';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/register/register_body.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
-import 'package:fitness_app/core/routes/routes.dart';
-import 'package:fitness_app/feature/auth/presentation/view_model/models/collecting_data_model.dart';
-
-import '../../../../../core/theme/app_theme.dart';
-import '../../../../../generated/locale_keys.g.dart';
-import '../../widgets/pop_widget.dart';
+import 'package:fitness_app/core/theme/app_theme.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
+import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectGender extends StatefulWidget {
-  const SelectGender({super.key, required this.data});
-  final DataModel data;
+  const SelectGender({super.key, required this.pageController});
+  final PageController pageController;
 
   @override
   State<SelectGender> createState() => _SelectGenderState();
 }
+
 late RegisterCubit cubit;
+
 class _SelectGenderState extends State<SelectGender> {
   String? selectedGender;
 
@@ -32,10 +28,16 @@ class _SelectGenderState extends State<SelectGender> {
     super.initState();
     cubit = context.read<RegisterCubit>();
 
+    // Set default selection to male
+    selectedGender = 'male';
+    cubit.gender = 'male';
   }
 
   void _onGenderSelected(String gender) {
-    setState(() => selectedGender = cubit.gender);
+    setState(() {
+      selectedGender = gender;
+      cubit.gender = gender;
+    });
   }
 
   @override
@@ -58,7 +60,7 @@ class _SelectGenderState extends State<SelectGender> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
-                      child: pop_widget(context),
+                      child: pop_widget(context,(){Navigator.pop(context);}),
                     ),
                     SizedBox(
                       width: context.wp(17),
@@ -202,13 +204,10 @@ class _SelectGenderState extends State<SelectGender> {
                               onTap: selectedGender == null
                                   ? null
                                   : () {
-                                final data1 = CollectingDataModel();
-                                final userData =
-                                data1.copyWith(gender: selectedGender,firstName: widget.data.firstname,lastName: widget.data.LastName,email: widget.data.email,password: widget.data.password);
-cubit.gender=selectedGender!;
-                                Navigator.of(context).pushNamed(
-                                  Routes.old,
-                                  arguments: userData,
+                                cubit.gender = selectedGender!;
+                                widget.pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
                                 );
                               },
                               child: Container(
@@ -221,8 +220,7 @@ cubit.gender=selectedGender!;
                                 child: Center(
                                   child: Text(
                                     LocaleKeys.Authentication_next.tr(),
-                                    style: AppTheme
-                                        .lightTheme.textTheme.bodyMedium!
+                                    style: AppTheme.lightTheme.textTheme.bodyMedium!
                                         .copyWith(fontSize: 15),
                                   ),
                                 ),

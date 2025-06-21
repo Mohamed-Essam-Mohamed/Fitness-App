@@ -17,16 +17,14 @@ import '../../view_model/register/register_state.dart';
 import '../../widgets/pop_widget.dart';
 
 class ActivityScreen extends StatefulWidget {
-  const ActivityScreen({super.key, required this.data});
-  final CollectingDataModel data;
-
+  const ActivityScreen({super.key, required this.pageController});
+  final PageController pageController;
   @override
   State<ActivityScreen> createState() => _ActivityScreenState();
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
   int selectedIndex = 0;
-  late CollectingDataModel data;
   late RegisterCubit cubit;
 
   final List<String> activity = [
@@ -36,14 +34,11 @@ class _ActivityScreenState extends State<ActivityScreen> {
     LocaleKeys.Authentication_Advance.tr(),
     LocaleKeys.Authentication_TrueBeast.tr(),
   ];
- late int count ;
   @override
   void initState() {
     super.initState();
-    data = widget.data;
     cubit = context.read<RegisterCubit>();
-    selectedIndex = cubit.activityLevel;
-    count=1;
+    selectedIndex = cubit.indexActivityLevel;
   }
 
   @override
@@ -53,7 +48,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.status == RegisterStatus.failure) {
-          Navigator.of(context).pushNamed(Routes.RgisterFirsPart);
+          Navigator.of(context).pushNamed(Routes.registerView);
 
           Future.delayed(const Duration(milliseconds: 500), () {
             AppToast.showToast(
@@ -65,15 +60,18 @@ class _ActivityScreenState extends State<ActivityScreen> {
           });
 
         } else if (state.status == RegisterStatus.success) {
-
-            Navigator.of(context).pushNamed(Routes.login);
-
-            Future.delayed(const Duration(milliseconds: 500), () {  AppToast.showToast(
+          AppToast.showToast(
             context: context,
             title: '',
             description: "user created successfully",
             type: ToastificationType.success,
-          );});
+          );
+
+
+            Future.delayed(const Duration(milliseconds: 700), () {
+              cubit.close();
+              Navigator.of(context).pop();
+            });
         }
 
       },
@@ -95,7 +93,13 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
-                        child: pop_widget(context),
+                        child:pop_widget(context,(){
+                          widget.pageController.previousPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+
+                        }),
                       ),
                       SizedBox(
                         width: context.wp(17),
@@ -172,50 +176,50 @@ class _ActivityScreenState extends State<ActivityScreen> {
                             ),
                           ),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ...List.generate(activity.length, (index) {
-                              return SelectWidget(
-                                title: activity[index],
-                                selected: index == selectedIndex,
-                                onTap: () {
-                                  setState(() {
-                                    selectedIndex = index;
-                                  });
-                                },
-                              );
-                            }),
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: GestureDetector(
-                                onTap: () {
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(height: context.hp(4),),
+                              ...List.generate(activity.length, (index) {
+                                return SelectWidget(
+                                  title: activity[index],
+                                  selected: index == selectedIndex,
+                                  onTap: () {
+                                    setState(() {
+                                      selectedIndex = index;
+                                    });
+                                  },
+                                );
+                              }),
+                              Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    final level = "level${selectedIndex + 1}";
+                                    cubit.indexActivityLevel=selectedIndex;
+                                    cubit.activityLevel=level;
+                                      cubit.register();
 
-                                  final level = "level${selectedIndex + 1}";
-                                  cubit.activityLevel=selectedIndex;
-                                  data = data.copyWith(activityLevel: level);
-                                  cubit.collectUserData(data);
-                                    cubit.register();
-
-
-                                },
-                                child: Container(
-                                  height: context.hp(6),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.orange,
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      LocaleKeys.Authentication_next.tr(),
-                                      style: AppTheme.lightTheme.textTheme.bodyMedium!.copyWith(fontSize: 15),
+                                  },
+                                  child: Container(
+                                    height: context.hp(6),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.orange,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        LocaleKeys.Authentication_next.tr(),
+                                        style: AppTheme.lightTheme.textTheme.bodyMedium!.copyWith(fontSize: 15),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

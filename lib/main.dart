@@ -24,23 +24,16 @@ void main() async {
   final initialRoute = await getInitialRoute();
 
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<RegisterCubit>(
-          create: (_) => serviceLocator.get<RegisterCubit>(),
-        ),
-        // Add other BlocProviders here
-      ],
-      child: EasyLocalization(
+
+       EasyLocalization(
         supportedLocales: AppValues.supportedLocales,
         fallbackLocale: AppValues.englishLocale,
         path: AppValues.pathTranslation,
         child:
 
-        DevicePreview(enabled: !kReleaseMode,
-            builder: (context) =>MyApp(initialRoute: initialRoute)),
-      ),
-    ),
+    MyApp(initialRoute: initialRoute)),
+
+
   );
 }
 
@@ -76,7 +69,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: initialRoute,
+            initialRoute: Routes.login,
           ),
         );
       },

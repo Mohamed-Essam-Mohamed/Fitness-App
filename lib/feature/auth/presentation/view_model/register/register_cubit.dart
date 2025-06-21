@@ -12,48 +12,38 @@ class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase registerUseCase;
 
   RegisterCubit(this.registerUseCase) : super(RegisterState());
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password= TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late CollectingDataModel _data;
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-   String gender="male";
+  String gender="male";
    int age=25;
    int weight=80;
    int height=85;
-   int goal=2;
-   int activityLevel=1;
+   int indexGoal=2;
+   int indexActivityLevel=1;
+  String goal="Gain weight";
+  String activityLevel="level1";
+
   CollectingDataModel data = CollectingDataModel();
 
-  void collectUserData(CollectingDataModel data) {
-    _data = data;
-  }
-
-
-  void updateUserData() {
-    data = data.copyWith(
-      firstName: firstNameController.text,
-      lastName: lastNameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    );
-  }
   Future<void> register() async {
     emit(state.copyWith(status: RegisterStatus.loading));
 
     final model = RegisterRequestModel(
-      firstName: _data.firstName!,
-      lastName: _data.lastName!,
-      email: _data.email!,
-      password: _data.password!,
-      rePassword: _data.password!,
-      gender: _data.gender!,
-      age: _data.age!,
-      weight: _data.weight!,
-      height: _data.height!,
-      goal: _data.goal!,
-      activityLevel: _data.activityLevel!,
+      firstName: firstName.text,
+      lastName: lastName.text,
+      email: email.text,
+      password: password.text,
+      rePassword: password.text,
+      gender: gender,
+      age: age,
+      weight: weight,
+      height: height,
+      goal: goal,
+      activityLevel: activityLevel,
     );
 
     final result = await registerUseCase(model);
@@ -62,7 +52,6 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(state.copyWith(
         status: RegisterStatus.success,
         errorMessage: null,
-        data: _data,
       ));
     } else if (result is FailureResult<String>) {
       final error = result.exception.toString();

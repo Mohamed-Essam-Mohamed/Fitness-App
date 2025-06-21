@@ -12,4 +12,6 @@ class Routes {
   static const String changePassword = '/change-password';
   static const String login = '/login';
   static const String appSection = '/appSection';
+  static const String registerView = '/registerView';
+
 }

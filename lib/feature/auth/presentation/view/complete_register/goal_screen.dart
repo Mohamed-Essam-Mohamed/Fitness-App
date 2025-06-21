@@ -15,9 +15,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../widgets/pop_widget.dart';
 
 class GoalScreen extends StatefulWidget {
-  const GoalScreen({super.key, required this.data});
-  final CollectingDataModel data;
-
+  const GoalScreen({super.key, required this.pageController});
+final PageController pageController;
   @override
   State<GoalScreen> createState() => _GoalScreenState();
 }
@@ -38,7 +37,7 @@ class _GoalScreenState extends State<GoalScreen> {
     super.initState();
     cubit = context.read<RegisterCubit>();
 
-    selectedIndex = cubit.goal;
+    selectedIndex = cubit.indexGoal;
   }
 
 
@@ -65,7 +64,13 @@ class _GoalScreenState extends State<GoalScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
-                      child: pop_widget(context),
+                      child:pop_widget(context,(){
+                        widget.pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+
+                      }),
                     ),
                     SizedBox(
                       width: context.wp(17),
@@ -142,46 +147,53 @@ class _GoalScreenState extends State<GoalScreen> {
                           ),
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ...List.generate(goals.length, (index) {
-                            return SelectWidget(
-                              title: goals[index],
-                              selected: index == selectedIndex,
-                              onTap: () {
-                                setState(() {
-                                  selectedIndex = index;
-                                });
-                              },
-                            );
-                          }),
-                          Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: GestureDetector(
-                              onTap: () {
-                                final selectedGoal = goals[selectedIndex];
-                                cubit.goal=selectedIndex;
-                                final userData = widget.data.copyWith(goal: selectedGoal);
-                                Navigator.of(context).pushNamed(Routes.activity, arguments: userData);
-                              },
-                              child: Container(
-                                height: context.hp(6),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: AppColors.orange,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    LocaleKeys.Authentication_next.tr(),
-                                    style: AppTheme.lightTheme.textTheme.bodyMedium!.copyWith(fontSize: 15),
+                      SingleChildScrollView(
+                        child: Column(
+
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: context.hp(4),),
+                            ...List.generate(goals.length, (index) {
+                              return SelectWidget(
+                                title: goals[index],
+                                selected: index == selectedIndex,
+                                onTap: () {
+                                  setState(() {
+                                    selectedIndex = index;
+                                  });
+                                },
+                              );
+                            }),
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: GestureDetector(
+                                onTap: () {
+                                  final selectedGoal = goals[selectedIndex];
+                                  cubit.indexGoal=selectedIndex;
+                                  cubit.goal=selectedGoal;
+                                  widget.pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Container(
+                                  height: context.hp(6),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.orange,
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      LocaleKeys.Authentication_next.tr(),
+                                      style: AppTheme.lightTheme.textTheme.bodyMedium!.copyWith(fontSize: 15),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

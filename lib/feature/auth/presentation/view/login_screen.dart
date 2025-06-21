@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_assets.dart';
 import '../widgets/login_body.dart';
 
-class LoginScreen extends StatelessWidget{
+class LoginScreen extends StatefulWidget{
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,5 +30,4 @@ class LoginScreen extends StatelessWidget{
     );
 
   }
-
 }

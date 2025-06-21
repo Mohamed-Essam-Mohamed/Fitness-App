@@ -15,9 +15,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../widgets/pop_widget.dart';
 
 class WeightScreen extends StatefulWidget {
-  const WeightScreen({super.key, required this.data});
-  final CollectingDataModel data;
-
+  const WeightScreen({super.key, required this.pageController});
+final PageController pageController;
   @override
   State<WeightScreen> createState() => _WeightScreenState();
 }
@@ -89,7 +88,13 @@ class _WeightScreenState extends State<WeightScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
-                      child: pop_widget(context),
+                      child: pop_widget(context,(){
+                        widget.pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+
+                      }),
                     ),
                     SizedBox(
                       width: context.wp(17),
@@ -237,11 +242,10 @@ class _WeightScreenState extends State<WeightScreen> {
                             child: GestureDetector(
                               onTap: () {
                                 final userData =
-                                widget.data.copyWith(weight: weight);
                               cubit.weight=weight;
-                                Navigator.of(context).pushNamed(
-                                  Routes.height,
-                                  arguments: userData,
+                                widget.pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
                                 );
                               },
                               child: Container(

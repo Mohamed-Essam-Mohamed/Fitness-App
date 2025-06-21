@@ -16,9 +16,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../widgets/pop_widget.dart';
 
 class HeightScreen extends StatefulWidget {
-  const HeightScreen({super.key, required this.data});
-  final CollectingDataModel data;
-
+  const HeightScreen({super.key, required this.pageController});
+final PageController pageController;
   @override
   State<HeightScreen> createState() => _HeightScreenState();
 }
@@ -93,7 +92,13 @@ class _HeightScreenState extends State<HeightScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
-                      child: pop_widget(context),
+                      child:pop_widget(context,(){
+                        widget.pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+
+                      }),
                     ),
                     SizedBox(
                       width: context.wp(17),
@@ -226,10 +231,11 @@ class _HeightScreenState extends State<HeightScreen> {
                             padding: const EdgeInsets.all(15),
                             child: GestureDetector(
                               onTap: () {
-                                final userData = widget.data.copyWith(height: height);
                                 cubit.height=height;
-                                Navigator.of(context).pushNamed(Routes.goal, arguments: userData);
-                              },
+                                widget.pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );                              },
                               child: Container(
                                 height: context.hp(6),
                                 width: double.infinity,

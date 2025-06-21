@@ -165,7 +165,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                                           decoration: TextDecoration.underline,
                                           decorationColor: AppColors.lightOrange,
                                         ),
-                                     recognizer: TapGestureRecognizer()..onTap = () => Navigator.of(context).pushNamed(Routes.RgisterFirsPart),
+                                     recognizer: TapGestureRecognizer()..onTap = () => Navigator.of(context).pushNamed(Routes.registerView),
                                   ),
                                 ],
                               ),
