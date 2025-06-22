@@ -116,7 +116,7 @@ class _LoginContentWidgetState extends State<LoginContentWidget> {
                         onTapOutside: (_) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                       ),
-                      BottomSection(),
+                      const BottomSection(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: SizedBox(

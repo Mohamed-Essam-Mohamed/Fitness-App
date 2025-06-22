@@ -39,6 +39,8 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
     as _i285;
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
     as _i176;
+import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart'
+    as _i657;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -70,6 +72,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i657.MealsRetrofitClient>(
+        () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
