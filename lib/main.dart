@@ -30,8 +30,7 @@ void main() async {
         fallbackLocale: AppValues.englishLocale,
         path: AppValues.pathTranslation,
         child:
-
-    MyApp(initialRoute: initialRoute)),
+        MyApp(initialRoute: initialRoute)),
 
 
   );

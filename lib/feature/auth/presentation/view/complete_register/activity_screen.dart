@@ -48,17 +48,21 @@ class _ActivityScreenState extends State<ActivityScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.status == RegisterStatus.failure) {
-          Navigator.of(context).pushNamed(Routes.registerView);
-
-          Future.delayed(const Duration(milliseconds: 500), () {
-            AppToast.showToast(
-              context: context,
-              title: 'Error',
-              description: state.errorMessage.toString(),
-              type: ToastificationType.error,
-            );
+          widget.pageController.animateToPage(
+            0,
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.easeInOut,
+          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              AppToast.showToast(
+                context: context,
+                title: 'Error',
+                description: state.errorMessage.toString(),
+                type: ToastificationType.error,
+              );
+            }
           });
-
         } else if (state.status == RegisterStatus.success) {
           AppToast.showToast(
             context: context,
