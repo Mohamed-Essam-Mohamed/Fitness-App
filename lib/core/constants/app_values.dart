@@ -34,6 +34,11 @@ abstract class AppValues {
   static const String goal = "goal";
   static const String photo = "photo";
   static const String createdAt = "createdAt";
+  static const String beginnerId="67c797e226895f87ce0aa94b";
+  static const String advanced="67c797e226895f87ce0aa94e";
+  static const String intermediateId="67c797e226895f87ce0aa94c";
+
+
 
 
 

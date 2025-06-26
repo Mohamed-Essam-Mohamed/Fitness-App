@@ -4,4 +4,9 @@ abstract class ApiConstants {
   static const String verifyResetCode = 'auth/verifyResetCode';
   static const String changePassword = 'auth/resetPassword';
   static const String loginRoute = 'auth/signin';
+  static const getExercisesByMuscleDifficulty = 'exercises/by-muscle-difficulty';
+  static const primeMoverMuscleId  ="primeMoverMuscleId";
+  static const difficultyLevelId  ="difficultyLevelId";
+
+
 }

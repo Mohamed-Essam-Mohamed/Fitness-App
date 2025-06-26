@@ -15,6 +15,7 @@ dependencies:
 
 
   #? UI-related packages: For building and styling the user interface
+  youtube_player_flutter: ^9.1.1
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.17
   cached_network_image:
