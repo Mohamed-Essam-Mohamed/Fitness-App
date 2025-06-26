@@ -4,6 +4,7 @@ import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/animation_routes.dart';
 import 'package:fitness_app/feature/app_section/view/app_sections.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/Register_view.dart';
+import 'package:fitness_app/feature/meals/presentation/view/food_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../feature/auth/presentation/view_model/register/register_cubit.dart';
@@ -47,7 +48,9 @@ class RouteGenerator {
         return AnimationRoute(page: const LoginScreen());
       case Routes.appSection:
         return AnimationRoute(page: const AppSection());
-
+      case Routes.mealDetails:
+        final mealId = arg as String;
+        return AnimationRoute(page:  MealDetailsScreen(mealId: mealId));
       case Routes.registerView:
         return AnimationRoute(
           page: BlocProvider.value(

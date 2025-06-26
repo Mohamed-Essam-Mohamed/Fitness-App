@@ -41,6 +41,18 @@ import 'package:fitness_app/feature/auth/presentation/view_model/register/regist
     as _i176;
 import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart'
     as _i657;
+import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart'
+    as _i546;
+import 'package:fitness_app/feature/meals/data/data_source/meals_data_source_impl.dart'
+    as _i247;
+import 'package:fitness_app/feature/meals/data/repository_impl/meals_repository_impl.dart'
+    as _i40;
+import 'package:fitness_app/feature/meals/domain/repository/meals_repository.dart'
+    as _i774;
+import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart'
+    as _i666;
+import 'package:fitness_app/feature/meals/presentation/view_model/meal_cubit.dart'
+    as _i391;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -78,10 +90,17 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
         ));
+    gh.factory<_i546.RemoteMealsDataSource>(
+        () => _i247.RemoteMealsDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i657.MealsRetrofitClient>(),
+            ));
     gh.factory<_i911.AuthRepository>(
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
     gh.factory<_i757.LoginUseCase>(
         () => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i774.MealsRepository>(
+        () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
     gh.factory<_i1031.ChangePasswordUseCase>(
         () => _i1031.ChangePasswordUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i498.ForgetPasswordUseCase>(
@@ -97,8 +116,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
     gh.factory<_i669.RegisterUseCase>(
         () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i666.GetMealDetailsUseCase>(
+        () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i176.RegisterCubit>(
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
+    gh.factory<_i391.MealCubit>(
+        () => _i391.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
     return this;
   }
 }

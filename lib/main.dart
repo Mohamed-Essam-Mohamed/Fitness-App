@@ -24,22 +24,19 @@ void main() async {
   final initialRoute = await getInitialRoute();
 
   runApp(
-
-       EasyLocalization(
+    EasyLocalization(
         supportedLocales: AppValues.supportedLocales,
         fallbackLocale: AppValues.englishLocale,
         path: AppValues.pathTranslation,
-        child:
-        MyApp(initialRoute: initialRoute)),
-
-
+        child: MyApp(initialRoute: initialRoute)),
   );
 }
 
 Future<String> getInitialRoute() async {
   final prefs = await SharedPreferences.getInstance();
   final isLoggedIn = prefs.getBool(AppValues.isLoggedIn) ?? false;
-  final isOnboardingCompleted = prefs.getBool(AppValues.isOnboardingCompleted) ?? false;
+  final isOnboardingCompleted =
+      prefs.getBool(AppValues.isOnboardingCompleted) ?? false;
 
   if (!isOnboardingCompleted) return Routes.onboarding;
   return isLoggedIn ? Routes.appSection : Routes.login;
@@ -68,7 +65,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.login,
+            initialRoute: initialRoute,
           ),
         );
       },
