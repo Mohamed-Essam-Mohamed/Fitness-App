@@ -1,3 +1,4 @@
+import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
 import 'package:flutter/material.dart';
 
 class ChatAiScreen extends StatelessWidget {
@@ -5,8 +6,6 @@ class ChatAiScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-    );
+    return const FoodRecommendationScreen();
   }
 }

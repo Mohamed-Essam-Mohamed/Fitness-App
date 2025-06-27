@@ -105,7 +105,8 @@
     "CheckOut" : "Checkout",
     "PlaceOrder" : "Place Order",
     "Next" : "Next",
-    "SortBy" : "Sort By"
+    "SortBy" : "Sort By",
+    "FoodRecommendation": "Food Recommendation"
   },
 
   "Error": {

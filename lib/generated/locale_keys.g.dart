@@ -106,6 +106,7 @@ abstract class  LocaleKeys {
   static const Home_PlaceOrder = 'Home.PlaceOrder';
   static const Home_Next = 'Home.Next';
   static const Home_SortBy = 'Home.SortBy';
+  static const Home_FoodRecommendation = 'Home.FoodRecommendation';
   static const Home = 'Home';
   static const Error_LoginFailed = 'Error.LoginFailed';
   static const Error_CodeCannotBeEmpty = 'Error.CodeCannotBeEmpty';

@@ -21,8 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "amira22@gmail.com");
+  final TextEditingController passwordController = TextEditingController(text: "Amira@123");
 
   void doIntent(LoginAction action) {
     switch (action) {

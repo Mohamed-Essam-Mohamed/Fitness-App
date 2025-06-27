@@ -104,7 +104,9 @@
         "CheckOut": "إتمام الشراء",
         "PlaceOrder": "تأكيد الطلب",
         "Next": "التالي",
-        "SortBy": "فرز حسب"
+        "SortBy": "فرز حسب",
+        "FoodRecommendation": "توصية الغذاء"
+
     },
     "Error": {
         "LoginFailed": "فشل تسجيل الدخول",

@@ -1,3 +1,4 @@
+import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

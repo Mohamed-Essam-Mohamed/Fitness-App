@@ -4,4 +4,7 @@ abstract class ApiConstants {
   static const String verifyResetCode = 'auth/verifyResetCode';
   static const String changePassword = 'auth/resetPassword';
   static const String loginRoute = 'auth/signin';
+  static const String categories = 'categories.php';
+  static const String meals = 'filter.php';
+  static const String mealsBaseUrl = 'https://www.themealdb.com/api/json/v1/1/';
 }
