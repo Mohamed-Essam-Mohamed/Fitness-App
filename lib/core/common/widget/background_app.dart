@@ -67,14 +67,15 @@ class _BackgroundAppState extends State<BackgroundApp> {
           // cacheHeight: MediaQuery.of(context).size.height.toInt(),
           // cacheWidth: MediaQuery.of(context).size.width.toInt(),
         ),
-        // Positioned.fill(
-        //   child: BackdropFilter(
-        //     filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Reduced blur
-        //     child: Container(
-        //       color: Colors.black.withOpacity(0.05),
-        //     ),
-        //   ),
-        // ),
+
+        /// Positioned.fill(
+        ///   child: BackdropFilter(
+        ///     filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Reduced blur
+        ///     child: Container(
+        ///       color: Colors.black.withOpacity(0.05),
+        ///     ),
+        ///   ),
+        /// ),
         Positioned.fill(child: widget.child),
       ],
     );

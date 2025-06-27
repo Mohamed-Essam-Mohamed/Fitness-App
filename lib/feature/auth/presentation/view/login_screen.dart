@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        SingleChildScrollView(child: LoginBody())
+        const LoginBody()
       ]),
     );
 

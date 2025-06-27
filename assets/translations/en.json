@@ -105,7 +105,12 @@
     "CheckOut" : "Checkout",
     "PlaceOrder" : "Place Order",
     "Next" : "Next",
-    "SortBy" : "Sort By"
+    "SortBy" : "Sort By",
+    "hi": "Hi",
+    "LetsStartYourDay": "Let’s start your day",
+    "RecommendationForYou": "Recommendation For You",
+    "RecommendationToday": "Recommendation to day",
+    "UpcomingWorkouts": "Upcoming Workouts"
   },
 
   "Error": {

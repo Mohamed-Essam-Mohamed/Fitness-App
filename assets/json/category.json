@@ -1,0 +1,30 @@
+{
+    "total": 5,
+    "categories": [
+        {
+            "name": "Gym",
+            "id": "1",
+            "image": "assets/png/O15_34.png"
+        },
+        {
+            "name": "Fitness",
+            "id": "2",
+            "image": "assets/png/O15_19.png"
+        },
+        {
+            "name": "Yoga",
+            "id": "3",
+            "image": "assets/png/O15_25.png"
+        },
+        {
+            "name": "Aerobics",
+            "id": "4",
+            "image": "assets/png/O15_24.png"
+        },
+        {
+            "name": "Trainer",
+            "id": "5",
+            "image": "assets/png/O15_9.png"
+        }
+    ]
+}

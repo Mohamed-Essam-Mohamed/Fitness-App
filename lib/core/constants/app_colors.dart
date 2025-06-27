@@ -12,9 +12,10 @@ abstract class AppColors {
   static const int colorCode80 = 80;
   static const int colorCode90 = 90;
   static const int colorCode100 = 100;
-  static const darkBackground =Color(0xFF242424);
+  static const darkBackground = Color(0xFF242424);
 
   static const Color splashColor = Color(0x1A1A1A80);
+  static const Color bgCategory = Color(0xCC242424);
   static const Color green = Color(0xFF00A550);
   static const Color red = Color(0xFFD50000);
   static const Color lightGray = Color(0xFFEAEAEA);
@@ -42,7 +43,6 @@ abstract class AppColors {
     colorCode80: Color(0xFFFFD9CC),
     colorCode90: Color(0xFFFFECE5),
     colorCode100: Color(0xFFFFF9F7),
-
   });
 
   static const MaterialColor redOrange = MaterialColor(0xFFE52800, <int, Color>{
@@ -71,5 +71,4 @@ abstract class AppColors {
     colorCode90: Color(0xFF242424),
     colorCode100: Color(0xFF000000),
   });
-
 }
