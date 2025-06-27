@@ -110,7 +110,8 @@
     "LetsStartYourDay": "Let’s start your day",
     "RecommendationForYou": "Recommendation For You",
     "RecommendationToday": "Recommendation to day",
-    "UpcomingWorkouts": "Upcoming Workouts"
+    "UpcomingWorkouts": "Upcoming Workouts",
+    "workout":"Workouts"
   },
 
   "Error": {

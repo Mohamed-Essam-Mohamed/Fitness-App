@@ -50,6 +50,21 @@ import 'package:fitness_app/feature/Exercise/domain/use_case/exercise_use_case.d
     as _i566;
 import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart'
     as _i737;
+import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart' as _i58;
+import 'package:fitness_app/feature/Exercise/data/data_source/local/exercies_local_data_source_impl.dart'
+    as _i886;
+import 'package:fitness_app/feature/Exercise/data/data_source/local/exercise_local_data_source.dart'
+    as _i755;
+import 'package:fitness_app/feature/Exercise/data/data_source/remote/exercise_remote_data_source.dart'
+    as _i478;
+import 'package:fitness_app/feature/Exercise/data/data_source/remote/exercise_remote_data_source_impl.dart'
+    as _i91;
+import 'package:fitness_app/feature/Exercise/data/repo/repo_impl.dart' as _i90;
+import 'package:fitness_app/feature/Exercise/domain/repo/repo.dart' as _i227;
+import 'package:fitness_app/feature/Exercise/domain/use_case/exercise_use_case.dart'
+    as _i566;
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart'
+    as _i737;
 import 'package:fitness_app/feature/home/data/api/category_meals_retrofit_client.dart'
     as _i829;
 import 'package:fitness_app/feature/home/data/api/home_retrofit_client.dart' as _i921;
@@ -73,6 +88,7 @@ import 'package:fitness_app/feature/home/domain/use_cases/get_upcoming_workouts_
     as _i583;
 import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart'
     as _i972;
+import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart' as _i657;
 import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart' as _i657;
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart'
     as _i546;
@@ -118,8 +134,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
         () => _i58.ExerciseRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i829.CategoryMealsRetrofitClient>(
+        () => _i829.CategoryMealsRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i58.ExerciseRetrofitClient>(
+        () => _i58.ExerciseRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i921.HomeRetrofitClient>(
         () => _i921.HomeRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i657.MealsRetrofitClient>(
+        () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
+    gh.factory<_i478.ExerciseRemoteDataSource>(() => _i91.ExerciseDataSourceImpl(
+          gh<_i58.ExerciseRetrofitClient>(),
+          gh<_i74.ApiManager>(),
+        ));
     gh.lazySingleton<_i657.MealsRetrofitClient>(
         () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i478.ExerciseRemoteDataSource>(() => _i91.ExerciseDataSourceImpl(
@@ -138,6 +164,7 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i911.AuthRepository>(
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
+    gh.factory<_i757.LoginUseCase>(() => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i757.LoginUseCase>(() => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i614.HomeDataSource>(() => _i393.HomeDataSourceImpl(
           gh<_i74.ApiManager>(),
@@ -173,17 +200,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i176.RegisterCubit>(
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     gh.factory<_i391.MealCubit>(() => _i391.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
+    gh.factory<_i391.MealCubit>(() => _i391.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
+    gh.factory<_i289.GetRecommendationForYouUseCase>(
+        () => _i289.GetRecommendationForYouUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i438.GetRecommendationTodayUseCase>(
         () => _i438.GetRecommendationTodayUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i244.GetUpcomingWorkoutsCategoryUseCase>(
         () => _i244.GetUpcomingWorkoutsCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i583.GetUpcomingWorkoutsUseCase>(
         () => _i583.GetUpcomingWorkoutsUseCase(gh<_i545.HomeRepository>()));
-    gh.factory<_i289.GetRecommendationForYouUseCase>(
-        () => _i289.GetRecommendationForYouUseCase(gh<_i545.HomeRepository>()));
-    gh.factory<_i972.HomeCubit>(() => _i972.HomeCubit(
+    gh.singleton<_i972.HomeCubit>(() => _i972.HomeCubit(
           gh<_i958.GetCategoryUseCase>(),
           gh<_i438.GetRecommendationTodayUseCase>(),
           gh<_i244.GetUpcomingWorkoutsCategoryUseCase>(),

@@ -109,7 +109,8 @@
         "LetsStartYourDay": "لنبدأ يومك",
         "RecommendationForYou": "توصيات لك",
         "RecommendationToday": "توصية اليوم",
-        "UpcomingWorkouts": "التمارين القادمة"
+        "UpcomingWorkouts": "التمارين القادمة",
+        "workout":"التمارين"
     },
     "Error": {
         "LoginFailed": "فشل تسجيل الدخول",

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FadeInAssetImageWidget extends StatefulWidget {
-  const FadeInAssetImageWidget({super.key, required this.image, required this.index});
+  const FadeInAssetImageWidget(
+      {super.key, required this.image, required this.index});
   final String image;
   final int index;
 
@@ -16,7 +17,9 @@ class _FadeInAssetImageWidgetState extends State<FadeInAssetImageWidget> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300 * widget.index), () {
-      setState(() => _opacity = 1);
+      if (mounted) {
+        setState(() => _opacity = 1);
+      }
     });
   }
 

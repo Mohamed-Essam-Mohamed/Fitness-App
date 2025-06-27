@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart';
 
 part 'home_state.dart';
 
-@injectable
+@singleton
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(
     this._getCategoryUseCase,
