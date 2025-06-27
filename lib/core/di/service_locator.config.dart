@@ -41,6 +41,10 @@ import 'package:fitness_app/feature/auth/presentation/view_model/register/regist
     as _i176;
 import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
     as _i58;
+import 'package:fitness_app/feature/Exercise/data/data_source/local/exercies_local_data_source_impl.dart'
+    as _i886;
+import 'package:fitness_app/feature/Exercise/data/data_source/local/exercise_local_data_source.dart'
+    as _i755;
 import 'package:fitness_app/feature/Exercise/data/data_source/remote/exercise_remote_data_source.dart'
     as _i478;
 import 'package:fitness_app/feature/Exercise/data/data_source/remote/exercise_remote_data_source_impl.dart'
@@ -65,16 +69,6 @@ import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_useca
     as _i666;
 import 'package:fitness_app/feature/meals/presentation/view_model/meal_cubit.dart'
     as _i391;
-import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart'
-    as _i546;
-import 'package:fitness_app/feature/meals/data/data_source/meals_data_source_impl.dart'
-    as _i247;
-import 'package:fitness_app/feature/meals/data/repository_impl/meals_repository_impl.dart'
-    as _i40;
-import 'package:fitness_app/feature/meals/domain/repository/meals_repository.dart'
-    as _i774;
-import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart'
-    as _i666;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -104,6 +98,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
         ));
+    gh.factory<_i755.ExerciseLocalDataSource>(
+        () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
@@ -128,8 +124,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
     gh.factory<_i757.LoginUseCase>(
         () => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
-    gh.factory<_i774.MealsRepository>(
-        () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
     gh.factory<_i774.MealsRepository>(
         () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
     gh.factory<_i227.ExerciseRepo>(
