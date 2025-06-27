@@ -12,7 +12,6 @@ abstract class DioModule {
     dio.options = BaseOptions(
       connectTimeout: const Duration(seconds: 40),
       receiveTimeout: const Duration(seconds: 40),
-      baseUrl: ApiConstants.baseUrl,
     );
     dio.interceptors.addAll([authInterceptor, logger]);
     return dio;
