@@ -79,7 +79,7 @@ class ImageAsset {
   static const chickenMushroomsSoup = 'assets/png/chicken_mushrooms_soup.png';
   static const pizza = 'assets/png/pizza.png';
 
-  static const backgroundExercise = "assets/png/background_exercise.png";
+  static const backgroundExercise = 'assets/png/background_exercise.png';
 }
 
 class LottieAsset {}
