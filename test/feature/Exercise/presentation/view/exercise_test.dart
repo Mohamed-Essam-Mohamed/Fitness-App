@@ -1,11 +1,10 @@
-import 'package:fitness_app/feature/Exercise/data/model/exercise_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
 import 'package:mocktail/mocktail.dart';
-import 'dart:async';
+import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/feature/Exercise/domain/entity/entity.dart';
 
 class MockExerciseCubit extends Mock implements ExerciseCubit {}
 
@@ -15,16 +14,17 @@ void main() {
   setUp(() {
     mockCubit = MockExerciseCubit();
 
+    // ✅ تمرير ExerciseEntity بدل ExerciseModel
     when(() => mockCubit.state).thenReturn(ExerciseState(
       status: ExerciseStatus.success,
       exercises: [
-        ExerciseModel(
+        ExerciseEntity(
           id: '1',
           name: 'Push Up',
           videoUrl: 'https://www.youtube.com/watch?v=abc123',
           muscle: 'Chest',
         ),
-         ExerciseModel(
+        ExerciseEntity(
           id: '2',
           name: 'Pull Up',
           videoUrl: 'https://www.youtube.com/watch?v=xyz456',
@@ -45,13 +45,16 @@ void main() {
   testWidgets('should display list of exercises and allow tapping', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: ExerciseScreen(primeMoverId: '', injectedCubit: mockCubit),
+        home: ExerciseScreen(
+          primeMoverId: '',
+          injectedCubit: mockCubit,
+        ),
       ),
     );
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Push Up').first, findsOneWidget);
+    expect(find.text('Push Up'), findsOneWidget);
     expect(find.text('Pull Up'), findsOneWidget);
 
     await tester.tap(find.text('Pull Up'));

@@ -5,18 +5,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:fitness_app/core/network/common/api_result.dart' as _i8;
-import 'package:fitness_app/core/network/remote/api_manager.dart' as _i7;
+import 'package:fitness_app/core/network/common/api_result.dart' as _i6;
+import 'package:fitness_app/core/network/remote/api_manager.dart' as _i5;
 import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
     as _i3;
-import 'package:fitness_app/feature/Exercise/data/data_source/local/exercise_local_data_source.dart'
-    as _i5;
-import 'package:fitness_app/feature/Exercise/data/model/exercise_model.dart'
-    as _i6;
 import 'package:fitness_app/feature/Exercise/data/model/exercise_response_model.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -64,56 +60,24 @@ class MockExerciseRetrofitClient extends _i1.Mock
           as _i4.Future<_i2.ExerciseListResponseModel>);
 }
 
-/// A class which mocks [ExerciseLocalDataSource].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockExerciseLocalDataSource extends _i1.Mock
-    implements _i5.ExerciseLocalDataSource {
-  MockExerciseLocalDataSource() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<void> cacheExercises(
-    List<_i6.ExerciseModel>? exercises,
-    String? key,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#cacheExercises, [exercises, key]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
-
-  @override
-  _i4.Future<List<_i6.ExerciseModel>> getCachedExercises(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getCachedExercises, [key]),
-            returnValue: _i4.Future<List<_i6.ExerciseModel>>.value(
-              <_i6.ExerciseModel>[],
-            ),
-          )
-          as _i4.Future<List<_i6.ExerciseModel>>);
-}
-
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i7.ApiManager {
+class MockApiManager extends _i1.Mock implements _i5.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i8.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
+  _i4.Future<_i6.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [apiCall]),
-            returnValue: _i4.Future<_i8.Result<T>>.value(
-              _i9.dummyValue<_i8.Result<T>>(
+            returnValue: _i4.Future<_i6.Result<T>>.value(
+              _i7.dummyValue<_i6.Result<T>>(
                 this,
                 Invocation.method(#execute, [apiCall]),
               ),
             ),
           )
-          as _i4.Future<_i8.Result<T>>);
+          as _i4.Future<_i6.Result<T>>);
 }

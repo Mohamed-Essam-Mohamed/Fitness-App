@@ -9,10 +9,6 @@ import 'package:fitness_app/core/network/common/api_result.dart' as _i6;
 import 'package:fitness_app/core/network/remote/api_manager.dart' as _i5;
 import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
     as _i3;
-import 'package:fitness_app/feature/Exercise/data/data_source/local/exercise_local_data_source.dart'
-    as _i8;
-import 'package:fitness_app/feature/Exercise/data/model/exercise_model.dart'
-    as _i9;
 import 'package:fitness_app/feature/Exercise/data/model/exercise_response_model.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -84,36 +80,4 @@ class MockApiManager extends _i1.Mock implements _i5.ApiManager {
             ),
           )
           as _i4.Future<_i6.Result<T>>);
-}
-
-/// A class which mocks [ExerciseLocalDataSource].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockExerciseLocalDataSource extends _i1.Mock
-    implements _i8.ExerciseLocalDataSource {
-  MockExerciseLocalDataSource() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<void> cacheExercises(
-    List<_i9.ExerciseModel>? exercises,
-    String? key,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#cacheExercises, [exercises, key]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
-
-  @override
-  _i4.Future<List<_i9.ExerciseModel>> getCachedExercises(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getCachedExercises, [key]),
-            returnValue: _i4.Future<List<_i9.ExerciseModel>>.value(
-              <_i9.ExerciseModel>[],
-            ),
-          )
-          as _i4.Future<List<_i9.ExerciseModel>>);
 }
