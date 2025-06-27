@@ -13,5 +13,8 @@ class Routes {
   static const String login = '/login';
   static const String appSection = '/appSection';
   static const String registerView = '/registerView';
+  static const String mealDetails = '/mealDetails';
+  static const String exercise = '/exercise';
+
 
 }

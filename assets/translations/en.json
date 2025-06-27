@@ -163,6 +163,12 @@
     "done": "Do It",
     "back": "Back"
   },
+  "meal": {
+    "mealDescription": "Lorem ipsum dolor sit amet consectetur. \n Eu urna ut gravida quis id pretium purus. \n Mauris massa ",
+    "Ingredients": "Ingredients",
+    "Recommendation": "Recommendation"
+  },
+
   "Ok": "Ok",
   "Loading": "Loading...",
   "Retry": "Retry"

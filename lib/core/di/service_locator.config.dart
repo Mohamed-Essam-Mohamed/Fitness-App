@@ -104,6 +104,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
         ));
+    gh.factory<_i755.ExerciseLocalDataSource>(
+        () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i921.HomeRetrofitClient>(
@@ -115,6 +117,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
+        ));
+    gh.factory<_i546.RemoteMealsDataSource>(
+        () => _i247.RemoteMealsDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i657.MealsRetrofitClient>(),
+            ));
         ));
     gh.factory<_i546.RemoteMealsDataSource>(
         () => _i247.RemoteMealsDataSourceImp(
@@ -138,6 +146,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i498.ForgetPasswordUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i394.VerifyCodeUseCase>(
         () => _i394.VerifyCodeUseCase(gh<_i911.AuthRepository>()));
+    gh.lazySingleton<_i566.GetExercisesUseCase>(
+        () => _i566.GetExercisesUseCase(gh<_i227.ExerciseRepo>()));
+    gh.factory<_i737.ExerciseCubit>(
+        () => _i737.ExerciseCubit(gh<_i566.GetExercisesUseCase>()));
     gh.factory<_i369.ForgetPasswordCubit>(() => _i369.ForgetPasswordCubit(
           gh<_i498.ForgetPasswordUseCase>(),
           gh<_i394.VerifyCodeUseCase>(),
@@ -149,6 +161,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
     gh.factory<_i669.RegisterUseCase>(
         () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i666.GetMealDetailsUseCase>(
+        () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i666.GetMealDetailsUseCase>(
         () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i176.RegisterCubit>(
