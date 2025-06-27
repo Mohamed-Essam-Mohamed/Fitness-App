@@ -21,11 +21,9 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        EasyLocalization(
-            supportedLocales: AppValues.supportedLocales,
-            fallbackLocale: AppValues.englishLocale,
-            path: AppValues.pathTranslation,
-            child: MyApp(initialRoute: initialRoute)),
+        supportedLocales: AppValues.supportedLocales,
+        fallbackLocale: AppValues.englishLocale,
+        path: AppValues.pathTranslation,
         child: MyApp(initialRoute: initialRoute)),
   );
 }
