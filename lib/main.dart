@@ -21,12 +21,11 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        EasyLocalization(
-            supportedLocales: AppValues.supportedLocales,
-            fallbackLocale: AppValues.englishLocale,
-            path: AppValues.pathTranslation,
-            child: MyApp(initialRoute: initialRoute)),
-        child: MyApp(initialRoute: initialRoute)),
+      supportedLocales: AppValues.supportedLocales,
+      fallbackLocale: AppValues.englishLocale,
+      path: AppValues.pathTranslation,
+      child: MyApp(initialRoute: initialRoute),
+    ),
   );
 }
 
@@ -62,7 +61,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.appSection,
+            initialRoute: initialRoute,
           ),
         );
       },
