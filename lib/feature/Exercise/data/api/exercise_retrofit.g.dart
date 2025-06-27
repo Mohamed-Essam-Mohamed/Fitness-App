@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meals_retrofit_client.dart';
+part of 'exercise_retrofit.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,9 +8,9 @@ part of 'meals_retrofit_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _MealsRetrofitClient implements MealsRetrofitClient {
-  _MealsRetrofitClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://www.themealdb.com/api/json/v1/1/';
+class _ExerciseRetrofitClient implements ExerciseRetrofitClient {
+  _ExerciseRetrofitClient(this._dio, {this.baseUrl, this.errorLogger}) {
+    baseUrl ??= 'https://fitness.elevateegy.com/api/v1/';
   }
 
   final Dio _dio;
@@ -20,25 +20,31 @@ class _MealsRetrofitClient implements MealsRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MealDetailsDto> getMealDetailsById(String mealId) async {
+  Future<ExerciseListResponseModel> getExercises(
+    String muscleId,
+    String difficultyId,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'i': mealId};
+    final queryParameters = <String, dynamic>{
+      r'primeMoverMuscleId': muscleId,
+      r'difficultyLevelId': difficultyId,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MealDetailsDto>(
+    final _options = _setStreamType<ExerciseListResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'lookup.php',
+            'exercises/by-muscle-difficulty',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MealDetailsDto _value;
+    late ExerciseListResponseModel _value;
     try {
-      _value = MealDetailsDto.fromJson(_result.data!);
+      _value = ExerciseListResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

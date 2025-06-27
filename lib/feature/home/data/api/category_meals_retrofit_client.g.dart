@@ -29,7 +29,7 @@ class _CategoryMealsRetrofitClient implements CategoryMealsRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'categories.php',
+            null,
             queryParameters: queryParameters,
             data: _data,
           )

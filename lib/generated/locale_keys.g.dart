@@ -111,6 +111,7 @@ abstract class  LocaleKeys {
   static const Home_RecommendationForYou = 'Home.RecommendationForYou';
   static const Home_RecommendationToday = 'Home.RecommendationToday';
   static const Home_UpcomingWorkouts = 'Home.UpcomingWorkouts';
+  static const Home_workout = 'Home.workout';
   static const Home = 'Home';
   static const Error_LoginFailed = 'Error.LoginFailed';
   static const Error_CodeCannotBeEmpty = 'Error.CodeCannotBeEmpty';
@@ -157,6 +158,10 @@ abstract class  LocaleKeys {
   static const Onboarding_done = 'Onboarding.done';
   static const Onboarding_back = 'Onboarding.back';
   static const Onboarding = 'Onboarding';
+  static const meal_mealDescription = 'meal.mealDescription';
+  static const meal_Ingredients = 'meal.Ingredients';
+  static const meal_Recommendation = 'meal.Recommendation';
+  static const meal = 'meal';
   static const Ok = 'Ok';
   static const Loading = 'Loading';
   static const Retry = 'Retry';
