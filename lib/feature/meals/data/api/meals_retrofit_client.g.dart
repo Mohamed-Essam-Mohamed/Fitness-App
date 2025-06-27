@@ -20,25 +20,53 @@ class _MealsRetrofitClient implements MealsRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MealDetailsDto> getMealDetailsById(String mealId) async {
+  Future<CategoriesModel> getCategories(String token) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'i': mealId};
-    final _headers = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MealDetailsDto>(
+    final _options = _setStreamType<CategoriesModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'lookup.php',
+            'categories.php',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MealDetailsDto _value;
+    late CategoriesModel _value;
     try {
-      _value = MealDetailsDto.fromJson(_result.data!);
+      _value = CategoriesModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<MealsFoodModel> getMealsByCategories(String strCategory) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'c': strCategory};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<MealsFoodModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'filter.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MealsFoodModel _value;
+    try {
+      _value = MealsFoodModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

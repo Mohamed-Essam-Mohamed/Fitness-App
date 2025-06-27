@@ -91,8 +91,8 @@ import 'package:fitness_app/feature/meals/domain/repository/meals_repository.dar
     as _i774;
 import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart'
     as _i666;
-import 'package:fitness_app/feature/meals/presentation/view_model/meal_cubit.dart'
-    as _i391;
+import 'package:fitness_app/feature/meals/presentation/view_model/food_recommendation/food_recommendation_cubit.dart'
+    as _i354;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -186,8 +186,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i176.RegisterCubit>(
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
-    gh.factory<_i391.MealCubit>(
-        () => _i391.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
+    gh.factory<_i354.FoodRecommendationCubit>(
+        () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(

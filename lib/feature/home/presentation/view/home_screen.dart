@@ -1,3 +1,4 @@
+import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
@@ -10,7 +11,6 @@ import 'package:fitness_app/feature/home/presentation/common/sections/recommenda
 import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/common/sections/upcoming_workouts_section.dart';
 import 'package:flutter/material.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,8 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     .doIntend(AppValues.english, GetShotData());
               },
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(
-                    top: 40, left: 16, right: 16, bottom: 60),
+                padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

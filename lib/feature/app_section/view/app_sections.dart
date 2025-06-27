@@ -9,6 +9,7 @@ import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/chat_ai_screen.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
+import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
 import 'package:fitness_app/feature/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +29,24 @@ class AppSectionState extends State<AppSection> {
     AppColors.orange.withOpacity(0.1),
     Colors.transparent
   ];
+
   int _currentIndex = 0;
   final PageController pageController = PageController();
-  List<Widget> screens = [
-    const HomeScreen(),
-    const ChatAiScreen(),
-    const WorkoutsScreen(),
-    const ProfileScreen(),
+
+  final List<Widget> screens = const [
+    HomeScreen(),
+    ChatAiScreen(),
+    WorkoutsScreen(),
+    ProfileScreen(),
   ];
+
+  final List<String> icons = [
+    SvgAsset.home,
+    SvgAsset.chatAi,
+    SvgAsset.gym,
+    SvgAsset.profile,
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -59,32 +70,30 @@ class AppSectionState extends State<AppSection> {
   @override
   Widget build(BuildContext context) {
     AppSizes().init(context);
-    return BlocProvider(
-      create: (context) =>
-          serviceLocator<HomeCubit>()..doIntend(AppValues.english, GetShotData()),
-      child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: PageView(
-                  onPageChanged: (value) {
-                    setState(() {
-                      _currentIndex = value;
-                    });
-                  },
-                  controller: pageController,
-                  children: screens,
-                ),
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: PageView(
+                onPageChanged: (value) {
+                  setState(() {
+                    _currentIndex = value;
+                  });
+                },
+                controller: pageController,
+                children: screens,
               ),
-              Positioned(
-                bottom: 0,
-                right: 10,
-                left: 10,
-                child: bottomNavigationBarCustom(),
-              ),
-            ],
-          ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 10,
+              left: 10,
+              child: bottomNavigationBarCustom(),
+            ),
+          ],
         ),
       ),
     );
@@ -119,62 +128,23 @@ class AppSectionState extends State<AppSection> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BottomItemNav(
+                  children: List.generate(icons.length, (index) {
+                    return BottomItemNav(
                       onPressed: (val) {
                         animateToPage(val);
-                        setState(() {
-                          _currentIndex = val;
-                        });
                       },
-                      iconPath: SvgAsset.home,
+                      iconPath: icons[index],
                       currentIndex: _currentIndex,
-                      index: 0,
-                    ),
-                    BottomItemNav(
-                      onPressed: (val) {
-                        animateToPage(val);
-
-                        setState(() {
-                          _currentIndex = val;
-                        });
-                      },
-                      iconPath: SvgAsset.chatAi,
-                      currentIndex: _currentIndex,
-                      index: 1,
-                    ),
-                    BottomItemNav(
-                      onPressed: (val) {
-                        animateToPage(val);
-
-                        setState(() {
-                          _currentIndex = val;
-                        });
-                      },
-                      iconPath: SvgAsset.gym,
-                      currentIndex: _currentIndex,
-                      index: 2,
-                    ),
-                    BottomItemNav(
-                      onPressed: (val) {
-                        animateToPage(val);
-
-                        setState(() {
-                          _currentIndex = val;
-                        });
-                      },
-                      iconPath: SvgAsset.profile,
-                      currentIndex: _currentIndex,
-                      index: 3,
-                    ),
-                  ],
+                      index: index,
+                    );
+                  }),
                 ),
               ),
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.decelerate,
                 top: 0,
-                left: animatedPositionedLEftValue(_currentIndex),
+                left: animatedPositionedLeftValue(_currentIndex),
                 child: Column(
                   children: [
                     Container(
@@ -201,7 +171,7 @@ class AppSectionState extends State<AppSection> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -209,19 +179,8 @@ class AppSectionState extends State<AppSection> {
     );
   }
 
-  double animatedPositionedLEftValue(int currentIndex) {
-    switch (currentIndex) {
-      case 0:
-        return AppSizes.blockSizeHorizontal * 6.2;
-      case 1:
-        return AppSizes.blockSizeHorizontal * 26.5;
-      case 2:
-        return AppSizes.blockSizeHorizontal * 46.5;
-      case 3:
-        return AppSizes.blockSizeHorizontal * 66.5;
-
-      default:
-        return 0;
-    }
+  double animatedPositionedLeftValue(int currentIndex) {
+    final positions = [6.2, 26.5, 46.5, 66.5];
+    return AppSizes.blockSizeHorizontal * (positions[currentIndex]);
   }
 }
