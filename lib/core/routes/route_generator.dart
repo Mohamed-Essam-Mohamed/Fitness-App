@@ -2,6 +2,7 @@ import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/common/widget/undefined_route.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/animation_routes.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/app_section/view/app_sections.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/Register_view.dart';
 import 'package:fitness_app/feature/meals/presentation/view/food_details_screen.dart';
@@ -51,6 +52,9 @@ class RouteGenerator {
       case Routes.mealDetails:
         final mealId = arg as String;
         return AnimationRoute(page:  MealDetailsScreen(mealId: mealId));
+      case Routes.exercise:
+        return AnimationRoute(page: const ExerciseScreen(primeMoverId:'', ));
+
       case Routes.registerView:
         return AnimationRoute(
           page: BlocProvider.value(
@@ -61,7 +65,6 @@ class RouteGenerator {
 
 
         default:
-        return AnimationRoute(page: const UndefinedRoute());
         return null;
     }
   }

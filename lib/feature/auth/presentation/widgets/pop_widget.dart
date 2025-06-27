@@ -5,18 +5,23 @@ InkWell pop_widget(BuildContext context, void Function() onTap) {
   return InkWell(
     onTap: onTap,
     child: Container(
-      width: 25,
-      height: 25,
+      width: 26, // Slightly wider to safely contain the content
+      height: 26,
       decoration: BoxDecoration(
         color: AppColors.orange,
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text("|", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white)),
-          Text("<", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900, color: Colors.white)),
-        ],
+      child: const Center(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text("|", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
+              Text("<", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Colors.white)),
+            ],
+          ),
+        ),
       ),
     ),
   );
