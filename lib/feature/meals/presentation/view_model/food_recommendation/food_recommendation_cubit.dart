@@ -2,12 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/categories_entity.dart';
 import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart';
-import 'package:fitness_app/feature/meals/presentation/view_model/meals_state.dart';
+import 'package:fitness_app/feature/meals/presentation/view_model/food_recommendation/food_recommendation_state.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
-
   FoodRecommendationCubit(this._getMealDetailsUseCase)
       : super(FoodRecommendationInitial());
   final GetMealDetailsUseCase _getMealDetailsUseCase;
@@ -59,7 +58,8 @@ class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
   }
 
   Future<void> _loadMealsForCategory(CategoriesEntity category) async {
-    final result = await _getMealDetailsUseCase.getMealsByCategories(category.strCategory ?? '');
+    final result =
+        await _getMealDetailsUseCase.getMealsByCategories(category.strCategory ?? '');
 
     switch (result) {
       case SuccessResult(data: final mealData):
