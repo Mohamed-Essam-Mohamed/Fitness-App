@@ -5,6 +5,7 @@ import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/app_section/view/app_sections.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/Register_view.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
+import 'package:fitness_app/feature/meals/presentation/view/food_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/feature/auth/presentation/view/change_password_screen.dart';
@@ -42,9 +43,9 @@ class RouteGenerator {
         );
       case Routes.onboarding:
         return AnimationRoute(page: const OnBoardingScreen());
-      case Routes.login:
-        return AnimationRoute(page: const AppSection());
       case Routes.appSection:
+        return AnimationRoute(page: const AppSection());
+      case Routes.login:
         return AnimationRoute(page: const LoginScreen());
 
       case Routes.exercise:
@@ -52,6 +53,10 @@ class RouteGenerator {
             page: const ExerciseScreen(
           primeMoverId: '',
         ));
+
+      case Routes.mealDetails:
+        final mealId = arg as String;
+        return AnimationRoute(page: MealDetailsScreen(mealId: mealId));
 
       case Routes.registerView:
         return AnimationRoute(

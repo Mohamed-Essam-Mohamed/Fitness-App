@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/fade_in_asset_image_widget.dart';
-import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
+import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

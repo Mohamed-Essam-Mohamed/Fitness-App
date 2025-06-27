@@ -1,7 +1,9 @@
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart';
+import 'package:fitness_app/feature/meals/data/model/food_details/response/meal_details_dto.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/categories_entity.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
+import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/domain/repository/meals_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,16 +13,26 @@ class MealsRepositoryImpl implements MealsRepository {
   final RemoteMealsDataSource _remoteMealsDataSource;
 
   @override
-  Future<Result<CategoriesFoodEntity>> getCategories()async {
-    final response=await _remoteMealsDataSource.getCategories();
+  Future<Result<CategoriesFoodEntity>> getCategories() async {
+    final response = await _remoteMealsDataSource.getCategories();
     return response;
   }
 
   @override
-  Future<Result<MealsFoodEntity>> getMealsByCategories(String strCategory) async{
-    final response=await _remoteMealsDataSource.getMealsByCategories(strCategory);
+  Future<Result<MealsFoodEntity>> getMealsByCategories(String strCategory) async {
+    final response = await _remoteMealsDataSource.getMealsByCategories(strCategory);
     return response;
   }
 
+  @override
+  Future<Result<MealDetailsEntity?>> getMealDetailsById(String mealId) async {
+    final result = await _remoteMealsDataSource.getMealDetailsById(mealId);
 
+    if (result is SuccessResult<MealDetailsDto?>) {
+      return SuccessResult(result.data?.toDomain());
+    } else if (result is FailureResult<MealDetailsDto?>) {
+      return FailureResult(result.exception);
+    }
+    return FailureResult(Exception('Unknown error occurred'));
+  }
 }

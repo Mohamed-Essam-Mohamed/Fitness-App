@@ -3,7 +3,7 @@ import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
 
 import 'package:fitness_app/feature/home/presentation/common/loading/category_list_loading.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/container_blur_widget.dart';
-import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
+import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

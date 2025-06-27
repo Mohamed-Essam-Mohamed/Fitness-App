@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart';
 
 part 'home_state.dart';
 
-@singleton
+@injectable
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(
     this._getCategoryUseCase,
@@ -31,6 +31,8 @@ class HomeCubit extends Cubit<HomeState> {
   late final GetUpcomingWorkoutsCategoryUseCase _getUpcomingWorkoutsCategoryUseCase;
   late final GetUpcomingWorkoutsUseCase _getUpcomingWorkoutsUseCase;
   late final GetRecommendationForYouUseCase _getRecommendationForYouUseCase;
+  int selectedIndex = 0;
+
   Future<void> doIntend(String getLang, HomeAction action) async {
     switch (action) {
       case GetShotData():

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -22,45 +26,49 @@ class MealsGrid extends StatelessWidget {
         final meal = meals[index];
         return ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.network(
-                meal.strMealThumb ?? '',
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    const Icon(Icons.error, color: AppColors.red),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.black.withOpacity(0.2), AppColors.black],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(Routes.mealDetails, arguments: meal.idMeal);
+            },
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.network(
+                  meal.strMealThumb ?? '',
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) =>
+                      const Icon(Icons.error, color: AppColors.red),
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppColors.black.withOpacity(0.2), AppColors.black],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        meal.strMeal ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.displayLarge,
+                        //style: theme.textTheme.titleMedium,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      meal.strMeal ?? '',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.displayLarge,
-                      //style: theme.textTheme.titleMedium,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
-              ),
-
-            ],
+              ],
+            ),
           ),
         );
       },

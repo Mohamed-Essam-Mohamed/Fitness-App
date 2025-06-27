@@ -77,8 +77,8 @@ import 'package:fitness_app/feature/home/domain/use_cases/get_upcoming_workouts_
     as _i244;
 import 'package:fitness_app/feature/home/domain/use_cases/get_upcoming_workouts_use_case.dart'
     as _i583;
-import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart'
-    as _i972;
+import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart'
+    as _i1032;
 import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart'
     as _i657;
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart'
@@ -93,6 +93,8 @@ import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_useca
     as _i666;
 import 'package:fitness_app/feature/meals/presentation/view_model/food_recommendation/food_recommendation_cubit.dart'
     as _i354;
+import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_cubit.dart'
+    as _i379;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -188,6 +190,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     gh.factory<_i354.FoodRecommendationCubit>(
         () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
+    gh.factory<_i379.MealCubit>(
+        () => _i379.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(
@@ -198,7 +202,7 @@ extension GetItInjectableX on _i174.GetIt {
         _i244.GetUpcomingWorkoutsCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i583.GetUpcomingWorkoutsUseCase>(
         () => _i583.GetUpcomingWorkoutsUseCase(gh<_i545.HomeRepository>()));
-    gh.singleton<_i972.HomeCubit>(() => _i972.HomeCubit(
+    gh.factory<_i1032.HomeCubit>(() => _i1032.HomeCubit(
           gh<_i958.GetCategoryUseCase>(),
           gh<_i438.GetRecommendationTodayUseCase>(),
           gh<_i244.GetUpcomingWorkoutsCategoryUseCase>(),

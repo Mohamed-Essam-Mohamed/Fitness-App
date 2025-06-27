@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
@@ -7,9 +6,8 @@ import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/chat_ai_screen.dart';
-import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
-import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
+import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
 import 'package:fitness_app/feature/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +31,11 @@ class AppSectionState extends State<AppSection> {
   int _currentIndex = 0;
   final PageController pageController = PageController();
 
-  final List<Widget> screens = const [
-    HomeScreen(),
-    ChatAiScreen(),
-    WorkoutsScreen(),
-    ProfileScreen(),
+  final List<Widget> screens = [
+    const HomeScreen(),
+    const ChatAiScreen(),
+    const WorkoutsScreen(),
+    const ProfileScreen(),
   ];
 
   final List<String> icons = [
@@ -76,15 +74,19 @@ class AppSectionState extends State<AppSection> {
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned.fill(
-              child: PageView(
-                onPageChanged: (value) {
-                  setState(() {
-                    _currentIndex = value;
-                  });
-                },
-                controller: pageController,
-                children: screens,
+            BlocProvider<HomeCubit>(
+              create: (context) =>
+                  serviceLocator<HomeCubit>()..doIntend(AppValues.english, GetShotData()),
+              child: Positioned.fill(
+                child: PageView(
+                  onPageChanged: (value) {
+                    setState(() {
+                      _currentIndex = value;
+                    });
+                  },
+                  controller: pageController,
+                  children: screens,
+                ),
               ),
             ),
             Positioned(
