@@ -1,10 +1,10 @@
+import 'package:bloc/bloc.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/categories_entity.dart';
-import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
 import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/meals_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
 @injectable
 class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
 
@@ -12,44 +12,67 @@ class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
       : super(FoodRecommendationInitial());
   final GetMealDetailsUseCase _getMealDetailsUseCase;
 
-  List<CategoriesEntity> _categories = [];
+  List<CategoriesEntity> _allCategories = [];
   CategoriesEntity? _selectedCategory;
 
-  Future<void> loadCategoriesAndMeals() async {
-    emit(FoodRecommendationLoading());
+  void loadCategoriesAndMeals() async {
+    emit(FoodRecommendationLoading(
+      categories: const [],
+      selectedCategory: CategoriesEntity(
+        idCategory: '',
+        strCategory: '',
+        strCategoryThumb: '',
+        strCategoryDescription: '',
+      ),
+    ));
 
-    final catResult = await _getMealDetailsUseCase.getCategories();
-    if (catResult is FailureResult) {
-      emit(FoodRecommendationError(catResult.exception.toString()));
-      return;
-    }
+    final categoryResult = await _getMealDetailsUseCase.getCategories();
 
-    if (catResult is SuccessResult<CategoriesFoodEntity>) {
-      _categories = catResult.data.categories;
-      _selectedCategory = _categories.first;
-      await _loadMealsForSelectedCategory();
+    switch (categoryResult) {
+      case SuccessResult(data: final categoryData):
+        _allCategories = categoryData.categories;
+        _selectedCategory = _allCategories.first;
+
+        emit(FoodRecommendationLoading(
+          categories: _allCategories,
+          selectedCategory: _selectedCategory!,
+        ));
+
+        await _loadMealsForCategory(_selectedCategory!);
+        break;
+
+      case FailureResult(exception: final error):
+        emit(FoodRecommendationError(error.toString()));
+        break;
     }
   }
 
-  Future<void> changeCategory(CategoriesEntity newCategory) async {
-    _selectedCategory = newCategory;
-    emit(FoodRecommendationLoading());
-    await _loadMealsForSelectedCategory();
+  void changeCategory(CategoriesEntity category) async {
+    _selectedCategory = category;
+
+    emit(FoodRecommendationLoading(
+      categories: _allCategories,
+      selectedCategory: category,
+    ));
+
+    await _loadMealsForCategory(category);
   }
 
-  Future<void> _loadMealsForSelectedCategory() async {
-    final mealResult = await _getMealDetailsUseCase.getMealsByCategories(
-      _selectedCategory?.strCategory ?? '',
-    );
+  Future<void> _loadMealsForCategory(CategoriesEntity category) async {
+    final result = await _getMealDetailsUseCase.getMealsByCategories(category.strCategory ?? '');
 
-    if (mealResult is FailureResult) {
-      emit(FoodRecommendationError(mealResult.exception.toString()));
-    } else if (mealResult is SuccessResult<MealsFoodEntity>) {
-      emit(FoodRecommendationLoaded(
-        categories: _categories,
-        selectedCategory: _selectedCategory!,
-        meals: mealResult.data.meals ?? [],
-      ));
+    switch (result) {
+      case SuccessResult(data: final mealData):
+        emit(FoodRecommendationLoaded(
+          categories: _allCategories,
+          selectedCategory: category,
+          meals: mealData.meals ?? [],
+        ));
+        break;
+
+      case FailureResult(exception: final error):
+        emit(FoodRecommendationError(error.toString()));
+        break;
     }
   }
 }

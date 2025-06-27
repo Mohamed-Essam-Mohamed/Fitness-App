@@ -47,6 +47,8 @@ class MealsGrid extends StatelessWidget {
                   children: [
                     Text(
                       meal.strMeal ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.displayLarge,
                       //style: theme.textTheme.titleMedium,
