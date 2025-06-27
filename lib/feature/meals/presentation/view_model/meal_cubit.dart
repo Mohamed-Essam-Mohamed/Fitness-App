@@ -25,7 +25,6 @@ class MealCubit extends Cubit<MealState> {
     emit(state.copyWith(baseState: BaseLoadingState()));
 
     final result = await _getMealDetailsUseCase.call(mealId);
-    print('result $result');
     switch (result) {
       case SuccessResult<MealDetailsEntity?>():
         {

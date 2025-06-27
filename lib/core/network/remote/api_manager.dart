@@ -24,8 +24,6 @@ class ApiManager {
         DataParsingException(message: LocaleKeys.Error_DataParsingException.tr()),
       );
     } catch (e,stackTrace ) {
-    print(" Unknown error: $e");
-    print(" StackTrace: $stackTrace");
       return FailureResult<T>(
         UnknownApiException(message: LocaleKeys.Error_Unexpected_error.tr()),
       );

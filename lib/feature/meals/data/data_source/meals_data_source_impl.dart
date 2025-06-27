@@ -18,7 +18,6 @@ class RemoteMealsDataSourceImp implements RemoteMealsDataSource {
         return await _mealsRetrofitClient.getMealDetailsById(mealId);
       },
     );
- print('response $response');
     return response;
   }  }
 
