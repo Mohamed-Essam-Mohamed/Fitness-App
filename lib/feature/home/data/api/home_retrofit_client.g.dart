@@ -30,7 +30,7 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            null,
+            'levels',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -58,7 +58,7 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            null,
+            'muscles/random',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -88,7 +88,7 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            null,
+            'muscles',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -119,7 +119,7 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            null,
+            'musclesGroup/${id}',
             queryParameters: queryParameters,
             data: _data,
           )
