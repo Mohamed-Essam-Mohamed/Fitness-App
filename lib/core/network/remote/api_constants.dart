@@ -7,4 +7,9 @@ abstract class ApiConstants {
   static const String loginRoute = 'auth/signin';
   static const String mealDetailsRoute = 'lookup.php';
 
+  static const String getExercisesByMuscleDifficulty = 'exercises/by-muscle-difficulty';
+  static const String  primeMoverMuscleId  ="primeMoverMuscleId";
+  static const String difficultyLevelId  ="difficultyLevelId";
+
+
 }
