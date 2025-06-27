@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
@@ -58,28 +59,32 @@ class AppSectionState extends State<AppSection> {
   @override
   Widget build(BuildContext context) {
     AppSizes().init(context);
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: PageView(
-                onPageChanged: (value) {
-                  setState(() {
-                    _currentIndex = value;
-                  });
-                },
-                controller: pageController,
-                children: screens,
+    return BlocProvider(
+      create: (context) =>
+          serviceLocator<HomeCubit>()..doIntend(AppValues.english, GetShotData()),
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: PageView(
+                  onPageChanged: (value) {
+                    setState(() {
+                      _currentIndex = value;
+                    });
+                  },
+                  controller: pageController,
+                  children: screens,
+                ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 10,
-              left: 10,
-              child: bottomNavigationBarCustom(),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                right: 10,
+                left: 10,
+                child: bottomNavigationBarCustom(),
+              ),
+            ],
+          ),
         ),
       ),
     );
