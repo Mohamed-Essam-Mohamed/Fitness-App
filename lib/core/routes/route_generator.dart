@@ -47,7 +47,7 @@ class RouteGenerator {
       case Routes.login:
         return AnimationRoute(page: const AppSection());
       case Routes.appSection:
-        return AnimationRoute(page: const AppSection());
+        return AnimationRoute(page: const LoginScreen());
 
 
       case Routes.registerView:

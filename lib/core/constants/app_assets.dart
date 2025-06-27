@@ -8,6 +8,7 @@ class SvgAsset {
   static const securityWarning = 'assets/svg/security_warning.svg';
   static const lock = 'assets/svg/lock.svg';
   static const eye = 'assets/svg/eye.svg';
+  static const backButton = 'assets/svg/back_button.svg';
   static const ex1 = 'assets/svg/O15_1.svg';
   static const ex2 = 'assets/svg/O15_2.svg';
   static const ex3 = 'assets/svg/O15_3.svg';
@@ -55,7 +56,6 @@ class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
   static const firstBg = 'assets/png/first_bg.png';
-
   static const secondBg = 'assets/png/second_bg.png';
   static const thirdBg = 'assets/png/third_bg.png';
   static const fourthBg = 'assets/png/fourth_bg.png';
@@ -71,6 +71,9 @@ class ImageAsset {
   static const google = 'assets/png/Google.png';
   static const apple = 'assets/png/Apple.png';
   static const back = 'assets/svg/Vector.svg';
+  static const chickenMushroomsSoup = 'assets/png/chicken_mushrooms_soup.png';
+  static const pizza = 'assets/png/pizza.png';
+
 }
 
 class LottieAsset {}

@@ -153,6 +153,10 @@ abstract class  LocaleKeys {
   static const Onboarding_done = 'Onboarding.done';
   static const Onboarding_back = 'Onboarding.back';
   static const Onboarding = 'Onboarding';
+  static const meal_mealDescription = 'meal.mealDescription';
+  static const meal_Ingredients = 'meal.Ingredients';
+  static const meal_Recommendation = 'meal.Recommendation';
+  static const meal = 'meal';
   static const Ok = 'Ok';
   static const Loading = 'Loading';
   static const Retry = 'Retry';

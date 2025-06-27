@@ -1,5 +1,7 @@
+import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/remote/api_manager.dart';
+import 'package:fitness_app/core/utils/app_shared_preference.dart';
 import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart';
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart';
 import 'package:fitness_app/feature/meals/data/model/categories/categories_model.dart';
@@ -16,11 +18,9 @@ class RemoteMealsDataSourceImp implements RemoteMealsDataSource {
 
   @override
   Future<Result<CategoriesFoodEntity>>getCategories() async {
-    final String token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1ZDQ2NTdkYjY1MjAwNTE0NDFkNGJjIiwiaWF0IjoxNzUwOTQzMzE5fQ.7oH73tHxUDnTkSDl8GQWNgXJBiFE7JGCp4_gnMY6rOY';
-
+    var token = await SharedPreferencesUtils.getString(AppValues.token);
     final result = await _apiManager.execute<CategoriesModel>(() async {
-      return _mealsRetrofitClient.getCategories(token);
+      return _mealsRetrofitClient.getCategories('Bearer $token');
     });
 
     switch (result) {
