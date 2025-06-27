@@ -1,14 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/chat_ai_screen.dart';
+import 'package:fitness_app/feature/home/presentation/view_model/home/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
 import 'package:fitness_app/feature/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppSection extends StatefulWidget {
   const AppSection({super.key});
@@ -25,11 +29,11 @@ class AppSectionState extends State<AppSection> {
   ];
   int _currentIndex = 0;
   final PageController pageController = PageController();
-  List<Widget> screens = const [
-    HomeScreen(),
-    ChatAiScreen(),
-    WorkoutsScreen(),
-    ProfileScreen(),
+  List<Widget> screens = [
+    const HomeScreen(),
+    const ChatAiScreen(),
+    const WorkoutsScreen(),
+    const ProfileScreen(),
   ];
   @override
   void initState() {

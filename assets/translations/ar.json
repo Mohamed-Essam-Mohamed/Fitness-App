@@ -104,7 +104,12 @@
         "CheckOut": "إتمام الشراء",
         "PlaceOrder": "تأكيد الطلب",
         "Next": "التالي",
-        "SortBy": "فرز حسب"
+        "SortBy": "فرز حسب",
+        "hi": "مرحبًا",
+        "LetsStartYourDay": "لنبدأ يومك",
+        "RecommendationForYou": "توصيات لك",
+        "RecommendationToday": "توصية اليوم",
+        "UpcomingWorkouts": "التمارين القادمة"
     },
     "Error": {
         "LoginFailed": "فشل تسجيل الدخول",
