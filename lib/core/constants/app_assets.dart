@@ -69,6 +69,7 @@ class ImageAsset {
   static const facebook = 'assets/png/facebook circle.png';
   static const google = 'assets/png/Google.png';
   static const apple = 'assets/png/Apple.png';
+  static const backgroundExercise ="assets/png/background_exercise.png";
 }
 
 class LottieAsset {}

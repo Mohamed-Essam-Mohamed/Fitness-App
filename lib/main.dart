@@ -1,5 +1,3 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,8 +9,6 @@ import 'package:fitness_app/core/routes/route_generator.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/core/utils/bloc_observer.dart';
-
-import 'feature/auth/presentation/view_model/register/register_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +64,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.login,
+            initialRoute: Routes.exercise,
           ),
         );
       },
