@@ -10,26 +10,29 @@ class NutritionCardListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 360,
-      height: 90,
-      padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 16) ,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            AppColors.gray[AppColors.colorCode90]!,
-            Colors.transparent
-          ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 9),
+      child: Container(
+        width: double.infinity,
+        height: 90,
+        padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 16) ,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [
+              AppColors.gray[AppColors.colorCode90]!,
+              Colors.transparent
+            ],
+          ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: nutritionList
-            .map((e) => NutritionCardWidget(nutritionEntity: e))
-            .toList(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: nutritionList
+              .map((e) => NutritionCardWidget(nutritionEntity: e))
+              .toList(),
+        ),
       ),
     );
   }

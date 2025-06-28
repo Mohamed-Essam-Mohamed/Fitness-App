@@ -56,11 +56,21 @@ class ExerciseCubit extends Cubit<ExerciseState> {
     }
   }
 
+
+  void setSelectedExercise({
+    required String name,
+    required String videoUrl,
+  }) {
+    emit(state.copyWith(
+      selectedExerciseName: name,
+      currentVideoUrl: videoUrl,
+      selectedExerciseImage: _getYoutubeThumbnail(videoUrl),
+    ));
+  }
   String _getYoutubeThumbnail(String url) {
     final id = _extractYoutubeId(url);
     return 'https://img.youtube.com/vi/$id/0.jpg';
   }
-
   String _extractYoutubeId(String url) {
     final uri = Uri.tryParse(url);
     if (uri == null) return '';
@@ -72,3 +82,4 @@ class ExerciseCubit extends Cubit<ExerciseState> {
     return '';
   }
 }
+

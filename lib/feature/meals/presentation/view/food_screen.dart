@@ -69,38 +69,21 @@ class _FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                         const SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
+                          child:
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                                child: Container(
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.orange,
-                                    borderRadius: BorderRadius.circular(28),
-                                  ),
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      ImageAsset.back,
-                                      height: 12,
-                                      width: 12,
-                                      color: AppColors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                child:
                               Text(
                                 LocaleKeys.Home_FoodRecommendation.tr(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .displayMedium
                                     ?.copyWith(fontSize: 24),
-                              ),
-                            ],
+
+
                           ),
                         ),
-
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4, horizontal:20),
                           child: TabContainerWidget(

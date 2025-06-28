@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/dialogs/app_dialogs.dart';
+import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/presentation/mappers/meal_Details_mapper.dart';
@@ -21,8 +23,9 @@ class TopSection extends StatelessWidget {
     return  Stack(
       children: [
         SizedBox(
-          height: 350,
+          height: context.hp(42.6),
           child: Stack(
+            alignment: Alignment.center,
             fit: StackFit.expand,
             children: [
               ClipRRect(
@@ -35,45 +38,43 @@ class TopSection extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 1, sigmaY:1),
-                  child: Container(
-                    color: Colors.grey.withAlpha(30),
-                  ),
-                ),
-              ),
+              // ClipRRect(
+              //   borderRadius: const BorderRadius.only(
+              //     bottomRight: Radius.circular(20),
+              //     bottomLeft: Radius.circular(20),
+              //   ),
+              //   child: BackdropFilter(
+              //     filter: ImageFilter.blur(sigmaX: 1, sigmaY:1),
+              //     child: Container(
+              //       color: Colors.grey.withAlpha(5),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
-        Positioned(
-          left: 140,
-          top: 100,
-          child: GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                barrierColor: Colors.black.withValues(alpha: 0.95),
-                builder: (_) => GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Scaffold(
-                    backgroundColor: Colors.black,
-                    body: SafeArea(
-                      child: Center(
-                        child: CustomYoutubePlayer(videoUrl: mealDetailsEntity.meals![0].strYoutube!),
-                      ),
+        GestureDetector(
+          onTap: () {
+            mealDetailsEntity.meals![0].strYoutube!=null?
+            showDialog(
+              context: context,
+              barrierColor: Colors.black.withValues(alpha: 0.95),
+              builder: (_) => GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => Navigator.of(context).pop(),
+                child: Scaffold(
+                  backgroundColor: Colors.black,
+                  body: SafeArea(
+                    child: Center(
+                      child: CustomYoutubePlayer(videoUrl: mealDetailsEntity.meals![0].strYoutube!),
                     ),
                   ),
                 ),
-              );
-            },
-            child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange),
-          ),
+              ),
+            ):  AppDialogs.showFailureDialog(context, message: 'sorry this video deleted please watch another ');
+
+          },
+          child: Center(child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange)),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -119,10 +120,16 @@ class TopSection extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: AppColors.white)),
             ),
-            NutritionCardListWidget(
-                nutritionList: MealDetailsMapper.nutritionData),
+
           ],
-        )
+        ),
+        Align(
+    alignment: Alignment.bottomCenter,
+            child: NutritionCardListWidget(
+                nutritionList: MealDetailsMapper.nutritionData),
+          ),
+
+
       ],
     );
 

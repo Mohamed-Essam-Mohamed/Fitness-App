@@ -167,8 +167,10 @@ class AppDialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(title ?? LocaleKeys.Error),
-          content: Text(message),
+
+          title: Text(title ?? LocaleKeys.Error,style: TextStyle(color: AppColors.orange),),
+          content: Text(message ,style: TextStyle(color: AppColors.orange)),
+
           actions: [
             if (nextAction != null && nextActionTitle != null)
               TextButton(
@@ -179,7 +181,7 @@ class AppDialogs {
               onPressed: onPressed ?? () => Navigator.of(context).pop(),
               child: Text(
                 buttonText ?? LocaleKeys.Ok,
-                style: const TextStyle(color: AppColors.black),
+                style: const TextStyle(color: AppColors.orange),
               ),
             ),
           ],

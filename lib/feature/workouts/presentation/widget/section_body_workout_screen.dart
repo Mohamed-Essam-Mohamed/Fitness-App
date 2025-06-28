@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/core/common/animation/loading_shimmer.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
+import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,33 +27,40 @@ class SectionBodyWorkoutScreen extends StatelessWidget {
               crossAxisSpacing: 17,
             ),
             itemBuilder: (context, index) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Stack(
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.none,
-                  children: [
-                    CustomCacheNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: state.upcomingData[index].image,
-                    ),
-                    Container(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          state.upcomingData[index].name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
+              return InkWell(
+                onTap: ()=> Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ExerciseScreen(primeMoverId: state.upcomingData[index].id),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.none,
+                    children: [
+                      CustomCacheNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: state.upcomingData[index].image,
                       ),
-                    )
-                  ],
+                      Container(
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            state.upcomingData[index].name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.displayLarge,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             },

@@ -59,10 +59,11 @@ class ExerciseListView extends StatelessWidget {
 
                   return GestureDetector(
                     onTap: () {
-                      cubit.state.copyWith(
-                        selectedExerciseImage: 'https://img.youtube.com/vi/${_getYoutubeId(videoUrl)}/0.jpg',
-                        selectedExerciseName: exercise.name,
-                        currentVideoUrl: videoUrl,
+                      cubit.setSelectedExercise(
+
+                        videoUrl: videoUrl,
+                        name: exercise.name,
+
                       );
 
                       if (scrollController.hasClients && scrollController.offset > 0) {

@@ -42,12 +42,26 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     fetchByDifficulty();
   }
 
-  void fetchByDifficulty() {
-    cubit.fetchExercises(
-      muscleId: widget.primeMoverId.isEmpty ? "67c8499726895f87ce0aa9be" : widget.primeMoverId,
-      difficultyId: difficultyMap[selectedDifficulty]!,
+  Future<void> fetchByDifficulty() async {
+    final difficultyId = difficultyMap[selectedDifficulty]!;
+
+    await cubit.fetchExercises(
+      muscleId: widget.primeMoverId.isEmpty
+          ? "67c8499726895f87ce0aa9be"
+          : widget.primeMoverId,
+      difficultyId: difficultyId,
     );
+
+    final first = cubit.state.exercises.isNotEmpty ? cubit.state.exercises.first : null;
+
+    if (first != null && first.videoUrl != null) {
+      cubit.setSelectedExercise(
+        name: first.name,
+        videoUrl: first.videoUrl!,
+      );
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -155,11 +169,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: difficultyMap.length,
-                    onPageChanged: (index) {
+                    onPageChanged: (index) async{
                       setState(() {
                         selectedDifficulty = difficultyMap.keys.elementAt(index);
                       });
-                      fetchByDifficulty();
+                       await fetchByDifficulty();
                     },
                     itemBuilder: (context, index) {
                       final label = difficultyMap.keys.elementAt(index);
