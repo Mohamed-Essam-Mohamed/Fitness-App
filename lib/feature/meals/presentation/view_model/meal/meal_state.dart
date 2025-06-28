@@ -25,3 +25,5 @@ final class DetailsAction extends MealsAction {
   DetailsAction({required this.mealId});
   final String mealId;
 }
+
+

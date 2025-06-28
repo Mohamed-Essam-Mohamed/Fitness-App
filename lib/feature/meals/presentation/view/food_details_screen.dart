@@ -1,6 +1,7 @@
 import 'package:fitness_app/core/base_state/base_state.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
+import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_cubit.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_state.dart';
@@ -9,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.mealId});
+  const MealDetailsScreen({super.key, required this.mealId , required this.meals});
   final String mealId;
-
+  final List<MealsEntity> meals;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,6 +37,7 @@ class MealDetailsScreen extends StatelessWidget {
 
             return MealDetailsContent(
               mealDetailsEntity: mealDetails,
+              recommendedMeals: meals,
             );
           }
 

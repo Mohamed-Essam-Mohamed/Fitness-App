@@ -1,3 +1,5 @@
+import 'package:fitness_app/feature/home/domain/entities/recommendation_for_you_entity.dart';
+import 'package:fitness_app/feature/home/domain/use_cases/get_recommendation_for_you_use_case.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_state.dart';
@@ -8,15 +10,19 @@ import 'package:fitness_app/core/network/common/api_result.dart';
 
 @injectable
 class MealCubit extends Cubit<MealState> {
-  MealCubit(this._getMealDetailsUseCase)
+  MealCubit(this._getMealDetailsUseCase, this._getRecommendationForYouUseCase)
       : super(MealState(baseState: BaseInitialState()));
   final GetMealDetailsUseCase _getMealDetailsUseCase;
+   final GetRecommendationForYouUseCase _getRecommendationForYouUseCase;
+
 
   void doIntent(MealsAction action) {
     switch (action) {
       case DetailsAction():
         _getMealDetailsById(action.mealId);
+
     }
+
   }
 
   Future<MealDetailsEntity?> _getMealDetailsById(String mealId) async {
@@ -40,4 +46,6 @@ class MealCubit extends Cubit<MealState> {
     }
     return null;
   }
+
+
 }

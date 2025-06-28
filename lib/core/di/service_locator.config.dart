@@ -190,8 +190,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     gh.factory<_i354.FoodRecommendationCubit>(
         () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
-    gh.factory<_i379.MealCubit>(
-        () => _i379.MealCubit(gh<_i666.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(
@@ -207,6 +205,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i438.GetRecommendationTodayUseCase>(),
           gh<_i244.GetUpcomingWorkoutsCategoryUseCase>(),
           gh<_i583.GetUpcomingWorkoutsUseCase>(),
+          gh<_i289.GetRecommendationForYouUseCase>(),
+        ));
+    gh.factory<_i379.MealCubit>(() => _i379.MealCubit(
+          gh<_i666.GetMealDetailsUseCase>(),
           gh<_i289.GetRecommendationForYouUseCase>(),
         ));
     return this;

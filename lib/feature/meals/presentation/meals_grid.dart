@@ -4,6 +4,7 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
+import 'package:fitness_app/feature/meals/presentation/entity/meal_details_screen_args.dart';
 import 'package:flutter/material.dart';
 
 class MealsGrid extends StatelessWidget {
@@ -28,7 +29,7 @@ class MealsGrid extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(Routes.mealDetails, arguments: meal.idMeal);
+              Navigator.of(context).pushNamed(Routes.mealDetails, arguments: MealDetailsScreenArgs(mealId: meal.idMeal!, meals: meals));
             },
             child: Stack(
               fit: StackFit.expand,

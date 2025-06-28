@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/presentation/mappers/meal_Details_mapper.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/nutrition_card_list_widget.dart';
@@ -17,17 +20,59 @@ class TopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Stack(
       children: [
-        Container(
+        SizedBox(
           height: 350,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20)),
-            image: DecorationImage(
-              image: NetworkImage(
-                  mealDetailsEntity.meals![0].strMealThumb!),
-              fit: BoxFit.cover,
-            ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                ),
+                child: Image.network(
+                  mealDetailsEntity.meals![0].strMealThumb!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 1, sigmaY:1),
+                  child: Container(
+                    color: Colors.grey.withAlpha(30),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          left: 140,
+          top: 100,
+          child: GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                barrierColor: Colors.black.withValues(alpha: 0.95),
+                builder: (_) => GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Scaffold(
+                    backgroundColor: Colors.black,
+                    body: SafeArea(
+                      child: Center(
+                        child: CustomYoutubePlayer(videoUrl: mealDetailsEntity.meals![0].strYoutube!),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange),
           ),
         ),
         Column(
@@ -41,10 +86,15 @@ class TopSection extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    radius: 12,
-                    backgroundColor: AppColors.orange,
-                    child: SvgPicture.asset(SvgAsset.backButton),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: AppColors.orange,
+                      child: SvgPicture.asset(SvgAsset.backButton),
+                    ),
                   ),
                 ],
               ),
