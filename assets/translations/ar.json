@@ -166,6 +166,16 @@
         "Ingredients": "المكونات",
         "Recommendation": "التوصيات"
     },
+    "chatBoot": {
+        "Hi": "مرحبًا",
+        "IamYourSmartCoach": "أنا مدربك الذكي",
+        "HowCanIAssistYou": "كيف يمكنني مساعدتك",
+        "Today": "اليوم ؟",
+        "GetStarted": "ابدأ الآن",
+        "PreviousConversations": "المحادثات السابقة",
+        "SmartCoach": "المدرب الزكي"
+
+    },
     "Ok": "موافق",
     "Loading": "جارٍ التحميل...",
     "Retry": "إعادة المحاولة"

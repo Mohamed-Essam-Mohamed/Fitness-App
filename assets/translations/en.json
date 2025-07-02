@@ -166,6 +166,18 @@
         "Ingredients": "Ingredients",
         "Recommendation": "Recommendation"
     },
+    "chatBoot": {
+        "Hi":"Hi",
+        "IamYourSmartCoach": "I am your smart coach",
+        "HowCanIAssistYou": "How Can I Assist You",
+        "Today": "Today ?",
+        "GetStarted": "Get Started",
+        "PreviousConversations": "Previous conversations",
+        "SmartCoach": "Smart coach"
+
+    },
+
+
     "Ok": "Ok",
     "Loading": "Loading...",
     "Retry": "Retry"

@@ -163,6 +163,14 @@ abstract class  LocaleKeys {
   static const meal_Ingredients = 'meal.Ingredients';
   static const meal_Recommendation = 'meal.Recommendation';
   static const meal = 'meal';
+  static const chatBoot_Hi = 'chatBoot.Hi';
+  static const chatBoot_IamYourSmartCoach = 'chatBoot.IamYourSmartCoach';
+  static const chatBoot_HowCanIAssistYou = 'chatBoot.HowCanIAssistYou';
+  static const chatBoot_Today = 'chatBoot.Today';
+  static const chatBoot_GetStarted = 'chatBoot.GetStarted';
+  static const chatBoot_PreviousConversations = 'chatBoot.PreviousConversations';
+  static const chatBoot_SmartCoach = 'chatBoot.SmartCoach';
+  static const chatBoot = 'chatBoot';
   static const Ok = 'Ok';
   static const Loading = 'Loading';
   static const Retry = 'Retry';
