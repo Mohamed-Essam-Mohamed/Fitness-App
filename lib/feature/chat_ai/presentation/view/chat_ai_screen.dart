@@ -1,154 +1,87 @@
-// import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart';
-// import 'package:fitness_app/feature/chat_ai/domain/repository/smart_coach_repository.dart';
-// import 'package:fitness_app/feature/chat_ai/domain/use_case/get_smart_coach_usecase.dart';
-// import 'package:fitness_app/feature/chat_ai/presentation/view_model/message.dart';
-// import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-//
-// class ChatAiScreen extends StatelessWidget {
-//   ChatAiScreen({super.key});
-//
-//   final TextEditingController _controller = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final service = SmartCoachService();
-//     final repo = SmartCoachRepository(service);
-//     final usecase = GetSmartCoachUseCase(repo);
-//
-//     return BlocProvider(
-//       create: (_) => ChatCubit(usecase),
-//       child: Builder( // 👈 This creates a new context within the BlocProvider scope
-//         builder: (context) => Scaffold(
-//           appBar: AppBar(title: const Text('Smart Coach')),
-//           body: Column(
-//             children: [
-//               Expanded(
-//                 child: BlocBuilder<ChatCubit, ChatState>(
-//                   builder: (ctx, state) => ListView.builder(
-//                     itemCount: state.messages.length,
-//                     itemBuilder: (c, i) {
-//                       final msg = state.messages[i];
-//                       final align = msg.sender == Sender.user
-//                           ? Alignment.centerRight
-//                           : Alignment.centerLeft;
-//                       return Align(
-//                         alignment: align,
-//                         child: Container(
-//                           margin: const EdgeInsets.all(8),
-//                           padding: const EdgeInsets.all(12),
-//                           decoration: BoxDecoration(
-//                             color: msg.sender == Sender.user
-//                                 ? Colors.blue
-//                                 : Colors.grey[300],
-//                             borderRadius: BorderRadius.circular(8),
-//                           ),
-//                           child: Text(
-//                             msg.text,
-//                             style: TextStyle(
-//                               color: msg.sender == Sender.user
-//                                   ? Colors.white
-//                                   : Colors.black,
-//                             ),
-//                           ),
-//                         ),
-//                       );
-//                     },
-//                   ),
-//                 ),
-//               ),
-//               _buildQuickSuggestions(context),
-//               _buildInputArea(context),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-//
-//   Widget _buildQuickSuggestions(BuildContext ctx) {
-//     final chips = [
-//       "Suggest breakfast",
-//       "Suggest lunch for muscle gain",
-//       "Suggest dinner for fat loss",
-//       "Suggest post-workout meal"
-//     ];
-//     return Wrap(
-//       spacing: 8,
-//       children: chips
-//           .map((t) => ActionChip(
-//         label: Text(t),
-//         onPressed: () {
-//           _controller.text = t;
-//           _send(ctx);
-//         },
-//       ))
-//           .toList(),
-//     );
-//   }
-//
-//   Widget _buildInputArea(BuildContext ctx) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: TextField(
-//               controller: _controller,
-//               decoration: const InputDecoration(hintText: 'Ask coach...'),
-//             ),
-//           ),
-//           IconButton(
-//             icon: const Icon(Icons.send),
-//             onPressed: () => _send(ctx),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   void _send(BuildContext ctx) {
-//     final text = _controller.text.trim();
-//     if (text.isNotEmpty) {
-//       ctx.read<ChatCubit>().send(text);
-//       _controller.clear();
-//     }
-//   }
-// }
-import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart';
-import 'package:fitness_app/feature/chat_ai/data/repository_impl/smart_coach_repository_impl.dart';
-import 'package:fitness_app/feature/chat_ai/domain/use_case/get_smart_coach_usecase.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view_model/message.dart';
+// lib/feature/chat_ai/presentation/view/chat_ai_screen.dart
+
+import 'package:fitness_app/core/base_state/base_state.dart'; // Import BaseState
+import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart'; // Corrected import
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart'; // Import GetIt
 
-class ChatAiScreen extends StatelessWidget {
+// GetIt instance (assuming it's globally accessible as `getIt`)
+final getIt = GetIt.instance;
+
+class ChatAiScreen extends StatefulWidget {
+  const ChatAiScreen({super.key});
+
+  @override
+  State<ChatAiScreen> createState() => _ChatAiScreenState();
+}
+
+class _ChatAiScreenState extends State<ChatAiScreen> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
-  ChatAiScreen({super.key});
+  @override
+  void dispose() {
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SmartCoachCubit(
-        GetSmartCoachResponse(
-          SmartCoachRepositoryImpl(SmartCoachService()),
-        ),
-      ),
+      create: (_) => getIt<SmartCoachCubit>(), // Instantiate Cubit via GetIt
       child: Builder(
         builder: (ctx) => Scaffold(
           appBar: AppBar(title: const Text("Smart Coach")),
           body: Column(
             children: [
               Expanded(
-                child: BlocBuilder<SmartCoachCubit, ChatState>(
+                child: BlocConsumer<SmartCoachCubit, SmartCoachChatState>(
+                  listener: (context, state) {
+                    // Listen for errors from SmartCoachChatState's errorMessage
+                    if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.errorMessage!),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                      // Clear the error message after showing it, so it doesn't reappear on rebuilds
+                      // You'd need to add a method to your cubit: `cubit.clearErrorMessage()`
+                      // For now, it will only show once per error.
+                    }
+
+                    // Auto-scroll to bottom after state changes (new messages)
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (_scrollController.hasClients) {
+                        _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeOut,
+                        );
+                      }
+                    });
+
+                    // You could also listen to `state.baseState` here for global UI changes
+                    // For example, if you had a global loading indicator or error dialog:
+                    // if (state.baseState is BaseLoadingState) {
+                    //   // Show global loading indicator
+                    // } else if (state.baseState is BaseErrorState) {
+                    //   // Show global error dialog
+                    // }
+                  },
                   builder: (context, state) {
+                    // Use null-aware operator for messages list
+                    final messages = state.messages ?? [];
+
                     return ListView.builder(
-                      itemCount: state.messages.length,
+                      controller: _scrollController,
+                      itemCount: messages.length,
                       itemBuilder: (context, index) {
-                        final msg = state.messages[index];
+                        final msg = messages[index];
                         final align = msg.sender == Sender.user
                             ? Alignment.centerRight
                             : Alignment.centerLeft;
@@ -176,7 +109,6 @@ class ChatAiScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // _buildSuggestions(ctx),
               _buildInput(ctx),
             ],
           ),
@@ -186,50 +118,51 @@ class ChatAiScreen extends StatelessWidget {
   }
 
   Widget _buildInput(BuildContext ctx) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _controller,
-              decoration: const InputDecoration(hintText: "Ask coach..."),
-            ),
+    return BlocBuilder<SmartCoachCubit, SmartCoachChatState>(
+      builder: (context, state) {
+        final bool isLoading = state.isLoading;
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    hintText: isLoading ? "Thinking..." : "Ask coach...",
+                    border: const OutlineInputBorder(),
+                  ),
+                  enabled: !isLoading,
+                  onSubmitted: (text) {
+                    if (!isLoading && text.trim().isNotEmpty) {
+                      ctx.read<SmartCoachCubit>().sendMessage(text.trim());
+                      _controller.clear();
+                    }
+                  },
+                ),
+              ),
+              IconButton(
+                icon: isLoading
+                    ? const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+                    : const Icon(Icons.send),
+                onPressed: isLoading
+                    ? null
+                    : () {
+                  final text = _controller.text.trim();
+                  if (text.isNotEmpty) {
+                    ctx.read<SmartCoachCubit>().sendMessage(text);
+                    _controller.clear();
+                  }
+                },
+              ),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: () {
-              final text = _controller.text.trim();
-              if (text.isNotEmpty) {
-                ctx.read<SmartCoachCubit>().sendMessage(text);
-                _controller.clear();
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSuggestions(BuildContext ctx) {
-    final suggestions = [
-      "Suggest breakfast",
-      "Lunch for muscle gain",
-      "Dinner for fat loss",
-      "Post-workout meal",
-    ];
-
-    return Wrap(
-      spacing: 8,
-      children: suggestions
-          .map((s) => ActionChip(
-        label: Text(s),
-        onPressed: () {
-          _controller.text = s;
-          ctx.read<SmartCoachCubit>().sendMessage(s);
-        },
-      ))
-          .toList(),
+        );
+      },
     );
   }
 }

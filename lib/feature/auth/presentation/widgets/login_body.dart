@@ -32,7 +32,7 @@ class LoginBody extends StatelessWidget {
           child: Text(LocaleKeys.Authentication_welcomeBack.tr(),
               style: Theme.of(context).textTheme.labelLarge),
         ),
-        BlurredContainerWidget(
+        const BlurredContainerWidget(
           child: LoginContentWidget(),
         )
       ],

@@ -39,12 +39,20 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
     as _i285;
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
     as _i176;
-import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_retrofit_client.dart'
-    as _i217;
+import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart'
+    as _i528;
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart'
     as _i99;
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source_impl.dart'
     as _i49;
+import 'package:fitness_app/feature/chat_ai/data/repository_impl/smart_coach_repository_impl.dart'
+    as _i341;
+import 'package:fitness_app/feature/chat_ai/domain/repository/smart_coach_repository.dart'
+    as _i341;
+import 'package:fitness_app/feature/chat_ai/domain/use_case/get_smart_coach_usecase.dart'
+    as _i992;
+import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart'
+    as _i286;
 import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
     as _i58;
 import 'package:fitness_app/feature/Exercise/data/data_source/local/exercies_local_data_source_impl.dart'
@@ -126,6 +134,9 @@ extension GetItInjectableX on _i174.GetIt {
         () => dioModule.providerInterceptor());
     gh.lazySingleton<_i674.AuthInterceptor>(
         () => dioModule.provideAuthInterceptor());
+    gh.lazySingleton<_i528.SmartCoachService>(() => _i528.SmartCoachService());
+    gh.factory<_i99.SmartCoachRemoteDataSource>(() =>
+        _i49.SmartCoachRemoteDataSourceImpl(gh<_i528.SmartCoachService>()));
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
@@ -134,8 +145,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
-    gh.lazySingleton<_i217.SmartCoachRetrofitClient>(
-        () => _i217.SmartCoachRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
         () => _i58.ExerciseRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i829.CategoryMealsRetrofitClient>(
@@ -149,11 +158,8 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i58.ExerciseRetrofitClient>(),
               gh<_i74.ApiManager>(),
             ));
-    gh.factory<_i99.RemoteSmartCoachDataSource>(
-        () => _i49.RemoteSmartCoachDataSourceImp(
-              gh<_i74.ApiManager>(),
-              gh<_i217.SmartCoachRetrofitClient>(),
-            ));
+    gh.factory<_i341.SmartCoachRepository>(() =>
+        _i341.SmartCoachRepositoryImpl(gh<_i99.SmartCoachRemoteDataSource>()));
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
@@ -174,6 +180,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i774.MealsRepository>(
         () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
+    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
+        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i227.ExerciseRepo>(
         () => _i90.ExerciseRepoImpl(gh<_i478.ExerciseRemoteDataSource>()));
     gh.factory<_i1031.ChangePasswordUseCase>(
@@ -191,6 +199,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i394.VerifyCodeUseCase>(),
           gh<_i1031.ChangePasswordUseCase>(),
         ));
+    gh.factory<_i286.SmartCoachCubit>(
+        () => _i286.SmartCoachCubit(gh<_i992.GetSmartCoachResponseUseCase>()));
     gh.factory<_i545.HomeRepository>(
         () => _i963.HomeRepositoryImpl(gh<_i614.HomeDataSource>()));
     gh.factory<_i285.LoginCubit>(
