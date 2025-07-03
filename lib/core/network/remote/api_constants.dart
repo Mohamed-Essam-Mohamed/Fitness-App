@@ -6,8 +6,12 @@ abstract class ApiConstants {
   static const String changePassword = 'auth/resetPassword';
   static const String loginRoute = 'auth/signin';
   static const String mealDetailsRoute = 'lookup.php';
-
+ static const String musclesRandom = 'muscles/random';
+  static const String muscles = 'muscles';
+  static const String musclesGroup = 'musclesGroup/{id}';
+  static const String mealsCategory = 'categories.php';
   static const String getExercisesByMuscleDifficulty = 'exercises/by-muscle-difficulty';
+    static const String levels = 'levels';
   static const String  primeMoverMuscleId  ="primeMoverMuscleId";
   static const String difficultyLevelId  ="difficultyLevelId";
 

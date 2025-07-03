@@ -20,13 +20,13 @@ void main() async {
   final initialRoute = await getInitialRoute();
 
   runApp(
-    EasyLocalization(
-    EasyLocalization(
+    
+     EasyLocalization(
         supportedLocales: AppValues.supportedLocales,
         fallbackLocale: AppValues.englishLocale,
         path: AppValues.pathTranslation,
         child: MyApp(initialRoute: initialRoute)),
-        child: MyApp(initialRoute: initialRoute)),
+        
   );
 }
 
