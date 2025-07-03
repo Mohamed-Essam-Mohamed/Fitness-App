@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fitness_app/core/constants/app_values.dart';
@@ -12,6 +13,8 @@ import 'package:fitness_app/core/utils/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await dotenv.load();
+  Gemini.init(apiKey:'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM');
   await EasyLocalization.ensureInitialized();
   configureDependencies();
 

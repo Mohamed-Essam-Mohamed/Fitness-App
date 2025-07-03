@@ -33,7 +33,7 @@ class AppSectionState extends State<AppSection> {
 
   final List<Widget> screens = [
     const HomeScreen(),
-    const ChatAiScreen(),
+     ChatAiScreen(),
     const WorkoutsScreen(),
     const ProfileScreen(),
   ];

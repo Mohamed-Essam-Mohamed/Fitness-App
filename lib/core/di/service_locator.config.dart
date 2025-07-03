@@ -39,6 +39,12 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
     as _i285;
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
     as _i176;
+import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_retrofit_client.dart'
+    as _i217;
+import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart'
+    as _i99;
+import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source_impl.dart'
+    as _i49;
 import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
     as _i58;
 import 'package:fitness_app/feature/Exercise/data/data_source/local/exercies_local_data_source_impl.dart'
@@ -128,6 +134,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i217.SmartCoachRetrofitClient>(
+        () => _i217.SmartCoachRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
         () => _i58.ExerciseRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i829.CategoryMealsRetrofitClient>(
@@ -140,6 +148,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i91.ExerciseDataSourceImpl(
               gh<_i58.ExerciseRetrofitClient>(),
               gh<_i74.ApiManager>(),
+            ));
+    gh.factory<_i99.RemoteSmartCoachDataSource>(
+        () => _i49.RemoteSmartCoachDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i217.SmartCoachRetrofitClient>(),
             ));
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
