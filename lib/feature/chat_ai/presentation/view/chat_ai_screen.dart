@@ -1,14 +1,11 @@
-// lib/feature/chat_ai/presentation/view/chat_ai_screen.dart
 
-import 'package:fitness_app/core/base_state/base_state.dart'; // Import BaseState
-import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart'; // Corrected import
+import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart'; // Import GetIt
+import 'package:get_it/get_it.dart';
 
-// GetIt instance (assuming it's globally accessible as `getIt`)
 final getIt = GetIt.instance;
 
 class ChatAiScreen extends StatefulWidget {
@@ -32,16 +29,15 @@ class _ChatAiScreenState extends State<ChatAiScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<SmartCoachCubit>(), // Instantiate Cubit via GetIt
+      create: (_) => getIt<SmartCoachCubit>(),
       child: Builder(
         builder: (ctx) => Scaffold(
-          appBar: AppBar(title: const Text("Smart Coach")),
+          appBar: AppBar(title: const Text('Smart Coach')),
           body: Column(
             children: [
               Expanded(
                 child: BlocConsumer<SmartCoachCubit, SmartCoachChatState>(
                   listener: (context, state) {
-                    // Listen for errors from SmartCoachChatState's errorMessage
                     if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -49,12 +45,9 @@ class _ChatAiScreenState extends State<ChatAiScreen> {
                           backgroundColor: Colors.red,
                         ),
                       );
-                      // Clear the error message after showing it, so it doesn't reappear on rebuilds
-                      // You'd need to add a method to your cubit: `cubit.clearErrorMessage()`
-                      // For now, it will only show once per error.
+
                     }
 
-                    // Auto-scroll to bottom after state changes (new messages)
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (_scrollController.hasClients) {
                         _scrollController.animateTo(
@@ -65,16 +58,9 @@ class _ChatAiScreenState extends State<ChatAiScreen> {
                       }
                     });
 
-                    // You could also listen to `state.baseState` here for global UI changes
-                    // For example, if you had a global loading indicator or error dialog:
-                    // if (state.baseState is BaseLoadingState) {
-                    //   // Show global loading indicator
-                    // } else if (state.baseState is BaseErrorState) {
-                    //   // Show global error dialog
-                    // }
+
                   },
                   builder: (context, state) {
-                    // Use null-aware operator for messages list
                     final messages = state.messages ?? [];
 
                     return ListView.builder(
@@ -129,7 +115,7 @@ class _ChatAiScreenState extends State<ChatAiScreen> {
                 child: TextField(
                   controller: _controller,
                   decoration: InputDecoration(
-                    hintText: isLoading ? "Thinking..." : "Ask coach...",
+                    hintText: isLoading ? 'Thinking...' : 'Ask coach...',
                     border: const OutlineInputBorder(),
                   ),
                   enabled: !isLoading,
