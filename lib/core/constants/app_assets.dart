@@ -93,6 +93,9 @@ class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
   static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
   static const firstBg = 'assets/png/first_bg.png';
+  static const backGroundRobot = 'assets/svg/back_ground_robot.png';
+  static const robot = 'assets/svg/Robot.png';
+  static const menu = 'assets/svg/menu.png';
 
   static const secondBg = 'assets/png/second_bg.png';
   static const thirdBg = 'assets/png/third_bg.png';
