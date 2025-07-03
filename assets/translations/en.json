@@ -82,12 +82,16 @@
         "Done": "Done"
     },
     "Profile": {
-        "Profile": "Profile",
-        "EditProfile": "Edit profile",
-        "Change": "Change",
+        "ProfileTitle": "Profile",
+        "EditProfile": "Edit Profile",
         "ChangePassword": "Change Password",
-        "Update": "Update",
-        "ResetPassword": "Reset Password"
+        "SelectLanguage": "Select Language",
+        "LanguageName": "English",
+        "Security": "Security",
+        "PrivacyPolicy": "Privacy Policy",
+        "Help": "Help",
+        "Logout": "Logout",
+        "language": "English"
     },
     "Home": {
         "Home": "Home",

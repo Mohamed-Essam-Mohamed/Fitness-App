@@ -6,6 +6,7 @@ class SvgAsset {
   static const logout = 'assets/svg/logout.svg';
   static const lockSetting = 'assets/svg/lock_setting.svg';
   static const securityWarning = 'assets/svg/security_warning.svg';
+  static const arrowLeft = 'assets/svg/arrow-left.svg';
   static const lock = 'assets/svg/lock.svg';
   static const eye = 'assets/svg/eye.svg';
 

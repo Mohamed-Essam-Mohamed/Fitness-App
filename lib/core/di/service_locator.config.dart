@@ -95,6 +95,20 @@ import 'package:fitness_app/feature/meals/presentation/view_model/food_recommend
     as _i354;
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_cubit.dart'
     as _i379;
+import 'package:fitness_app/feature/profile/data/api/profile_retrofit_client.dart'
+    as _i63;
+import 'package:fitness_app/feature/profile/data/data_sources/remote/profile_remote_data_source.dart'
+    as _i50;
+import 'package:fitness_app/feature/profile/data/data_sources/remote/profile_remote_data_source_imp.dart'
+    as _i302;
+import 'package:fitness_app/feature/profile/data/repositories_impl/profile_repository_imp.dart'
+    as _i733;
+import 'package:fitness_app/feature/profile/domain/repositories/profile_repoistory.dart'
+    as _i448;
+import 'package:fitness_app/feature/profile/domain/use_cases/get_data_profile_use_case.dart'
+    as _i73;
+import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart'
+    as _i133;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -136,6 +150,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i921.HomeRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i657.MealsRetrofitClient>(
         () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i63.ProfileRetrofitClient>(
+        () => _i63.ProfileRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i478.ExerciseRemoteDataSource>(
         () => _i91.ExerciseDataSourceImpl(
               gh<_i58.ExerciseRetrofitClient>(),
@@ -145,6 +161,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
         ));
+    gh.factory<_i50.ProfileRemoteDataSource>(
+        () => _i302.ProfileRemoteDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i63.ProfileRetrofitClient>(),
+            ));
     gh.factory<_i546.RemoteMealsDataSource>(
         () => _i247.RemoteMealsDataSourceImp(
               gh<_i74.ApiManager>(),
@@ -178,6 +199,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i394.VerifyCodeUseCase>(),
           gh<_i1031.ChangePasswordUseCase>(),
         ));
+    gh.factory<_i448.ProfileRepository>(
+        () => _i733.ProfileRepositoryImp(gh<_i50.ProfileRemoteDataSource>()));
+    gh.factory<_i73.GetDataProfileUseCase>(
+        () => _i73.GetDataProfileUseCase(gh<_i448.ProfileRepository>()));
     gh.factory<_i545.HomeRepository>(
         () => _i963.HomeRepositoryImpl(gh<_i614.HomeDataSource>()));
     gh.factory<_i285.LoginCubit>(
@@ -190,6 +215,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
     gh.factory<_i354.FoodRecommendationCubit>(
         () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
+    gh.factory<_i133.ProfileCubit>(
+        () => _i133.ProfileCubit(gh<_i73.GetDataProfileUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(
