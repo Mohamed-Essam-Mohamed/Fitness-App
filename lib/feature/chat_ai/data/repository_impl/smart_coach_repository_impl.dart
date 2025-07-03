@@ -66,7 +66,7 @@ class SmartCoachRepositoryImpl implements SmartCoachRepository {
   Stream<String> getSmartCoachReplyStream(List<MessageEntity> chatHistory) {
     try {
       final geminiChatHistory = _mapMessagesToGeminiContent(chatHistory);
-      final geminiResponseStream = remoteDataSource.getSmartCoachResponseStream(geminiChatHistory);
+      final geminiResponseStream = remoteDataSource.getSmartCoachResponseStream(geminiChatHistory,  model: 'gemini-1.5-flash',  );
 
       return geminiResponseStream.map((candidate) {
         if (candidate == null || candidate.content == null) {

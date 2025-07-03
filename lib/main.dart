@@ -14,7 +14,8 @@ import 'package:fitness_app/core/utils/bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await dotenv.load();
-  Gemini.init(apiKey:'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM');
+  Gemini.init(apiKey:'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM',
+  );
   await EasyLocalization.ensureInitialized();
   configureDependencies();
 
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             title: AppValues.appTitle,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.chatBootScreen,
+            initialRoute: Routes.onboardingSmartCoachScreen,
           ),
         );
       },

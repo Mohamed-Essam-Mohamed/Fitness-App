@@ -11,9 +11,9 @@ class SmartCoachRemoteDataSourceImpl implements SmartCoachRemoteDataSource {
   final SmartCoachService _service;
 
   @override
-  Stream<Candidates?> getSmartCoachResponseStream(List<Content> chatHistory) {
+  Stream<Candidates?> getSmartCoachResponseStream(List<Content> chatHistory,{String? model}) {
     try {
-      final geminiStream = _service.streamChat(chatHistory);
+      final geminiStream = _service.streamChat(chatHistory,   model: model,);
 
       return geminiStream.handleError((error) {
         if (error is GeminiException) {

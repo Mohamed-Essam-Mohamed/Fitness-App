@@ -5,8 +5,8 @@ import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/app_section/view/app_sections.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/Register_view.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view/chat_boot_screen.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_caht_boot.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view/smart_coach_screen.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
 import 'package:fitness_app/feature/meals/presentation/entity/meal_details_screen_args.dart';
 import 'package:fitness_app/feature/meals/presentation/view/food_details_screen.dart';
 import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
@@ -60,12 +60,12 @@ class RouteGenerator {
       case Routes.foodScreen:
         return AnimationRoute(
             page:  FoodRecommendationScreen());
-      case Routes.chatBootScreen:
+      case Routes.smartCoachScreen:
         return AnimationRoute(
-            page:  ChatBootScreen());
-      case Routes.onboardingChatScreen:
+            page:  SmartCoachScreen());
+      case Routes.onboardingSmartCoachScreen:
         return AnimationRoute(
-            page:  OnboardingChatBootScreen());
+            page:  OnboardingSmartCoachScreen());
 
       case Routes.mealDetails:
         final mealDetailsScreenArgs = arg as MealDetailsScreenArgs;

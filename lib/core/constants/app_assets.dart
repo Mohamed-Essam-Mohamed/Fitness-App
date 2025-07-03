@@ -96,7 +96,6 @@ class ImageAsset {
   static const backGroundRobot = 'assets/svg/back_ground_robot.png';
   static const robot = 'assets/svg/Robot.png';
   static const menu = 'assets/svg/menu.png';
-
   static const secondBg = 'assets/png/second_bg.png';
   static const thirdBg = 'assets/png/third_bg.png';
   static const fourthBg = 'assets/png/fourth_bg.png';
@@ -114,7 +113,6 @@ class ImageAsset {
   static const back = 'assets/svg/Vector.svg';
   static const chickenMushroomsSoup = 'assets/png/chicken_mushrooms_soup.png';
   static const pizza = 'assets/png/pizza.png';
-
   static const backgroundExercise = 'assets/png/background_exercise.png';
   static const gymVector = 'assets/png/O15_34.png';
   static const fitnessVector = 'assets/png/O15_19.png';
