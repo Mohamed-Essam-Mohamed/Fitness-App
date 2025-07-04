@@ -219,8 +219,6 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i774.MealsRepository>(
         () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
-    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
-        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i209.DeleteConversationUseCase>(() =>
         _i209.DeleteConversationUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i399.FetchConversationSummariesUseCase>(() =>
@@ -228,6 +226,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i341.SmartCoachRepository>()));
     gh.factory<_i88.FetchMessagesUseCase>(
         () => _i88.FetchMessagesUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
+        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i994.SaveMessagesUseCase>(
         () => _i994.SaveMessagesUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i108.SetConversationTitleUseCase>(() =>
