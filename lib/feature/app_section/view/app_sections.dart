@@ -5,7 +5,9 @@ import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/smart_coach_screen.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
@@ -33,8 +35,11 @@ class AppSectionState extends State<AppSection> {
 
   final List<Widget> screens = [
     const HomeScreen(),
-    const SmartCoachScreen(),
-    const WorkoutsScreen(),
+  BlocProvider<SmartCoachCubit>(
+  create: (context) => serviceLocator.get<SmartCoachCubit>()..loadUserData(),
+  child: const OnboardingSmartCoachScreen(),
+  ),
+  const WorkoutsScreen(),
     const ProfileScreen(),
   ];
 

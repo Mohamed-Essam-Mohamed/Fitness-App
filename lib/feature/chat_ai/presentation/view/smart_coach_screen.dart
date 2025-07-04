@@ -19,12 +19,21 @@ class SmartCoachScreen extends StatefulWidget {
   @override
   State<SmartCoachScreen> createState() => _SmartCoachScreenState();
 }
-
+late SmartCoachCubit cubit;
 class _SmartCoachScreenState extends State<SmartCoachScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _showSidebar = false;
+  @override
+  void initState() {
+    super.initState();
+    cubit = serviceLocator.get<SmartCoachCubit>();
+    _loadUserData();
+  }
 
+  Future<void> _loadUserData() async {
+    await cubit.loadUserData();
+  }
   @override
   void dispose() {
     _controller.dispose();
@@ -52,193 +61,195 @@ class _SmartCoachScreenState extends State<SmartCoachScreen> {
           children: [
             Scaffold(
               backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset(
-                        ImageAsset.backGroundRobot,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              pop_widget(context, () {
-                                Navigator.of(context).pushNamed(Routes.appSection);
-                              }),
-                              Text(LocaleKeys.smart_coach_title.tr(),
-                                  style: AppTheme
-                                      .lightTheme.textTheme.titleLarge
-                                      ?.copyWith(color: Colors.white)),
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.menu, color: Colors.white),
-                                onPressed: () => setState(
-                                    () => _showSidebar = !_showSidebar),
-                              ),
-                            ],
-                          ),
+              body: Material(
+                child: SafeArea(
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.asset(
+                          ImageAsset.backGroundRobot,
+                          fit: BoxFit.fill,
                         ),
-                        Expanded(
-                          child: BlocConsumer<SmartCoachCubit,
-                              SmartCoachChatState>(
-                            listener: (context, state) {
-                              if (state.errorMessage != null &&
-                                  state.errorMessage!.isNotEmpty) {}
-
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                if (_scrollController.hasClients) {
-                                  _scrollController.animateTo(
-                                    _scrollController.position.maxScrollExtent +
-                                        100,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeOut,
-                                  );
-                                }
-                              });
-                            },
-                            builder: (context, state) {
-                              final messages = state.messages ?? [];
-
-                              return ListView.builder(
-                                controller: _scrollController,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                itemCount: messages.length,
-                                itemBuilder: (context, index) {
-                                  final message = messages[index];
-                                  final isBot = message.sender == Sender.model;
-                                  final text = message.text;
-
-                                  return Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 8),
-                                    child: Row(
-                                      mainAxisAlignment: isBot
-                                          ? MainAxisAlignment.start
-                                          : MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        if (isBot)
-                                          const CircleAvatar(
-                                            radius: 25,
-                                            backgroundImage:
-                                                AssetImage(ImageAsset.logo),
-                                            backgroundColor: Colors.transparent,
-                                          ),
-                                        if (!isBot) const SizedBox(width: 40),
-                                        Flexible(
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 15),
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            decoration: BoxDecoration(
-                                              color: isBot
-                                                  ? AppColors.gray
-                                                      .withOpacity(0.07)
-                                                  : AppColors.orange
-                                                      .withOpacity(0.6),
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    const Radius.circular(20),
-                                                bottomRight:
-                                                    const Radius.circular(20),
-                                                topLeft: Radius.circular(
-                                                    isBot ? 0 : 20),
-                                                topRight: Radius.circular(
-                                                    isBot ? 20 : 0),
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                pop_widget(context, () {
+                                  Navigator.of(context).pop();
+                                }),
+                                Text(LocaleKeys.smart_coach_title.tr(),
+                                    style: AppTheme
+                                        .lightTheme.textTheme.titleLarge
+                                        ?.copyWith(color: Colors.white)),
+                                IconButton(
+                                  icon:
+                                      const Icon(Icons.menu, color: Colors.white),
+                                  onPressed: () => setState(
+                                      () => _showSidebar = !_showSidebar),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: BlocConsumer<SmartCoachCubit,
+                                SmartCoachChatState>(
+                              listener: (context, state) {
+                                if (state.errorMessage != null &&
+                                    state.errorMessage!.isNotEmpty) {}
+                
+                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                  if (_scrollController.hasClients) {
+                                    _scrollController.animateTo(
+                                      _scrollController.position.maxScrollExtent +
+                                          100,
+                                      duration: const Duration(milliseconds: 300),
+                                      curve: Curves.easeOut,
+                                    );
+                                  }
+                                });
+                              },
+                              builder: (context, state) {
+                                final messages = state.messages ?? [];
+                
+                                return ListView.builder(
+                                  controller: _scrollController,
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 12),
+                                  itemCount: messages.length,
+                                  itemBuilder: (context, index) {
+                                    final message = messages[index];
+                                    final isBot = message.sender == Sender.model;
+                                    final text = message.text;
+                
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 8),
+                                      child: Row(
+                                        mainAxisAlignment: isBot
+                                            ? MainAxisAlignment.start
+                                            : MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          if (isBot)
+                                            const CircleAvatar(
+                                              radius: 25,
+                                              backgroundImage:
+                                                  AssetImage(ImageAsset.ellipse),
+                                              backgroundColor: Colors.transparent,
+                                            ),
+                                          if (!isBot) const SizedBox(width: 40),
+                                          Flexible(
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20, vertical: 15),
+                                              margin: const EdgeInsets.symmetric(
+                                                  horizontal: 8),
+                                              decoration: BoxDecoration(
+                                                color: isBot
+                                                    ? AppColors.gray
+                                                        .withOpacity(0.07)
+                                                    : AppColors.orange
+                                                        .withOpacity(0.6),
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      const Radius.circular(20),
+                                                  bottomRight:
+                                                      const Radius.circular(20),
+                                                  topLeft: Radius.circular(
+                                                      isBot ? 0 : 20),
+                                                  topRight: Radius.circular(
+                                                      isBot ? 20 : 0),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                text,
+                                                style: const TextStyle(
+                                                    color: Colors.white),
                                               ),
                                             ),
-                                            child: Text(
-                                              text,
-                                              style: const TextStyle(
-                                                  color: Colors.white),
+                                          ),
+                                          if (!isBot)
+                                             CircleAvatar(
+                                              radius: 25,
+                                              backgroundImage:
+                                                  NetworkImage(cubit.state.photo.toString()),
+                                              backgroundColor: Colors.transparent,
                                             ),
-                                          ),
+                                          if (isBot) const SizedBox(width: 40),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                          BlocBuilder<SmartCoachCubit, SmartCoachChatState>(
+                            builder: (context, state) {
+                              final bool isLoading = state.isLoading;
+                
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 12),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.4),
+                                          borderRadius: BorderRadius.circular(25),
                                         ),
-                                        if (!isBot)
-                                          const CircleAvatar(
-                                            radius: 25,
-                                            backgroundImage:
-                                                AssetImage(ImageAsset.logo),
-                                            backgroundColor: Colors.transparent,
+                                        child: TextField(
+                                          controller: _controller,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: isLoading
+                                                ? LocaleKeys.smart_coach_ai_typing.tr()
+                                                : LocaleKeys.smart_coach_type_message.tr(),
+                                            hintStyle: const TextStyle(
+                                                color: Colors.white54),
+                                            border: InputBorder.none,
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 20, vertical: 15),
                                           ),
-                                        if (isBot) const SizedBox(width: 40),
-                                      ],
+                                          enabled: !isLoading,
+                                          onSubmitted: (_) => _sendMessage(ctx),
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
+                                    const SizedBox(width: 10),
+                                    IconButton(
+                                      icon: isLoading
+                                          ? const SizedBox(
+                                              width: 24,
+                                              height: 24,
+                                              child: CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                  color: Colors.white),
+                                            )
+                                          : const Icon(Icons.send,
+                                              color: Colors.white),
+                                      onPressed: isLoading
+                                          ? null
+                                          : () => _sendMessage(ctx),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
-                          ),
-                        ),
-                        BlocBuilder<SmartCoachCubit, SmartCoachChatState>(
-                          builder: (context, state) {
-                            final bool isLoading = state.isLoading;
-
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 12),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.4),
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: TextField(
-                                        controller: _controller,
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                        decoration: InputDecoration(
-                                          hintText: isLoading
-                                              ? LocaleKeys.smart_coach_ai_typing.tr()
-                                              : LocaleKeys.smart_coach_type_message.tr(),
-                                          hintStyle: const TextStyle(
-                                              color: Colors.white54),
-                                          border: InputBorder.none,
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 20, vertical: 15),
-                                        ),
-                                        enabled: !isLoading,
-                                        onSubmitted: (_) => _sendMessage(ctx),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  IconButton(
-                                    icon: isLoading
-                                        ? const SizedBox(
-                                            width: 24,
-                                            height: 24,
-                                            child: CircularProgressIndicator(
-                                                strokeWidth: 2,
-                                                color: Colors.white),
-                                          )
-                                        : const Icon(Icons.send,
-                                            color: Colors.white),
-                                    onPressed: isLoading
-                                        ? null
-                                        : () => _sendMessage(ctx),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        )
-                      ],
-                    ),
-                  ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

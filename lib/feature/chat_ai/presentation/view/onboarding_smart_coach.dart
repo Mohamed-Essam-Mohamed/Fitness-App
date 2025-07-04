@@ -2,17 +2,35 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_state.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OnboardingSmartCoachScreen extends StatelessWidget {
+class OnboardingSmartCoachScreen extends StatefulWidget {
   const OnboardingSmartCoachScreen({super.key});
 
   @override
+  State<OnboardingSmartCoachScreen> createState() => _OnboardingSmartCoachScreenState();
+}
+late SmartCoachCubit cubit;
+class _OnboardingSmartCoachScreenState extends State<OnboardingSmartCoachScreen> {
+@override
+  void initState() {
+    super.initState();
+    cubit = serviceLocator.get<SmartCoachCubit>();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    await cubit.loadUserData();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -35,10 +53,25 @@ class OnboardingSmartCoachScreen extends StatelessWidget {
                     }),
                     Column(
                       children: [
-                        Text(
-                          LocaleKeys.chatBoot_Hi.tr(),
-                          style: AppTheme.lightTheme.textTheme.titleSmall!
-                              .copyWith(fontWeight: FontWeight.w500),
+                        Row(
+                          children: [
+                            Text(
+                              "${LocaleKeys.chatBoot_Hi.tr()}  ",
+                              style: AppTheme.lightTheme.textTheme.titleSmall!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+    BlocBuilder<SmartCoachCubit, SmartCoachChatState>(
+    builder: (context, state) {
+                               return  Text(
+                              cubit.state.firstName.toString(),
+                                style: AppTheme.lightTheme.textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.w500),
+    );
+    },
+    ),
+
+
+                          ],
                         ),
                         Text(
                           LocaleKeys.chatBoot_IamYourSmartCoach.tr(),
@@ -53,10 +86,10 @@ class OnboardingSmartCoachScreen extends StatelessWidget {
               ),
               Image.asset(
                 ImageAsset.robot,
-                height: context.hp(55),
+                height: context.hp(30),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 70),
                 child: SizedBox(
                     width: double.infinity,
                     height: context.hp(25),

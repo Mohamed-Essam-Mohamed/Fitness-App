@@ -120,6 +120,8 @@ class ImageAsset {
   static const yogaVector = 'assets/png/O15_25.png';
   static const aerobicsVector = 'assets/png/O15_24.png';
   static const trainerVector = 'assets/png/O15_9.png';
+  static const ellipse= "assets/png/Ellipse.png";
+
 }
 
 class LottieAsset {}
