@@ -16,4 +16,5 @@ abstract class ApiConstants {
   static const String getExercisesByMuscleDifficulty = 'exercises/by-muscle-difficulty';
   static const String primeMoverMuscleId = 'primeMoverMuscleId';
   static const String difficultyLevelId = 'difficultyLevelId';
+  static const String getDataProfile = 'auth/profile-data';
 }

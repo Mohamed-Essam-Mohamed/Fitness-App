@@ -82,12 +82,16 @@
         "Done": "تم"
     },
     "Profile": {
-        "Profile": "الملف الشخصي",
+        "ProfileTitle": "الملف الشخصي",
         "EditProfile": "تعديل الملف الشخصي",
-        "Change": "تغيير",
         "ChangePassword": "تغيير كلمة المرور",
-        "ResetPassword": "تعديل كلمة المرور",
-        "Update": "تحديث"
+        "SelectLanguage": "اختيار اللغة",
+        "LanguageName": "الإنجليزية",
+        "Security": "الأمان",
+        "PrivacyPolicy": "سياسة الخصوصية",
+        "Help": "المساعدة",
+        "Logout": "تسجيل الخروج",
+        "language" : "عربي"
     },
     "Home": {
         "Home": "الرئيسية",
