@@ -6,12 +6,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 
-class GetSmartCoachResponseUseCase {
+class SaveMessagesUseCase {
 
-  GetSmartCoachResponseUseCase(this._repository);
+  SaveMessagesUseCase(this._repository);
   final SmartCoachRepository _repository;
 
-  Stream<String> call(List<MessageEntity> chatHistory) {
-    return _repository.getSmartCoachReplyStream(chatHistory);
+  Future<void> call(String conversationId, MessageEntity message) {
+    return _repository.saveMessage(conversationId, message);
   }
 }

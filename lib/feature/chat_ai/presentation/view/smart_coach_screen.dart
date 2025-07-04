@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view/conversation_menu.dart';
+import 'package:fitness_app/feature/chat_ai/presentation/view/components/previous_conversation_menu.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
@@ -70,7 +72,7 @@ class _SmartCoachScreenState extends State<SmartCoachScreen> {
                               pop_widget(context, () {
                                 Navigator.of(context).pushNamed(Routes.appSection);
                               }),
-                              Text('Smart Coach',
+                              Text(LocaleKeys.smart_coach_title.tr(),
                                   style: AppTheme
                                       .lightTheme.textTheme.titleLarge
                                       ?.copyWith(color: Colors.white)),
@@ -199,8 +201,8 @@ class _SmartCoachScreenState extends State<SmartCoachScreen> {
                                             color: Colors.white),
                                         decoration: InputDecoration(
                                           hintText: isLoading
-                                              ? 'AI is typing...'
-                                              : 'Type your message...',
+                                              ? LocaleKeys.smart_coach_ai_typing.tr()
+                                              : LocaleKeys.smart_coach_type_message.tr(),
                                           hintStyle: const TextStyle(
                                               color: Colors.white54),
                                           border: InputBorder.none,

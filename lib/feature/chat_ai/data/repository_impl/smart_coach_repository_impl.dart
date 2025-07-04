@@ -1,37 +1,11 @@
-// import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart';
-// import 'package:fitness_app/feature/chat_ai/domain/repository/smart_coach_repository.dart';
-// import 'package:injectable/injectable.dart';
-//
-// @Injectable(as: SmartCoachRepository)
-// class SmartCoachRepositoryImpl implements SmartCoachRepository {
-//   SmartCoachRepositoryImpl(this._remoteSmartCoachDataSource);
-//   final RemoteSmartCoachDataSource _remoteSmartCoachDataSource;
-//
-// }
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/feature/chat_ai/data/api/gemini_custom_exception.dart';
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart';
 import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart';
+import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 
-//
-// class SmartCoachRepositoryImpl implements SmartCoachRepository {
-//   SmartCoachRepositoryImpl(this.service);
-//   final SmartCoachService service;
-//
-//
-//   //
-//   // @override
-//   // Future<String> askSmartCoach(String message) =>
-//   //     service.singleTurnAsk(message);
-//   //
-//   // @override
-//   // Stream<Candidates?> askSmartCoachStream(String message) =>
-//   //     service.askStream(message);
-//
-//   @override
-//   Stream<Candidates?> askSmartCoachStream2(String message, List<Content> history) =>
-//     service.askStream2(message,history);
-// }
 
 
 import 'package:fitness_app/feature/chat_ai/domain/repository/smart_coach_repository.dart';
@@ -55,7 +29,7 @@ class SmartCoachRepositoryImpl implements SmartCoachRepository {
       }
 
       geminiContent.add(Content(
-        role: msg.sender == Sender.user ? 'user' : 'model',
+        role: msg.sender == Sender.user ? AppValues.user : AppValues.model,
         parts: [Part.text(text)],
       ));
     }
@@ -66,7 +40,7 @@ class SmartCoachRepositoryImpl implements SmartCoachRepository {
   Stream<String> getSmartCoachReplyStream(List<MessageEntity> chatHistory) {
     try {
       final geminiChatHistory = _mapMessagesToGeminiContent(chatHistory);
-      final geminiResponseStream = remoteDataSource.getSmartCoachResponseStream(geminiChatHistory,  model: 'gemini-1.5-flash',  );
+      final geminiResponseStream = remoteDataSource.getSmartCoachResponseStream(geminiChatHistory,  model: AppValues.geminiModel ,  );
 
       return geminiResponseStream.map((candidate) {
         if (candidate == null || candidate.content == null) {
@@ -86,12 +60,42 @@ class SmartCoachRepositoryImpl implements SmartCoachRepository {
           throw error;
         }
 
-        throw ServerException(message: 'An unexpected error occurred in repository: $error');
+        throw ServerException(message: ' ${LocaleKeys.smart_coach_unexpected_error_repo.tr()} $error');
       });
     } on ServerException {
       rethrow;
     } catch (e) {
-      throw ServerException(message: 'Failed to process chat request: $e');
+      throw ServerException(message: '${LocaleKeys.smart_coach_chat_request_failed.tr()} $e');
     }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchConversationSummaries() {
+    return remoteDataSource.fetchConversationSummaries();
+  }
+
+  @override
+  Future<List<MessageEntity>> fetchMessages(String conversationId) {
+    return remoteDataSource.fetchMessages(conversationId);
+  }
+
+  @override
+  Future<void> deleteConversation(String conversationId) {
+    return remoteDataSource.deleteConversation(conversationId);
+  }
+
+  @override
+  Future<String> startNewConversation() {
+    return remoteDataSource.startNewConversation();
+  }
+
+  @override
+  Future<void> saveMessage(String conversationId, MessageEntity message) {
+    return remoteDataSource.saveMessage(conversationId, message);
+  }
+
+  @override
+  Future<void> setConversationTitle(String conversationId, String title) {
+    return remoteDataSource.setConversationTitle(conversationId, title);
   }
 }

@@ -56,5 +56,9 @@ abstract class AppValues {
 
   static const String promptFallback = 'My apologies, but my expertise is exclusively focused on fitness, health, and nutrition. How can I assist you with your wellness journey today?';
 
+  static const String geminiModel = 'gemini-1.5-flash';
+  static const String user = 'user';
+  static const String model = 'model';
+
 
 }

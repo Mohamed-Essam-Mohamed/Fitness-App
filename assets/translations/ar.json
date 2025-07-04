@@ -176,7 +176,30 @@
         "SmartCoach": "المدرب الزكي"
 
     },
-    "Ok": "موافق",
+
+    "smart_coach": {
+        "title": "المدرب الذكي",
+        "previous_conversations": "المحادثات السابقة",
+        "delete_chat_title": "حذف المحادثة",
+        "delete_chat_message": "هل أنت متأكد أنك تريد حذف هذه المحادثة؟",
+        "cancel": "إلغاء",
+        "delete": "حذف",
+        "loading": "جاري التحميل...",
+        "untitled_conversation": "محادثة بدون عنوان",
+        "type_message": "اكتب رسالتك...",
+        "ai_typing": "الذكاء الاصطناعي يكتب...",
+        "unknown_error": "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.",
+        "too_many_requests": "يواجه FitGenius AI حالياً عددًا كبيرًا من الطلبات. يرجى المحاولة لاحقاً.",
+        "api_error": "حدث خطأ في واجهة برمجة التطبيقات: {error}.",
+        "conversation": "محادثة",
+        "unexpected_error_repo": "حدث خطأ غير متوقع في المستودع:",
+        "chat_request_failed": "فشل في معالجة طلب الدردشة:",
+        "chat_stream_failed": "فشل في بدء تدفق المحادثة:",
+        "firebase_error": "خطأ في Firebase"
+    },
+
+
+"Ok": "موافق",
     "Loading": "جارٍ التحميل...",
     "Retry": "إعادة المحاولة"
 }
