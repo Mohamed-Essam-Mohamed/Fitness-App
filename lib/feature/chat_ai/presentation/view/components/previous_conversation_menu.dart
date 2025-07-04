@@ -32,7 +32,7 @@ class _PreviousConversationsMenuState extends State<PreviousConversationsMenu> {
         final cubit = context.read<SmartCoachCubit>();
         final conversations = cubit.conversationSummaries;
 
-        return Container(
+        return Material(child: Container(
             decoration: const BoxDecoration(
                 color: Color(0xEE242424),
                 borderRadius: BorderRadius.only(
@@ -122,7 +122,7 @@ class _PreviousConversationsMenuState extends State<PreviousConversationsMenu> {
                         },
                       ),
               )
-            ])));
+            ]))));
       },
     );
   }
