@@ -76,13 +76,62 @@ class FirebaseChatService {
         .orderBy('timestamp', descending: true)
         .get();
 
-    return snapshot.docs
-        .map((doc) => {
-      'id': doc.id,
-      'timestamp': doc['timestamp'],
-      'title': doc.data()['title'] ?? 'Untitled',
-    })
-        .toList();
+    List<Map<String, dynamic>> summaries = [];
+
+    for (var doc in snapshot.docs) {
+      final convoId = doc.id;
+
+      // Fetch the first user message
+      final messageSnapshot = await _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('conversations')
+          .doc(convoId)
+          .collection('messages')
+          .orderBy('timestamp')
+          .limit(1)
+          .get();
+
+      String title = 'Untitled';
+      if (messageSnapshot.docs.isNotEmpty) {
+        final messageData = messageSnapshot.docs.first.data();
+        if (messageData['sender'] == 'user' && messageData['text'] != null) {
+          title = messageData['text'];
+        }
+      }
+
+      summaries.add({
+        'id': convoId,
+        'timestamp': doc['timestamp'],
+        'text': title,
+      });
+    }
+
+    return summaries;
   }
+
+  Future<void> deleteConversation(String conversationId) async {
+    final uid = await userId;
+
+    final messagesRef = _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('conversations')
+        .doc(conversationId)
+        .collection('messages');
+
+    final messagesSnapshot = await messagesRef.get();
+    for (final doc in messagesSnapshot.docs) {
+      await doc.reference.delete();
+    }
+
+    await _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('conversations')
+        .doc(conversationId)
+        .delete();
+  }
+
 }
 
