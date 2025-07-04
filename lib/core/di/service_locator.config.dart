@@ -39,6 +39,8 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
     as _i285;
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
     as _i176;
+import 'package:fitness_app/feature/chat_ai/data/api/firesbase_services.dart'
+    as _i974;
 import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart'
     as _i528;
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart'
@@ -127,6 +129,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final loggerModule = _$LoggerModule();
     final dioModule = _$DioModule();
+    gh.factory<_i974.FirebaseChatService>(() => _i974.FirebaseChatService());
     gh.singleton<_i74.ApiManager>(() => _i74.ApiManager());
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
@@ -199,8 +202,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i394.VerifyCodeUseCase>(),
           gh<_i1031.ChangePasswordUseCase>(),
         ));
-    gh.factory<_i286.SmartCoachCubit>(
-        () => _i286.SmartCoachCubit(gh<_i992.GetSmartCoachResponseUseCase>()));
+    gh.factory<_i286.SmartCoachCubit>(() => _i286.SmartCoachCubit(
+          gh<_i992.GetSmartCoachResponseUseCase>(),
+          gh<_i974.FirebaseChatService>(),
+        ));
     gh.factory<_i545.HomeRepository>(
         () => _i963.HomeRepositoryImpl(gh<_i614.HomeDataSource>()));
     gh.factory<_i285.LoginCubit>(
