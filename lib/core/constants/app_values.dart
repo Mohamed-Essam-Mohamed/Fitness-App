@@ -32,22 +32,22 @@ abstract class AppValues {
   static const String stateUser = 'StateUser';
   static const String token = 'token';
   static const String isOnboardingCompleted = 'isOnboardingCompleted';
-  static const String isLoggedIn = "isLoggedIn";
-  static const String id = "id";
-  static const String firstName = "firstName";
-  static const String lastName = "lastName";
-  static const String email = "email";
-  static const String gender = "gender";
-  static const String age = "age";
-  static const String weight = "weight";
-  static const String height = "height";
-  static const String activityLevel = "activityLevel";
-  static const String goal = "goal";
-  static const String photo = "photo";
-  static const String createdAt = "createdAt";
-  static const String beginnerId="67c797e226895f87ce0aa94b";
-  static const String advanced="67c797e226895f87ce0aa94e";
-  static const String intermediateId="67c797e226895f87ce0aa94c";
+  static const String isLoggedIn = 'isLoggedIn';
+  static const String id = 'id';
+  static const String firstName = 'firstName';
+  static const String lastName = 'lastName';
+  static const String email = 'email';
+  static const String gender = 'gender';
+  static const String age = 'age';
+  static const String weight = 'weight';
+  static const String height = 'height';
+  static const String activityLevel = 'activityLevel';
+  static const String goal = 'goal';
+  static const String photo = 'photo';
+  static const String createdAt = 'createdAt';
+  static const String beginnerId='67c797e226895f87ce0aa94b';
+  static const String advanced='67c797e226895f87ce0aa94e';
+  static const String intermediateId='67c797e226895f87ce0aa94c';
 
 
   // Smart-Coach
@@ -57,6 +57,7 @@ abstract class AppValues {
   static const String promptFallback = 'My apologies, but my expertise is exclusively focused on fitness, health, and nutrition. How can I assist you with your wellness journey today?';
 
   static const String geminiModel = 'gemini-1.5-flash';
+  static const String apiKey = 'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM';
   static const String user = 'user';
   static const String model = 'model';
 

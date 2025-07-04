@@ -19,7 +19,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Gemini.init(apiKey:'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM',
+  Gemini.init(apiKey:AppValues.apiKey,
   );
   await EasyLocalization.ensureInitialized();
   configureDependencies();

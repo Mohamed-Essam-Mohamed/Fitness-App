@@ -7,10 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../core/base_state/base_state.dart';
-import '../../../../../core/network/common/api_result.dart';
-import '../../../domain/entities/login/request/login_request_entity.dart';
-import '../../../domain/use_cases/login_use_case.dart';
+import 'package:fitness_app/core/base_state/base_state.dart';
+import 'package:fitness_app/core/network/common/api_result.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/request/login_request_entity.dart';
+import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
@@ -21,8 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController(text: "amira22@gmail.com");
-  final TextEditingController passwordController = TextEditingController(text: "Amira@123");
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   void doIntent(LoginAction action) {
     switch (action) {
