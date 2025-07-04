@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
-import 'package:fitness_app/core/constants/app_colors.dart';
+
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dialogs/app_toasts.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
@@ -12,10 +12,11 @@ import 'package:fitness_app/feature/auth/presentation/view_model/forget_password
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/logo_app_widget.dart';
+import 'package:fitness_app/feature/auth/presentation/widgets/text_form_widget.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:toastification/toastification.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -42,13 +43,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 }
                 if (state.isChangeSuccess) {
                   Navigator.of(context).pushNamed(Routes.login);
-                  Future.delayed(const Duration(milliseconds: 500), () {  AppToast.showToast(
-                    context: context,
-                    title: '',
-                    description: "password changed Successfuly",
-                    type: ToastificationType.success,
-                  );});
-       //           context.pop();
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    AppToast.showToast(
+                      context: context,
+                      title: '',
+                      description: "password changed Successfuly",
+                      type: ToastificationType.success,
+                    );
+                  });
+                  //           context.pop();
                   //!  navigate to home
                 }
                 if (state.isChangeFailure) {
@@ -160,71 +163,5 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     _newPasswordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
-  }
-}
-
-class TextFormWidget extends StatefulWidget {
-  TextFormWidget({
-    super.key,
-    this.controller,
-    this.validator,
-    this.hintText,
-    required this.suffixIcon,
-    required this.prefixIcon,
-    this.obscureText = true,
-  });
-  final TextEditingController? controller;
-  final String? Function(String?)? validator;
-  final String? hintText;
-  final String suffixIcon;
-  final String prefixIcon;
-  bool obscureText;
-
-  @override
-  State<TextFormWidget> createState() => _TextFormWidgetState();
-}
-
-class _TextFormWidgetState extends State<TextFormWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      validator: widget.validator,
-      obscureText: widget.obscureText,
-      style: Theme.of(context).textTheme.titleSmall,
-      decoration: InputDecoration(
-        suffixIcon: InkWell(
-          onTap: () {
-            setState(() {
-              widget.obscureText = !widget.obscureText;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 8),
-            child: SizedBox(
-              width: 25,
-              height: 25,
-              child: SvgPicture.asset(
-                widget.suffixIcon,
-                fit: BoxFit.contain,
-                color: widget.obscureText ? null : AppColors.redOrange,
-              ),
-            ),
-          ),
-        ),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 8),
-          child: SizedBox(
-            width: 25,
-            height: 25,
-            child: SvgPicture.asset(
-              widget.prefixIcon,
-              fit: BoxFit.contain, // مهم جدًا
-            ),
-          ),
-        ),
-        hintText: widget.hintText,
-      ),
-    );
   }
 }

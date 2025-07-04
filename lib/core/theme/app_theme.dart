@@ -139,7 +139,7 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       errorStyle: const TextStyle(color: AppColors.red, fontSize: 12),
-      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
       iconColor: AppColors.lightPink,
       hintStyle: TextStyle(
         color: AppColors.gray[AppColors.colorCode10],

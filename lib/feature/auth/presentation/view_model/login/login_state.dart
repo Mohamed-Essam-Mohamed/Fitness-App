@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../../../../../core/base_state/base_state.dart';
+import 'package:fitness_app/core/base_state/base_state.dart';
 
 class LoginState extends Equatable {
   const LoginState({

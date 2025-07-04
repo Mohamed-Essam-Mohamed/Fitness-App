@@ -4,14 +4,15 @@ import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ContainerBlurWidget extends StatelessWidget {
-  const ContainerBlurWidget({super.key, required this.child});
+  const ContainerBlurWidget({super.key, required this.child, this.padding});
   final Widget child;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+        padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
         decoration: BoxDecoration(
           color: AppColors.black.withOpacity(0.01),
           gradient: LinearGradient(

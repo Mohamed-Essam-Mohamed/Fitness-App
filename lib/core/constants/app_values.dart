@@ -17,7 +17,6 @@ abstract class AppValues {
   static const String completedState = 'completed';
   static const String canceledState = 'canceled';
 
-
   static const String nutritionEnergy = 'Energy';
   static const String nutritionProtein = 'Protein';
   static const String nutritionCarbs = 'Carbs';
@@ -45,21 +44,35 @@ abstract class AppValues {
   static const String goal = 'goal';
   static const String photo = 'photo';
   static const String createdAt = 'createdAt';
-  static const String beginnerId='67c797e226895f87ce0aa94b';
-  static const String advanced='67c797e226895f87ce0aa94e';
-  static const String intermediateId='67c797e226895f87ce0aa94c';
-
+  static const String beginnerId = '67c797e226895f87ce0aa94b';
+  static const String advanced = '67c797e226895f87ce0aa94e';
+  static const String intermediateId = '67c797e226895f87ce0aa94c';
+  static const String isLoggedIn = 'isLoggedIn';
+  static const String id = 'id';
+  static const String firstName = 'firstName';
+  static const String lastName = 'lastName';
+  static const String email = 'email';
+  static const String gender = 'gender';
+  static const String age = 'age';
+  static const String weight = 'weight';
+  static const String height = 'height';
+  static const String activityLevel = 'activityLevel';
+  static const String goal = 'goal';
+  static const String photo = 'photo';
+  static const String createdAt = 'createdAt';
+  static const String beginnerId = '67c797e226895f87ce0aa94b';
+  static const String advanced = '67c797e226895f87ce0aa94e';
+  static const String intermediateId = '67c797e226895f87ce0aa94c';
 
   // Smart-Coach
   static const String promptPrefix =
       "You are 'FitGenius AI', an advanced virtual fitness and nutrition coach. Your core purpose is to provide expert, evidence-based advice exclusively on topics related to: fitness routines (strength, cardio, flexibility), exercise techniques, general health optimization (sleep, stress, hydration pertinent to fitness), injury prevention (non-diagnostic), healthy eating plans, specific diet recommendations (e.g., keto, vegan, Mediterranean, high-protein), macro/micronutrient guidance, and healthy recipe ideas. Crucially, keep your responses to a few sentences – typically 2-4 sentences, unless more detail is specifically requested by the user. Maintain a supportive, encouraging, and highly knowledgeable tone. If a user asks a question that is outside these specific categories (e.g., general knowledge, current events, personal opinions, financial advice, medical diagnoses, or any topic unrelated to fitness and nutrition), you must politely but firmly respond with: 'My apologies, but my expertise is exclusively focused on fitness, health, and nutrition. How can I assist you with your wellness journey today?' Do not speculate or attempt to answer questions outside your domain. Always prioritize user safety and responsible health advice; for medical concerns, always advise consulting a healthcare professional. ";
 
-  static const String promptFallback = 'My apologies, but my expertise is exclusively focused on fitness, health, and nutrition. How can I assist you with your wellness journey today?';
+  static const String promptFallback =
+      'My apologies, but my expertise is exclusively focused on fitness, health, and nutrition. How can I assist you with your wellness journey today?';
 
   static const String geminiModel = 'gemini-1.5-flash';
   static const String apiKey = 'AIzaSyB1lsgpB1ed0ZQSMYUcKsMn5SR_EyPV1ZM';
   static const String user = 'user';
   static const String model = 'model';
-
-
 }

@@ -25,57 +25,48 @@ class _BackgroundAppState extends State<BackgroundApp> {
   @override
   void initState() {
     super.initState();
-    // _startSwitcher();
+    _startSwitcher();
   }
 
-  // void _startSwitcher() {
-  //   Future.delayed(const Duration(seconds: 6), _switchImage);
-  // }
+  void _startSwitcher() {
+    Future.delayed(const Duration(seconds: 6), _switchImage);
+  }
 
-  // void _switchImage() {
-  //   setState(() => _visible = false);
+  void _switchImage() {
+    setState(() => _visible = false);
 
-  //   Future.delayed(const Duration(milliseconds: 500), () {
-  //     setState(() {
-  //       _currentIndex = (_currentIndex + 1) % _images.length;
-  //       _visible = true;
-  //     });
-  //     _startSwitcher();
-  //   });
-  // }
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % _images.length;
+        _visible = true;
+      });
+      _startSwitcher();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        // AnimatedOpacity(
-        //   opacity: _visible ? 1.0 : 0.0,
-        //   duration: const Duration(seconds: ),
-        //   child: Image.asset(
-        //     _images[_currentIndex],
-        //     fit: BoxFit.cover,
-        //     filterQuality: FilterQuality.high,
-        //     cacheHeight: MediaQuery.of(context).size.height.toInt(),
-        //     cacheWidth: MediaQuery.of(context).size.width.toInt(),
-        //   ),
-        // ),
-        Image.asset(
-          _images[0],
-          fit: BoxFit.cover,
-          // filterQuality: FilterQuality.high,
-          // cacheHeight: MediaQuery.of(context).size.height.toInt(),
-          // cacheWidth: MediaQuery.of(context).size.width.toInt(),
+        AnimatedOpacity(
+          opacity: _visible ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.fastOutSlowIn,
+          child: Image.asset(
+            _images[_currentIndex],
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.high,
+            cacheHeight: MediaQuery.of(context).size.height.toInt(),
+            cacheWidth: MediaQuery.of(context).size.width.toInt(),
+          ),
         ),
-
-        /// Positioned.fill(
-        ///   child: BackdropFilter(
-        ///     filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Reduced blur
-        ///     child: Container(
-        ///       color: Colors.black.withOpacity(0.05),
-        ///     ),
-        ///   ),
-        /// ),
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 8),
+            child: const SizedBox(),
+          ),
+        ),
         Positioned.fill(child: widget.child),
       ],
     );
