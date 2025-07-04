@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_colors.dart';
+import 'package:fitness_app/core/constants/app_colors.dart';
 
-InkWell pop_widget(BuildContext context, void Function() onTap) {
+InkWell popWidget(BuildContext context, void Function() onTap) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -17,8 +17,12 @@ InkWell pop_widget(BuildContext context, void Function() onTap) {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("|", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
-              Text("<", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Colors.white)),
+              Text("|",
+                  style: TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
+              Text("<",
+                  style: TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w900, color: Colors.white)),
             ],
           ),
         ),

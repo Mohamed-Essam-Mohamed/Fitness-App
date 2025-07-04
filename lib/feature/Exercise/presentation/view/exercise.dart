@@ -46,9 +46,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     final difficultyId = difficultyMap[selectedDifficulty]!;
 
     await cubit.fetchExercises(
-      muscleId: widget.primeMoverId.isEmpty
-          ? "67c8499726895f87ce0aa9be"
-          : widget.primeMoverId,
+      muscleId:
+          widget.primeMoverId.isEmpty ? "67c8499726895f87ce0aa9be" : widget.primeMoverId,
       difficultyId: difficultyId,
     );
 
@@ -61,7 +60,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +103,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                               height: context.hp(20),
                               color: Colors.grey,
                               alignment: Alignment.center,
-                              child: const Icon(Icons.image_not_supported, color: Colors.white),
+                              child: const Icon(Icons.image_not_supported,
+                                  color: Colors.white),
                             ),
                           ),
                           Positioned.fill(
@@ -140,19 +139,21 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                       backgroundColor: Colors.black,
                                       body: SafeArea(
                                         child: Center(
-                                          child: CustomYoutubePlayer(videoUrl: state.currentVideoUrl!),
+                                          child: CustomYoutubePlayer(
+                                              videoUrl: state.currentVideoUrl!),
                                         ),
                                       ),
                                     ),
                                   ),
                                 );
                               },
-                              child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange),
+                              child: const Icon(Icons.play_arrow,
+                                  size: 50, color: AppColors.orange),
                             ),
                           Positioned(
                             left: 15,
                             top: 15,
-                            child: pop_widget(context, () => Navigator.of(context).pop()),
+                            child: popWidget(context, () => Navigator.of(context).pop()),
                           ),
                         ],
                       ),
@@ -169,11 +170,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: difficultyMap.length,
-                    onPageChanged: (index) async{
+                    onPageChanged: (index) async {
                       setState(() {
                         selectedDifficulty = difficultyMap.keys.elementAt(index);
                       });
-                       await fetchByDifficulty();
+                      await fetchByDifficulty();
                     },
                     itemBuilder: (context, index) {
                       final label = difficultyMap.keys.elementAt(index);
@@ -181,8 +182,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         label: label,
                         cubit: cubit,
                         scrollController: _scrollController,
-                      )
-                      ;
+                      );
                     },
                   ),
                 ),
@@ -193,6 +193,4 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       ),
     );
   }
-
-
 }

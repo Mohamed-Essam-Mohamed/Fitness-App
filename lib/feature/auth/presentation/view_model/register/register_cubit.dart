@@ -1,33 +1,34 @@
+import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/network/common/api_result.dart';
-import '../../../data/model/request/register_request._model.dart';
-import '../../../domain/use_cases/register_use_case.dart';
-import '../models/collecting_data_model.dart';
+import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart';
+import 'package:fitness_app/feature/auth/domain/use_cases/register_use_case.dart';
+import 'package:fitness_app/feature/auth/presentation/view_model/models/collecting_data_model.dart';
+
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
+  RegisterCubit(this.registerUseCase) : super(const RegisterState());
   final RegisterUseCase registerUseCase;
 
-  RegisterCubit(this.registerUseCase) : super(RegisterState());
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
-  final TextEditingController password= TextEditingController();
+  final TextEditingController password = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  String gender="male";
-   int age=25;
-   int weight=80;
-   int height=85;
-   int indexGoal=2;
-   int indexActivityLevel=1;
-  String goal="Gain weight";
-  String activityLevel="level1";
+  String gender = "male";
+  int age = 25;
+  int weight = 80;
+  int height = 85;
+  int indexGoal = 2;
+  int indexActivityLevel = 1;
+  String goal = "Gain weight";
+  String activityLevel = "level1";
 
-  CollectingDataModel data = CollectingDataModel();
+  CollectingDataModel data = const CollectingDataModel();
 
   Future<void> register() async {
     emit(state.copyWith(status: RegisterStatus.loading));
@@ -55,9 +56,8 @@ class RegisterCubit extends Cubit<RegisterState> {
       ));
     } else if (result is FailureResult<String>) {
       final error = result.exception.toString();
-      final cleanMessage = error.contains('-')
-          ? error.split('-').sublist(1).join('-').trim()
-          : error;
+      final cleanMessage =
+          error.contains('-') ? error.split('-').sublist(1).join('-').trim() : error;
 
       emit(state.copyWith(
         status: RegisterStatus.failure,
@@ -65,5 +65,4 @@ class RegisterCubit extends Cubit<RegisterState> {
       ));
     }
   }
-
 }

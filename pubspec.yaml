@@ -74,6 +74,7 @@ dependencies:
   dio_cache_interceptor: ^4.0.3
   path_provider: ^2.1.5
   smooth_page_indicator: ^1.2.1
+  percent_indicator: ^4.2.5
 
 
 dev_dependencies:

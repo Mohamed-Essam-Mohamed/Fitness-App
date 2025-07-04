@@ -57,16 +57,16 @@ class CollectingDataModel extends Equatable {
 
   @override
   List<Object?> get props => [
-    gender,
-    age,
-    weight,
-    height,
-    goal,
-    activityLevel,
-    firstName,
-    lastName,
-    email,
-    password,
-    rePassword,
-  ];
+        gender,
+        age,
+        weight,
+        height,
+        goal,
+        activityLevel,
+        firstName,
+        lastName,
+        email,
+        password,
+        rePassword,
+      ];
 }
