@@ -170,6 +170,40 @@
         "Ingredients": "Ingredients",
         "Recommendation": "Recommendation"
     },
+    "chatBoot": {
+        "Hi":"Hi",
+        "IamYourSmartCoach": "I am your smart coach",
+        "HowCanIAssistYou": "How Can I Assist You",
+        "Today": "Today ?",
+        "GetStarted": "Get Started",
+        "PreviousConversations": "Previous conversations",
+        "SmartCoach": "Smart coach"
+
+    },
+
+
+    "smart_coach": {
+        "title": "Smart Coach",
+        "previous_conversations": "Previous Conversations",
+        "delete_chat_title": "Delete Chat",
+        "delete_chat_message": "Are you sure you want to delete this chat?",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "loading": "Loading...",
+        "untitled_conversation": "Untitled Conversation",
+        "type_message": "Type your message...",
+        "ai_typing": "AI is typing...",
+        "unknown_error": "An unknown error occurred. Please try again.",
+        "too_many_requests": "FitGenius AI is currently experiencing too many requests. Please try again in a moment.",
+        "api_error": "An API error occurred: {error}.",
+        "conversation": "Conversation",
+        "unexpected_error_repo": "An unexpected error occurred in repository:",
+        "chat_request_failed": "Failed to process chat request:",
+        "chat_stream_failed": "Failed to initiate chat stream:",
+        "firebase_error": "Firebase error"
+    },
+
+
     "Ok": "Ok",
     "Loading": "Loading...",
     "Retry": "Retry"
