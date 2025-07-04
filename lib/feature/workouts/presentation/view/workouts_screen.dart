@@ -16,28 +16,26 @@ class WorkoutsScreen extends StatefulWidget {
 class _WorkoutsScreenState extends State<WorkoutsScreen> {
   @override
   Widget build(BuildContext context) {
-    return BackgroundApp(
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Text(
-            LocaleKeys.Home_workout.tr(),
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(fontWeight: FontWeight.w600),
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        Text(
+          LocaleKeys.Home_workout.tr(),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 24),
+        const SectionHeaderWorkoutScreen(),
+        const SizedBox(height: 24),
+        const Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: SectionBodyWorkoutScreen(),
           ),
-          const SizedBox(height: 24),
-          const SectionHeaderWorkoutScreen(),
-          const SizedBox(height: 24),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: SectionBodyWorkoutScreen(),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

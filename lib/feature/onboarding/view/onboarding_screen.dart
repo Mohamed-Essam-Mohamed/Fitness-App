@@ -56,6 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SafeArea(
           top: true,
           child: Scaffold(
+            backgroundColor: Colors.transparent,
             body: Stack(
               children: [
                 PageView.builder(

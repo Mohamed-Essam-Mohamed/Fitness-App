@@ -20,108 +20,105 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('ProfileScreen');
     return BlocProvider(
       create: (context) =>
           serviceLocator<ProfileCubit>()..doIntend(GetDataProfileAction()),
-      child: BackgroundApp(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
-          child: Column(
-            children: [
-              Text(
-                LocaleKeys.Profile_ProfileTitle.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(fontWeight: FontWeight.w600, height: 1.20),
-              ),
-              const SizedBox(height: 40),
-              BlocBuilder<ProfileCubit, ProfileState>(
-                builder: (context, state) {
-                  return Skeletonizer(
-                    enabled: state.isGetProfileLoading,
-                    child: Column(
-                      children: [
-                        CustomCacheNetworkImage(
-                          imageUrl: state.isGetProfileLoading
-                              ? dummyImageProfileUrl
-                              : state.dataUserEntity.photo,
-                          isCircular: true,
-                          width: 100,
-                          height: 100,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          state.isGetProfileLoading
-                              ? dummyText
-                              : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(fontWeight: FontWeight.w600, height: 1.20),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 40),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(8),
-                decoration: ShapeDecoration(
-                  color: const Color(0xCC242424),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
+        child: Column(
+          children: [
+            Text(
+              LocaleKeys.Profile_ProfileTitle.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.w600, height: 1.20),
+            ),
+            const SizedBox(height: 40),
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                return Skeletonizer(
+                  enabled: state.isGetProfileLoading,
+                  child: Column(
+                    children: [
+                      CustomCacheNetworkImage(
+                        imageUrl: state.isGetProfileLoading
+                            ? dummyImageProfileUrl
+                            : state.dataUserEntity.photo,
+                        isCircular: true,
+                        width: 100,
+                        height: 100,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        state.isGetProfileLoading
+                            ? dummyText
+                            : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(fontWeight: FontWeight.w600, height: 1.20),
+                      ),
+                    ],
                   ),
+                );
+              },
+            ),
+            const SizedBox(height: 40),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8),
+              decoration: ShapeDecoration(
+                color: const Color(0xCC242424),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: Column(
-                  children: [
-                    ListTileProfileWidget(
-                      image: SvgAsset.profile,
-                      title: LocaleKeys.Profile_EditProfile.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.change,
-                      title: LocaleKeys.Profile_ChangePassword.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    const SelectLanguageWidget(),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.lockSetting,
-                      title: LocaleKeys.Profile_Security.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.securityWarning,
-                      title: LocaleKeys.Profile_PrivacyPolicy.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.help,
-                      title: LocaleKeys.Profile_Help.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.logout,
-                      title: LocaleKeys.Profile_Logout.tr(),
-                      trailing: _iconWidget(),
-                      textColor: AppColors.redOrange,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+              ),
+              child: Column(
+                children: [
+                  ListTileProfileWidget(
+                    image: SvgAsset.profile,
+                    title: LocaleKeys.Profile_EditProfile.tr(),
+                    trailing: _iconWidget(),
+                  ),
+                  _dividerWidget(),
+                  ListTileProfileWidget(
+                    image: SvgAsset.change,
+                    title: LocaleKeys.Profile_ChangePassword.tr(),
+                    trailing: _iconWidget(),
+                  ),
+                  _dividerWidget(),
+                  const SelectLanguageWidget(),
+                  _dividerWidget(),
+                  ListTileProfileWidget(
+                    image: SvgAsset.lockSetting,
+                    title: LocaleKeys.Profile_Security.tr(),
+                    trailing: _iconWidget(),
+                  ),
+                  _dividerWidget(),
+                  ListTileProfileWidget(
+                    image: SvgAsset.securityWarning,
+                    title: LocaleKeys.Profile_PrivacyPolicy.tr(),
+                    trailing: _iconWidget(),
+                  ),
+                  _dividerWidget(),
+                  ListTileProfileWidget(
+                    image: SvgAsset.help,
+                    title: LocaleKeys.Profile_Help.tr(),
+                    trailing: _iconWidget(),
+                  ),
+                  _dividerWidget(),
+                  ListTileProfileWidget(
+                    image: SvgAsset.logout,
+                    title: LocaleKeys.Profile_Logout.tr(),
+                    trailing: _iconWidget(),
+                    textColor: AppColors.redOrange,
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

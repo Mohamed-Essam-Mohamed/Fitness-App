@@ -1,3 +1,4 @@
+import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
@@ -35,11 +36,11 @@ class AppSectionState extends State<AppSection> {
 
   final List<Widget> screens = [
     const HomeScreen(),
-  BlocProvider<SmartCoachCubit>(
-  create: (context) => serviceLocator.get<SmartCoachCubit>()..loadUserData(),
-  child: const OnboardingSmartCoachScreen(),
-  ),
-  const WorkoutsScreen(),
+    BlocProvider<SmartCoachCubit>(
+      create: (context) => serviceLocator.get<SmartCoachCubit>()..loadUserData(),
+      child: const OnboardingSmartCoachScreen(),
+    ),
+    const WorkoutsScreen(),
     const ProfileScreen(),
   ];
 
@@ -74,33 +75,36 @@ class AppSectionState extends State<AppSection> {
   Widget build(BuildContext context) {
     AppSizes().init(context);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            BlocProvider<HomeCubit>(
-              create: (context) =>
-                  serviceLocator<HomeCubit>()..doIntend(AppValues.english, GetShotData()),
-              child: Positioned.fill(
-                child: PageView(
-                  onPageChanged: (value) {
-                    setState(() {
-                      _currentIndex = value;
-                    });
-                  },
-                  controller: pageController,
-                  children: screens,
+    return BackgroundApp(
+      child: SafeArea(
+        top: true,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: [
+              BlocProvider<HomeCubit>(
+                create: (context) => serviceLocator<HomeCubit>()
+                  ..doIntend(AppValues.english, GetShotData()),
+                child: Positioned.fill(
+                  child: PageView(
+                    onPageChanged: (value) {
+                      setState(() {
+                        _currentIndex = value;
+                      });
+                    },
+                    controller: pageController,
+                    children: screens,
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 10,
-              left: 10,
-              child: bottomNavigationBarCustom(),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                right: 10,
+                left: 10,
+                child: bottomNavigationBarCustom(),
+              ),
+            ],
+          ),
         ),
       ),
     );

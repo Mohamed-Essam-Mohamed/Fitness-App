@@ -47,22 +47,6 @@ abstract class AppValues {
   static const String beginnerId = '67c797e226895f87ce0aa94b';
   static const String advanced = '67c797e226895f87ce0aa94e';
   static const String intermediateId = '67c797e226895f87ce0aa94c';
-  static const String isLoggedIn = 'isLoggedIn';
-  static const String id = 'id';
-  static const String firstName = 'firstName';
-  static const String lastName = 'lastName';
-  static const String email = 'email';
-  static const String gender = 'gender';
-  static const String age = 'age';
-  static const String weight = 'weight';
-  static const String height = 'height';
-  static const String activityLevel = 'activityLevel';
-  static const String goal = 'goal';
-  static const String photo = 'photo';
-  static const String createdAt = 'createdAt';
-  static const String beginnerId = '67c797e226895f87ce0aa94b';
-  static const String advanced = '67c797e226895f87ce0aa94e';
-  static const String intermediateId = '67c797e226895f87ce0aa94c';
 
   // Smart-Coach
   static const String promptPrefix =
