@@ -43,7 +43,7 @@ class RouteGenerator {
           ),
         );
       case Routes.onboarding:
-        return AnimationRoute(page: const OnBoardingScreen());
+        return AnimationRoute(page: const OnboardingScreen());
       case Routes.appSection:
         return AnimationRoute(page: const AppSection());
       case Routes.login:
@@ -57,7 +57,10 @@ class RouteGenerator {
 
       case Routes.mealDetails:
         final mealDetailsScreenArgs = arg as MealDetailsScreenArgs;
-        return AnimationRoute(page: MealDetailsScreen(mealId: mealDetailsScreenArgs.mealId, meals: mealDetailsScreenArgs.meals ));
+        return AnimationRoute(
+            page: MealDetailsScreen(
+                mealId: mealDetailsScreenArgs.mealId,
+                meals: mealDetailsScreenArgs.meals));
 
       case Routes.registerView:
         return AnimationRoute(

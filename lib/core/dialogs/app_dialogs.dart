@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
-class AppDialogs {
+abstract class AppDialogs {
   // Show a loading dialog
   static void showLoadingDialog(BuildContext context, {String? message}) {
     showDialog(
@@ -13,14 +15,13 @@ class AppDialogs {
         return WillPopScope(
           onWillPop: () async => false,
           child: AlertDialog(
-            // backgroundColor: Colors.transparent,
-            content: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text(message ?? LocaleKeys.Loading.tr()),
-              ],
+            backgroundColor: Colors.transparent,
+            content: Lottie.asset(
+              LottieAsset.loading,
+              repeat: true,
+              width: 100,
+              height: 100,
+              fit: BoxFit.contain,
             ),
           ),
         );
@@ -167,10 +168,11 @@ class AppDialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-
-          title: Text(title ?? LocaleKeys.Error,style: TextStyle(color: AppColors.orange),),
-          content: Text(message ,style: TextStyle(color: AppColors.orange)),
-
+          title: Text(
+            title ?? LocaleKeys.Error,
+            style: const TextStyle(color: AppColors.orange),
+          ),
+          content: Text(message, style: const TextStyle(color: AppColors.orange)),
           actions: [
             if (nextAction != null && nextActionTitle != null)
               TextButton(

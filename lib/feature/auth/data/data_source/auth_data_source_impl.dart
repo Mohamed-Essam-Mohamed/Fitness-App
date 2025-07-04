@@ -78,7 +78,6 @@ class RemoteAuthDataSourceImp extends RemoteAuthDataSource {
     }
   }
 
-
 // ex
   @override
   Future<Result<LoginResponseDto?>> login(LoginRequestDto loginRequest) async {

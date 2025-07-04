@@ -106,7 +106,7 @@ class ImageAsset {
   static const onboarding1 = 'assets/png/O15_31.png';
   static const onboarding2 = 'assets/png/O15_30.png';
   static const onboarding3 = 'assets/png/O15_29.png';
-  static const facebook = 'assets/png/facebook circle.png';
+  static const facebook = 'assets/png/facebook_circle.png';
   static const google = 'assets/png/Google.png';
   static const apple = 'assets/png/Apple.png';
   static const back = 'assets/svg/Vector.svg';
@@ -121,6 +121,8 @@ class ImageAsset {
   static const trainerVector = 'assets/png/O15_9.png';
 }
 
-class LottieAsset {}
+class LottieAsset {
+  static const loading = 'assets/lottie/loading_fitness.json';
+}
 
 //! const image dummy

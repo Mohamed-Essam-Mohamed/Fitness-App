@@ -1,7 +1,9 @@
+import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
+import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
@@ -14,11 +16,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   configureDependencies();
-
+  SharedPreferencesHelper.init();
   Bloc.observer = MyBlocObserver();
 
   final initialRoute = await getInitialRoute();
-
   runApp(
     EasyLocalization(
       supportedLocales: AppValues.supportedLocales,
@@ -30,12 +31,12 @@ void main() async {
 }
 
 Future<String> getInitialRoute() async {
-  final prefs = await SharedPreferences.getInstance();
-  final isLoggedIn = prefs.getBool(AppValues.isLoggedIn) ?? false;
-  final isOnboardingCompleted = prefs.getBool(AppValues.isOnboardingCompleted) ?? false;
+  final tokenCheck = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
+  final isOnboardingCompleted =
+      SharedPreferencesHelper.getData(key: AppValues.isOnboardingCompleted) as bool?;
 
-  if (!isOnboardingCompleted) return Routes.onboarding;
-  return isLoggedIn ? Routes.appSection : Routes.login;
+  if (isOnboardingCompleted == null || !isOnboardingCompleted) return Routes.onboarding;
+  return tokenCheck != null ? Routes.appSection : Routes.login;
 }
 
 class MyApp extends StatelessWidget {
