@@ -5,8 +5,14 @@ import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
+import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
+import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dummy/dummy_constant.dart';
+import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
+import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/list_tile_profile_widget.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/select_language_widget.dart';
@@ -87,6 +93,9 @@ class ProfileScreen extends StatelessWidget {
                     image: SvgAsset.change,
                     title: LocaleKeys.Profile_ChangePassword.tr(),
                     trailing: _iconWidget(),
+                    onTap: () {
+                      context.pushNamed(Routes.forgotPassword);
+                    },
                   ),
                   _dividerWidget(),
                   const SelectLanguageWidget(),
@@ -114,6 +123,23 @@ class ProfileScreen extends StatelessWidget {
                     title: LocaleKeys.Profile_Logout.tr(),
                     trailing: _iconWidget(),
                     textColor: AppColors.redOrange,
+                    onTap: () {
+                      AppDialogs.showMessage(
+                        context: context,
+                        onPressedAction1: () {
+                          context.pop();
+                        },
+                        onPressedAction2: () async {
+                          context.pushNamedAndRemoveUntil(Routes.login);
+                          await SharedPreferencesHelper.clearDataUserPref();
+                          await SecureStorageHelper.instance
+                              .deleteSecure(key: AppValues.token);
+                        },
+                        titleAction1: 'No',
+                        titleAction2: 'Yes',
+                        message: 'Are you sure to close the application?',
+                      );
+                    },
                   ),
                 ],
               ),

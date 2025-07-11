@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/enum/status.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/common/helper.dart';
+import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/feature/profile/domain/entities/get_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/use_cases/get_data_profile_use_case.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_state.dart';
 
@@ -25,10 +27,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> _getProfile() async {
     emit(state.copyWith(getProfileStatus: Status.loading));
-    // not the best get token from shared preference but wait for change this in future
-    final pref = await SharedPreferences.getInstance();
-    final token = pref.getString(AppValues.token);
-    final result = await _getDataProfileUseCase.call(token!);
+    final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
+    final result = await _getDataProfileUseCase.call('Bearer $token');
     switch (result) {
       case SuccessResult<GetProfileEntity>():
         emit(state.copyWith(
