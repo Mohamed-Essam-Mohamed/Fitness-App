@@ -1,4 +1,5 @@
-import 'package:animate_do/animate_do.dart';
+import 'dart:developer';
+
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/activity_screen.dart';
@@ -8,7 +9,6 @@ import 'package:fitness_app/feature/auth/presentation/view/complete_register/old
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/register_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/select_gender.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/weight_screen.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_indicator_widget.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/logo_app_widget.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,22 +21,25 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  final PageController _controller = PageController();
-
-  int currentIndex = 1;
+  final PageController controller = PageController();
+  late List<Widget> screens;
+  int currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    screens = [
+      RegisterScreen(pageController: controller),
+      SelectGender(pageController: controller),
+      OldScreen(pageController: controller),
+      WeightScreen(pageController: controller),
+      HeightScreen(pageController: controller),
+      GoalScreen(pageController: controller),
+      ActivityScreen(pageController: controller),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [
-      RegisterScreen(pageController: _controller),
-      SelectGender(pageController: _controller),
-      OldScreen(pageController: _controller),
-      WeightScreen(pageController: _controller),
-      HeightScreen(pageController: _controller),
-      GoalScreen(pageController: _controller),
-      ActivityScreen(pageController: _controller),
-    ];
-
     return BackgroundApp(
       child: SafeArea(
         child: Scaffold(
@@ -48,10 +51,12 @@ class _RegisterViewState extends State<RegisterView> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: popWidget(context, () {
-                      _controller.previousPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
+                      currentIndex == 0
+                          ? context.pop()
+                          : controller.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
                     }),
                   ),
                   const Spacer(flex: 3),
@@ -62,10 +67,10 @@ class _RegisterViewState extends State<RegisterView> {
               Expanded(
                 child: PageView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  controller: _controller,
+                  controller: controller,
                   itemCount: screens.length,
                   itemBuilder: (context, index) {
-                    // currentIndex = index;
+                    currentIndex = index;
                     return screens[index];
                   },
                   onPageChanged: (index) => setState(() => currentIndex = index),

@@ -21,6 +21,8 @@ class _BackgroundAppState extends State<BackgroundApp> {
 
   int _currentIndex = 0;
   bool _visible = true;
+  Timer? _switchTimer;
+  Timer? _fadeTimer;
 
   @override
   void initState() {
@@ -29,19 +31,31 @@ class _BackgroundAppState extends State<BackgroundApp> {
   }
 
   void _startSwitcher() {
-    Future.delayed(const Duration(seconds: 6), _switchImage);
+    _switchTimer = Timer(const Duration(seconds: 6), _switchImage);
   }
 
   void _switchImage() {
+    if (!mounted) return;
+
     setState(() => _visible = false);
 
-    Future.delayed(const Duration(milliseconds: 500), () {
+    _fadeTimer = Timer(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
+
       setState(() {
         _currentIndex = (_currentIndex + 1) % _images.length;
         _visible = true;
       });
-      _startSwitcher();
+
+      _startSwitcher(); // start next cycle
     });
+  }
+
+  @override
+  void dispose() {
+    _switchTimer?.cancel();
+    _fadeTimer?.cancel();
+    super.dispose();
   }
 
   @override

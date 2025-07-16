@@ -36,21 +36,22 @@ class _BottomSectionState extends State<BottomSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              child: SvgPicture.asset(ImageAsset.facebook),
+              child: Image.asset(ImageAsset.facebook),
               onTap: () {},
             ),
             const SizedBox(width: 16),
             InkWell(
-              child: SvgPicture.asset(ImageAsset.google),
+              child: Image.asset(ImageAsset.google),
               onTap: () {},
             ),
             const SizedBox(width: 16),
             InkWell(
-              child: SvgPicture.asset(ImageAsset.apple),
+              child: Image.asset(ImageAsset.apple),
               onTap: () {},
             ),
           ],
         ),
+        const SizedBox(height: 10),
       ],
     );
   }

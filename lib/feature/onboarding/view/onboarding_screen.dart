@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -60,7 +61,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             body: Stack(
               children: [
                 PageView.builder(
-                  physics: const BouncingScrollPhysics(),
                   controller: pageController,
                   itemCount: listItems.length,
                   onPageChanged: (newIndex) {
@@ -69,6 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   itemBuilder: ((context, index) {
+                    // Using CustomAnimatedWidget to animate the image
                     return Stack(
                       clipBehavior: Clip.none,
                       children: [

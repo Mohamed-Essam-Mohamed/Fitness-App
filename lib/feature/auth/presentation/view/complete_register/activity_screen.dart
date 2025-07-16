@@ -51,6 +51,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.status == RegisterStatus.failure) {
+          context.pop();
           widget.pageController.animateToPage(
             0,
             duration: const Duration(milliseconds: 1000),
@@ -67,6 +68,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
             }
           });
         } else if (state.status == RegisterStatus.success) {
+          context.pop();
           context.pushNamedAndRemoveUntil(Routes.login);
         } else if (state.status == RegisterStatus.loading) {
           AppDialogs.showLoadingDialog(context);
