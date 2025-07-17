@@ -38,18 +38,18 @@ class UserDataDto {
 
   UserDataEntity toDomain() {
     return UserDataEntity(
-      id: id,
-      email: email,
-      createdAt: createdAt,
-      photo: photo,
-      gender: gender,
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      activityLevel: activityLevel,
-      goal: goal,
-      height: height,
-      weight: weight,
+      id: id ?? '',
+      email: email ?? '',
+      createdAt: createdAt ?? '',
+      photo: photo ?? '',
+      gender: gender ?? '',
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      age: age ?? 0,
+      activityLevel: activityLevel ?? '',
+      goal: goal ?? '',
+      height: height ?? 0,
+      weight: weight ?? 0,
     );
   }
 }

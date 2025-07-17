@@ -29,6 +29,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 
   final initialRoute = await getInitialRoute();
+
   runApp(
     EasyLocalization(
       supportedLocales: AppValues.supportedLocales,

@@ -7,11 +7,11 @@ import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view/smart_coach_screen.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,14 +34,11 @@ class AppSectionState extends State<AppSection> {
   int _currentIndex = 0;
   final PageController pageController = PageController();
 
-  final List<Widget> screens = [
-    const HomeScreen(),
-    BlocProvider<SmartCoachCubit>(
-      create: (context) => serviceLocator.get<SmartCoachCubit>()..loadUserData(),
-      child: const OnboardingSmartCoachScreen(),
-    ),
-    const WorkoutsScreen(),
-    const ProfileScreen(),
+  final List<Widget> screens = const [
+    HomeScreen(),
+    OnboardingSmartCoachScreen(),
+    WorkoutsScreen(),
+    ProfileScreen(),
   ];
 
   final List<String> icons = [
@@ -82,9 +79,21 @@ class AppSectionState extends State<AppSection> {
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
-              BlocProvider<HomeCubit>(
-                create: (context) => serviceLocator<HomeCubit>()
-                  ..doIntend(AppValues.english, GetShotData()),
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider<HomeCubit>(
+                    create: (context) => serviceLocator<HomeCubit>()
+                      ..doIntend(AppValues.english, GetShotData()),
+                  ),
+                  BlocProvider<ProfileCubit>(
+                    create: (context) =>
+                        serviceLocator<ProfileCubit>()..doIntend(GetDataProfileAction()),
+                  ),
+                  BlocProvider<SmartCoachCubit>(
+                    create: (context) =>
+                        serviceLocator.get<SmartCoachCubit>()..loadUserData(),
+                  ),
+                ],
                 child: Positioned.fill(
                   child: PageView(
                     onPageChanged: (value) {

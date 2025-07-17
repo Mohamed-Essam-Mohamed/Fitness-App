@@ -86,18 +86,18 @@ extension UserMapper on UserDataEntity {
 extension UserDtoMapper on UserDataDto {
   UserDataEntity toEntity() {
     return UserDataEntity(
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      weight: weight,
-      height: height,
-      goal: goal,
-      id: id,
-      activityLevel: activityLevel,
-      gender: gender,
-      createdAt: createdAt,
-      email: email,
-      photo: photo,
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      age: age ?? 0,
+      weight: weight!,
+      height: height!,
+      goal: goal ?? '',
+      id: id ?? '',
+      activityLevel: activityLevel ?? '',
+      gender: gender ?? '',
+      createdAt: createdAt ?? '',
+      email: email ?? '',
+      photo: photo ?? '',
     );
   }
 }

@@ -1,11 +1,8 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:fitness_app/core/common/widget/background_app.dart';
-
 import 'package:fitness_app/feature/home/presentation/common/sections/category_section.dart';
 import 'package:fitness_app/feature/home/presentation/common/sections/info_section.dart';
 import 'package:fitness_app/feature/home/presentation/common/sections/recommendation_for_you_section.dart';
 import 'package:fitness_app/feature/home/presentation/common/sections/recommendation_to_day_section.dart';
-
 import 'package:fitness_app/feature/home/presentation/common/sections/upcoming_workouts_section.dart';
 import 'package:flutter/material.dart';
 

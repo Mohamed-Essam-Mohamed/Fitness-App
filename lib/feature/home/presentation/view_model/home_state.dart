@@ -12,6 +12,8 @@ class HomeState extends Equatable {
     this.getUpcomingDataStatus = Status.initial,
     this.recommendationForYou = const [],
     this.getRecommendationFYStatus = Status.initial,
+    this.dataUser = const UserDataEntity(),
+    this.getDataInfoStatus = Status.initial,
   });
   final List<CategoryItemEntity> categories;
   final Status getCategoriesStatus;
@@ -23,6 +25,8 @@ class HomeState extends Equatable {
   final Status getUpcomingDataStatus;
   final List<MealCategoryEntity> recommendationForYou;
   final Status getRecommendationFYStatus;
+  final UserDataEntity dataUser;
+  final Status getDataInfoStatus;
 
   // copyWith
   HomeState copyWith({
@@ -37,6 +41,8 @@ class HomeState extends Equatable {
     Status? getUpcomingDataStatus,
     List<MealCategoryEntity>? recommendationForYou,
     Status? getRecommendationFYStatus,
+    UserDataEntity? dataUser,
+    Status? getDataInfoStatus,
   }) {
     return HomeState(
       categories: categories ?? this.categories,
@@ -52,6 +58,8 @@ class HomeState extends Equatable {
       recommendationForYou: recommendationForYou ?? this.recommendationForYou,
       getRecommendationFYStatus:
           getRecommendationFYStatus ?? this.getRecommendationFYStatus,
+      dataUser: dataUser ?? this.dataUser,
+      getDataInfoStatus: getDataInfoStatus ?? this.getDataInfoStatus,
     );
   }
 
@@ -66,7 +74,9 @@ class HomeState extends Equatable {
         upcomingData,
         getUpcomingDataStatus,
         recommendationForYou,
-        getRecommendationFYStatus
+        getRecommendationFYStatus,
+        dataUser,
+        getDataInfoStatus,
       ];
 }
 
@@ -78,9 +88,11 @@ extension HomeStateExtension on HomeState {
 
   bool get isUpcomingCategoryLoading => getUpcomingCategoryStatus == Status.loading;
   bool get isUpcomingDataLoading => getUpcomingDataStatus == Status.loading;
+  bool get isDataInfoLoading => getDataInfoStatus == Status.loading;
 
   bool get isCategoriesSuccess => getCategoriesStatus == Status.success;
   bool get isRecommendationSuccess => getRecommendationTDStatus == Status.success;
+  bool get isDataInfoSuccess => getDataInfoStatus == Status.success;
 
   bool get isRecommendationForYouSuccess => getRecommendationFYStatus == Status.success;
 
@@ -94,6 +106,7 @@ extension HomeStateExtension on HomeState {
 
   bool get isUpcomingCategoryFailure => getUpcomingCategoryStatus == Status.failure;
   bool get isUpcomingDataFailure => getUpcomingDataStatus == Status.failure;
+  bool get isDataInfoFailure => getDataInfoStatus == Status.failure;
 }
 
 sealed class HomeAction {}
