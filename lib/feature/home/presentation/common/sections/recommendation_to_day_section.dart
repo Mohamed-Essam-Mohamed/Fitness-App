@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 
 import 'package:fitness_app/feature/home/presentation/common/loading/category_list_loading.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/container_blur_widget.dart';
@@ -36,35 +37,43 @@ class RecommendationToDaySection extends StatelessWidget {
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Container(
-                  width: 104,
-                  height: 104,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    fit: StackFit.expand,
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      CustomCacheNetworkImage(
-                        imageUrl: state.recommendationToDay[index].image,
-                        fit: BoxFit.cover,
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: ContainerBlurWidget(
-                          child: Text(
-                            state.recommendationToDay[index].name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(height: 1.20),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ExerciseScreen(
+                          primeMoverId: state.recommendationToDay[index].id),
+                    ),
+                  ),
+                  child: Container(
+                    width: 104,
+                    height: 104,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      fit: StackFit.expand,
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        CustomCacheNetworkImage(
+                          imageUrl: state.recommendationToDay[index].image,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: ContainerBlurWidget(
+                            child: Text(
+                              state.recommendationToDay[index].name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(height: 1.20),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 separatorBuilder: (context, index) => const SizedBox(width: 16),

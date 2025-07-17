@@ -10,7 +10,6 @@ import 'package:fitness_app/feature/meals/presentation/view_model/food_recommend
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 class FoodRecommendationScreen extends StatefulWidget {
   const FoodRecommendationScreen({super.key});
@@ -50,11 +49,13 @@ class _FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                 builder: (context, state) {
                   if (state is FoodRecommendationError) {
                     return Center(
-                      child: Text(state.message, style: const TextStyle(color: Colors.white)),
+                      child: Text(state.message,
+                          style: const TextStyle(color: Colors.white)),
                     );
                   }
 
-                  if (state is FoodRecommendationLoaded || state is FoodRecommendationLoading) {
+                  if (state is FoodRecommendationLoaded ||
+                      state is FoodRecommendationLoading) {
                     final categories = (state is FoodRecommendationLoaded)
                         ? state.categories
                         : (state as FoodRecommendationLoading).categories;
@@ -69,39 +70,40 @@ class _FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                         const SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child:
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
-                                child:
-                              Text(
-                                LocaleKeys.Home_FoodRecommendation.tr(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(fontSize: 24),
-
-
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              LocaleKeys.Home_FoodRecommendation.tr(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.copyWith(fontSize: 24),
+                            ),
                           ),
                         ),
-                        ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal:20),
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                           child: TabContainerWidget(
                             upcomingCategory: categories.toMuscleItemGroups(),
+                            onTabSelected: (index) {
+                              // cubit.changeCategory(categories[index]);
+                            },
                             callBack: (selectedId) {
-                              final selected = categories.firstWhere((cat) => cat.idCategory == selectedId);
-                              context.read<FoodRecommendationCubit>().changeCategory(selected);
+                              final selected = categories
+                                  .firstWhere((cat) => cat.idCategory == selectedId);
+                              context
+                                  .read<FoodRecommendationCubit>()
+                                  .changeCategory(selected);
                             },
                           ),
                         ),
-
                         const SizedBox(height: 20),
-
                         Expanded(
                           child: state is FoodRecommendationLoading
                               ? const Center(child: CircularProgressIndicator())
                               : MealsGrid(
-                              meals: (state as FoodRecommendationLoaded).meals),
+                                  meals: (state as FoodRecommendationLoaded).meals),
                         ),
                       ],
                     );

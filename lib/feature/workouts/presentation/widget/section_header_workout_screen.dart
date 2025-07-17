@@ -14,7 +14,6 @@ class SectionHeaderWorkoutScreen extends StatefulWidget {
 }
 
 class _SectionHeaderWorkoutScreenState extends State<SectionHeaderWorkoutScreen> {
-  int selectCategoryIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,6 +27,10 @@ class _SectionHeaderWorkoutScreenState extends State<SectionHeaderWorkoutScreen>
           }
           return TabContainerWidget(
             upcomingCategory: state.upcomingCategory,
+            selectedIndex: context.read<HomeCubit>().selectedIndex,
+            onTabSelected: (index) {
+              context.read<HomeCubit>().selectedIndex = index;
+            },
             callBack: (id) => context
                 .read<HomeCubit>()
                 .doIntend(AppValues.english, GetUpcomingData(id: id)),
