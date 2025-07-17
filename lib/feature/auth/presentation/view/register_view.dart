@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/activity_screen.dart';

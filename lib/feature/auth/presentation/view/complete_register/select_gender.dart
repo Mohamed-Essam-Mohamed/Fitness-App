@@ -7,7 +7,6 @@ import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_indicator_widget.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/logo_app_widget.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

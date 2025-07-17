@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:fitness_app/core/network/remote/api_constants.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +11,7 @@ abstract class DioModule {
     final dio = Dio();
     final cacheOptions = CacheOptions(
       store: MemCacheStore(),
-      policy:  CachePolicy.forceCache,
+      policy: CachePolicy.forceCache,
       hitCacheOnErrorCodes: [401, 403],
       priority: CachePriority.normal,
       maxStale: const Duration(days: 7),
@@ -51,8 +50,7 @@ abstract class DioModule {
 
 class AuthInterceptor extends Interceptor {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     print('this is token from dio_module : $token');

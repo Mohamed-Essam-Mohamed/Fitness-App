@@ -1,6 +1,5 @@
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BottomSection extends StatefulWidget {
   const BottomSection({super.key});
