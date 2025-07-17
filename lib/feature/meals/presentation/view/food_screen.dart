@@ -85,10 +85,9 @@ class _FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                           padding:
                               const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                           child: TabContainerWidget(
+                            selectedIndex: categories.indexOf(selectedCategory),
                             upcomingCategory: categories.toMuscleItemGroups(),
-                            onTabSelected: (index) {
-                              // cubit.changeCategory(categories[index]);
-                            },
+                            onTabSelected: (index) {},
                             callBack: (selectedId) {
                               final selected = categories
                                   .firstWhere((cat) => cat.idCategory == selectedId);
@@ -103,7 +102,8 @@ class _FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                           child: state is FoodRecommendationLoading
                               ? const Center(child: CircularProgressIndicator())
                               : MealsGrid(
-                                  meals: (state as FoodRecommendationLoaded).meals),
+                                  meals: (state as FoodRecommendationLoaded).meals,
+                                ),
                         ),
                       ],
                     );

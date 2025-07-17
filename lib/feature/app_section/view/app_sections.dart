@@ -3,6 +3,7 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
+import 'package:fitness_app/core/extentions/media_query_extensions.dart';
 import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';

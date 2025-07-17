@@ -115,7 +115,8 @@
         "RecommendationForYou": "Recommendation For You",
         "RecommendationToday": "Recommendation to day",
         "UpcomingWorkouts": "Upcoming Workouts",
-        "workout": "Workouts"
+        "workout": "Workouts",
+        "SeeAll" : "See All"
     },
     "Error": {
         "LoginFailed": "Login failed",

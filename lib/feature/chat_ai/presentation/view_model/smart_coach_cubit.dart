@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/base_state/base_state.dart';
-import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/dummy/dummy_constant.dart';
 import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/feature/chat_ai/data/api/gemini_custom_exception.dart';
@@ -17,7 +16,6 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_state.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @injectable
 class SmartCoachCubit extends Cubit<SmartCoachChatState> {

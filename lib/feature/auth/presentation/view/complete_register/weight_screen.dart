@@ -161,9 +161,6 @@ class _WeightScreenState extends State<WeightScreen> {
                   size: 50,
                   color: AppColors.orange,
                 ),
-                //!
-
-                //!
                 const SizedBox(height: 24),
                 BounceInDown(
                   delay: const Duration(milliseconds: 700),
@@ -175,7 +172,6 @@ class _WeightScreenState extends State<WeightScreen> {
                       ),
                     ),
                     onPressed: () {
-                      final userData = cubit.weight = weight;
                       widget.pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,

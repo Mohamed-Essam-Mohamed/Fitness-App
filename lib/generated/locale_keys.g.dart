@@ -117,6 +117,7 @@ abstract class  LocaleKeys {
   static const Home_RecommendationToday = 'Home.RecommendationToday';
   static const Home_UpcomingWorkouts = 'Home.UpcomingWorkouts';
   static const Home_workout = 'Home.workout';
+  static const Home_SeeAll = 'Home.SeeAll';
   static const Home = 'Home';
   static const Error_LoginFailed = 'Error.LoginFailed';
   static const Error_CodeCannotBeEmpty = 'Error.CodeCannotBeEmpty';
