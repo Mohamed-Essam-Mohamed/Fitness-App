@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/base_state/base_state.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
+import 'package:fitness_app/core/dummy/dummy_constant.dart';
+import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/feature/chat_ai/data/api/gemini_custom_exception.dart';
 import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart';
 import 'package:fitness_app/feature/chat_ai/domain/use_case/delete_conversation_usecase.dart';
@@ -45,17 +47,14 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
     _chatStreamSubscription?.cancel();
     return super.close();
   }
-  Future<void> loadUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final firstName = prefs.getString(AppValues.firstName);
-    final photo = prefs.getString(AppValues.photo);
 
+  Future<void> loadUserData() async {
+    final user = await SharedPreferencesHelper.getDataUserPref();
     emit(state.copyWith(
-      firstName: firstName,
-      photo: photo,
+      firstName: user?.firstName ?? 'Mohamed Ali',
+      photo: user?.firstName ?? dummyImageProfileUrl,
     ));
   }
-
 
   Future<void> _startNewConversation() async {
     _currentConversationId = await _startNewConversationUseCase.call();
@@ -79,7 +78,8 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
     }
   }
 
-  Future<List<MessageEntity>?> fetchMessagesByConversationId(String conversationId) async {
+  Future<List<MessageEntity>?> fetchMessagesByConversationId(
+      String conversationId) async {
     emit(state.copyWith(baseState: BaseLoadingState()));
     try {
       final messages = await _fetchMessagesUseCase.call(conversationId);
@@ -95,7 +95,6 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
     }
   }
 
-
   Future<void> deleteConversationById(String id) async {
     try {
       await _deleteConversationUseCase.call(id);
@@ -104,7 +103,6 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
       emit(state.copyWith(baseState: BaseErrorState(errorMessage: e.toString())));
     }
   }
-
 
   void sendMessage(String prompt) async {
     emit(state.copyWith(
@@ -116,23 +114,17 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
     final userMessage = MessageEntity(text: prompt, sender: Sender.user);
 
     if (_currentConversationId == null) {
-      _currentConversationId =
-          await _startNewConversationUseCase.call();
-      await _setConversationTitleUseCase.call(
-          _currentConversationId!, prompt);
+      _currentConversationId = await _startNewConversationUseCase.call();
+      await _setConversationTitleUseCase.call(_currentConversationId!, prompt);
     }
 
-    await _saveMessagesUseCase.call(
-        _currentConversationId!, userMessage);
+    await _saveMessagesUseCase.call(_currentConversationId!, userMessage);
 
     final messagesWithNewUser = [...?state.messages, userMessage];
     emit(state.copyWith(messages: messagesWithNewUser));
 
     final aiMessagePlaceholder = MessageEntity(text: '', sender: Sender.model);
-    final messagesWithPlaceholder = [
-      ...messagesWithNewUser,
-      aiMessagePlaceholder
-    ];
+    final messagesWithPlaceholder = [...messagesWithNewUser, aiMessagePlaceholder];
     emit(state.copyWith(messages: messagesWithPlaceholder));
 
     final StringBuffer buffer = StringBuffer();
@@ -146,8 +138,7 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
         buffer.write(chunk);
 
         if (updatedList.isNotEmpty && updatedList.last.sender == Sender.user) {
-          updatedList
-              .add(aiMessagePlaceholder.copyWith(text: buffer.toString()));
+          updatedList.add(aiMessagePlaceholder.copyWith(text: buffer.toString()));
         } else if (updatedList.isNotEmpty) {
           updatedList[updatedList.length - 1] =
               aiMessagePlaceholder.copyWith(text: buffer.toString());
@@ -156,22 +147,20 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
         emit(state.copyWith(messages: updatedList));
       },
       onError: (error) {
-        String displayErrorMessage =
-            'An unknown error occurred. Please try again.';
+        String displayErrorMessage = 'An unknown error occurred. Please try again.';
         Exception? exceptionToReport;
 
         if (error is ServerException) {
           exceptionToReport = error;
           if (error.statusCode == 429) {
-            displayErrorMessage =
-                LocaleKeys.smart_coach_too_many_requests.tr();
+            displayErrorMessage = LocaleKeys.smart_coach_too_many_requests.tr();
           } else {
-            displayErrorMessage = ' ${LocaleKeys.smart_coach_too_many_requests.tr()} ${error.message}';
+            displayErrorMessage =
+                ' ${LocaleKeys.smart_coach_too_many_requests.tr()} ${error.message}';
           }
         }
 
-        final errorMessagesList =
-            List<MessageEntity>.from(state.messages ?? []);
+        final errorMessagesList = List<MessageEntity>.from(state.messages ?? []);
         _updateLastMessageWithError(displayErrorMessage, errorMessagesList);
 
         emit(state.copyWith(
@@ -211,8 +200,7 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
       updatedMessageList[updatedMessageList.length - 1] =
           updatedMessageList.last.copyWith(text: errorMessage);
     } else {
-      updatedMessageList
-          .add(MessageEntity(text: errorMessage, sender: Sender.model));
+      updatedMessageList.add(MessageEntity(text: errorMessage, sender: Sender.model));
     }
     emit(state.copyWith(messages: updatedMessageList));
   }

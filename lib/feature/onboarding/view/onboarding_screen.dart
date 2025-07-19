@@ -46,7 +46,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return BackgroundApp(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
@@ -56,6 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SafeArea(
           top: true,
           child: Scaffold(
+            backgroundColor: Colors.transparent,
             body: Stack(
               children: [
                 PageView.builder(

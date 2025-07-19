@@ -1,15 +1,17 @@
-import 'package:fitness_app/core/constants/app_values.dart';
+import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/feature/chat_ai/domain/entity/smart_coach/message_entity.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 @injectable
 class FirebaseChatService {
   final _firestore = FirebaseFirestore.instance;
 
   Future<String> get userId async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppValues.id) ?? 'guest_user';
+    // final prefs = await SharedPreferences.getInstance();
+    // return prefs.getString(AppValues.id) ?? 'guest_user';
+    final data = await SharedPreferencesHelper.getDataUserPref();
+    return data?.id ?? 'guest_user';
   }
 
   Future<String> startNewConversation() async {
@@ -132,6 +134,4 @@ class FirebaseChatService {
         .doc(conversationId)
         .delete();
   }
-
 }
-

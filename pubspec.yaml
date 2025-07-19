@@ -11,9 +11,6 @@ dependencies:
 
   #? splash-screen
 
-
-
-
   #? UI-related packages: For building and styling the user interface
   youtube_player_flutter: ^9.1.1
   cupertino_icons: ^1.0.8
@@ -54,6 +51,8 @@ dependencies:
 
   #? Permissions: For handling runtime permissions
   permission_handler: ^12.0.0+1
+  device_info_plus:
+  device_info_plus:
 
   #? Firebase: For Firebase services
   firebase_core: ^3.13.0
@@ -78,7 +77,6 @@ dependencies:
   flutter_gemini: 3.0.0
   cloud_firestore: ^5.6.11
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,9 +97,12 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/png/icon-launcher.png"
-  adaptive_icon_background: "#242424"
-  adaptive_icon_foreground: "assets/png/play-store-icon-launcher.png" 
+  image_path: 'assets/png/icon-launcher.png'
+  adaptive_icon_background: '#242424'
+  adaptive_icon_foreground: 'assets/png/play-store-icon-launcher.png'
+  image_path: 'assets/png/icon-launcher.png'
+  adaptive_icon_background: '#242424'
+  adaptive_icon_foreground: 'assets/png/play-store-icon-launcher.png'
 
 flutter:
   uses-material-design: true
@@ -117,4 +118,3 @@ flutter:
     - family: Baloo Thambi 2
       fonts:
         - asset: assets/fonts/baloo/BalooThambi2-Regular.ttf
-

@@ -222,11 +222,12 @@ class AppTheme {
           topRight: Radius.circular(24),
         ),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.shearGray,
       dragHandleSize: Size(80, 4),
       dragHandleColor: AppColors.black,
       showDragHandle: true,
       elevation: 0,
     ),
+
   );
 }

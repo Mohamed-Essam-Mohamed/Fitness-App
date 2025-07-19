@@ -32,24 +32,22 @@ abstract class AppDialogs {
   /// Show a message dialog with two actions
   static void showMessage({
     required BuildContext context,
-    required String title,
-    required TextStyle titleStyle,
     required String message,
-    required TextStyle messageStyle,
     required VoidCallback onPressedAction1,
     required VoidCallback onPressedAction2,
     required String titleAction1,
     required String titleAction2,
-    // required TextStyle titleAction1Style,
-    // required TextStyle titleAction2Style,
   }) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: ((context) {
         return AlertDialog(
-          title: Text(title),
-          content: Text(message),
+          content: Text(
+            message,
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,29 +56,28 @@ abstract class AppDialogs {
                 Expanded(
                   child: _buttonAction(
                     onPressed: onPressedAction1,
-                    context: context,
                     title: titleAction1,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _buttonAction(
-                    onPressed: onPressedAction2,
-                    title: titleAction2,
                     context: context,
                     colorBackground: Colors.transparent,
                     colorText: AppColors.orange,
                     haveBorder: true,
                   ),
                 ),
+                const SizedBox(width: 60),
+                Expanded(
+                  child: _buttonAction(
+                    onPressed: onPressedAction2,
+                    context: context,
+                    title: titleAction2,
+                    colorText: AppColors.white,
+                  ),
+                ),
               ],
             ),
           ],
-          contentTextStyle: messageStyle,
-          titleTextStyle: titleStyle,
           alignment: Alignment.center,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          backgroundColor: AppColors.white,
+          backgroundColor: const Color(0xFF242424),
           elevation: 0,
         );
       }),
@@ -193,7 +190,6 @@ abstract class AppDialogs {
   }
 }
 
-
 typedef DialogOnConfirm = void Function();
 
 class AppCustomDialog extends StatelessWidget {
@@ -304,5 +300,3 @@ class AppCustomDialog extends StatelessWidget {
     );
   }
 }
-
-

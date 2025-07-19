@@ -9,7 +9,11 @@ import 'package:fitness_app/feature/chat_ai/presentation/view/smart_coach_screen
 import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
 import 'package:fitness_app/feature/meals/presentation/entity/meal_details_screen_args.dart';
 import 'package:fitness_app/feature/meals/presentation/view/food_details_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view/edit_profile_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/meals/presentation/view/food_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view/edit_profile_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/feature/auth/presentation/view/change_password_screen.dart';
@@ -73,6 +77,14 @@ class RouteGenerator {
             page: MealDetailsScreen(
                 mealId: mealDetailsScreenArgs.mealId,
                 meals: mealDetailsScreenArgs.meals));
+        return AnimationRoute(
+            page: MealDetailsScreen(
+                mealId: mealDetailsScreenArgs.mealId,
+                meals: mealDetailsScreenArgs.meals));
+        return AnimationRoute(
+            page: MealDetailsScreen(
+                mealId: mealDetailsScreenArgs.mealId,
+                meals: mealDetailsScreenArgs.meals));
 
       case Routes.registerView:
         return AnimationRoute(
@@ -81,6 +93,18 @@ class RouteGenerator {
             child: RegisterView(),
           ),
         );
+      case Routes.editProfile:
+        final editProfileScreenArgs = arg as ProfileCubit;
+        return AnimationRoute(
+            page: EditProfileScreen(
+          profileCubit: editProfileScreenArgs,
+        ));
+      case Routes.editProfile:
+        final editProfileScreenArgs = arg as ProfileCubit;
+        return AnimationRoute(
+            page: EditProfileScreen(
+          profileCubit: editProfileScreenArgs,
+        ));
 
       default:
         return null;

@@ -47,6 +47,10 @@ class SvgAsset {
   static const ex34 = 'assets/svg/O15_34.svg';
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
+  //static const editProfileIcon = 'assets/svg/edit_profile_image.svg';
+  static const editProfile='assets/svg/edit_profile_image.svg';
+  static const camera='assets/svg/camera.svg';
+  static const gallery='assets/svg/gallery.svg'; 
   // static const ex1 = 'assets/svg/O15_1.svg';
   // static const ex2 = 'assets/svg/O15_2.svg';
   // static const ex3 = 'assets/svg/O15_3.svg';
@@ -101,7 +105,8 @@ class ImageAsset {
   static const thirdBg = 'assets/png/third_bg.png';
   static const fourthBg = 'assets/png/fourth_bg.png';
   static const logo = 'assets/png/logo.png';
-  static const onboardingBackgroundImage = 'assets/png/onboarding_background_image.png';
+  static const onboardingBackgroundImage =
+      'assets/png/onboarding_background_image.png';
   static const screenFitLogo = 'assets/png/fit_1.png';
   static const backgroundImage = 'assets/png/background_image.png';
   static const backgroundFoodImage = 'assets/png/backgroundFoodImage.jpg';
