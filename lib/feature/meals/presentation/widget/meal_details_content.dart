@@ -86,7 +86,7 @@ class MealDetailsContent extends StatelessWidget {
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
                 SliverToBoxAdapter(
                   child: RecommendedCardListWidget(
-                     recommendedMeals: recommendedMeals,
+                    recommendedMeals: recommendedMeals,
                   ),
                 ),
               ],

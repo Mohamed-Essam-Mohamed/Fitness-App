@@ -17,4 +17,5 @@ class Routes {
   static const String mealDetails = '/mealDetails';
   static const String exercise = '/exercise';
   static const String mealDetailsScreen = '/mealDetailsScreen';
+  static const String editProfile='/editProfileScreen';
 }

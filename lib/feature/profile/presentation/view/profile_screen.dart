@@ -7,6 +7,8 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/dummy/dummy_constant.dart';
+import 'package:fitness_app/core/routes/routes.dart';
+import 'package:fitness_app/feature/profile/presentation/view/edit_profile_screen.dart';
 import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/list_tile_profile_widget.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/select_language_widget.dart';
@@ -15,18 +17,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late final ProfileCubit _profileCubit;
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit = serviceLocator.get<ProfileCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
     log('ProfileScreen');
     return BlocProvider(
-      create: (context) =>
-          serviceLocator<ProfileCubit>()..doIntend(GetDataProfileAction()),
+      create: (context) => _profileCubit..doIntend(GetDataProfileAction()),
       child: BackgroundApp(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
+          padding:
+              const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
           child: Column(
             children: [
               Text(
@@ -60,7 +74,8 @@ class ProfileScreen extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
-                              .copyWith(fontWeight: FontWeight.w600, height: 1.20),
+                              .copyWith(
+                                  fontWeight: FontWeight.w600, height: 1.20),
                         ),
                       ],
                     ),
@@ -83,6 +98,10 @@ class ProfileScreen extends StatelessWidget {
                       image: SvgAsset.profile,
                       title: LocaleKeys.Profile_EditProfile.tr(),
                       trailing: _iconWidget(),
+                      onTap: () {
+                        Navigator.of(context).pushNamed(Routes.editProfile,
+                            arguments: _profileCubit);
+                      },
                     ),
                     _dividerWidget(),
                     ListTileProfileWidget(

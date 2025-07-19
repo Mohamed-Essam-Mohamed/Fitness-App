@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/profile/data/data_sources/remote/profile_remote_data_source.dart';
 import 'package:fitness_app/feature/profile/domain/entities/get_profile_entity.dart';
+import 'package:fitness_app/feature/profile/domain/entities/update_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/repositories/profile_repoistory.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,5 +21,17 @@ class ProfileRepositoryImp implements ProfileRepository {
       case FailureResult<GetProfileEntity>():
         return FailureResult<GetProfileEntity>(result.exception);
     }
+  }
+
+  @override
+  Future<Result<GetProfileEntity>> updateProfile(
+      String token, UpdateProfileEntity updateProfileEntity) async {
+    return await _dataSource.updateDataProfile(
+        token, updateProfileEntity.toUpdateProfileDto());
+  }
+
+  @override
+  Future<Result<void>> updateProfilePhoto(File photo, String token) async {
+    return await _dataSource.updateProfilePhoto(photo, token);
   }
 }

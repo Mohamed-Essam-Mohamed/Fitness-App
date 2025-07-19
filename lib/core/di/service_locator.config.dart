@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart' as _i695;
 import 'package:fitness_app/core/logger/logger_module.dart' as _i637;
 import 'package:fitness_app/core/network/remote/api_manager.dart' as _i74;
 import 'package:fitness_app/core/network/remote/dio_module.dart' as _i674;
@@ -107,6 +108,10 @@ import 'package:fitness_app/feature/profile/domain/repositories/profile_repoisto
     as _i448;
 import 'package:fitness_app/feature/profile/domain/use_cases/get_data_profile_use_case.dart'
     as _i73;
+import 'package:fitness_app/feature/profile/domain/use_cases/update_data_profile_use_case.dart'
+    as _i579;
+import 'package:fitness_app/feature/profile/domain/use_cases/update_profile_photo.dart'
+    as _i470;
 import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart'
     as _i133;
 import 'package:get_it/get_it.dart' as _i174;
@@ -130,16 +135,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i74.ApiManager>(() => _i74.ApiManager());
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
+    gh.lazySingleton<_i695.CacheOptions>(() => dioModule.provideCacheOptions());
     gh.lazySingleton<_i528.PrettyDioLogger>(
         () => dioModule.providerInterceptor());
     gh.lazySingleton<_i674.AuthInterceptor>(
         () => dioModule.provideAuthInterceptor());
+    gh.factory<_i755.ExerciseLocalDataSource>(
+        () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
+          gh<_i695.CacheOptions>(),
         ));
-    gh.factory<_i755.ExerciseLocalDataSource>(
-        () => _i886.ExerciseLocalDataSourceImpl());
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
@@ -203,6 +210,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i733.ProfileRepositoryImp(gh<_i50.ProfileRemoteDataSource>()));
     gh.factory<_i73.GetDataProfileUseCase>(
         () => _i73.GetDataProfileUseCase(gh<_i448.ProfileRepository>()));
+    gh.factory<_i579.UpdateDataProfileUseCase>(
+        () => _i579.UpdateDataProfileUseCase(gh<_i448.ProfileRepository>()));
+    gh.factory<_i470.UpdateProfilePhoto>(
+        () => _i470.UpdateProfilePhoto(gh<_i448.ProfileRepository>()));
     gh.factory<_i545.HomeRepository>(
         () => _i963.HomeRepositoryImpl(gh<_i614.HomeDataSource>()));
     gh.factory<_i285.LoginCubit>(
@@ -213,10 +224,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i176.RegisterCubit>(
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
+    gh.factory<_i133.ProfileCubit>(() => _i133.ProfileCubit(
+          gh<_i73.GetDataProfileUseCase>(),
+          gh<_i579.UpdateDataProfileUseCase>(),
+          gh<_i470.UpdateProfilePhoto>(),
+        ));
     gh.factory<_i354.FoodRecommendationCubit>(
         () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
-    gh.factory<_i133.ProfileCubit>(
-        () => _i133.ProfileCubit(gh<_i73.GetDataProfileUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(

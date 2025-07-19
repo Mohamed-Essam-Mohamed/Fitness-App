@@ -24,6 +24,7 @@ class ListTileProfileWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 4),
       child: ListTile(
+        
         minTileHeight: 30,
         iconColor: AppColors.redOrange,
         onTap: onTap,
