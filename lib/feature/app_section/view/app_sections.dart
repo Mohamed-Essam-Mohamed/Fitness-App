@@ -149,6 +149,7 @@ class AppSectionState extends State<AppSection> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  textDirection: Directionality.of(context),
                   children: List.generate(icons.length, (index) {
                     return BottomItemNav(
                       onPressed: (val) {
@@ -201,7 +202,8 @@ class AppSectionState extends State<AppSection> {
   }
 
   double animatedPositionedLeftValue(int currentIndex) {
-    final positions = [6.2, 26.5, 46.5, 66.5];
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final positions = isRTL ? [66.5, 46.5, 26.5, 6.2] : [6.2, 26.5, 46.5, 66.5];
     return AppSizes.blockSizeHorizontal * (positions[currentIndex]);
   }
 }
