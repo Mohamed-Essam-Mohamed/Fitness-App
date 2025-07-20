@@ -23,44 +23,48 @@ class _InfoSectionState extends State<InfoSection> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        return Skeletonizer(
-          enabled: state.isDataInfoLoading,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text.rich(
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.start,
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: state.isDataInfoLoading
-                          ? dummyText
-                          : '${LocaleKeys.Home_hi.tr()} ${state.dataUser.firstName},\n',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(height: 1.40, fontWeight: FontWeight.w500),
-                    ),
-                    TextSpan(
-                      text: LocaleKeys.Home_LetsStartYourDay.tr(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(height: 1.40, fontWeight: FontWeight.w700),
-                    ),
-                  ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Skeletonizer(
+            enabled: state.isDataInfoLoading,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text.rich(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: state.isDataInfoLoading
+                            ? dummyText
+                            : '${LocaleKeys.Home_hi.tr()} ${state.dataUser.firstName},\n',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(height: 1.40, fontWeight: FontWeight.w500),
+                      ),
+                      TextSpan(
+                        text: LocaleKeys.Home_LetsStartYourDay.tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(height: 1.40, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              CustomCacheNetworkImage(
-                imageUrl:
-                    state.isDataInfoLoading ? dummyImageProfileUrl : state.dataUser.photo,
-                isCircular: true,
-                width: 40,
-                height: 40,
-              ),
-            ],
+                CustomCacheNetworkImage(
+                  imageUrl: state.isDataInfoLoading
+                      ? dummyImageProfileUrl
+                      : state.dataUser.photo,
+                  isCircular: true,
+                  width: 40,
+                  height: 40,
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -36,7 +36,7 @@ class _OnboardingSmartCoachScreenState extends State<OnboardingSmartCoachScreen>
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
+      padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 80),
       physics: const BouncingScrollPhysics(),
       child: Column(
         spacing: 30,

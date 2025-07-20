@@ -25,15 +25,18 @@ class _SectionHeaderWorkoutScreenState extends State<SectionHeaderWorkoutScreen>
           if (state.isUpcomingCategoryLoading || state.isUpcomingCategoryFailure) {
             return const TabContainerLoading();
           }
-          return TabContainerWidget(
-            upcomingCategory: state.upcomingCategory,
-            selectedIndex: context.read<HomeCubit>().selectedIndex,
-            onTabSelected: (index) {
-              context.read<HomeCubit>().selectedIndex = index;
-            },
-            callBack: (id) => context
-                .read<HomeCubit>()
-                .doIntend(AppValues.english, GetUpcomingData(id: id)),
+          return Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: TabContainerWidget(
+              upcomingCategory: state.upcomingCategory,
+              selectedIndex: context.read<HomeCubit>().selectedIndex,
+              onTabSelected: (index) {
+                context.read<HomeCubit>().selectedIndex = index;
+              },
+              callBack: (id) => context
+                  .read<HomeCubit>()
+                  .doIntend(AppValues.english, GetUpcomingData(id: id)),
+            ),
           );
         },
       ),

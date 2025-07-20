@@ -16,31 +16,39 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 24,
-        children: [
-          const InfoSection(),
-          const CategorySection(),
-          FadeInLeft(
-            duration: const Duration(milliseconds: 500),
-            child: const RecommendationToDaySection(),
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        const InfoSection(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 80),
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 20,
+              children: [
+                const CategorySection(),
+                FadeInLeft(
+                  duration: const Duration(milliseconds: 500),
+                  child: const RecommendationToDaySection(),
+                ),
+                FadeInLeft(
+                  delay: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
+                  child: const UpcomingWorkoutsSection(),
+                ),
+                FadeInLeft(
+                  delay: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 500),
+                  child: const RecommendationForYouSection(),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
-          FadeInLeft(
-            delay: const Duration(milliseconds: 500),
-            duration: const Duration(milliseconds: 500),
-            child: const UpcomingWorkoutsSection(),
-          ),
-          FadeInLeft(
-            delay: const Duration(milliseconds: 1000),
-            duration: const Duration(milliseconds: 500),
-            child: const RecommendationForYouSection(),
-          ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/core/common/animation/loading_shimmer.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
+import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
@@ -22,15 +23,16 @@ class SectionBodyWorkoutScreen extends StatelessWidget {
             itemCount: state.upcomingData.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1,
+              childAspectRatio: 163 / 160,
               mainAxisSpacing: 18,
               crossAxisSpacing: 17,
             ),
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: ()=> Navigator.of(context).push(
+                onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => ExerciseScreen(primeMoverId: state.upcomingData[index].id),
+                    builder: (context) =>
+                        ExerciseScreen(primeMoverId: state.upcomingData[index].id),
                   ),
                 ),
                 child: ClipRRect(
@@ -44,12 +46,18 @@ class SectionBodyWorkoutScreen extends StatelessWidget {
                         imageUrl: state.upcomingData[index].image,
                       ),
                       Container(
-                        color: Colors.black.withOpacity(0.5),
+                        decoration: ShapeDecoration(
+                          color: Colors.black.withValues(alpha: 0.50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Text(
                             textAlign: TextAlign.center,
                             state.upcomingData[index].name,

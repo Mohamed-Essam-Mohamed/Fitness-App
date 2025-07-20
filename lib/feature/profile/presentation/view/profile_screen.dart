@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
-import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dummy/dummy_constant.dart';
 import 'package:fitness_app/core/extentions/media_query_extensions.dart';
@@ -27,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
+      padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 100),
       child: Column(
         children: [
           Text(
@@ -37,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
                 .titleLarge!
                 .copyWith(fontWeight: FontWeight.w600, height: 1.20),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
               return Skeletonizer(
@@ -68,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
