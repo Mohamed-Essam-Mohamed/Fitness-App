@@ -67,9 +67,9 @@ We are a team of Flutter developers who collaborated on this project with shared
 
 | Name           | Role                          | GitHub Profile                     |
 |----------------|-------------------------------|------------------------------------|
-| **ENG: Mohamed Esam** | Flutter Developer           | [@MohamedEsam](https://github.com/Mohamed-Essam-Mohamed) |
-| **ENG: Rana Osama** | Flutter Developer             | [@RanaOsama](https://github.com/RanaUsama20) |
-| **ENG: Amira Khaled** | Flutter Developer           | [@AmiraKhaled](https://github.com/Amira098) |
+| **ENG: Mohamed Esam** | Flutter Developer           | [@Mohamed Essam Eid](https://github.com/Mohamed-Essam-Mohamed) |
+| **ENG: Rana Osama** | Flutter Developer             | [@Rana Osama](https://github.com/RanaUsama20) |
+| **ENG: Amira Khaled** | Flutter Developer           | [@Amira Khaled](https://github.com/Amira098) |
 | **ENG: Amr Nabil** | Flutter Developer              | [@Amr Nabil](https://github.com/3mmrrrNabil) |
 | **ENG: Bakri** | Flutter Developer                  | [@Bakri](https://github.com/BakriCB9) |
 
