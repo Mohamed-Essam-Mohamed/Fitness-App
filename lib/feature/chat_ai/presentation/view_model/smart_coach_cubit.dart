@@ -76,8 +76,7 @@ class SmartCoachCubit extends Cubit<SmartCoachChatState> {
     }
   }
 
-  Future<List<MessageEntity>?> fetchMessagesByConversationId(
-      String conversationId) async {
+  Future<void> fetchMessagesByConversationId(String conversationId) async {
     emit(state.copyWith(baseState: BaseLoadingState()));
     try {
       final messages = await _fetchMessagesUseCase.call(conversationId);
