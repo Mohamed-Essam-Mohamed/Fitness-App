@@ -13,9 +13,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         const SizedBox(height: 20),
@@ -51,4 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
