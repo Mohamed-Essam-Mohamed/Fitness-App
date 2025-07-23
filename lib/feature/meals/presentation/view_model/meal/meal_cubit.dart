@@ -1,5 +1,5 @@
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
-import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart';
+import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_use_case.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

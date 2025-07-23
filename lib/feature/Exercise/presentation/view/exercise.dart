@@ -3,8 +3,8 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_state.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/build_sector.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
@@ -47,7 +47,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
     await cubit.fetchExercises(
       muscleId:
-          widget.primeMoverId.isEmpty ? "67c8499726895f87ce0aa9be" : widget.primeMoverId,
+          widget.primeMoverId.isEmpty ? '67c8499726895f87ce0aa9be' : widget.primeMoverId,
       difficultyId: difficultyId,
     );
 

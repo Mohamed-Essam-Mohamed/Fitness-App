@@ -3,7 +3,7 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
-import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
+import 'package:fitness_app/feature/app_section/widget/bottom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
@@ -26,8 +26,8 @@ class AppSection extends StatefulWidget {
 
 class AppSectionState extends State<AppSection> {
   final List<Color> gradient = [
-    AppColors.orange.withOpacity(0.3),
-    AppColors.orange.withOpacity(0.1),
+    AppColors.orange.withAlpha((0.3 * 255).toInt()),
+    AppColors.orange.withAlpha((0.1 * 255).toInt()),
     Colors.transparent
   ];
 

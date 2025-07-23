@@ -13,7 +13,7 @@ class CustomAuthContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
         decoration: BoxDecoration(
-          color: AppColors.black.withOpacity(0.2),
+          color: AppColors.black.withAlpha((0.2 * 255).toInt()),
           borderRadius: BorderRadius.circular(50),
           gradient: LinearGradient(
             begin: Alignment.topLeft,

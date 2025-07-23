@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_state.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
 
 class ExerciseListView extends StatelessWidget {
@@ -27,12 +27,15 @@ class ExerciseListView extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.status == ExerciseStatus.failure) {
-          return Center(child: Text('Error: ${state.error}', style: const TextStyle(color: Colors.white)));
+          return Center(
+              child: Text('Error: ${state.error}',
+                  style: const TextStyle(color: Colors.white)));
         }
 
         final exercises = state.exercises;
         if (exercises.isEmpty) {
-          return const Center(child: Text('No exercises found', style: TextStyle(color: Colors.white)));
+          return const Center(
+              child: Text('No exercises found', style: TextStyle(color: Colors.white)));
         }
 
         return Padding(
@@ -44,7 +47,8 @@ class ExerciseListView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
-                    child: Container(color: AppColors.darkBackground.withValues(alpha: 0.7)),
+                    child:
+                        Container(color: AppColors.darkBackground.withValues(alpha: 0.7)),
                   ),
                 ),
               ),
@@ -60,10 +64,8 @@ class ExerciseListView extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       cubit.setSelectedExercise(
-
                         videoUrl: videoUrl,
                         name: exercise.name,
-
                       );
 
                       if (scrollController.hasClients && scrollController.offset > 0) {
@@ -107,16 +109,21 @@ class ExerciseListView extends StatelessWidget {
                                   children: [
                                     Text(
                                       exercise.name,
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     const SizedBox(height: 4),
-                                    const Text("3 Groups * 15 Times", style: TextStyle(color: Colors.white70)),
+                                    const Text('3 Groups * 15 Times',
+                                        style: TextStyle(color: Colors.white70)),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.play_circle_fill, color: AppColors.orange, size: 33),
+                              const Icon(Icons.play_circle_fill,
+                                  color: AppColors.orange, size: 33),
                             ],
                           ),
                         ),

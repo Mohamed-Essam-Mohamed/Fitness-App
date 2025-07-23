@@ -1,9 +1,9 @@
 import 'package:fitness_app/core/common/widget/background_app.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/activity_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/goal_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/height_screen.dart';
-import 'package:fitness_app/feature/auth/presentation/view/complete_register/old_sceen.dart';
+import 'package:fitness_app/feature/auth/presentation/view/complete_register/old_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/register_screen.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/select_gender.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/weight_screen.dart';
@@ -12,7 +12,7 @@ import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
-  RegisterView({super.key});
+  const RegisterView({super.key});
 
   @override
   State<RegisterView> createState() => _RegisterViewState();

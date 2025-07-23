@@ -78,7 +78,7 @@ class RouteGenerator {
         return AnimationRoute(
           page: BlocProvider.value(
             value: serviceLocator.get<RegisterCubit>(),
-            child: RegisterView(),
+            child: const RegisterView(),
           ),
         );
 

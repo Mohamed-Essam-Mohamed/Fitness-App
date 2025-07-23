@@ -19,7 +19,7 @@ class RemoteMealsDataSourceImp implements RemoteMealsDataSource {
 
   @override
   Future<Result<CategoriesFoodEntity>> getCategories() async {
-    var token = await SharedPreferencesHelper.getString(AppValues.token);
+    final token = await SharedPreferencesHelper.getString(AppValues.token);
     final result = await _apiManager.execute<CategoriesModel>(() async {
       return _mealsRetrofitClient.getCategories('Bearer $token');
     });

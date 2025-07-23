@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/utils/validator.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';

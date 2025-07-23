@@ -36,7 +36,10 @@ class BottomItemNav extends StatelessWidget {
                     bottom: AppSizes.blockSizeHorizontal * 1.5,
                     child: SvgPicture.asset(
                       iconPath,
-                      color: AppColors.black,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.black,
+                        BlendMode.srcIn,
+                      ),
                       height: AppSizes.blockSizeHorizontal * 8,
                       width: AppSizes.blockSizeHorizontal * 8,
                     ),
@@ -48,7 +51,10 @@ class BottomItemNav extends StatelessWidget {
               curve: Curves.easeIn,
               child: SvgPicture.asset(
                 iconPath,
-                color: (currentIndex == index) ? AppColors.orange : AppColors.white,
+                colorFilter: ColorFilter.mode(
+                  (currentIndex == index) ? AppColors.orange : AppColors.white,
+                  BlendMode.srcIn,
+                ),
                 height: AppSizes.blockSizeHorizontal * 8,
                 width: AppSizes.blockSizeHorizontal * 8,
               ),

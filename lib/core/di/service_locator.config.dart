@@ -117,8 +117,8 @@ import 'package:fitness_app/feature/meals/data/repository_impl/meals_repository_
     as _i40;
 import 'package:fitness_app/feature/meals/domain/repository/meals_repository.dart'
     as _i774;
-import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart'
-    as _i666;
+import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_use_case.dart'
+    as _i917;
 import 'package:fitness_app/feature/meals/presentation/view_model/food_recommendation/food_recommendation_cubit.dart'
     as _i354;
 import 'package:fitness_app/feature/meals/presentation/view_model/meal/meal_cubit.dart'
@@ -270,14 +270,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
     gh.factory<_i669.RegisterUseCase>(
         () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
-    gh.factory<_i666.GetMealDetailsUseCase>(
-        () => _i666.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
+    gh.factory<_i917.GetMealDetailsUseCase>(
+        () => _i917.GetMealDetailsUseCase(gh<_i774.MealsRepository>()));
     gh.factory<_i176.RegisterCubit>(
         () => _i176.RegisterCubit(gh<_i669.RegisterUseCase>()));
-    gh.factory<_i354.FoodRecommendationCubit>(
-        () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
     gh.factory<_i133.ProfileCubit>(
         () => _i133.ProfileCubit(gh<_i73.GetDataProfileUseCase>()));
+    gh.factory<_i354.FoodRecommendationCubit>(
+        () => _i354.FoodRecommendationCubit(gh<_i917.GetMealDetailsUseCase>()));
+    gh.factory<_i379.MealCubit>(
+        () => _i379.MealCubit(gh<_i917.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(
@@ -293,10 +295,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i438.GetRecommendationTodayUseCase>(),
           gh<_i244.GetUpcomingWorkoutsCategoryUseCase>(),
           gh<_i583.GetUpcomingWorkoutsUseCase>(),
-          gh<_i289.GetRecommendationForYouUseCase>(),
-        ));
-    gh.factory<_i379.MealCubit>(() => _i379.MealCubit(
-          gh<_i666.GetMealDetailsUseCase>(),
           gh<_i289.GetRecommendationForYouUseCase>(),
         ));
     return this;

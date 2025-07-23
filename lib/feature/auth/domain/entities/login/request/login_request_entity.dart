@@ -1,6 +1,4 @@
-
-
-import '../../../../data/model/login/request/login_request_dto.dart';
+import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart';
 
 class LoginRequestEntity {
   const LoginRequestEntity({

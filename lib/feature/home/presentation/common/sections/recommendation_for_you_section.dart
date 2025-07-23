@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/common/loading/category_list_loading.dart';

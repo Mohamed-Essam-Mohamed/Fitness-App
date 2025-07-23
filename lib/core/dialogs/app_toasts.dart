@@ -27,7 +27,7 @@ abstract class AppToast {
       ),
       showProgressBar: true,
       backgroundColor: type == ToastificationType.success
-          ? AppColors.gray.withOpacity(0.1)
+          ? AppColors.gray.withAlpha((0.1 * 255).toInt())
           : type == ToastificationType.info
               ? Colors.blue
               : type == ToastificationType.warning

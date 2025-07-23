@@ -1,20 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
 
 class TopExercisePreview extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String? videoUrl;
-
   const TopExercisePreview({
     super.key,
     required this.imageUrl,
     required this.name,
     required this.videoUrl,
   });
+  final String imageUrl;
+  final String name;
+  final String? videoUrl;
 
   @override
   Widget build(BuildContext context) {

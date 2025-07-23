@@ -1,12 +1,11 @@
-import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
-import 'package:fitness_app/feature/meals/presentation/mappers/meal_Details_mapper.dart';
+import 'package:fitness_app/feature/meals/presentation/mappers/meal_details_mapper.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/nutrition_card_list_widget.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +62,7 @@ class TopSection extends StatelessWidget {
                     message: 'sorry this video deleted please watch another ');
           },
           child: const Center(
-              child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange)),
+              child: Icon(Icons.play_arrow, size: 50, color: AppColors.orange)),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

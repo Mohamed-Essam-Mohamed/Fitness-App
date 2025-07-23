@@ -1,8 +1,7 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_indicator_widget.dart';
@@ -95,7 +94,7 @@ class _SelectGenderState extends State<SelectGender> {
                           border: Border.all(
                             color: selectedGender == 'male'
                                 ? AppColors.orange
-                                : AppColors.white.withOpacity(0.8),
+                                : AppColors.white.withAlpha((0.8 * 255).toInt()),
                           ),
                           color: selectedGender == 'male'
                               ? AppColors.orange
@@ -134,7 +133,7 @@ class _SelectGenderState extends State<SelectGender> {
                       border: Border.all(
                         color: selectedGender == 'female'
                             ? AppColors.orange
-                            : AppColors.white.withOpacity(0.8),
+                            : AppColors.white.withAlpha((0.8 * 255).toInt()),
                       ),
                       color: selectedGender == 'female'
                           ? AppColors.orange

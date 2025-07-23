@@ -43,7 +43,10 @@ class MealsGrid extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.black.withOpacity(0.2), AppColors.black],
+                      colors: [
+                        AppColors.black.withAlpha((0.2 * 255).toInt()),
+                        AppColors.black
+                      ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),

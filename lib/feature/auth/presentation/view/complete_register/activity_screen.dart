@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/routes/routes.dart';
@@ -7,7 +6,7 @@ import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dar
 import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_indicator_widget.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:flutter/material.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toastification/toastification.dart';
@@ -130,7 +129,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                         minimumSize: const Size.fromHeight(30),
                       ),
                       onPressed: () {
-                        final level = "level${selectedIndex + 1}";
+                        final level = 'level${selectedIndex + 1}';
                         cubit.indexActivityLevel = selectedIndex;
                         cubit.activityLevel = level;
                         cubit.register();

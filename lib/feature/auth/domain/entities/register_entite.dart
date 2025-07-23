@@ -1,13 +1,4 @@
 class RegisterEntity {
-  final String email;
-  final String password;
-  final String gender;
-  final int age;
-  final int height;
-  final int weight;
-  final String goal;
-  final String activityLevel;
-
   RegisterEntity({
     required this.email,
     required this.password,
@@ -18,4 +9,12 @@ class RegisterEntity {
     required this.goal,
     required this.activityLevel,
   });
+  final String email;
+  final String password;
+  final String gender;
+  final int age;
+  final int height;
+  final int weight;
+  final String goal;
+  final String activityLevel;
 }

@@ -59,7 +59,9 @@ class _TextFormWidgetState extends State<TextFormWidget> {
               child: SvgPicture.asset(
                 widget.suffixIcon,
                 fit: BoxFit.contain,
-                color: isObscure ? null : AppColors.redOrange,
+                colorFilter: isObscure
+                    ? null
+                    : const ColorFilter.mode(AppColors.redOrange, BlendMode.srcIn),
               ),
             ),
           ),

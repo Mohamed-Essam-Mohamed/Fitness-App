@@ -138,8 +138,10 @@ class _SmartCoachScreenState extends State<SmartCoachScreen> {
                                               const EdgeInsets.symmetric(horizontal: 8),
                                           decoration: BoxDecoration(
                                             color: isBot
-                                                ? AppColors.gray.withOpacity(0.07)
-                                                : AppColors.orange.withOpacity(0.6),
+                                                ? AppColors.gray
+                                                    .withAlpha((0.07 * 255).toInt())
+                                                : AppColors.orange
+                                                    .withAlpha((0.6 * 255).toInt()),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: const Radius.circular(20),
                                               bottomRight: const Radius.circular(20),
@@ -181,7 +183,7 @@ class _SmartCoachScreenState extends State<SmartCoachScreen> {
                                 Expanded(
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.4),
+                                      color: Colors.black.withAlpha((0.4 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                     child: TextField(

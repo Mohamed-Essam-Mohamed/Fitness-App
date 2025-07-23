@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/enum/status.dart';
@@ -135,14 +133,12 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(getDataInfoStatus: Status.loading));
 
     try {
-      log('Fetching user data from SharedPreferences');
       final UserDataEntity? dataUser = await SharedPreferencesHelper.getDataUserPref();
       emit(state.copyWith(
         getDataInfoStatus: Status.success,
         dataUser: dataUser,
       ));
     } catch (e) {
-      log('Error fetching user data from SharedPreferences: $e');
       emit(state.copyWith(
         getDataInfoStatus: Status.failure,
         errorMessageMuscle: e.toString(),

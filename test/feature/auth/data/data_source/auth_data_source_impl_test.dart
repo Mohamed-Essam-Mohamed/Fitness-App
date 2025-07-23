@@ -17,7 +17,7 @@ void main() {
   late MockAuthRetrofitClient mockApiService;
   late RemoteAuthDataSourceImp dataSource;
   provideDummy<Result<LoginResponseDto?>>(
-    FailureResult(Exception("dummy")),
+    FailureResult(Exception('dummy')),
   );
   // provideDummy<Result<LoginRequestDto?>>(
   //   SuccessResult().data,
@@ -32,7 +32,7 @@ void main() {
   group('login', () {
     test('returns SuccessResult on successful login', () async {
       final loginRequest =
-          const LoginRequestDto(email: 'rana@mail.com', password: 'Zayn@123');
+          const LoginRequestDto(email: 'rana@mail.com', password: 'test@123');
       final loginResponse =
           const LoginResponseDto(message: 'Login success', token: 'token');
 

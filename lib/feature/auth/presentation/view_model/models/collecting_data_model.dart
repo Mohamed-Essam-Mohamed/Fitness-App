@@ -1,18 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class CollectingDataModel extends Equatable {
-  final String? gender;
-  final int? age;
-  final int? weight;
-  final int? height;
-  final String? goal;
-  final String? activityLevel;
-  final String? firstName;
-  final String? lastName;
-  final String? email;
-  final String? password;
-  final String? rePassword;
-
   const CollectingDataModel({
     this.gender,
     this.age,
@@ -26,6 +14,17 @@ class CollectingDataModel extends Equatable {
     this.password,
     this.rePassword,
   });
+  final String? gender;
+  final int? age;
+  final int? weight;
+  final int? height;
+  final String? goal;
+  final String? activityLevel;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? password;
+  final String? rePassword;
 
   CollectingDataModel copyWith({
     String? gender,

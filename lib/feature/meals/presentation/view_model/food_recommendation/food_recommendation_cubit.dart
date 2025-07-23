@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/categories_entity.dart';
-import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_usecase.dart';
+import 'package:fitness_app/feature/meals/domain/use_case/get_meal_details_use_case.dart';
 import 'package:fitness_app/feature/meals/presentation/view_model/food_recommendation/food_recommendation_state.dart';
 import 'package:injectable/injectable.dart';
 

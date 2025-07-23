@@ -25,12 +25,12 @@ void main() {
       ExerciseEntity(id: '1', name: 'Push Up', videoUrl: 'https://youtube.com/')
     ];
 
-    var result =SuccessResult<List<ExerciseEntity>>(expectedList);
+    final result = SuccessResult<List<ExerciseEntity>>(expectedList);
     provideDummy<Result<List<ExerciseEntity>>>(result);
     when(mockRepo.getExercises(muscleId, difficultyId))
         .thenAnswer((_) async => SuccessResult(expectedList));
 
-    final actual = await useCase.call(muscleId: muscleId, difficultyId: difficultyId) ;
+    final actual = await useCase.call(muscleId: muscleId, difficultyId: difficultyId);
 
     expect((actual as SuccessResult).data, expectedList);
 

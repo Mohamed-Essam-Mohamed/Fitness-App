@@ -53,12 +53,9 @@ class AuthInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
-    print('this is token from dio_module : $token');
-
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-
     return handler.next(options);
   }
 }
