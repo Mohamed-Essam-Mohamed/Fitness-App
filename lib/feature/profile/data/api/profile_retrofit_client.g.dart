@@ -20,11 +20,10 @@ class _ProfileRetrofitClient implements ProfileRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<GetProfileDto> getProfile(String token) async {
+  Future<GetProfileDto> getProfile() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GetProfileDto>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -49,13 +48,11 @@ class _ProfileRetrofitClient implements ProfileRetrofitClient {
 
   @override
   Future<GetProfileDto> updateDataProfile(
-    String token,
     UpdateProfileDto updateRequest,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(updateRequest.toJson());
     final _options = _setStreamType<GetProfileDto>(
@@ -80,11 +77,10 @@ class _ProfileRetrofitClient implements ProfileRetrofitClient {
   }
 
   @override
-  Future<void> updateProfileImage(File photo, String token) async {
+  Future<UpdatePhotoDto> updateProfileImage(File photo) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(
       MapEntry(
@@ -96,7 +92,7 @@ class _ProfileRetrofitClient implements ProfileRetrofitClient {
         ),
       ),
     );
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<UpdatePhotoDto>(
       Options(
         method: 'PUT',
         headers: _headers,
@@ -111,7 +107,15 @@ class _ProfileRetrofitClient implements ProfileRetrofitClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UpdatePhotoDto _value;
+    try {
+      _value = UpdatePhotoDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
