@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/network/remote/api_constants.dart';
+import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +15,8 @@ abstract class DioModule {
   CacheOptions provideCacheOptions() {
     return CacheOptions(
       store: MemCacheStore(),
-      policy: CachePolicy.forceCache, // default policy
+      policy: CachePolicy.request, // default policy
+      hitCacheOnNetworkFailure: true,
       hitCacheOnErrorCodes: [401, 403],
       priority: CachePriority.normal,
       maxStale: const Duration(days: 7),
@@ -61,8 +64,8 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    final pref = await SharedPreferences.getInstance();
-    final token = pref.getString('token');
+    final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
+    
     print('this is token from dio_module : $token');
 
     if (token != null && token.isNotEmpty) {

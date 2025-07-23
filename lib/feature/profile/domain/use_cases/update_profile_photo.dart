@@ -9,5 +9,5 @@ class UpdateProfilePhoto {
  const  UpdateProfilePhoto(this._profileRepository);
  final  ProfileRepository _profileRepository;
 
-  Future<Result<void>> call(File photo,String token)=>_profileRepository.updateProfilePhoto(photo, token);
+  Future<Result<String>> call(File photo)=>_profileRepository.updateProfilePhoto(photo);
 }

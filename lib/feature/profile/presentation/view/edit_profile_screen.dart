@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/animation/loading_shimmer.dart';
+import 'package:fitness_app/core/common/widget/custom_snack_bar.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/enum/status.dart';
@@ -33,9 +34,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(ImageAsset.thirdBg), fit: BoxFit.cover)),
+              image: AssetImage(ImageAsset.editProfileBackground),
+              fit: BoxFit.cover)),
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            BlocBuilder<ProfileCubit, ProfileState>(
+              bloc: widget.profileCubit,
+              buildWhen: (pre, cur) {
+                if (pre.updateProfileStatus != cur.updateProfileStatus) {
+                  return true;
+                }
+                return false;
+              },
+              builder: (context, state) {
+                if (state.updateProfileStatus == Status.loading) {
+                  return const CircularProgressIndicator(
+                    strokeWidth: 3,
+                    color: AppColors.orange,
+                  );
+                }
+                return TextButton(
+                    onPressed: () {
+                      widget.profileCubit.doIntend(UpdateDataProfileAction());
+                    },
+                    child: const Text('Save'));
+              },
+            )
+          ],
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
@@ -54,7 +80,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               },
               bloc: widget.profileCubit,
               builder: (context, state) {
-                print("it ren=build now bakkkar***************************");
                 if (state.getProfileStatus == Status.failure) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -90,134 +115,176 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         state.isGetProfileLoading
                             ? const LoadingShimmer(
-                                isCircular: true, width: 120, height: 120)
+                                isCircular: true, width: 100, height: 100)
                             : ChangeProfilePhoto(
                                 profileCubit: widget.profileCubit,
                                 url: state.dataUserEntity.photo,
                               ),
                         const SizedBox(height: 8),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: false,
-                              )
-                            : Text(
-                                '${state.dataUserEntity.firstName}  ${state.dataUserEntity.lastName}',
-                                style: theme.labelLarge!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                              ),
-                        const SizedBox(height: 40),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : CustomTextFormFieldForNameAndEmail(
-                                icon: SvgAsset.profile,
-                                controller: TextEditingController(
-                                    text: state.dataUserEntity.firstName),
-                              ),
-                        const SizedBox(height: 16),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : CustomTextFormFieldForNameAndEmail(
-                                icon: SvgAsset.profile,
-                                controller: TextEditingController(
-                                    text: state.dataUserEntity.lastName),
-                              ),
-                        const SizedBox(height: 16),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : CustomTextFormFieldForNameAndEmail(
-                                icon: SvgAsset.mail,
-                                controller: TextEditingController(
-                                    text: state.dataUserEntity.email),
-                              ),
-                        const SizedBox(height: 40),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: state.isGetProfileLoading
-                              ? CustomShimmerLoading(
-                                  isBig: false,
-                                )
-                              : const TitleTextForWeightGoalActivityLevel(
-                                  title: 'Your Weight',
+
+                        ///rebuild all Ui
+                        BlocConsumer<ProfileCubit, ProfileState>(
+                          bloc: widget.profileCubit,
+                          listener: (context, state) {
+                            if (state.updateProfileStatus == Status.success) {
+                              CustomSnackBar.showSnack(
+                                  context: context,
+                                  title: state.successMessage,
+                                  stateType: true);
+                            } else if (state.updateProfileStatus ==
+                                Status.failure) {
+                              CustomSnackBar.showSnack(
+                                  context: context,
+                                  title: state.errorMessage,
+                                  stateType: false);
+                            }
+                          },
+                          listenWhen: (pre, cur) {
+                            if (cur.updateProfileStatus !=
+                                pre.updateProfileStatus) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          buildWhen: (pre, cur) {
+                            if (cur.updateProfileStatus != Status.success) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (context, state) {
+                            print(
+                                'we only build in update state of type ${state.updateProfileStatus}');
+                            return Column(
+                              children: [
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: false,
+                                      )
+                                    : Text(
+                                        '${state.dataUserEntity.firstName}  ${state.dataUserEntity.lastName}',
+                                        style: theme.labelLarge!.copyWith(
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                const SizedBox(height: 40),
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : CustomTextFormFieldForNameAndEmail(
+                                        icon: SvgAsset.profile,
+                                        controller: widget
+                                            .profileCubit.firstNameController,
+                                      ),
+                                const SizedBox(height: 16),
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : CustomTextFormFieldForNameAndEmail(
+                                        icon: SvgAsset.profile,
+                                        controller: widget
+                                            .profileCubit.lastNameController,
+                                      ),
+                                const SizedBox(height: 16),
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : CustomTextFormFieldForNameAndEmail(
+                                        icon: SvgAsset.mail,
+                                        controller: widget
+                                            .profileCubit.emailController),
+                                const SizedBox(height: 40),
+                                Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: state.isGetProfileLoading
+                                      ? const CustomShimmerLoading(
+                                          isBig: false,
+                                        )
+                                      : const TitleTextForWeightGoalActivityLevel(
+                                          title: 'Your Weight',
+                                        ),
                                 ),
-                        ),
-                        const SizedBox(height: 16),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : TextFormField(
-                                controller: TextEditingController(
-                                    text:
-                                        state.dataUserEntity.weight.toString()),
-                                decoration: InputDecoration(
-                                  fillColor: AppColors.lightWhite.withAlpha(40),
-                                  filled: true,
+                                const SizedBox(height: 16),
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : TextFormField(
+                                        controller: TextEditingController(
+                                            text: state.dataUserEntity.weight
+                                                .toString()),
+                                        decoration: InputDecoration(
+                                          fillColor: AppColors.lightWhite
+                                              .withAlpha(40),
+                                          filled: true,
+                                        ),
+                                      ),
+                                const SizedBox(
+                                  height: 16,
                                 ),
-                              ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: state.isGetProfileLoading
-                              ? CustomShimmerLoading(
-                                  isBig: false,
-                                )
-                              : const TitleTextForWeightGoalActivityLevel(
-                                  title: 'Your Goal',
+                                Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: state.isGetProfileLoading
+                                      ? const CustomShimmerLoading(
+                                          isBig: false,
+                                        )
+                                      : const TitleTextForWeightGoalActivityLevel(
+                                          title: 'Your Goal',
+                                        ),
                                 ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : TextFormField(
-                                controller: TextEditingController(
-                                    text: state.dataUserEntity.goal),
-                                decoration: InputDecoration(
-                                  fillColor: AppColors.lightWhite.withAlpha(40),
-                                  filled: true,
+                                const SizedBox(
+                                  height: 16,
                                 ),
-                              ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: state.isGetProfileLoading
-                              ? CustomShimmerLoading(
-                                  isBig: false,
-                                )
-                              : const TitleTextForWeightGoalActivityLevel(
-                                  title: 'Your Activity Level',
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : TextFormField(
+                                        controller: TextEditingController(
+                                            text: state.dataUserEntity.goal),
+                                        decoration: InputDecoration(
+                                          fillColor: AppColors.lightWhite
+                                              .withAlpha(40),
+                                          filled: true,
+                                        ),
+                                      ),
+                                const SizedBox(
+                                  height: 16,
                                 ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        state.isGetProfileLoading
-                            ? CustomShimmerLoading(
-                                isBig: true,
-                              )
-                            : TextFormField(
-                                controller: TextEditingController(
-                                    text: state.dataUserEntity.activityLevel),
-                                decoration: InputDecoration(
-                                  fillColor: AppColors.lightWhite.withAlpha(40),
-                                  filled: true,
+                                Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: state.isGetProfileLoading
+                                      ? const CustomShimmerLoading(
+                                          isBig: false,
+                                        )
+                                      : const TitleTextForWeightGoalActivityLevel(
+                                          title: 'Your Activity Level',
+                                        ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                state.isGetProfileLoading
+                                    ? const CustomShimmerLoading(
+                                        isBig: true,
+                                      )
+                                    : TextFormField(
+                                        controller: TextEditingController(
+                                            text: state
+                                                .dataUserEntity.activityLevel),
+                                        decoration: InputDecoration(
+                                          fillColor: AppColors.lightWhite
+                                              .withAlpha(40),
+                                          filled: true,
+                                        ),
+                                      ),
+                              ],
+                            );
+                          },
+                        ),
                         const SizedBox(height: 50),
-                        // Elevet
                       ],
                     ),
                   ),
@@ -259,8 +326,8 @@ class TitleTextForWeightGoalActivityLevel extends StatelessWidget {
 }
 
 class CustomShimmerLoading extends StatelessWidget {
-  CustomShimmerLoading({required this.isBig, super.key});
-  bool isBig;
+  const CustomShimmerLoading({required this.isBig, super.key});
+  final bool isBig;
 
   @override
   Widget build(BuildContext context) {

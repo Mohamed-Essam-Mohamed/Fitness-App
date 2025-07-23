@@ -13,8 +13,8 @@ class ProfileRepositoryImp implements ProfileRepository {
   final ProfileRemoteDataSource _dataSource;
 
   @override
-  Future<Result<GetProfileEntity>> getProfile(String token) async {
-    final result = await _dataSource.getProfile(token);
+  Future<Result<GetProfileEntity>> getProfile() async {
+    final result = await _dataSource.getProfile();
     switch (result) {
       case SuccessResult<GetProfileEntity>():
         return SuccessResult<GetProfileEntity>(result.data);
@@ -25,13 +25,13 @@ class ProfileRepositoryImp implements ProfileRepository {
 
   @override
   Future<Result<GetProfileEntity>> updateProfile(
-      String token, UpdateProfileEntity updateProfileEntity) async {
+     UpdateProfileEntity updateProfileEntity) async {
     return await _dataSource.updateDataProfile(
-        token, updateProfileEntity.toUpdateProfileDto());
+         updateProfileEntity.toUpdateProfileDto());
   }
 
   @override
-  Future<Result<void>> updateProfilePhoto(File photo, String token) async {
-    return await _dataSource.updateProfilePhoto(photo, token);
+  Future<Result<String>> updateProfilePhoto(File photo) async {
+    return await _dataSource.updateProfilePhoto(photo);
   }
 }

@@ -200,12 +200,11 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         overlayColor: WidgetStateProperty.all(Colors.transparent),
-        foregroundColor: WidgetStateProperty.all(AppColors.black),
+        foregroundColor: WidgetStateProperty.all(AppColors.orange),
         textStyle: WidgetStateProperty.all(
           const TextStyle(
-            decoration: TextDecoration.underline,
             fontWeight: FontWeight.w400,
-            fontSize: 12,
+            fontSize: 16,
             color: AppColors.orange,
           ),
         ),
@@ -228,6 +227,5 @@ class AppTheme {
       showDragHandle: true,
       elevation: 0,
     ),
-
   );
 }

@@ -52,7 +52,6 @@ dependencies:
   #? Permissions: For handling runtime permissions
   permission_handler: ^12.0.0+1
   device_info_plus:
-  device_info_plus:
 
   #? Firebase: For Firebase services
   firebase_core: ^3.13.0
@@ -72,6 +71,7 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   dio_cache_interceptor: ^4.0.3
   path_provider: ^2.1.5
+
   smooth_page_indicator: ^1.2.1
   percent_indicator: ^4.2.5
   flutter_gemini: 3.0.0
@@ -97,9 +97,6 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets/png/icon-launcher.png'
-  adaptive_icon_background: '#242424'
-  adaptive_icon_foreground: 'assets/png/play-store-icon-launcher.png'
   image_path: 'assets/png/icon-launcher.png'
   adaptive_icon_background: '#242424'
   adaptive_icon_foreground: 'assets/png/play-store-icon-launcher.png'

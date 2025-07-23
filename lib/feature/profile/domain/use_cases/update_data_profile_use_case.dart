@@ -10,6 +10,6 @@ class UpdateDataProfileUseCase {
   final ProfileRepository _profileRepository;
 
   Future<Result<GetProfileEntity>> call(
-          String token, UpdateProfileEntity updateProfile) =>
-      _profileRepository.updateProfile(token, updateProfile);
+           UpdateProfileEntity updateProfile) =>
+      _profileRepository.updateProfile(updateProfile);
 }

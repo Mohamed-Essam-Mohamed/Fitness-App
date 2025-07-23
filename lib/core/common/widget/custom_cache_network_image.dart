@@ -23,7 +23,7 @@ class CustomCacheNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget image = CachedNetworkImage(
       imageUrl: imageUrl,
-      fit: fit,
+      fit: fit,   
       width: width,
       height: height,
       placeholder: (context, url) => _buildShimmer(),

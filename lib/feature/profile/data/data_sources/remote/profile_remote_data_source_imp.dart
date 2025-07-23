@@ -1,6 +1,4 @@
 import 'dart:io';
-
-
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/remote/api_manager.dart';
 import 'package:fitness_app/feature/profile/data/api/profile_retrofit_client.dart';
@@ -17,29 +15,31 @@ class ProfileRemoteDataSourceImp implements ProfileRemoteDataSource {
   
 
   @override
-  Future<Result<GetProfileEntity>> getProfile(String token) =>
+  Future<Result<GetProfileEntity>> getProfile() =>
       _apiManager.execute<GetProfileEntity>(() async {
-        final response = await _apiService.getProfile(token);
+        final response = await _apiService.getProfile();
 
         return response.toEntity();
       });
 
   @override
   Future<Result<GetProfileEntity>> updateDataProfile(
-      String token, UpdateProfileDto updateRequest) {
+       UpdateProfileDto updateRequest) {
     return _apiManager.execute(() async {
       final response = await _apiService.updateDataProfile(
-        token,
+      
         updateRequest,
+        
       );
       return response.toEntity();
     });
   }
 
   @override
-  Future<Result<void>> updateProfilePhoto(File photo, String token) {
-    return _apiManager.execute((){
-      return _apiService.updateProfileImage(photo, token);
+  Future<Result<String>> updateProfilePhoto(File photo) {
+    return _apiManager.execute(()async{
+      final ans=await  _apiService.updateProfileImage(photo);
+      return ans.message;
     });
   
   }

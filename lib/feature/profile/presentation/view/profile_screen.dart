@@ -5,16 +5,10 @@ import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
-import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dummy/dummy_constant.dart';
+import 'package:fitness_app/core/enum/status.dart';
 import 'package:fitness_app/core/routes/routes.dart';
-import 'package:fitness_app/feature/profile/presentation/view/edit_profile_screen.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
-import 'package:fitness_app/core/routes/routes.dart';
-import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
-import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/list_tile_profile_widget.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/select_language_widget.dart';
@@ -23,52 +17,99 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late final ProfileCubit _profileCubit;
+  late final TextTheme theme;
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit = serviceLocator.get<ProfileCubit>();
+  }
+
+  didChangeDependencies() {
+    theme = Theme.of(context).textTheme;
+  }
 
   @override
   Widget build(BuildContext context) {
     log('ProfileScreen');
     return BlocProvider(
-      create: (context) =>
-          serviceLocator<ProfileCubit>()..doIntend(GetDataProfileAction()),
+      create: (context) => _profileCubit..doIntend(GetDataProfileAction()),
       child: BackgroundApp(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
+          padding:
+              const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
           child: Column(
             children: [
               Text(
                 LocaleKeys.Profile_ProfileTitle.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
+                style: theme.titleLarge!
                     .copyWith(fontWeight: FontWeight.w600, height: 1.20),
               ),
               const SizedBox(height: 40),
               BlocBuilder<ProfileCubit, ProfileState>(
+                buildWhen: (pre, cur) {
+                  if (pre.getProfileStatus != cur.getProfileStatus) {
+                    return true;
+                  }
+                  return false;
+                },
                 builder: (context, state) {
                   return Skeletonizer(
                     enabled: state.isGetProfileLoading,
                     child: Column(
                       children: [
-                        CustomCacheNetworkImage(
-                          imageUrl: state.isGetProfileLoading
-                              ? dummyImageProfileUrl
-                              : state.dataUserEntity.photo,
-                          isCircular: true,
-                          width: 100,
-                          height: 100,
+                        BlocBuilder<ProfileCubit, ProfileState>(
+                          buildWhen: (pre, cur) {
+                            if (pre.profilePhotoStatus !=
+                                cur.profilePhotoStatus) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (context, state) {
+                            if (state.profilePhotoStatus == Status.loading) {
+                              return const CircleAvatar(
+                                  backgroundColor: AppColors.darkBackground,
+                                  radius: 50,
+                                  child: CircularProgressIndicator(
+                                      color: AppColors.orange));
+                            }
+                            return CustomCacheNetworkImage(
+                              imageUrl: state.isGetProfileLoading
+                                  ? dummyImageProfileUrl
+                                  : state.dataUserEntity.photo,
+                              isCircular: true,
+                              width: 100,
+                              height: 100,
+                            );
+                          },
                         ),
                         const SizedBox(height: 8),
-                        Text(
-                          state.isGetProfileLoading
-                              ? dummyText
-                              : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(fontWeight: FontWeight.w600, height: 1.20),
+                        BlocBuilder<ProfileCubit, ProfileState>(
+                          buildWhen: (pre, cur) {
+                            if (pre.updateProfileStatus != Status.success) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (context, state) {
+                            return Text(
+                              state.isGetProfileLoading
+                                  ? dummyText
+                                  : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
+                              textAlign: TextAlign.center,
+                              style: theme.labelLarge!.copyWith(
+                                  fontWeight: FontWeight.w600, height: 1.20),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -91,6 +132,10 @@ class ProfileScreen extends StatelessWidget {
                       image: SvgAsset.profile,
                       title: LocaleKeys.Profile_EditProfile.tr(),
                       trailing: _iconWidget(),
+                      onTap: () {
+                        Navigator.of(context).pushNamed(Routes.editProfile,
+                            arguments: _profileCubit);
+                      },
                     ),
                     _dividerWidget(),
                     ListTileProfileWidget(

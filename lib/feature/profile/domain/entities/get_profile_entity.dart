@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class GetProfileEntity {
   const GetProfileEntity({
     this.message = '',
@@ -8,7 +10,7 @@ class GetProfileEntity {
   final DataUserEntity user;
 }
 
-class DataUserEntity {
+class DataUserEntity extends Equatable {
   const DataUserEntity({
     this.id = '',
     this.firstName = '',
@@ -36,4 +38,42 @@ class DataUserEntity {
   final String goal;
   final String photo;
   final String createdAt;
+
+  DataUserEntity copyWith({
+    String? firstName,
+    String? lastName,
+    String? email,
+    int? age,
+    int? weight,
+    String? activityLevel,
+  }) {
+    return DataUserEntity(
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        email: email ?? this.email,
+        age: age ?? this.age,
+        weight: weight ?? this.weight,
+        activityLevel: activityLevel ?? this.activityLevel,
+        id: id,
+        createdAt: createdAt,
+        gender: gender,
+        goal: goal,
+        height: height,
+        photo: photo);
+  }
+
+  @override
+  List<Object?> get props => [
+        goal,
+        firstName,
+        lastName,
+        email,
+        height,
+        weight,
+        id,
+        photo,
+        createdAt,
+        age,
+        activityLevel,
+      ];
 }

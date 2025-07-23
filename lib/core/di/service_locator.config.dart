@@ -169,13 +169,21 @@ extension GetItInjectableX on _i174.GetIt {
         () => dioModule.providerInterceptor());
     gh.lazySingleton<_i674.AuthInterceptor>(
         () => dioModule.provideAuthInterceptor());
+    gh.lazySingleton<_i528.SmartCoachService>(() => _i528.SmartCoachService());
     gh.factory<_i755.ExerciseLocalDataSource>(
         () => _i886.ExerciseLocalDataSourceImpl());
+    gh.factory<_i99.SmartCoachRemoteDataSource>(
+        () => _i49.SmartCoachRemoteDataSourceImpl(
+              gh<_i528.SmartCoachService>(),
+              gh<_i974.FirebaseChatService>(),
+            ));
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
           gh<_i695.CacheOptions>(),
         ));
+    gh.factory<_i341.SmartCoachRepository>(() =>
+        _i341.SmartCoachRepositoryImpl(gh<_i99.SmartCoachRemoteDataSource>()));
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
@@ -188,18 +196,35 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i63.ProfileRetrofitClient>(
         () => _i63.ProfileRetrofitClient(gh<_i361.Dio>()));
-    gh.factory<_i99.SmartCoachRemoteDataSource>(
-        () => _i49.SmartCoachRemoteDataSourceImpl(
-              gh<_i528.SmartCoachService>(),
-              gh<_i974.FirebaseChatService>(),
-            ));
+    gh.factory<_i209.DeleteConversationUseCase>(() =>
+        _i209.DeleteConversationUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i399.FetchConversationSummariesUseCase>(() =>
+        _i399.FetchConversationSummariesUseCase(
+            gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i88.FetchMessagesUseCase>(
+        () => _i88.FetchMessagesUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
+        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i994.SaveMessagesUseCase>(
+        () => _i994.SaveMessagesUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i108.SetConversationTitleUseCase>(() =>
+        _i108.SetConversationTitleUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i94.StartNewConversationUseCase>(() =>
+        _i94.StartNewConversationUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i286.SmartCoachCubit>(() => _i286.SmartCoachCubit(
+          gh<_i992.GetSmartCoachResponseUseCase>(),
+          gh<_i108.SetConversationTitleUseCase>(),
+          gh<_i94.StartNewConversationUseCase>(),
+          gh<_i994.SaveMessagesUseCase>(),
+          gh<_i88.FetchMessagesUseCase>(),
+          gh<_i399.FetchConversationSummariesUseCase>(),
+          gh<_i209.DeleteConversationUseCase>(),
+        ));
     gh.factory<_i478.ExerciseRemoteDataSource>(
         () => _i91.ExerciseDataSourceImpl(
               gh<_i58.ExerciseRetrofitClient>(),
               gh<_i74.ApiManager>(),
             ));
-    gh.factory<_i341.SmartCoachRepository>(() =>
-        _i341.SmartCoachRepositoryImpl(gh<_i99.SmartCoachRemoteDataSource>()));
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
@@ -225,21 +250,6 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i774.MealsRepository>(
         () => _i40.MealsRepositoryImpl(gh<_i546.RemoteMealsDataSource>()));
-    gh.factory<_i209.DeleteConversationUseCase>(() =>
-        _i209.DeleteConversationUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i399.FetchConversationSummariesUseCase>(() =>
-        _i399.FetchConversationSummariesUseCase(
-            gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i88.FetchMessagesUseCase>(
-        () => _i88.FetchMessagesUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
-        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i994.SaveMessagesUseCase>(
-        () => _i994.SaveMessagesUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i108.SetConversationTitleUseCase>(() =>
-        _i108.SetConversationTitleUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i94.StartNewConversationUseCase>(() =>
-        _i94.StartNewConversationUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i227.ExerciseRepo>(
         () => _i90.ExerciseRepoImpl(gh<_i478.ExerciseRemoteDataSource>()));
     gh.factory<_i1031.ChangePasswordUseCase>(
@@ -250,15 +260,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i394.VerifyCodeUseCase(gh<_i911.AuthRepository>()));
     gh.lazySingleton<_i566.GetExercisesUseCase>(
         () => _i566.GetExercisesUseCase(gh<_i227.ExerciseRepo>()));
-    gh.factory<_i286.SmartCoachCubit>(() => _i286.SmartCoachCubit(
-          gh<_i992.GetSmartCoachResponseUseCase>(),
-          gh<_i108.SetConversationTitleUseCase>(),
-          gh<_i94.StartNewConversationUseCase>(),
-          gh<_i994.SaveMessagesUseCase>(),
-          gh<_i88.FetchMessagesUseCase>(),
-          gh<_i399.FetchConversationSummariesUseCase>(),
-          gh<_i209.DeleteConversationUseCase>(),
-        ));
     gh.factory<_i737.ExerciseCubit>(
         () => _i737.ExerciseCubit(gh<_i566.GetExercisesUseCase>()));
     gh.factory<_i369.ForgetPasswordCubit>(() => _i369.ForgetPasswordCubit(

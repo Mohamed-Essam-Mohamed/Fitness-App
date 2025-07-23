@@ -126,6 +126,7 @@ class ImageAsset {
   static const aerobicsVector = 'assets/png/O15_24.png';
   static const trainerVector = 'assets/png/O15_9.png';
   static const ellipse= "assets/png/Ellipse.png";
+  static const editProfileBackground='assets/png/home-bg.png';
 
 }
 

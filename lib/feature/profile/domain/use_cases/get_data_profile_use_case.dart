@@ -8,6 +8,6 @@ class GetDataProfileUseCase {
   const GetDataProfileUseCase(this._profileRepository);
   final ProfileRepository _profileRepository;
 
-  Future<Result<GetProfileEntity>> call(String token) =>
-      _profileRepository.getProfile(token);
+  Future<Result<GetProfileEntity>> call() =>
+      _profileRepository.getProfile();
 }
