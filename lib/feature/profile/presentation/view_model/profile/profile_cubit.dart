@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
@@ -16,7 +14,7 @@ part 'profile_state.dart';
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this._getDataProfileUseCase) : super(const ProfileState());
-  GetDataProfileUseCase _getDataProfileUseCase;
+  final GetDataProfileUseCase _getDataProfileUseCase;
 
   Future<void> doIntend(ProfileAction action) async {
     switch (action) {

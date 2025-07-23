@@ -1,4 +1,3 @@
-import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/feature/home/presentation/common/loading/tab_container_loading.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/tab_container_widget.dart';

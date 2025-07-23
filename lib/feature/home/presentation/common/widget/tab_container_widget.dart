@@ -3,7 +3,7 @@ import 'package:fitness_app/feature/home/presentation/common/widget/tab_item_wid
 import 'package:flutter/material.dart';
 
 class TabContainerWidget extends StatefulWidget {
-  TabContainerWidget({
+  const TabContainerWidget({
     super.key,
     required this.upcomingCategory,
     required this.callBack,
@@ -13,12 +13,21 @@ class TabContainerWidget extends StatefulWidget {
   final List<MuscleItemGroupEntity> upcomingCategory;
   final Function(String id) callBack;
   final Function(int index) onTabSelected;
-  int selectedIndex;
+  final int selectedIndex;
+
   @override
   State<TabContainerWidget> createState() => _TabContainerWidgetState();
 }
 
 class _TabContainerWidgetState extends State<TabContainerWidget> {
+  late int _currentSelectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSelectedIndex = widget.selectedIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,17 +47,18 @@ class _TabContainerWidgetState extends State<TabContainerWidget> {
             indicatorPadding: EdgeInsets.zero,
             labelPadding: EdgeInsets.zero,
             onTap: (index) {
-              widget.selectedIndex = index;
-              widget.onTabSelected(index);
-              widget.callBack(widget.upcomingCategory[index].id);
-              setState(() {});
+              setState(() {
+                _currentSelectedIndex = index;
+                widget.onTabSelected(index);
+                widget.callBack(widget.upcomingCategory[index].id);
+              });
             },
             tabs: widget.upcomingCategory
                 .map(
                   (source) => TabItemWidget(
                     category: source,
                     isSelected:
-                        widget.selectedIndex == widget.upcomingCategory.indexOf(source),
+                        _currentSelectedIndex == widget.upcomingCategory.indexOf(source),
                   ),
                 )
                 .toList(),

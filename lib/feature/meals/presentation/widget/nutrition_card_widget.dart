@@ -3,9 +3,9 @@ import 'package:fitness_app/feature/meals/presentation/entity/nutrition_entity.d
 import 'package:flutter/material.dart';
 
 class NutritionCardWidget extends StatelessWidget {
-   NutritionCardWidget({super.key, required this.nutritionEntity});
+  const NutritionCardWidget({super.key, required this.nutritionEntity});
 
-  NutritionEntity nutritionEntity;
+  final NutritionEntity nutritionEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +19,15 @@ class NutritionCardWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(nutritionEntity.value,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: AppColors.white
-              )),
-          Text(nutritionEntity.label, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: AppColors.orange
-          )),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: AppColors.white)),
+          Text(nutritionEntity.label,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: AppColors.orange)),
         ],
       ),
     );

@@ -6,7 +6,6 @@ import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/common/loading/category_list_loading.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/container_blur_widget.dart';
-import 'package:fitness_app/feature/meals/presentation/entity/meal_details_screen_args.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

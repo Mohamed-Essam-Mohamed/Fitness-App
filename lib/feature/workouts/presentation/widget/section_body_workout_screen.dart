@@ -1,8 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/core/common/animation/loading_shimmer.dart';
 import 'package:fitness_app/core/common/widget/custom_cache_network_image.dart';
-import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:flutter/material.dart';
