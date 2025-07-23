@@ -8,25 +8,31 @@ Through a personalized onboarding process, users define their goals and current 
 - 🍽️ Healthy meal plans with cooking video tutorials
 - 🔥 Full control over calorie tracking and nutritional intake
 - 💬 Interactive chat with a fitness-specific AI coach
+- ✅ Easy-to-use interface with a smooth and friendly experience
+- 🧑‍🏫 Replaces the need for a personal trainer
+- 🔔 Daily reminders to keep you on track if you skip workouts
+- 📈 Progress tracking until you reach your fitness goals
+- 🗓️ Daily personalized workout and nutrition recommendations to keep things fresh and exciting
+
 
 ## Skills
-
-- Clean and modular **MVI Architecture** and  **Clean Architecture**
+- Clean and modular **MVI Architecture**,  **Clean Architecture** **Microservices**
 - **State Management:** using Cubit and Bloc (flutter_bloc)
 - **API Integration:** via Dio + Retrofit
-- **Firebase Integration:** App Distribution + Crashlytics + Dashboard
+- **Firebase Integration:** App Distribution + Crashlytics + Dashboard + Cloud Messaging
 - **Unit Testing** , **Bloc Testing** and **Widget Testing**
 - **Secure & Local Storage:** shared_preferences + flutter_secure_storage
-- **CI/CD:** GitHub Actions, Linting, CodeCov, SonarQube
+- **CI/CD:** GitHub Actions to Automation Linting, Unit Testing, Bloc Testing, Integration Testing, Build APK, Distribute APK, and Code Coverage.
 - **Agile Process:** Jira + Scrum + Git Workflow + Github workflow
 - **Internationalization** using `easy_localization`
-- Responsive UI for all devices
+- Responsive UI for all mobile devices
+- SonarQube and codecov
+- Dio cache interceptor `dio_cache_interceptor`
+- Best Performance App
 - Teamwork
 
 ## 📂 Project Structure
-<img width="337" height="631" alt="image" src="https://github.com/user-attachments/assets/1b2de7ce-68d8-46ed-bef9-b7fdd846eab4" />
-
-
+<img width="448" height="735" alt="Screenshot 2025-07-24 004442" src="https://github.com/user-attachments/assets/5e4c499c-7e6b-4cd0-9a00-bf399c9d8092" />
 
 
 
@@ -34,8 +40,8 @@ Through a personalized onboarding process, users define their goals and current 
 
 | Category        | Tools & Packages |
 |----------------|------------------|
-| **State Management** | `flutter_bloc`, `equatable`, `rxdart` |
-| **Networking**        | `dio`, `retrofit`, `pretty_dio_logger` |
+| **State Management** | `flutter_bloc`, `equatable` |
+| **Networking**        | `dio`, `retrofit`, `pretty_dio_logger`,  `dio_cache_interceptor` |
 | **UI & UX**           | `flutter_svg`, `shimmer`, `lottie`, `toastification`, `youtube_player_flutter` |
 | **Storage**           | `shared_preferences`, `flutter_secure_storage` |
 | **Localization**      | `easy_localization` |
