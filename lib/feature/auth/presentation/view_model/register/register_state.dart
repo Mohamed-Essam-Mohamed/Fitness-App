@@ -4,15 +4,14 @@ import 'package:fitness_app/feature/auth/presentation/view_model/models/collecti
 enum RegisterStatus { initial, loading, success, failure }
 
 class RegisterState extends Equatable {
-  final RegisterStatus status;
-  final String? errorMessage;
-  final CollectingDataModel? data;
-
   const RegisterState({
     this.status = RegisterStatus.initial,
     this.errorMessage,
     this.data,
   });
+  final RegisterStatus status;
+  final String? errorMessage;
+  final CollectingDataModel? data;
 
   RegisterState copyWith({
     RegisterStatus? status,
@@ -21,7 +20,7 @@ class RegisterState extends Equatable {
   }) {
     return RegisterState(
       status: status ?? this.status,
-      errorMessage:  errorMessage ??this.errorMessage,
+      errorMessage: errorMessage ?? this.errorMessage,
       data: data ?? this.data,
     );
   }

@@ -211,8 +211,8 @@ class AppTheme {
       ),
     ),
     radioTheme: const RadioThemeData(
-      fillColor: const WidgetStatePropertyAll((AppColors.orange)),
-      overlayColor: const WidgetStatePropertyAll(AppColors.orange),
+      fillColor: WidgetStatePropertyAll((AppColors.orange)),
+      overlayColor: WidgetStatePropertyAll(AppColors.orange),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       shape: RoundedRectangleBorder(

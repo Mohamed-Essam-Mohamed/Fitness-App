@@ -1,6 +1,5 @@
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BottomSection extends StatefulWidget {
   const BottomSection({super.key});
@@ -36,21 +35,22 @@ class _BottomSectionState extends State<BottomSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              child: SvgPicture.asset(ImageAsset.facebook),
+              child: Image.asset(ImageAsset.facebook),
               onTap: () {},
             ),
             const SizedBox(width: 16),
             InkWell(
-              child: SvgPicture.asset(ImageAsset.google),
+              child: Image.asset(ImageAsset.google),
               onTap: () {},
             ),
             const SizedBox(width: 16),
             InkWell(
-              child: SvgPicture.asset(ImageAsset.apple),
+              child: Image.asset(ImageAsset.apple),
               onTap: () {},
             ),
           ],
         ),
+        const SizedBox(height: 10),
       ],
     );
   }

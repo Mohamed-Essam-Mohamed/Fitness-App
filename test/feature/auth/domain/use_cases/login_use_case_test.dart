@@ -19,7 +19,7 @@ void main() {
   setUp(() {
     repo = MockAuthRepository();
     useCase = LoginUseCase(repo);
-    loginRequest = LoginRequestEntity(
+    loginRequest = const LoginRequestEntity(
       password: 'pass@123',
       email: 'mail@mail.com',
     );
@@ -29,7 +29,7 @@ void main() {
     test(
         'should call login on the repo and return SuccessResult when repository succeeds',
         () async {
-      final response = LoginResponseEntity(message: 'login successfully');
+      final response = const LoginResponseEntity(message: 'login successfully');
       final result = SuccessResult<LoginResponseEntity?>(response);
       provideDummy<Result<LoginResponseEntity?>>(result);
       when(repo.login(loginRequest)).thenAnswer((_) async => result);

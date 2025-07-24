@@ -16,11 +16,11 @@ InkWell popWidget(BuildContext context, void Function() onTap) {
           fit: BoxFit.scaleDown,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("|",
+            children: [
+              Text('|',
                   style: TextStyle(
                       fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
-              Text("<",
+              Text('<',
                   style: TextStyle(
                       fontSize: 17, fontWeight: FontWeight.w900, color: Colors.white)),
             ],

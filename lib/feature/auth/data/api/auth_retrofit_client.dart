@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_app/core/constants/app_key_pref.dart';
 import 'package:fitness_app/core/network/remote/api_constants.dart';
-import 'package:fitness_app/feature/auth/data/model/respones/register_response.dart';
+import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart';
+import 'package:fitness_app/feature/auth/data/model/response/register_response.dart';
 import 'package:fitness_app/feature/auth/data/model/login/request/login_request_dto.dart';
 import 'package:fitness_app/feature/auth/data/model/login/response/login_response_dto.dart';
 import 'package:fitness_app/feature/auth/data/model/forget_password/request/change_password_request_dto.dart';
@@ -13,7 +14,6 @@ import 'package:fitness_app/feature/auth/data/model/forget_password/response/ver
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-import '../model/request/register_request._model.dart';
 
 part 'auth_retrofit_client.g.dart';
 
@@ -22,10 +22,6 @@ part 'auth_retrofit_client.g.dart';
 abstract class AuthRetrofitClient {
   @factoryMethod
   factory AuthRetrofitClient(Dio dio) = _AuthRetrofitClient;
-
-  //  @POST(ApiConstants.nameEndpoint)
-  // Future<ModelResponseDto> function(
-  //     @Body() ModelRequestDto modelRequestDto);
 
   @POST(AppKeyPref.registerApiKey)
   Future<RegisterResponse> register(@Body() RegisterRequestModel body);

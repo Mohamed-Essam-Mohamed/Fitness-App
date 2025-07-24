@@ -8,8 +8,6 @@ class FirebaseChatService {
   final _firestore = FirebaseFirestore.instance;
 
   Future<String> get userId async {
-    // final prefs = await SharedPreferences.getInstance();
-    // return prefs.getString(AppValues.id) ?? 'guest_user';
     final data = await SharedPreferencesHelper.getDataUserPref();
     return data?.id ?? 'guest_user';
   }
@@ -78,7 +76,7 @@ class FirebaseChatService {
         .orderBy('timestamp', descending: true)
         .get();
 
-    List<Map<String, dynamic>> summaries = [];
+    final List<Map<String, dynamic>> summaries = [];
 
     for (var doc in snapshot.docs) {
       final convoId = doc.id;

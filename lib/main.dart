@@ -1,12 +1,11 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/firebase_options.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/core/routes/route_generator.dart';
@@ -30,12 +29,16 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 
   final initialRoute = await getInitialRoute();
+
   runApp(
     EasyLocalization(
       supportedLocales: AppValues.supportedLocales,
       fallbackLocale: AppValues.englishLocale,
       path: AppValues.pathTranslation,
-      child: MyApp(initialRoute: initialRoute),
+      child: DevicePreview(
+        enabled: false,
+        builder: (context) => MyApp(initialRoute: initialRoute), // Wrap your app
+      ),
     ),
   );
 }
@@ -60,7 +63,7 @@ class MyApp extends StatelessWidget {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
             textScaler: TextScaler.linear(
-              (MediaQuery.textScaleFactorOf(context)).clamp(0.85, 1.2),
+              MediaQuery.textScalerOf(context).scale(1.0).clamp(0.85, 1.2),
             ),
           ),
           child: MaterialApp(

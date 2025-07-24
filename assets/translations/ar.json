@@ -115,7 +115,8 @@
         "RecommendationForYou": "توصيات لك",
         "RecommendationToday": "توصية اليوم",
         "UpcomingWorkouts": "التمارين القادمة",
-        "workout": "التمارين"
+        "workout": "التمارين",
+        "SeeAll": "عرض الكل"
     },
     "Error": {
         "LoginFailed": "فشل تسجيل الدخول",

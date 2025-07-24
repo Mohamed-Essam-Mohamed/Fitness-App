@@ -1,5 +1,4 @@
 import 'package:fitness_app/feature/auth/data/data_source/auth_data_source_impl.dart';
-import 'package:fitness_app/feature/auth/domain/entities/login/response/login_response_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -18,7 +17,7 @@ void main() {
   late MockAuthRetrofitClient mockApiService;
   late RemoteAuthDataSourceImp dataSource;
   provideDummy<Result<LoginResponseDto?>>(
-    FailureResult(Exception("dummy")),
+    FailureResult(Exception('dummy')),
   );
   // provideDummy<Result<LoginRequestDto?>>(
   //   SuccessResult().data,
@@ -32,8 +31,10 @@ void main() {
 
   group('login', () {
     test('returns SuccessResult on successful login', () async {
-      final loginRequest = LoginRequestDto(email: 'rana@mail.com', password: 'Zayn@123');
-      final loginResponse = LoginResponseDto(message: "Login success", token: "token");
+      final loginRequest =
+          const LoginRequestDto(email: 'rana@mail.com', password: 'test@123');
+      final loginResponse =
+          const LoginResponseDto(message: 'Login success', token: 'token');
 
       when(mockApiManager.execute<LoginResponseDto?>(any)).thenAnswer(
         (_) async => SuccessResult<LoginResponseDto?>(loginResponse),
@@ -47,8 +48,9 @@ void main() {
     });
 
     test('returns FailureResult on failed login', () async {
-      final loginRequest = LoginRequestDto(email: 'rana@mail.com', password: '1234');
-      final exception = Exception("Invalid email or password");
+      final loginRequest =
+          const LoginRequestDto(email: 'rana@mail.com', password: '1234');
+      final exception = Exception('Invalid email or password');
 
       when(mockApiManager.execute<LoginResponseDto?>(any)).thenAnswer(
         (_) async => FailureResult<LoginResponseDto?>(exception),

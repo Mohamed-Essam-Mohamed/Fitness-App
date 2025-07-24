@@ -12,8 +12,8 @@ abstract class AppDialogs {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return WillPopScope(
-          onWillPop: () async => false,
+        return PopScope(
+          canPop: false,
           child: AlertDialog(
             backgroundColor: Colors.transparent,
             content: Lottie.asset(
@@ -193,22 +193,21 @@ abstract class AppDialogs {
 typedef DialogOnConfirm = void Function();
 
 class AppCustomDialog extends StatelessWidget {
-  final String title;
-  final String? message;
-  final String confirmButtonText;
-  final String cancelButtonText;
-  final VoidCallback onConfirm;
-  final VoidCallback? onCancel;
-
   const AppCustomDialog({
-    Key? key,
+    super.key,
     required this.title,
     this.message,
     this.confirmButtonText = 'OK',
     this.cancelButtonText = 'Cancel',
     required this.onConfirm,
     this.onCancel,
-  }) : super(key: key);
+  });
+  final String title;
+  final String? message;
+  final String confirmButtonText;
+  final String cancelButtonText;
+  final VoidCallback onConfirm;
+  final VoidCallback? onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -253,7 +252,8 @@ class AppCustomDialog extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      side: BorderSide(color: Colors.white.withOpacity(0.5)),
+                      side:
+                          BorderSide(color: Colors.white.withAlpha((0.5 * 255).toInt())),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),

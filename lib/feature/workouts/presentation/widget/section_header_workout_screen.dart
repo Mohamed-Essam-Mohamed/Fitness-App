@@ -1,4 +1,3 @@
-import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/feature/home/presentation/common/loading/tab_container_loading.dart';
 import 'package:fitness_app/feature/home/presentation/common/widget/tab_container_widget.dart';
@@ -14,7 +13,6 @@ class SectionHeaderWorkoutScreen extends StatefulWidget {
 }
 
 class _SectionHeaderWorkoutScreenState extends State<SectionHeaderWorkoutScreen> {
-  int selectCategoryIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -26,11 +24,18 @@ class _SectionHeaderWorkoutScreenState extends State<SectionHeaderWorkoutScreen>
           if (state.isUpcomingCategoryLoading || state.isUpcomingCategoryFailure) {
             return const TabContainerLoading();
           }
-          return TabContainerWidget(
-            upcomingCategory: state.upcomingCategory,
-            callBack: (id) => context
-                .read<HomeCubit>()
-                .doIntend(AppValues.english, GetUpcomingData(id: id)),
+          return Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: TabContainerWidget(
+              upcomingCategory: state.upcomingCategory,
+              selectedIndex: context.read<HomeCubit>().selectedIndex,
+              onTabSelected: (index) {
+                context.read<HomeCubit>().selectedIndex = index;
+              },
+              callBack: (id) => context
+                  .read<HomeCubit>()
+                  .doIntend(AppValues.english, GetUpcomingData(id: id)),
+            ),
           );
         },
       ),

@@ -1,6 +1,6 @@
 import 'package:fitness_app/feature/Exercise/domain/entity/entity.dart';
 import 'package:fitness_app/feature/Exercise/domain/use_case/exercise_use_case.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:injectable/injectable.dart';
@@ -56,7 +56,6 @@ class ExerciseCubit extends Cubit<ExerciseState> {
     }
   }
 
-
   void setSelectedExercise({
     required String name,
     required String videoUrl,
@@ -67,10 +66,12 @@ class ExerciseCubit extends Cubit<ExerciseState> {
       selectedExerciseImage: _getYoutubeThumbnail(videoUrl),
     ));
   }
+
   String _getYoutubeThumbnail(String url) {
     final id = _extractYoutubeId(url);
     return 'https://img.youtube.com/vi/$id/0.jpg';
   }
+
   String _extractYoutubeId(String url) {
     final uri = Uri.tryParse(url);
     if (uri == null) return '';
@@ -82,4 +83,3 @@ class ExerciseCubit extends Cubit<ExerciseState> {
     return '';
   }
 }
-

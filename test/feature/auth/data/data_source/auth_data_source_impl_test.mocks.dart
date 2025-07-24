@@ -27,7 +27,7 @@ import 'package:fitness_app/feature/auth/data/model/login/response/login_respons
     as _i6;
 import 'package:fitness_app/feature/auth/data/model/request/register_request._model.dart'
     as _i12;
-import 'package:fitness_app/feature/auth/data/model/respones/register_response.dart'
+import 'package:fitness_app/feature/auth/data/model/response/register_response.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i10;

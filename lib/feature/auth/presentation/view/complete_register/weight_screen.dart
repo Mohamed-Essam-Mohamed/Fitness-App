@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
@@ -6,14 +5,11 @@ import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_i
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
 
 class WeightScreen extends StatefulWidget {
   const WeightScreen({super.key, required this.pageController});
@@ -112,7 +108,7 @@ class _WeightScreenState extends State<WeightScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Kg",
+                  'Kg',
                   style: AppTheme.lightTheme.textTheme.bodySmall!.copyWith(
                     color: AppColors.orange,
                     fontSize: 10,
@@ -149,9 +145,11 @@ class _WeightScreenState extends State<WeightScreen> {
                             fontWeight: FontWeight.w700,
                             color: number == weight
                                 ? AppColors.orange
-                                : AppColors.white.withOpacity(
-                                    (1.1 - (distanceFromCenter / (itemWidth * 4)))
-                                        .clamp(0.2, 1.0),
+                                : Colors.white.withAlpha(
+                                    (((1.1 - (distanceFromCenter / (itemWidth * 4)))
+                                                .clamp(0.2, 1.0)) *
+                                            255)
+                                        .round(),
                                   ),
                           ),
                         ),
@@ -164,9 +162,6 @@ class _WeightScreenState extends State<WeightScreen> {
                   size: 50,
                   color: AppColors.orange,
                 ),
-                //!
-
-                //!
                 const SizedBox(height: 24),
                 BounceInDown(
                   delay: const Duration(milliseconds: 700),
@@ -178,7 +173,6 @@ class _WeightScreenState extends State<WeightScreen> {
                       ),
                     ),
                     onPressed: () {
-                      final userData = cubit.weight = weight;
                       widget.pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,

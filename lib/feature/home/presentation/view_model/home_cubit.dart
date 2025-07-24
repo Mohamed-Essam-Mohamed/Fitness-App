@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/enum/status.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/common/helper.dart';
+import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
+import 'package:fitness_app/feature/auth/domain/entities/login/response/user_data_entity.dart';
 import 'package:fitness_app/feature/home/domain/entities/category_Item_entity.dart';
 import 'package:fitness_app/feature/home/domain/entities/recommendation_for_you_entity.dart';
 import 'package:fitness_app/feature/home/domain/entities/recommendation_tody_entity.dart';
@@ -41,6 +43,7 @@ class HomeCubit extends Cubit<HomeState> {
           _getRecommendationToDay(getLang),
           _getUpcomingWorkoutsCategory(getLang),
           _getRecommendationForYou(),
+          _getDataUserFromPref(),
         ]);
       case GetUpcomingData():
         await _getUpcomingWorkouts(getLang, action.id);
@@ -123,6 +126,23 @@ class HomeCubit extends Cubit<HomeState> {
           getRecommendationFYStatus: Status.failure,
           errorMessageMuscle: Helper.getMessageFromException(result.exception),
         ));
+    }
+  }
+
+  Future<void> _getDataUserFromPref() async {
+    emit(state.copyWith(getDataInfoStatus: Status.loading));
+
+    try {
+      final UserDataEntity? dataUser = await SharedPreferencesHelper.getDataUserPref();
+      emit(state.copyWith(
+        getDataInfoStatus: Status.success,
+        dataUser: dataUser,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        getDataInfoStatus: Status.failure,
+        errorMessageMuscle: e.toString(),
+      ));
     }
   }
 }

@@ -18,14 +18,14 @@ void main() {
   late MockLoginUseCase mockLoginUseCase;
   late LoginCubit loginCubit;
   provideDummy<Result<LoginRequestEntity?>>(
-    FailureResult(Exception("dummy")),
+    FailureResult(Exception('dummy')),
   );
   provideDummy<Result<LoginResponseEntity?>>(
-    FailureResult(Exception("dummy")),
+    FailureResult(Exception('dummy')),
   );
   setUp(() {
     mockLoginUseCase = MockLoginUseCase();
-    SharedPreferences.setMockInitialValues({}); // Clear shared prefs
+    SharedPreferences.setMockInitialValues({});
     loginCubit = LoginCubit(mockLoginUseCase);
   });
 
@@ -39,7 +39,7 @@ void main() {
       password: 'password123',
     );
 
-    final userData = UserDataEntity(
+    final userData = const UserDataEntity(
       id: '1',
       email: 'test@example.com',
       firstName: 'Test',

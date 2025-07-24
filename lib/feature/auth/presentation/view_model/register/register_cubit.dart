@@ -19,14 +19,14 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController password = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  String gender = "male";
+  String gender = 'male';
   int age = 25;
   int weight = 80;
   int height = 85;
   int indexGoal = 2;
   int indexActivityLevel = 1;
-  String goal = "Gain weight";
-  String activityLevel = "level1";
+  String goal = 'Gain weight';
+  String activityLevel = 'level1';
 
   CollectingDataModel data = const CollectingDataModel();
 

@@ -16,9 +16,9 @@ class LoginBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 50),
+          const SizedBox(height: 40),
           const LogoAppWidget(),
-          const SizedBox(height: 88),
+          const SizedBox(height: 50),
           AnimationText(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 
@@ -142,9 +141,9 @@ class SelectWidget extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.8,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withAlpha((0.5 * 255).toInt()),
             ),
-            color: AppColors.lightGray.withOpacity(0.2),
+            color: AppColors.lightGray.withAlpha((0.2 * 255).toInt()),
             borderRadius: BorderRadius.circular(30),
           ),
           child: Row(

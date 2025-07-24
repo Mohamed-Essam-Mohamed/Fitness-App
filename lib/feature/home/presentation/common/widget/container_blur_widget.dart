@@ -14,7 +14,7 @@ class ContainerBlurWidget extends StatelessWidget {
       child: Container(
         padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
         decoration: BoxDecoration(
-          color: AppColors.black.withOpacity(0.01),
+          color: AppColors.black.withAlpha((0.01 * 255).toInt()),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

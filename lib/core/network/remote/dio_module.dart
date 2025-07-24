@@ -9,8 +9,6 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 @module
 abstract class DioModule {
-
-
   @lazySingleton
   CacheOptions provideCacheOptions() {
     return CacheOptions(
@@ -22,12 +20,11 @@ abstract class DioModule {
       maxStale: const Duration(days: 7),
     );
   }
-  
-  @lazySingleton
-  Dio provideDio(PrettyDioLogger logger, AuthInterceptor authInterceptor,CacheOptions cacheOptions) {
-    final dio = Dio();
 
-    
+  @lazySingleton
+  Dio provideDio(PrettyDioLogger logger, AuthInterceptor authInterceptor,
+      CacheOptions cacheOptions) {
+    final dio = Dio();
 
     dio.options = BaseOptions(
       connectTimeout: const Duration(seconds: 40),
@@ -40,7 +37,7 @@ abstract class DioModule {
       authInterceptor,
       logger,
     ]);
-    
+
     return dio;
   }
 
@@ -62,16 +59,15 @@ abstract class DioModule {
 
 class AuthInterceptor extends Interceptor {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
-    
+
     print('this is token from dio_module : $token');
 
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-    
+
     return handler.next(options);
   }
 }

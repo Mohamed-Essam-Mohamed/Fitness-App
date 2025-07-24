@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dart';
@@ -7,12 +6,10 @@ import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_contai
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:fitness_app/core/constants/app_colors.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
 
 class OldScreen extends StatefulWidget {
   const OldScreen({super.key, required this.pageController});
@@ -154,9 +151,11 @@ class _OldScreenState extends State<OldScreen> {
                               fontSize: fontSize,
                               color: number == age
                                   ? AppColors.orange
-                                  : Colors.white.withOpacity(
-                                      (1.1 - (distanceFromCenter / (itemWidth * 4)))
-                                          .clamp(0.2, 1.0),
+                                  : Colors.white.withAlpha(
+                                      (((1.1 - (distanceFromCenter / (itemWidth * 4)))
+                                                  .clamp(0.2, 1.0)) *
+                                              255)
+                                          .round(),
                                     ),
                               fontWeight: FontWeight.w700,
                             ),

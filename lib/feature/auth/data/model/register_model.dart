@@ -1,16 +1,4 @@
 class RegisterModel {
-  final String id;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String gender;
-  final int age;
-  final int weight;
-  final int height;
-  final String goal;
-  final String activityLevel;
-  final String photo;
-
   RegisterModel({
     required this.id,
     required this.firstName,
@@ -40,4 +28,15 @@ class RegisterModel {
       photo: json['photo'],
     );
   }
+  final String id;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String gender;
+  final int age;
+  final int weight;
+  final int height;
+  final String goal;
+  final String activityLevel;
+  final String photo;
 }

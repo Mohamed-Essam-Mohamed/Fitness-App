@@ -3,15 +3,15 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
-import 'package:fitness_app/feature/app_section/widget/botom_nav_btn.dart';
+import 'package:fitness_app/feature/app_section/widget/bottom_nav_btn.dart';
 import 'package:fitness_app/feature/app_section/clipper/clipper.dart';
 import 'package:fitness_app/core/constants/size_config.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view/onboarding_smart_coach.dart';
-import 'package:fitness_app/feature/chat_ai/presentation/view/smart_coach_screen.dart';
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart';
 import 'package:fitness_app/feature/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/view/profile_screen.dart';
+import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,22 +26,19 @@ class AppSection extends StatefulWidget {
 
 class AppSectionState extends State<AppSection> {
   final List<Color> gradient = [
-    AppColors.orange.withOpacity(0.3),
-    AppColors.orange.withOpacity(0.1),
+    AppColors.orange.withAlpha((0.3 * 255).toInt()),
+    AppColors.orange.withAlpha((0.1 * 255).toInt()),
     Colors.transparent
   ];
 
   int _currentIndex = 0;
   final PageController pageController = PageController();
 
-  final List<Widget> screens = [
-    const HomeScreen(),
-    BlocProvider<SmartCoachCubit>(
-      create: (context) => serviceLocator.get<SmartCoachCubit>()..loadUserData(),
-      child: const OnboardingSmartCoachScreen(),
-    ),
-    const WorkoutsScreen(),
-    const ProfileScreen(),
+  final List<Widget> screens = const [
+    HomeScreen(),
+    OnboardingSmartCoachScreen(),
+    WorkoutsScreen(),
+    ProfileScreen(),
   ];
 
   final List<String> icons = [
@@ -82,9 +79,21 @@ class AppSectionState extends State<AppSection> {
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
-              BlocProvider<HomeCubit>(
-                create: (context) => serviceLocator<HomeCubit>()
-                  ..doIntend(AppValues.english, GetShotData()),
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider<HomeCubit>(
+                    create: (context) => serviceLocator<HomeCubit>()
+                      ..doIntend(AppValues.english, GetShotData()),
+                  ),
+                  BlocProvider<ProfileCubit>(
+                    create: (context) =>
+                        serviceLocator<ProfileCubit>()..doIntend(GetDataProfileAction()),
+                  ),
+                  BlocProvider<SmartCoachCubit>(
+                    create: (context) =>
+                        serviceLocator.get<SmartCoachCubit>()..loadUserData(),
+                  ),
+                ],
                 child: Positioned.fill(
                   child: PageView(
                     onPageChanged: (value) {
@@ -139,6 +148,7 @@ class AppSectionState extends State<AppSection> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  textDirection: Directionality.of(context),
                   children: List.generate(icons.length, (index) {
                     return BottomItemNav(
                       onPressed: (val) {
@@ -191,7 +201,8 @@ class AppSectionState extends State<AppSection> {
   }
 
   double animatedPositionedLeftValue(int currentIndex) {
-    final positions = [6.2, 26.5, 46.5, 66.5];
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final positions = isRTL ? [66.5, 46.5, 26.5, 6.2] : [6.2, 26.5, 46.5, 66.5];
     return AppSizes.blockSizeHorizontal * (positions[currentIndex]);
   }
 }

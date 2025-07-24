@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view/exercise.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_state.dart';
 import 'package:fitness_app/feature/Exercise/domain/entity/entity.dart';
 
 class MockExerciseCubit extends Mock implements ExerciseCubit {}
@@ -14,7 +14,6 @@ void main() {
   setUp(() {
     mockCubit = MockExerciseCubit();
 
-    // ✅ تمرير ExerciseEntity بدل ExerciseModel
     when(() => mockCubit.state).thenReturn(ExerciseState(
       status: ExerciseStatus.success,
       exercises: [
@@ -33,16 +32,16 @@ void main() {
       ],
     ));
 
-    when(() => mockCubit.stream)
-        .thenAnswer((_) => const Stream<ExerciseState>.empty());
+    when(() => mockCubit.stream).thenAnswer((_) => const Stream<ExerciseState>.empty());
 
     when(() => mockCubit.fetchExercises(
-      muscleId: any(named: 'muscleId'),
-      difficultyId: any(named: 'difficultyId'),
-    )).thenAnswer((_) async {});
+          muscleId: any(named: 'muscleId'),
+          difficultyId: any(named: 'difficultyId'),
+        )).thenAnswer((_) async {});
   });
 
-  testWidgets('should display list of exercises and allow tapping', (WidgetTester tester) async {
+  testWidgets('should display list of exercises and allow tapping',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: ExerciseScreen(

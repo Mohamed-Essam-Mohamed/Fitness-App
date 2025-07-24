@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TextFormWidget extends StatefulWidget {
-  TextFormWidget({
+  const TextFormWidget({
     super.key,
     this.controller,
     this.validator,
@@ -17,25 +17,38 @@ class TextFormWidget extends StatefulWidget {
   final String? hintText;
   final String suffixIcon;
   final String prefixIcon;
-  bool obscureText;
+  final bool obscureText;
 
   @override
   State<TextFormWidget> createState() => _TextFormWidgetState();
 }
 
 class _TextFormWidgetState extends State<TextFormWidget> {
+  bool isObscure = false;
+  @override
+  void dispose() {
+    widget.controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isObscure = widget.obscureText;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       validator: widget.validator,
-      obscureText: widget.obscureText,
+      obscureText: isObscure,
       style: Theme.of(context).textTheme.titleSmall,
       decoration: InputDecoration(
         suffixIcon: InkWell(
           onTap: () {
             setState(() {
-              widget.obscureText = !widget.obscureText;
+              isObscure = !isObscure;
             });
           },
           child: Padding(
@@ -46,7 +59,9 @@ class _TextFormWidgetState extends State<TextFormWidget> {
               child: SvgPicture.asset(
                 widget.suffixIcon,
                 fit: BoxFit.contain,
-                color: widget.obscureText ? null : AppColors.redOrange,
+                colorFilter: isObscure
+                    ? null
+                    : const ColorFilter.mode(AppColors.redOrange, BlendMode.srcIn),
               ),
             ),
           ),

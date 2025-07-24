@@ -37,6 +37,10 @@ class UpcomingWorkoutsSection extends StatelessWidget {
             }
             return TabContainerWidget(
               upcomingCategory: state.upcomingCategory,
+              selectedIndex: context.read<HomeCubit>().selectedIndex,
+              onTabSelected: (index) {
+                context.read<HomeCubit>().selectedIndex = index;
+              },
               callBack: (id) => context
                   .read<HomeCubit>()
                   .doIntend(AppValues.english, GetUpcomingData(id: id)),
@@ -54,10 +58,12 @@ class UpcomingWorkoutsSection extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => InkWell(
-onTap: ()=>Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => ExerciseScreen(primeMoverId: state.upcomingData[index].id),
-    ),),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ExerciseScreen(primeMoverId: state.upcomingData[index].id),
+                    ),
+                  ),
                   child: Container(
                     width: 80,
                     height: 80,

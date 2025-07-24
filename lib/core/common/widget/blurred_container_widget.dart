@@ -3,12 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class BlurredContainerWidget extends StatelessWidget {
-  final Widget child;
   const BlurredContainerWidget({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: ClipRRect(

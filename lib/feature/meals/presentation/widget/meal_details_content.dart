@@ -4,7 +4,6 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/feature/meals/domain/entity/categories/meals_food_entity.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_entity.dart';
-import 'package:fitness_app/feature/meals/presentation/mappers/meal_Details_mapper.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/ingredient_list_widget.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/recommended_card_list_widget.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/top_section.dart';
@@ -12,11 +11,9 @@ import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
 class MealDetailsContent extends StatelessWidget {
-  MealDetailsContent(
-      {super.key,
-      required this.mealDetailsEntity,
-      required this.recommendedMeals});
-  MealDetailsEntity mealDetailsEntity;
+  const MealDetailsContent(
+      {super.key, required this.mealDetailsEntity, required this.recommendedMeals});
+  final MealDetailsEntity mealDetailsEntity;
   final List<MealsEntity> recommendedMeals;
 
   @override
@@ -46,8 +43,7 @@ class MealDetailsContent extends StatelessWidget {
                   expandedHeight: 350,
                   pinned: false,
                   flexibleSpace: FlexibleSpaceBar(
-                    background:
-                        TopSection(mealDetailsEntity: mealDetailsEntity),
+                    background: TopSection(mealDetailsEntity: mealDetailsEntity),
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
@@ -66,8 +62,7 @@ class MealDetailsContent extends StatelessWidget {
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
                 SliverToBoxAdapter(
                   child: IngredientListWidget(
-                    ingredients:
-                        mealDetailsEntity.meals?.first.toIngredientList() ?? [],
+                    ingredients: mealDetailsEntity.meals?.first.toIngredientList() ?? [],
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),

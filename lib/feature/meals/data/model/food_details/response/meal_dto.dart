@@ -60,7 +60,7 @@ class MealDto {
     this.strCreativeCommonsConfirmed,
     this.dateModified,
   });
-
+  factory MealDto.fromJson(Map<String, dynamic> json) => _$MealDtoFromJson(json);
   String? idMeal;
   String? strMeal;
   dynamic strMealAlternate;
@@ -114,9 +114,6 @@ class MealDto {
   dynamic strImageSource;
   dynamic strCreativeCommonsConfirmed;
   dynamic dateModified;
-
-  factory MealDto.fromJson(Map<String, dynamic> json) =>
-      _$MealDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MealDtoToJson(this);
 
@@ -177,6 +174,4 @@ class MealDto {
       dateModified: dateModified,
     );
   }
-
 }
-

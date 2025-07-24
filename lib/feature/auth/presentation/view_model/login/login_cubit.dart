@@ -13,10 +13,7 @@ import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginUseCase) : super(LoginState(baseState: BaseInitialState())) {
-    emailController.addListener(_validateForm);
-    passwordController.addListener(_validateForm);
-  }
+  LoginCubit(this._loginUseCase) : super(LoginState(baseState: BaseInitialState()));
   final LoginUseCase _loginUseCase;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -26,16 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
   void doIntent(LoginAction action) {
     switch (action) {
       case LoginAction():
-        if (formKey.currentState?.validate() ?? false) {
-          _login();
-        }
-    }
-  }
-
-  void _validateForm() {
-    final isValid = formKey.currentState?.validate() ?? false;
-    if (state.isFormValid != isValid) {
-      emit(state.copyWith(isFormValid: isValid));
+        _login();
     }
   }
 
@@ -67,16 +55,5 @@ class LoginCubit extends Cubit<LoginState> {
         }
     }
     return null;
-  }
-
-  @override
-  Future<void> close() {
-    emailController
-      ..removeListener(_validateForm)
-      ..dispose();
-    passwordController
-      ..removeListener(_validateForm)
-      ..dispose();
-    return super.close();
   }
 }

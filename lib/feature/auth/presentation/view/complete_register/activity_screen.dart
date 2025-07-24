@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
-import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/auth/presentation/view/complete_register/goal_screen.dart';
@@ -8,8 +6,7 @@ import 'package:fitness_app/feature/auth/presentation/widgets/animation_text.dar
 import 'package:fitness_app/feature/auth/presentation/widgets/circular_percent_indicator_widget.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/custom_auth_container.dart';
 import 'package:flutter/material.dart';
-import 'package:fitness_app/core/constants/app_assets.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:toastification/toastification.dart';
@@ -18,7 +15,6 @@ import 'package:fitness_app/core/theme/app_theme.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_state.dart';
-import 'package:fitness_app/feature/auth/presentation/widgets/pop_widget.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key, required this.pageController});
@@ -51,6 +47,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       bloc: cubit,
       listener: (context, state) {
         if (state.status == RegisterStatus.failure) {
+          context.pop();
           widget.pageController.animateToPage(
             0,
             duration: const Duration(milliseconds: 1000),
@@ -67,6 +64,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
             }
           });
         } else if (state.status == RegisterStatus.success) {
+          context.pop();
           context.pushNamedAndRemoveUntil(Routes.login);
         } else if (state.status == RegisterStatus.loading) {
           AppDialogs.showLoadingDialog(context);
@@ -131,7 +129,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                         minimumSize: const Size.fromHeight(30),
                       ),
                       onPressed: () {
-                        final level = "level${selectedIndex + 1}";
+                        final level = 'level${selectedIndex + 1}';
                         cubit.indexActivityLevel = selectedIndex;
                         cubit.activityLevel = level;
                         cubit.register();

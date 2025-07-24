@@ -1,6 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/common/widget/background_app.dart';
-import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/feature/workouts/presentation/widget/section_body_workout_screen.dart';
 import 'package:fitness_app/feature/workouts/presentation/widget/section_header_workout_screen.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';

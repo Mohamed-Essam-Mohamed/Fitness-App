@@ -1,12 +1,5 @@
 class Routes {
   static const String onboarding = '/onboarding';
-  static const String selectGender = '/selectGender';
-  static const String activity = '/activity';
-  static const String goal = '/goal';
-  static const String height = '/height';
-  static const String old = '/old';
-  static const String weight = '/weight';
-  static const String RgisterFirsPart = '/RgisterFirsPart';
   static const String forgotPassword = '/forgot-password';
   static const String verifyCode = '/verify-code';
   static const String changePassword = '/change-password';
@@ -20,8 +13,5 @@ class Routes {
   static const String onboardingSmartCoachScreen = '/onboardingSmartCoachScreen';
   static const String smartCoachScreen = '/smartCoachScreen';
 
-
-
-  static const String editProfile='/editProfileScreen';
-  
+  static const String editProfile = '/editProfileScreen';
 }

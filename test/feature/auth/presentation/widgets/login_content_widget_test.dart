@@ -1,4 +1,3 @@
-import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cubit.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/login/login_state.dart';
 import 'package:fitness_app/feature/auth/presentation/widgets/login_content_widget.dart';
@@ -11,7 +10,6 @@ import 'package:mockito/annotations.dart';
 import 'login_content_widget_test.mocks.dart';
 
 @GenerateMocks([LoginCubit])
-
 void main() {
   late MockLoginCubit mockCubit;
 
@@ -22,8 +20,10 @@ void main() {
   Widget buildTestWidget(LoginState state) {
     when(mockCubit.state).thenReturn(state);
     when(mockCubit.formKey).thenReturn(GlobalKey<FormState>());
-    when(mockCubit.emailController).thenReturn(TextEditingController(text: 'rana@mail.com'));
-    when(mockCubit.passwordController).thenReturn(TextEditingController(text: 'Zayn@123'));
+    when(mockCubit.emailController)
+        .thenReturn(TextEditingController(text: 'rana@mail.com'));
+    when(mockCubit.passwordController)
+        .thenReturn(TextEditingController(text: 'Zayn@123'));
 
     return MaterialApp(
       home: Scaffold(
@@ -39,25 +39,24 @@ void main() {
   }
 
   testWidgets(' Navigates to appSection on successful login',
-          (WidgetTester tester) async {
-        final successState = LoginState(baseState: BaseSuccessState(), isFormValid: true);
+      (WidgetTester tester) async {
+    final successState = LoginState(baseState: BaseSuccessState(), isFormValid: true);
 
-        await tester.pumpWidget(buildTestWidget(successState));
-        await tester.pumpAndSettle();
-        expect(find.text('Home Screen'), findsOneWidget);
-      });
+    await tester.pumpWidget(buildTestWidget(successState));
+    await tester.pumpAndSettle();
+    expect(find.text('Home Screen'), findsOneWidget);
+  });
 
-  testWidgets('Shows error toast on failed login',
-          (WidgetTester tester) async {
-        final errorState = LoginState(
-          baseState: BaseErrorState(errorMessage: ''),
-          isFormValid: true,
-        );
+  testWidgets('Shows error toast on failed login', (WidgetTester tester) async {
+    final errorState = LoginState(
+      baseState: BaseErrorState(errorMessage: ''),
+      isFormValid: true,
+    );
 
-        await tester.pumpWidget(buildTestWidget(errorState));
+    await tester.pumpWidget(buildTestWidget(errorState));
 
-        await tester.pump(const Duration(seconds: 2));
+    await tester.pump(const Duration(seconds: 2));
 
-        expect(find.textContaining('Incorrect email and password '), findsOneWidget);
-      });
+    expect(find.textContaining('Incorrect email and password '), findsOneWidget);
+  });
 }

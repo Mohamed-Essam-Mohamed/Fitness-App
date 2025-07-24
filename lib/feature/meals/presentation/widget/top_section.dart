@@ -1,26 +1,23 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/constants/app_assets.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/feature/Exercise/presentation/widgets/custom_youtube_player.dart';
 import 'package:fitness_app/feature/meals/domain/entity/food_details/response/meal_details_entity.dart';
-import 'package:fitness_app/feature/meals/presentation/mappers/meal_Details_mapper.dart';
+import 'package:fitness_app/feature/meals/presentation/mappers/meal_details_mapper.dart';
 import 'package:fitness_app/feature/meals/presentation/widget/nutrition_card_list_widget.dart';
 import 'package:fitness_app/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TopSection extends StatelessWidget {
-   TopSection({super.key, required this.mealDetailsEntity});
-  MealDetailsEntity mealDetailsEntity;
-
+  const TopSection({super.key, required this.mealDetailsEntity});
+  final MealDetailsEntity mealDetailsEntity;
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: [
         SizedBox(
           height: context.hp(42.6),
@@ -38,43 +35,34 @@ class TopSection extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              // ClipRRect(
-              //   borderRadius: const BorderRadius.only(
-              //     bottomRight: Radius.circular(20),
-              //     bottomLeft: Radius.circular(20),
-              //   ),
-              //   child: BackdropFilter(
-              //     filter: ImageFilter.blur(sigmaX: 1, sigmaY:1),
-              //     child: Container(
-              //       color: Colors.grey.withAlpha(5),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
         GestureDetector(
           onTap: () {
-            mealDetailsEntity.meals![0].strYoutube!=null?
-            showDialog(
-              context: context,
-              barrierColor: Colors.black.withValues(alpha: 0.95),
-              builder: (_) => GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.of(context).pop(),
-                child: Scaffold(
-                  backgroundColor: Colors.black,
-                  body: SafeArea(
-                    child: Center(
-                      child: CustomYoutubePlayer(videoUrl: mealDetailsEntity.meals![0].strYoutube!),
+            mealDetailsEntity.meals![0].strYoutube != null
+                ? showDialog(
+                    context: context,
+                    barrierColor: Colors.black.withValues(alpha: 0.95),
+                    builder: (_) => GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Scaffold(
+                        backgroundColor: Colors.black,
+                        body: SafeArea(
+                          child: Center(
+                            child: CustomYoutubePlayer(
+                                videoUrl: mealDetailsEntity.meals![0].strYoutube!),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ):  AppDialogs.showFailureDialog(context, message: 'sorry this video deleted please watch another ');
-
+                  )
+                : AppDialogs.showFailureDialog(context,
+                    message: 'sorry this video deleted please watch another ');
           },
-          child: Center(child: const Icon(Icons.play_arrow, size: 50, color: AppColors.orange)),
+          child: const Center(
+              child: Icon(Icons.play_arrow, size: 50, color: AppColors.orange)),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,7 +76,7 @@ class TopSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.of(context).pop();
                     },
                     child: CircleAvatar(
@@ -105,8 +93,7 @@ class TopSection extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  mealDetailsEntity.meals![0].strMeal ?? 'not found',
+              child: Text(mealDetailsEntity.meals![0].strMeal ?? 'not found',
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -120,18 +107,13 @@ class TopSection extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: AppColors.white)),
             ),
-
           ],
         ),
         Align(
-    alignment: Alignment.bottomCenter,
-            child: NutritionCardListWidget(
-                nutritionList: MealDetailsMapper.nutritionData),
-          ),
-
-
+          alignment: Alignment.bottomCenter,
+          child: NutritionCardListWidget(nutritionList: MealDetailsMapper.nutritionData),
+        ),
       ],
     );
-
   }
 }

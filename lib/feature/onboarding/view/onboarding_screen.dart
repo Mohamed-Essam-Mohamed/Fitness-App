@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/common/widget/background_app.dart';
 import 'package:fitness_app/core/constants/app_colors.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/feature/onboarding/data/item_element_data.dart';
@@ -61,7 +60,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             body: Stack(
               children: [
                 PageView.builder(
-                  physics: const BouncingScrollPhysics(),
                   controller: pageController,
                   itemCount: listItems.length,
                   onPageChanged: (newIndex) {
@@ -70,6 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   itemBuilder: ((context, index) {
+                    // Using CustomAnimatedWidget to animate the image
                     return Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -101,9 +100,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withAlpha((0.2 * 255).toInt()),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.1),
+                            color: Colors.white.withAlpha((0.1 * 255).toInt()),
                           ),
                         ),
                         child: Column(

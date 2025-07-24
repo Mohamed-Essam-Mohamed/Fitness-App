@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/feature/Exercise/domain/entity/entity.dart';
 import 'package:fitness_app/feature/Exercise/domain/use_case/exercise_use_case.dart';
-import 'package:fitness_app/feature/Exercise/presentation/view_model/exercies_state.dart';
+import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_state.dart';
 import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cubit.dart';
 
 import 'exercise_cubit_test.mocks.dart';
@@ -59,8 +59,7 @@ void main() {
       'emits [loading, failure] when use case returns FailureResult',
       build: () {
         when(mockUseCase(muscleId: muscleId, difficultyId: difficultyId))
-            .thenAnswer((_) async =>
-            FailureResult(Exception('Error occurred')));
+            .thenAnswer((_) async => FailureResult(Exception('Error occurred')));
         return cubit;
       },
       act: (cubit) =>

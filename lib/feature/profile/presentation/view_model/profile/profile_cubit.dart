@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/enum/status.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/common/helper.dart';
+import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/feature/profile/domain/entities/get_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/entities/update_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/use_cases/get_data_profile_use_case.dart';
@@ -19,6 +20,9 @@ part 'profile_state.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
+  ProfileCubit(this._getDataProfileUseCase) : super(const ProfileState());
+  final GetDataProfileUseCase _getDataProfileUseCase;
+
   ProfileCubit(this._getDataProfileUseCase, this._updateDataProfileUseCase,
       this._updateProfilePhoto)
       : super(const ProfileState());
@@ -45,6 +49,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> _getProfile() async {
+    emit(state.copyWith(getProfileStatus: Status.loading));
+    final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
+    final result = await _getDataProfileUseCase.call('Bearer $token');
     emit(state.copyWith(getProfileStatus: Status.loading, errorMessage: null));
 
     final result = await _getDataProfileUseCase.call();
@@ -118,9 +125,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> _updatPhoto(File photo) async {
     emit(state.copyWith(
-        profilePhotoStatus: Status.loading,
-        errorMessage: null,
-        successMessage: null));
+        profilePhotoStatus: Status.loading, errorMessage: null, successMessage: null));
 
     final result = await _updateProfilePhoto(photo);
     switch (result) {

@@ -5,7 +5,7 @@ import 'package:fitness_app/core/constants/app_assets.dart';
 
 import 'package:fitness_app/core/dialogs/app_dialogs.dart';
 import 'package:fitness_app/core/dialogs/app_toasts.dart';
-import 'package:fitness_app/core/extentions/media_query_extensions.dart';
+import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/utils/validator.dart';
 import 'package:fitness_app/feature/auth/presentation/view_model/forget_password/forget_password_cubit.dart';
@@ -43,14 +43,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 }
                 if (state.isChangeSuccess) {
                   Navigator.of(context).pushNamed(Routes.login);
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    AppToast.showToast(
-                      context: context,
-                      title: '',
-                      description: "password changed Successfuly",
-                      type: ToastificationType.success,
-                    );
-                  });
+                  AppToast.showToast(
+                    context: context,
+                    title: '',
+                    description: 'password changed successfully',
+                    type: ToastificationType.success,
+                  );
                   //           context.pop();
                   //!  navigate to home
                 }

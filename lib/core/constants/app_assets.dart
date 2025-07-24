@@ -9,7 +9,6 @@ class SvgAsset {
   static const arrowLeft = 'assets/svg/arrow-left.svg';
   static const lock = 'assets/svg/lock.svg';
   static const eye = 'assets/svg/eye.svg';
-
   static const backButton = 'assets/svg/back_button.svg';
   static const ex1 = 'assets/svg/O15_1.svg';
   static const ex2 = 'assets/svg/O15_2.svg';
@@ -48,9 +47,9 @@ class SvgAsset {
   static const ex35 = 'assets/svg/O15_35.svg';
   static const ex36 = 'assets/svg/O15_36.svg';
   //static const editProfileIcon = 'assets/svg/edit_profile_image.svg';
-  static const editProfile='assets/svg/edit_profile_image.svg';
-  static const camera='assets/svg/camera.svg';
-  static const gallery='assets/svg/gallery.svg'; 
+  static const editProfile = 'assets/svg/edit_profile_image.svg';
+  static const camera = 'assets/svg/camera.svg';
+  static const gallery = 'assets/svg/gallery.svg';
   // static const ex1 = 'assets/svg/O15_1.svg';
   // static const ex2 = 'assets/svg/O15_2.svg';
   // static const ex3 = 'assets/svg/O15_3.svg';
@@ -96,7 +95,6 @@ class SvgAsset {
 
 class ImageAsset {
   static const fullShotYoga = 'assets/png/full_shot_yoga.png';
-  static const handSomePushUps = 'assets/png/hand_some_push_ups.png';
   static const firstBg = 'assets/png/first_bg.png';
   static const backGroundRobot = 'assets/svg/back_ground_robot.png';
   static const robot = 'assets/svg/Robot.png';
@@ -105,18 +103,15 @@ class ImageAsset {
   static const thirdBg = 'assets/png/third_bg.png';
   static const fourthBg = 'assets/png/fourth_bg.png';
   static const logo = 'assets/png/logo.png';
-  static const onboardingBackgroundImage =
-      'assets/png/onboarding_background_image.png';
+  static const onboardingBackgroundImage = 'assets/png/onboarding_background_image.png';
   static const screenFitLogo = 'assets/png/fit_1.png';
   static const backgroundImage = 'assets/png/background_image.png';
-  static const backgroundFoodImage = 'assets/png/backgroundFoodImage.jpg';
   static const onboarding1 = 'assets/png/O15_31.png';
   static const onboarding2 = 'assets/png/O15_30.png';
   static const onboarding3 = 'assets/png/O15_29.png';
   static const facebook = 'assets/png/facebook_circle.png';
   static const google = 'assets/png/Google.png';
   static const apple = 'assets/png/Apple.png';
-  static const back = 'assets/svg/Vector.svg';
   static const chickenMushroomsSoup = 'assets/png/chicken_mushrooms_soup.png';
   static const pizza = 'assets/png/pizza.png';
   static const backgroundExercise = 'assets/png/background_exercise.png';
@@ -125,9 +120,9 @@ class ImageAsset {
   static const yogaVector = 'assets/png/O15_25.png';
   static const aerobicsVector = 'assets/png/O15_24.png';
   static const trainerVector = 'assets/png/O15_9.png';
-  static const ellipse= "assets/png/Ellipse.png";
-  static const editProfileBackground='assets/png/home-bg.png';
-
+  static const ellipse = 'assets/png/Ellipse.png';
+  static const ellipse = "assets/png/Ellipse.png";
+  static const editProfileBackground = 'assets/png/home-bg.png';
 }
 
 class LottieAsset {

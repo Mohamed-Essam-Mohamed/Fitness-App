@@ -60,18 +60,16 @@ class RouteGenerator {
 
       case Routes.exercise:
         return AnimationRoute(
-            page: const ExerciseScreen(
-          primeMoverId: '',
-        ));
+          page: const ExerciseScreen(
+            primeMoverId: '',
+          ),
+        );
       case Routes.foodScreen:
-        return AnimationRoute(
-            page:  FoodRecommendationScreen());
+        return AnimationRoute(page: const FoodRecommendationScreen());
       case Routes.smartCoachScreen:
-        return AnimationRoute(
-            page:  SmartCoachScreen());
+        return AnimationRoute(page: const SmartCoachScreen());
       case Routes.onboardingSmartCoachScreen:
-        return AnimationRoute(
-            page:  OnboardingSmartCoachScreen());
+        return AnimationRoute(page: const OnboardingSmartCoachScreen());
 
       case Routes.mealDetails:
         final mealDetailsScreenArgs = arg as MealDetailsScreenArgs;
@@ -88,15 +86,17 @@ class RouteGenerator {
                 mealId: mealDetailsScreenArgs.mealId,
                 meals: mealDetailsScreenArgs.meals));
         return AnimationRoute(
-            page: MealDetailsScreen(
-                mealId: mealDetailsScreenArgs.mealId,
-                meals: mealDetailsScreenArgs.meals));
+          page: MealDetailsScreen(
+            mealId: mealDetailsScreenArgs.mealId,
+            meals: mealDetailsScreenArgs.meals,
+          ),
+        );
 
       case Routes.registerView:
         return AnimationRoute(
           page: BlocProvider.value(
             value: serviceLocator.get<RegisterCubit>(),
-            child: RegisterView(),
+            child: const RegisterView(),
           ),
         );
       case Routes.editProfile:
