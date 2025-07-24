@@ -32,9 +32,41 @@ Through a personalized onboarding process, users define their goals and current 
 - Teamwork
 
 ## 📂 Project Structure
-<img width="448" height="735" alt="Screenshot 2025-07-24 004442" src="https://github.com/user-attachments/assets/5e4c499c-7e6b-4cd0-9a00-bf399c9d8092" />
+```lib/
+├── core/
+│   ├── base_state/
+│   ├── common/
+│   ├── constants/
+│   ├── di/
+│   ├── dialogs/
+│   ├── dummy/
+│   ├── enum/
+│   ├── extensions/
+│   ├── logger/
+│   ├── network/
+│   ├── routes/
+│   ├── storage_helper/
+│   ├── theme/
+│   └── utils/
+├── feature/
+│   ├── app_section/
+│   ├── auth/
+│   ├── chat_ai/
+│   ├── Exercise/
+│   ├── home/
+│   ├── meals/
+│   ├── onboarding/
+│   ├── profile/
+│   └── workouts/
+├── generated/
+├── firebase_options.dart
+└── main.dart
 
-
+test/
+└── feature/
+    ├── auth/
+    └── Exercise/
+```
 
 ## Technologies & Tools Used
 
@@ -54,7 +86,7 @@ Through a personalized onboarding process, users define their goals and current 
 
 
 ## UI APP
-
+<img width="1920" height="1080" alt="Fit" src="https://github.com/user-attachments/assets/ce34b532-ab45-424a-82c5-e8b471532967" />
 
 
 ## Demo APP
