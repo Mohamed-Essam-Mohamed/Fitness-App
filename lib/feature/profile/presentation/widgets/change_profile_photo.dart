@@ -11,8 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChangeProfilePhoto extends StatelessWidget {
-  const ChangeProfilePhoto(
-      {required this.url, required this.profileCubit, super.key});
+  const ChangeProfilePhoto({required this.url, required this.profileCubit, super.key});
   final String url;
   final ProfileCubit profileCubit;
 
@@ -27,14 +26,16 @@ class ChangeProfilePhoto extends StatelessWidget {
             listener: (context, state) {
               if (state.profilePhotoStatus == Status.success) {
                 CustomSnackBar.showSnack(
-                    context: context,
-                    title: state.successMessage,
-                    stateType: true);
+                  context: context,
+                  title: state.successMessage,
+                  stateType: true,
+                );
               } else if (state.profilePhotoStatus == Status.failure) {
                 CustomSnackBar.showSnack(
-                    context: context,
-                    title: state.errorMessage,
-                    stateType: false);
+                  context: context,
+                  title: state.errorMessage,
+                  stateType: false,
+                );
               }
             },
             bloc: profileCubit,
@@ -47,13 +48,14 @@ class ChangeProfilePhoto extends StatelessWidget {
                 );
               }
               return ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: CustomCacheNetworkImage(
-                      imageUrl: state.dataUserEntity.photo,
-                    ),
-                  ));
+                borderRadius: BorderRadius.circular(50),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: CustomCacheNetworkImage(
+                    imageUrl: state.dataUserEntity.photo,
+                  ),
+                ),
+              );
             },
           ),
         ),
@@ -63,19 +65,24 @@ class ChangeProfilePhoto extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return BottomSheetContent(profileCubit: profileCubit);
-                    });
+                  context: context,
+                  builder: (context) {
+                    return BottomSheetContent(profileCubit: profileCubit);
+                  },
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.bgCategory,
-                    border: Border.all(color: AppColors.orange)),
+                  shape: BoxShape.circle,
+                  color: AppColors.bgCategory,
+                  border: Border.all(
+                    color: AppColors.orange,
+                  ),
+                ),
                 child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: SvgPicture.asset(SvgAsset.editProfile)),
+                  padding: const EdgeInsets.all(5),
+                  child: SvgPicture.asset(SvgAsset.editProfile),
+                ),
               ),
             ))
       ],

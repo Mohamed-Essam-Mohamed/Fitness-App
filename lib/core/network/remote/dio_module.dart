@@ -61,13 +61,9 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
-
-    print('this is token from dio_module : $token');
-
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-
     return handler.next(options);
   }
 }

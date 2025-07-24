@@ -14,18 +14,22 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart' as _i695;
 import 'package:fitness_app/core/logger/logger_module.dart' as _i637;
 import 'package:fitness_app/core/network/remote/api_manager.dart' as _i74;
 import 'package:fitness_app/core/network/remote/dio_module.dart' as _i674;
-import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart' as _i395;
-import 'package:fitness_app/feature/auth/data/data_source/auth_data_source.dart' as _i65;
+import 'package:fitness_app/feature/auth/data/api/auth_retrofit_client.dart'
+    as _i395;
+import 'package:fitness_app/feature/auth/data/data_source/auth_data_source.dart'
+    as _i65;
 import 'package:fitness_app/feature/auth/data/data_source/auth_data_source_impl.dart'
     as _i361;
 import 'package:fitness_app/feature/auth/data/repository_impl/auth_repository_impl.dart'
     as _i969;
-import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart' as _i911;
+import 'package:fitness_app/feature/auth/domain/repository/auth_repository.dart'
+    as _i911;
 import 'package:fitness_app/feature/auth/domain/use_cases/change_password_use_case.dart'
     as _i1031;
 import 'package:fitness_app/feature/auth/domain/use_cases/forget_password_use_case.dart'
     as _i498;
-import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart' as _i757;
+import 'package:fitness_app/feature/auth/domain/use_cases/login_use_case.dart'
+    as _i757;
 import 'package:fitness_app/feature/auth/domain/use_cases/register_use_case.dart'
     as _i669;
 import 'package:fitness_app/feature/auth/domain/use_cases/verify_code_use_case.dart'
@@ -36,8 +40,10 @@ import 'package:fitness_app/feature/auth/presentation/view_model/login/login_cub
     as _i285;
 import 'package:fitness_app/feature/auth/presentation/view_model/register/register_cubit.dart'
     as _i176;
-import 'package:fitness_app/feature/chat_ai/data/api/firesbase_services.dart' as _i974;
-import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart' as _i528;
+import 'package:fitness_app/feature/chat_ai/data/api/firesbase_services.dart'
+    as _i974;
+import 'package:fitness_app/feature/chat_ai/data/api/smart_coach_services.dart'
+    as _i528;
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source.dart'
     as _i99;
 import 'package:fitness_app/feature/chat_ai/data/data_source/remote_smart_coach_data_source_impl.dart'
@@ -62,7 +68,8 @@ import 'package:fitness_app/feature/chat_ai/domain/use_case/start_new_conversati
     as _i94;
 import 'package:fitness_app/feature/chat_ai/presentation/view_model/smart_coach_cubit.dart'
     as _i286;
-import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart' as _i58;
+import 'package:fitness_app/feature/Exercise/data/api/exercise_retrofit.dart'
+    as _i58;
 import 'package:fitness_app/feature/Exercise/data/data_source/local/exercies_local_data_source_impl.dart'
     as _i886;
 import 'package:fitness_app/feature/Exercise/data/data_source/local/exercise_local_data_source.dart'
@@ -79,7 +86,8 @@ import 'package:fitness_app/feature/Exercise/presentation/view_model/exercise_cu
     as _i737;
 import 'package:fitness_app/feature/home/data/api/category_meals_retrofit_client.dart'
     as _i829;
-import 'package:fitness_app/feature/home/data/api/home_retrofit_client.dart' as _i921;
+import 'package:fitness_app/feature/home/data/api/home_retrofit_client.dart'
+    as _i921;
 import 'package:fitness_app/feature/home/data/data_sources/home_data_source.dart'
     as _i614;
 import 'package:fitness_app/feature/home/data/data_sources/home_data_source_impl.dart'
@@ -100,7 +108,8 @@ import 'package:fitness_app/feature/home/domain/use_cases/get_upcoming_workouts_
     as _i583;
 import 'package:fitness_app/feature/home/presentation/view_model/home_cubit.dart'
     as _i1032;
-import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart' as _i657;
+import 'package:fitness_app/feature/meals/data/api/meals_retrofit_client.dart'
+    as _i657;
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source.dart'
     as _i546;
 import 'package:fitness_app/feature/meals/data/data_source/meals_data_source_impl.dart'
@@ -156,21 +165,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i695.CacheOptions>(() => dioModule.provideCacheOptions());
-    gh.lazySingleton<_i528.PrettyDioLogger>(() => dioModule.providerInterceptor());
-    gh.lazySingleton<_i674.AuthInterceptor>(() => dioModule.provideAuthInterceptor());
+    gh.lazySingleton<_i528.PrettyDioLogger>(
+        () => dioModule.providerInterceptor());
+    gh.lazySingleton<_i674.AuthInterceptor>(
+        () => dioModule.provideAuthInterceptor());
     gh.lazySingleton<_i528.SmartCoachService>(() => _i528.SmartCoachService());
-    gh.factory<_i755.ExerciseLocalDataSource>(() => _i886.ExerciseLocalDataSourceImpl());
-    gh.factory<_i99.SmartCoachRemoteDataSource>(() => _i49.SmartCoachRemoteDataSourceImpl(
-          gh<_i528.SmartCoachService>(),
-          gh<_i974.FirebaseChatService>(),
-        ));
+    gh.factory<_i755.ExerciseLocalDataSource>(
+        () => _i886.ExerciseLocalDataSourceImpl());
+    gh.factory<_i99.SmartCoachRemoteDataSource>(
+        () => _i49.SmartCoachRemoteDataSourceImpl(
+              gh<_i528.SmartCoachService>(),
+              gh<_i974.FirebaseChatService>(),
+            ));
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
           gh<_i528.PrettyDioLogger>(),
           gh<_i674.AuthInterceptor>(),
           gh<_i695.CacheOptions>(),
         ));
-    gh.factory<_i341.SmartCoachRepository>(
-        () => _i341.SmartCoachRepositoryImpl(gh<_i99.SmartCoachRemoteDataSource>()));
+    gh.factory<_i341.SmartCoachRepository>(() =>
+        _i341.SmartCoachRepositoryImpl(gh<_i99.SmartCoachRemoteDataSource>()));
     gh.lazySingleton<_i395.AuthRetrofitClient>(
         () => _i395.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i58.ExerciseRetrofitClient>(
@@ -183,20 +196,21 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i657.MealsRetrofitClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i63.ProfileRetrofitClient>(
         () => _i63.ProfileRetrofitClient(gh<_i361.Dio>()));
-    gh.factory<_i209.DeleteConversationUseCase>(
-        () => _i209.DeleteConversationUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i399.FetchConversationSummariesUseCase>(
-        () => _i399.FetchConversationSummariesUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i209.DeleteConversationUseCase>(() =>
+        _i209.DeleteConversationUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i399.FetchConversationSummariesUseCase>(() =>
+        _i399.FetchConversationSummariesUseCase(
+            gh<_i341.SmartCoachRepository>()));
     gh.factory<_i88.FetchMessagesUseCase>(
         () => _i88.FetchMessagesUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i992.GetSmartCoachResponseUseCase>(
-        () => _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i992.GetSmartCoachResponseUseCase>(() =>
+        _i992.GetSmartCoachResponseUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i994.SaveMessagesUseCase>(
         () => _i994.SaveMessagesUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i108.SetConversationTitleUseCase>(
-        () => _i108.SetConversationTitleUseCase(gh<_i341.SmartCoachRepository>()));
-    gh.factory<_i94.StartNewConversationUseCase>(
-        () => _i94.StartNewConversationUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i108.SetConversationTitleUseCase>(() =>
+        _i108.SetConversationTitleUseCase(gh<_i341.SmartCoachRepository>()));
+    gh.factory<_i94.StartNewConversationUseCase>(() =>
+        _i94.StartNewConversationUseCase(gh<_i341.SmartCoachRepository>()));
     gh.factory<_i286.SmartCoachCubit>(() => _i286.SmartCoachCubit(
           gh<_i992.GetSmartCoachResponseUseCase>(),
           gh<_i108.SetConversationTitleUseCase>(),
@@ -206,25 +220,29 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i399.FetchConversationSummariesUseCase>(),
           gh<_i209.DeleteConversationUseCase>(),
         ));
-    gh.factory<_i478.ExerciseRemoteDataSource>(() => _i91.ExerciseDataSourceImpl(
-          gh<_i58.ExerciseRetrofitClient>(),
-          gh<_i74.ApiManager>(),
-        ));
+    gh.factory<_i478.ExerciseRemoteDataSource>(
+        () => _i91.ExerciseDataSourceImpl(
+              gh<_i58.ExerciseRetrofitClient>(),
+              gh<_i74.ApiManager>(),
+            ));
     gh.factory<_i65.RemoteAuthDataSource>(() => _i361.RemoteAuthDataSourceImp(
           gh<_i74.ApiManager>(),
           gh<_i395.AuthRetrofitClient>(),
         ));
-    gh.factory<_i50.ProfileRemoteDataSource>(() => _i302.ProfileRemoteDataSourceImp(
-          gh<_i74.ApiManager>(),
-          gh<_i63.ProfileRetrofitClient>(),
-        ));
-    gh.factory<_i546.RemoteMealsDataSource>(() => _i247.RemoteMealsDataSourceImp(
-          gh<_i74.ApiManager>(),
-          gh<_i657.MealsRetrofitClient>(),
-        ));
+    gh.factory<_i50.ProfileRemoteDataSource>(
+        () => _i302.ProfileRemoteDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i63.ProfileRetrofitClient>(),
+            ));
+    gh.factory<_i546.RemoteMealsDataSource>(
+        () => _i247.RemoteMealsDataSourceImp(
+              gh<_i74.ApiManager>(),
+              gh<_i657.MealsRetrofitClient>(),
+            ));
     gh.factory<_i911.AuthRepository>(
         () => _i969.AuthRepositoryImp(gh<_i65.RemoteAuthDataSource>()));
-    gh.factory<_i757.LoginUseCase>(() => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
+    gh.factory<_i757.LoginUseCase>(
+        () => _i757.LoginUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i614.HomeDataSource>(() => _i393.HomeDataSourceImpl(
           gh<_i74.ApiManager>(),
           gh<_i921.HomeRetrofitClient>(),
@@ -259,7 +277,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i470.UpdateProfilePhoto(gh<_i448.ProfileRepository>()));
     gh.factory<_i545.HomeRepository>(
         () => _i963.HomeRepositoryImpl(gh<_i614.HomeDataSource>()));
-    gh.factory<_i285.LoginCubit>(() => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
+    gh.factory<_i285.LoginCubit>(
+        () => _i285.LoginCubit(gh<_i757.LoginUseCase>()));
     gh.factory<_i669.RegisterUseCase>(
         () => _i669.RegisterUseCase(gh<_i911.AuthRepository>()));
     gh.factory<_i917.GetMealDetailsUseCase>(
@@ -272,15 +291,17 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i470.UpdateProfilePhoto>(),
         ));
     gh.factory<_i354.FoodRecommendationCubit>(
-        () => _i354.FoodRecommendationCubit(gh<_i666.GetMealDetailsUseCase>()));
+        () => _i354.FoodRecommendationCubit(gh<_i917.GetMealDetailsUseCase>()));
+    gh.factory<_i379.MealCubit>(
+        () => _i379.MealCubit(gh<_i917.GetMealDetailsUseCase>()));
     gh.factory<_i958.GetCategoryUseCase>(
         () => _i958.GetCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i289.GetRecommendationForYouUseCase>(
         () => _i289.GetRecommendationForYouUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i438.GetRecommendationTodayUseCase>(
         () => _i438.GetRecommendationTodayUseCase(gh<_i545.HomeRepository>()));
-    gh.factory<_i244.GetUpcomingWorkoutsCategoryUseCase>(
-        () => _i244.GetUpcomingWorkoutsCategoryUseCase(gh<_i545.HomeRepository>()));
+    gh.factory<_i244.GetUpcomingWorkoutsCategoryUseCase>(() =>
+        _i244.GetUpcomingWorkoutsCategoryUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i583.GetUpcomingWorkoutsUseCase>(
         () => _i583.GetUpcomingWorkoutsUseCase(gh<_i545.HomeRepository>()));
     gh.factory<_i1032.HomeCubit>(() => _i1032.HomeCubit(

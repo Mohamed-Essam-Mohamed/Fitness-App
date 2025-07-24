@@ -9,8 +9,6 @@ import 'package:fitness_app/core/extensions/media_query_extensions.dart';
 import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/core/storage_helper/app_shared_preference_helper.dart';
 import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
-import 'package:fitness_app/core/enum/status.dart';
-import 'package:fitness_app/core/routes/routes.dart';
 import 'package:fitness_app/feature/profile/presentation/view_model/profile/profile_cubit.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/list_tile_profile_widget.dart';
 import 'package:fitness_app/feature/profile/presentation/widgets/select_language_widget.dart';
@@ -27,15 +25,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late final ProfileCubit _profileCubit;
-  late final TextTheme theme;
-  @override
-  void initState() {
-    super.initState();
-    _profileCubit = serviceLocator.get<ProfileCubit>();
-  }
+  late TextTheme theme;
 
-  didChangeDependencies() {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     theme = Theme.of(context).textTheme;
   }
 
@@ -47,10 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Text(
             LocaleKeys.Profile_ProfileTitle.tr(),
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(fontWeight: FontWeight.w600, height: 1.20),
+            style: theme.titleLarge!.copyWith(fontWeight: FontWeight.w600, height: 1.20),
           ),
           const SizedBox(height: 20),
           BlocBuilder<ProfileCubit, ProfileState>(
@@ -73,9 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ? dummyText
                           : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
+                      style: theme.labelLarge!
                           .copyWith(fontWeight: FontWeight.w600, height: 1.20),
                     ),
                   ],
@@ -99,6 +88,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   image: SvgAsset.profile,
                   title: LocaleKeys.Profile_EditProfile.tr(),
                   trailing: _iconWidget(),
+                  onTap: () {
+                    context.pushNamed(Routes.editProfile,
+                        arguments: context.read<ProfileCubit>());
+                  },
                 ),
                 _dividerWidget(),
                 ListTileProfileWidget(
@@ -157,143 +150,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           )
         ],
-    log('ProfileScreen');
-    return BlocProvider(
-      create: (context) => _profileCubit..doIntend(GetDataProfileAction()),
-      child: BackgroundApp(
-        child: SingleChildScrollView(
-          padding:
-              const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 60),
-          child: Column(
-            children: [
-              Text(
-                LocaleKeys.Profile_ProfileTitle.tr(),
-                style: theme.titleLarge!
-                    .copyWith(fontWeight: FontWeight.w600, height: 1.20),
-              ),
-              const SizedBox(height: 40),
-              BlocBuilder<ProfileCubit, ProfileState>(
-                buildWhen: (pre, cur) {
-                  if (pre.getProfileStatus != cur.getProfileStatus) {
-                    return true;
-                  }
-                  return false;
-                },
-                builder: (context, state) {
-                  return Skeletonizer(
-                    enabled: state.isGetProfileLoading,
-                    child: Column(
-                      children: [
-                        BlocBuilder<ProfileCubit, ProfileState>(
-                          buildWhen: (pre, cur) {
-                            if (pre.profilePhotoStatus !=
-                                cur.profilePhotoStatus) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          builder: (context, state) {
-                            if (state.profilePhotoStatus == Status.loading) {
-                              return const CircleAvatar(
-                                  backgroundColor: AppColors.darkBackground,
-                                  radius: 50,
-                                  child: CircularProgressIndicator(
-                                      color: AppColors.orange));
-                            }
-                            return CustomCacheNetworkImage(
-                              imageUrl: state.isGetProfileLoading
-                                  ? dummyImageProfileUrl
-                                  : state.dataUserEntity.photo,
-                              isCircular: true,
-                              width: 100,
-                              height: 100,
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                        BlocBuilder<ProfileCubit, ProfileState>(
-                          buildWhen: (pre, cur) {
-                            if (pre.updateProfileStatus != Status.success) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          builder: (context, state) {
-                            return Text(
-                              state.isGetProfileLoading
-                                  ? dummyText
-                                  : '${state.dataUserEntity.firstName} ${state.dataUserEntity.lastName}',
-                              textAlign: TextAlign.center,
-                              style: theme.labelLarge!.copyWith(
-                                  fontWeight: FontWeight.w600, height: 1.20),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 40),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(8),
-                decoration: ShapeDecoration(
-                  color: const Color(0xCC242424),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    ListTileProfileWidget(
-                      image: SvgAsset.profile,
-                      title: LocaleKeys.Profile_EditProfile.tr(),
-                      trailing: _iconWidget(),
-                      onTap: () {
-                        Navigator.of(context).pushNamed(Routes.editProfile,
-                            arguments: _profileCubit);
-                      },
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.change,
-                      title: LocaleKeys.Profile_ChangePassword.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    const SelectLanguageWidget(),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.lockSetting,
-                      title: LocaleKeys.Profile_Security.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.securityWarning,
-                      title: LocaleKeys.Profile_PrivacyPolicy.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.help,
-                      title: LocaleKeys.Profile_Help.tr(),
-                      trailing: _iconWidget(),
-                    ),
-                    _dividerWidget(),
-                    ListTileProfileWidget(
-                      image: SvgAsset.logout,
-                      title: LocaleKeys.Profile_Logout.tr(),
-                      trailing: _iconWidget(),
-                      textColor: AppColors.redOrange,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }

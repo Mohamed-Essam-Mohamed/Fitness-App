@@ -1,11 +1,9 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/enum/status.dart';
 import 'package:fitness_app/core/network/common/api_result.dart';
 import 'package:fitness_app/core/network/common/helper.dart';
-import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:fitness_app/feature/profile/domain/entities/get_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/entities/update_profile_entity.dart';
 import 'package:fitness_app/feature/profile/domain/use_cases/get_data_profile_use_case.dart';
@@ -13,19 +11,16 @@ import 'package:fitness_app/feature/profile/domain/use_cases/update_data_profile
 import 'package:fitness_app/feature/profile/domain/use_cases/update_profile_photo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:injectable/injectable.dart';
-
 part 'profile_state.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._getDataProfileUseCase) : super(const ProfileState());
-  final GetDataProfileUseCase _getDataProfileUseCase;
-
-  ProfileCubit(this._getDataProfileUseCase, this._updateDataProfileUseCase,
-      this._updateProfilePhoto)
-      : super(const ProfileState());
+  ProfileCubit(
+    this._getDataProfileUseCase,
+    this._updateDataProfileUseCase,
+    this._updateProfilePhoto,
+  ) : super(const ProfileState());
   final GetDataProfileUseCase _getDataProfileUseCase;
   final UpdateDataProfileUseCase _updateDataProfileUseCase;
   final UpdateProfilePhoto _updateProfilePhoto;
@@ -44,17 +39,14 @@ class ProfileCubit extends Cubit<ProfileState> {
         await _updateProfile();
 
       case UpdateProfilePhotoAction():
-        await _updatPhoto(action.photo);
+        await _updatePhoto(action.photo);
     }
   }
 
   Future<void> _getProfile() async {
-    emit(state.copyWith(getProfileStatus: Status.loading));
-    final token = await SecureStorageHelper.instance.getSecure(key: AppValues.token);
-    final result = await _getDataProfileUseCase.call('Bearer $token');
     emit(state.copyWith(getProfileStatus: Status.loading, errorMessage: null));
-
     final result = await _getDataProfileUseCase.call();
+
     switch (result) {
       case SuccessResult<GetProfileEntity>():
         {
@@ -62,9 +54,10 @@ class ProfileCubit extends Cubit<ProfileState> {
           lastNameController.text = result.data.user.lastName;
           emailController.text = result.data.user.email;
           emit(state.copyWith(
-              getProfileStatus: Status.success,
-              dataUserEntity: result.data.user,
-              errorMessage: null));
+            getProfileStatus: Status.success,
+            dataUserEntity: result.data.user,
+            errorMessage: null,
+          ));
         }
 
       case FailureResult<GetProfileEntity>():
@@ -77,9 +70,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> _updateProfile() async {
     final newDataUserUpdate = state.dataUserEntity.copyWith(
-        firstName: firstNameController.text.trim(),
-        lastName: lastNameController.text.trim(),
-        email: emailController.text.trim());
+      firstName: firstNameController.text.trim(),
+      lastName: lastNameController.text.trim(),
+      email: emailController.text.trim(),
+    );
 
     final oldDataUserUpdate = state.dataUserEntity;
     if (oldDataUserUpdate == newDataUserUpdate) {
@@ -87,10 +81,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
 
     emit(state.copyWith(
-        updateProfileStatus: Status.loading,
-        dataUserEntity: newDataUserUpdate,
-        errorMessage: null,
-        successMessage: null));
+      updateProfileStatus: Status.loading,
+      dataUserEntity: newDataUserUpdate,
+      errorMessage: null,
+      successMessage: null,
+    ));
 
     final updateData = UpdateProfileEntity(
       firstName: firstNameController.text,
@@ -116,16 +111,20 @@ class ProfileCubit extends Cubit<ProfileState> {
           lastNameController.text = oldDataUserUpdate.lastName;
           emailController.text = oldDataUserUpdate.email;
           emit(state.copyWith(
-              updateProfileStatus: Status.failure,
-              dataUserEntity: oldDataUserUpdate,
-              errorMessage: Helper.getMessageFromException(result.exception)));
+            updateProfileStatus: Status.failure,
+            dataUserEntity: oldDataUserUpdate,
+            errorMessage: Helper.getMessageFromException(result.exception),
+          ));
         }
     }
   }
 
-  Future<void> _updatPhoto(File photo) async {
+  Future<void> _updatePhoto(File photo) async {
     emit(state.copyWith(
-        profilePhotoStatus: Status.loading, errorMessage: null, successMessage: null));
+      profilePhotoStatus: Status.loading,
+      errorMessage: null,
+      successMessage: null,
+    ));
 
     final result = await _updateProfilePhoto(photo);
     switch (result) {
@@ -134,8 +133,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       case FailureResult():
         emit(state.copyWith(
-            profilePhotoStatus: Status.failure,
-            errorMessage: Helper.getMessageFromException(result.exception)));
+          profilePhotoStatus: Status.failure,
+          errorMessage: Helper.getMessageFromException(result.exception),
+        ));
     }
   }
 
@@ -144,13 +144,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     switch (result) {
       case SuccessResult():
         emit(state.copyWith(
-            dataUserEntity: result.data.user,
-            successMessage: message,
-            profilePhotoStatus: Status.success));
+          dataUserEntity: result.data.user,
+          successMessage: message,
+          profilePhotoStatus: Status.success,
+        ));
       case FailureResult():
         emit(state.copyWith(
-            errorMessage: Helper.getMessageFromException(result.exception),
-            profilePhotoStatus: Status.failure));
+          errorMessage: Helper.getMessageFromException(result.exception),
+          profilePhotoStatus: Status.failure,
+        ));
     }
   }
 }

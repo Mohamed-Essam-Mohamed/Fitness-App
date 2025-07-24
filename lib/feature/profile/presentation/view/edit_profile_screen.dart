@@ -33,9 +33,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(ImageAsset.editProfileBackground),
-              fit: BoxFit.cover)),
+        image: DecorationImage(
+          image: AssetImage(ImageAsset.editProfileBackground),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
         appBar: AppBar(
           actions: [
@@ -50,15 +52,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               builder: (context, state) {
                 if (state.updateProfileStatus == Status.loading) {
                   return const CircularProgressIndicator(
-                    strokeWidth: 3,
+                    strokeWidth: 2,
                     color: AppColors.orange,
                   );
                 }
                 return TextButton(
-                    onPressed: () {
-                      widget.profileCubit.doIntend(UpdateDataProfileAction());
-                    },
-                    child: const Text('Save'));
+                  onPressed: () {
+                    widget.profileCubit.doIntend(UpdateDataProfileAction());
+                  },
+                  child: const Text('Save'),
+                );
               },
             )
           ],
@@ -75,7 +78,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 if (pre.getProfileStatus != cur.getProfileStatus) {
                   return true;
                 }
-
                 return false;
               },
               bloc: widget.profileCubit,
@@ -93,15 +95,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         height: 20,
                       ),
                       ElevatedButton(
-                          onPressed: () {
-                            widget.profileCubit
-                                .doIntend(GetDataProfileAction());
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
-                            child: Text('Try again'),
-                          ))
+                        onPressed: () {
+                          widget.profileCubit.doIntend(GetDataProfileAction());
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          child: Text('Try again'),
+                        ),
+                      )
                     ],
                   );
                 }
@@ -115,7 +116,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         state.isGetProfileLoading
                             ? const LoadingShimmer(
-                                isCircular: true, width: 100, height: 100)
+                                isCircular: true,
+                                width: 100,
+                                height: 100,
+                              )
                             : ChangeProfilePhoto(
                                 profileCubit: widget.profileCubit,
                                 url: state.dataUserEntity.photo,
@@ -128,20 +132,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           listener: (context, state) {
                             if (state.updateProfileStatus == Status.success) {
                               CustomSnackBar.showSnack(
-                                  context: context,
-                                  title: state.successMessage,
-                                  stateType: true);
-                            } else if (state.updateProfileStatus ==
-                                Status.failure) {
+                                context: context,
+                                title: state.successMessage,
+                                stateType: true,
+                              );
+                            } else if (state.updateProfileStatus == Status.failure) {
                               CustomSnackBar.showSnack(
-                                  context: context,
-                                  title: state.errorMessage,
-                                  stateType: false);
+                                context: context,
+                                title: state.errorMessage,
+                                stateType: false,
+                              );
                             }
                           },
                           listenWhen: (pre, cur) {
-                            if (cur.updateProfileStatus !=
-                                pre.updateProfileStatus) {
+                            if (cur.updateProfileStatus != pre.updateProfileStatus) {
                               return true;
                             }
                             return false;
@@ -153,8 +157,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             return false;
                           },
                           builder: (context, state) {
-                            print(
-                                'we only build in update state of type ${state.updateProfileStatus}');
                             return Column(
                               children: [
                                 state.isGetProfileLoading
@@ -163,8 +165,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : Text(
                                         '${state.dataUserEntity.firstName}  ${state.dataUserEntity.lastName}',
-                                        style: theme.labelLarge!.copyWith(
-                                            fontWeight: FontWeight.w600),
+                                        style: theme.labelLarge!
+                                            .copyWith(fontWeight: FontWeight.w600),
                                       ),
                                 const SizedBox(height: 40),
                                 state.isGetProfileLoading
@@ -173,8 +175,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : CustomTextFormFieldForNameAndEmail(
                                         icon: SvgAsset.profile,
-                                        controller: widget
-                                            .profileCubit.firstNameController,
+                                        controller:
+                                            widget.profileCubit.firstNameController,
                                       ),
                                 const SizedBox(height: 16),
                                 state.isGetProfileLoading
@@ -183,8 +185,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : CustomTextFormFieldForNameAndEmail(
                                         icon: SvgAsset.profile,
-                                        controller: widget
-                                            .profileCubit.lastNameController,
+                                        controller:
+                                            widget.profileCubit.lastNameController,
                                       ),
                                 const SizedBox(height: 16),
                                 state.isGetProfileLoading
@@ -193,8 +195,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : CustomTextFormFieldForNameAndEmail(
                                         icon: SvgAsset.mail,
-                                        controller: widget
-                                            .profileCubit.emailController),
+                                        controller: widget.profileCubit.emailController,
+                                        enabled: false,
+                                      ),
                                 const SizedBox(height: 40),
                                 Align(
                                   alignment: AlignmentDirectional.centerStart,
@@ -213,11 +216,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : TextFormField(
                                         controller: TextEditingController(
-                                            text: state.dataUserEntity.weight
-                                                .toString()),
+                                            text: state.dataUserEntity.weight.toString()),
                                         decoration: InputDecoration(
-                                          fillColor: AppColors.lightWhite
-                                              .withAlpha(40),
+                                          fillColor: AppColors.lightWhite.withAlpha(40),
                                           filled: true,
                                         ),
                                       ),
@@ -245,8 +246,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         controller: TextEditingController(
                                             text: state.dataUserEntity.goal),
                                         decoration: InputDecoration(
-                                          fillColor: AppColors.lightWhite
-                                              .withAlpha(40),
+                                          fillColor: AppColors.lightWhite.withAlpha(40),
                                           filled: true,
                                         ),
                                       ),
@@ -272,11 +272,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       )
                                     : TextFormField(
                                         controller: TextEditingController(
-                                            text: state
-                                                .dataUserEntity.activityLevel),
+                                            text: state.dataUserEntity.activityLevel),
                                         decoration: InputDecoration(
-                                          fillColor: AppColors.lightWhite
-                                              .withAlpha(40),
+                                          fillColor: AppColors.lightWhite.withAlpha(40),
                                           filled: true,
                                         ),
                                       ),

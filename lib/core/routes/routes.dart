@@ -12,6 +12,5 @@ class Routes {
   static const String mealDetailsScreen = '/mealDetailsScreen';
   static const String onboardingSmartCoachScreen = '/onboardingSmartCoachScreen';
   static const String smartCoachScreen = '/smartCoachScreen';
-
   static const String editProfile = '/editProfileScreen';
 }
