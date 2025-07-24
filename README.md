@@ -29,6 +29,7 @@ Through a personalized onboarding process, users define their goals and current 
 - SonarQube and codecov
 - Dio cache interceptor `dio_cache_interceptor`
 - Best Performance App
+- Git hooks precommit 
 - Teamwork
 
 ## 📂 Project Structure
@@ -90,7 +91,9 @@ test/
 
 
 ## Demo APP
-> [🔗 Open Demo in Google Drive](https://drive.google.com/file/d/1w7n_G1C9dGr_CCgVXy_LjdwYKdPjT82e/view?usp=sharing)  
+> [🔗 Google Drive](https://drive.google.com/file/d/1w7n_G1C9dGr_CCgVXy_LjdwYKdPjT82e/view?usp=sharing)  
+*(You can open demo app in google drive)*
+
 https://github.com/user-attachments/assets/d83bc58f-0234-4687-b387-d1087f12d868
 
 
@@ -101,6 +104,219 @@ https://github.com/user-attachments/assets/d83bc58f-0234-4687-b387-d1087f12d868
 *(You can host this on Firebase App Distribution, GitHub Releases, or any public URL.)*
 
 
+## 🚀 GitHub Actions Workflow
+# check-test file
+```
+name: Unit Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  flutter-test-cation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.27.4'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate files (build_runner)
+        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run tests
+        run: flutter test
+```
+# distribution-firebase
+```
+name: Flutter Test Action
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  flutter-test-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: 3.27.4
+
+
+      - run: flutter --version
+      - run: flutter pub get
+
+
+      # Build APK
+      - name: Build release APK
+        run: flutter build apk --release
+
+      # Upload to Firebase App Distribution
+      - name: Upload to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          file: build/app/outputs/flutter-apk/app-release.apk
+          groups: tester-github-action
+          releaseNotes: "Auto-release from GitHub Actions"
+```
+# flutter-lint
+```
+name: Flutter Lint Check
+
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+    branches: [master, dev]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.4'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Flutter analyze
+        run: flutter analyze
+```
+# validate-branch-name
+```
+name: Validate Branch Name
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate branch name
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = context.payload.pull_request.head.ref;
+            const regex = /^(feature|fix|chore|docs|refactor|test|style|perf)\/[a-z0-9-]+$/;
+
+            if (!regex.test(branchName)) {
+              core.setFailed(`Invalid branch name: "${branchName}"
+Branch name must follow this format:
+ <type>/<slug>
+Examples:
+  feature/login-page
+  fix/api-timeout
+  docs/readme-update`);
+            } else {
+              console.log("Branch name is valid.");
+            }
+```
+# validate-pr-title
+```
+name: Validate PR Title
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - labeled
+      - unlabeled
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PR Title Verify
+        uses: satvik-s/pr-title-check
+        with:
+          pattern: '^(fix|feat|chore|docs|style|refactor|perf|test)(\\([\\w\\-]+\\))?: .+$'
+
+```
+
+# Git hook Precommit
+```
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+# Format check
+flutter format --set-exit-if-changed .
+
+# Lint check
+flutter analyze
+
+# Unit tests
+flutter test
+
+if [ $? -ne 0 ]; then
+  echo "Pre-commit checks failed. Commit aborted."
+  exit 1
+fi
+
+```
+
+# analysis_options
+```
+# Flutter Linting for Teams - Professional Setup
+
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true                       
+    always_use_package_imports: true        
+    prefer_single_quotes: true              
+    prefer_const_constructors: true         
+    prefer_final_locals: true                
+    unnecessary_this: true                    
+    sort_constructors_first: true             
+    avoid_unnecessary_containers: true        
+    sized_box_for_whitespace: true            
+    avoid_field_initializers_in_const_classes: true
+    use_key_in_widget_constructors: true     
+    always_declare_return_types: true         
+    annotate_overrides: true                 
+    constant_identifier_names: true          
+    file_names: true                          
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"         
+    - "**/*.freezed.dart"
+    - "**/*.gr.dart"
+    - "**/*.config.dart"
+
+```
 
 ## 👥 Flutter Team
 
