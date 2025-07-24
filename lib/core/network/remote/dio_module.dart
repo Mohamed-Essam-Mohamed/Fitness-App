@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_app/core/constants/app_values.dart';
-import 'package:fitness_app/core/network/remote/api_constants.dart';
 import 'package:fitness_app/core/storage_helper/secure_storage_helper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 @module
@@ -29,7 +27,6 @@ abstract class DioModule {
     dio.options = BaseOptions(
       connectTimeout: const Duration(seconds: 40),
       receiveTimeout: const Duration(seconds: 40),
-      //baseUrl: ApiConstants.baseUrl,
     );
 
     dio.interceptors.addAll([

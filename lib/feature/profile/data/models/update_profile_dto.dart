@@ -10,7 +10,8 @@ class UpdateProfileDto {
       required this.weight,
       required this.activityLevel,
       required this.goal});
-
+  factory UpdateProfileDto.fromJson(Map<String, dynamic> json) =>
+      _$UpdateProfileDtoFromJson(json);
   final String firstName;
   final String lastName;
   final String email;
@@ -19,7 +20,5 @@ class UpdateProfileDto {
   final String activityLevel;
   final String goal;
 
-  factory UpdateProfileDto.fromJson(Map<String, dynamic> json) =>
-      _$UpdateProfileDtoFromJson(json);
   Map<String, dynamic> toJson() => _$UpdateProfileDtoToJson(this);
 }

@@ -44,9 +44,9 @@ class BottomSheetContent extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () async {
+                  Navigator.of(context).pop();
                   profileCubit.photo =
                       await SelectImagePicker.chooseOneImage(SourceImage.camera);
-                  Navigator.of(context).pop();
                   profileCubit.photo != null
                       ? profileCubit
                           .doIntend(UpdateProfilePhotoAction(profileCubit.photo!))
